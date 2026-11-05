@@ -165,7 +165,7 @@ class PersistentVectorIndex:
             return self.manifest.embedding_model
         return self.embedding_engine.model_name
 
-    def load(self, strict: bool = True) -> bool:
+    def load(self, strict: bool = True, mmap_mode: Optional[str] = "r") -> bool:
         """
         Loads the persistent index into memory and validates integrity:
         - Checks existence of embeddings, metadata, and manifest.
@@ -212,8 +212,11 @@ class PersistentVectorIndex:
                     raise ValueError(msg)
                 return False
 
-            # 2. Load embeddings array
-            self.embeddings = np.load(self.embeddings_path).astype(np.float32)
+            # 2. Load embeddings array (using memory mapping if requested to conserve RAM)
+            if mmap_mode:
+                self.embeddings = np.load(self.embeddings_path, mmap_mode=mmap_mode)
+            else:
+                self.embeddings = np.load(self.embeddings_path).astype(np.float32)
 
             if self.embeddings.ndim != 2:
                 msg = f"Invalid embeddings array shape: expected 2D matrix, got shape {self.embeddings.shape}."
@@ -242,12 +245,22 @@ class PersistentVectorIndex:
                     raise ValueError(msg)
                 return False
 
-            if not np.all(np.isfinite(self.embeddings)):
-                msg = f"Corrupted embeddings matrix in {self.index_dir}: matrix contains non-finite values (NaN or Inf)."
-                logger.error(msg)
-                if strict:
-                    raise ValueError(msg)
-                return False
+            # Finiteness check: full check if not mmap, sample check if mmap to prevent paging in entire matrix
+            if not mmap_mode:
+                if not np.all(np.isfinite(self.embeddings)):
+                    msg = f"Corrupted embeddings matrix in {self.index_dir}: matrix contains non-finite values (NaN or Inf)."
+                    logger.error(msg)
+                    if strict:
+                        raise ValueError(msg)
+                    return False
+            else:
+                sample_rows = min(50, len(self.embeddings))
+                if not np.all(np.isfinite(self.embeddings[:sample_rows])):
+                    msg = f"Corrupted embeddings matrix in {self.index_dir}: matrix sample contains non-finite values."
+                    logger.error(msg)
+                    if strict:
+                        raise ValueError(msg)
+                    return False
 
             # 3. Load and validate metadata records
             self.metadata_records = []

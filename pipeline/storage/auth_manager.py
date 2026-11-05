@@ -33,38 +33,9 @@ DEFAULT_SESSION_DURATION_SEC = 7 * 24 * 3600  # 7 days
 class AuthSessionManager:
     """Manages secure user sessions and cookie lifecycle."""
 
-    def __init__(self):
-        self.storage = get_conversation_storage()
-        self.sessions_file = self.storage.base_dir / "sessions.json"
+    def __init__(self, storage=None):
+        self.storage = storage or get_conversation_storage()
         self._lock = threading.RLock()
-        self._sessions: Dict[str, Dict[str, Any]] = {}
-        self._load_sessions()
-
-    def _load_sessions(self) -> None:
-        """Loads active sessions from persistent storage."""
-        with self._lock:
-            if self.sessions_file.exists():
-                try:
-                    with open(self.sessions_file, "r", encoding="utf-8") as f:
-                        data = json.load(f)
-                    now = time.time()
-                    # Filter unexpired sessions
-                    self._sessions = {
-                        token: meta for token, meta in data.items()
-                        if meta.get("expires_at", 0) > now
-                    }
-                except Exception as e:
-                    logger.warning(f"Could not load sessions from file: {e}")
-                    self._sessions = {}
-            else:
-                self._sessions = {}
-
-    def _persist_sessions(self) -> None:
-        """Saves sessions to disk atomically."""
-        try:
-            self.storage._atomic_write_json(self.sessions_file, self._sessions)
-        except Exception as e:
-            logger.error(f"Failed to persist sessions: {e}")
 
     def create_session(self, user_id: str, max_age: int = DEFAULT_SESSION_DURATION_SEC) -> str:
         """Generates a secure 256-bit session token."""
@@ -72,12 +43,7 @@ class AuthSessionManager:
         expires_at = time.time() + max_age
 
         with self._lock:
-            self._sessions[token] = {
-                "user_id": user_id,
-                "created_at": time.time(),
-                "expires_at": expires_at,
-            }
-            self._persist_sessions()
+            self.storage.save_session(token, user_id, expires_at)
 
         logger.info(f"Created secure session for user '{user_id}' (expires in {max_age // 3600} hours).")
         return token
@@ -88,14 +54,8 @@ class AuthSessionManager:
             return None
 
         with self._lock:
-            meta = self._sessions.get(token)
+            meta = self.storage.get_session(token)
             if not meta:
-                return None
-
-            if meta.get("expires_at", 0) < time.time():
-                # Expired
-                del self._sessions[token]
-                self._persist_sessions()
                 return None
 
             user_id = meta.get("user_id")
@@ -106,12 +66,10 @@ class AuthSessionManager:
 
     def revoke_session(self, token: str) -> bool:
         """Invalidates an active session token upon logout."""
-        with self._lock:
-            if token in self._sessions:
-                del self._sessions[token]
-                self._persist_sessions()
-                return True
+        if not token:
             return False
+        with self._lock:
+            return self.storage.revoke_session(token)
 
     def extract_token_from_headers(self, headers: Any) -> Optional[str]:
         """Parses HttpOnly cookie header to extract the session token."""

@@ -13,6 +13,9 @@ pdfplumber>=0.10.0
 # Authentication & Security
 argon2-cffi>=23.1.0
 
+# PostgreSQL Persistence (Neon Serverless / Cloud Deployments)
+psycopg2-binary>=2.9.9
+
 # Web Retrieval Fail-Safe
 ddgs>=9.0.0
 duckduckgo_search>=8.0.0

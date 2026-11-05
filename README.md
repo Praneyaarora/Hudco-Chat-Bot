@@ -105,6 +105,11 @@ A deterministic, audit-grade document ingestion, coordinate-aware structural seg
   - [23.4 Multi-Turn Conversational Memory & Rolling Summaries](#234-multi-turn-conversational-memory--rolling-summaries)
   - [23.5 Configurable Context Budget Slider & Real-Time Token Telemetry Meter](#235-configurable-context-budget-slider--real-time-token-telemetry-meter)
   - [23.6 Collapsible Left Sidebar, Date Grouping & Export/Import](#236-collapsible-left-sidebar-date-grouping--exportimport)
+- [25. Zero-Cost Free Render Web Service + Neon PostgreSQL Deployment ($0/month)](#25-zero-cost-free-render-web-service--neon-postgresql-deployment-0month)
+  - [25.1 Target Architecture & Cost Breakdown](#251-target-architecture--cost-breakdown)
+  - [25.2 Dual-Environment Storage Abstraction](#252-dual-environment-storage-abstraction)
+  - [25.3 Render Free 512 MB RAM Ceiling Optimization](#253-render-free-512-mb-ram-ceiling-optimization)
+  - [25.4 Step-by-Step Deployment Instructions](#254-step-by-step-deployment-instructions)
 
 ---
 
@@ -1674,4 +1679,112 @@ Root causes identified:
    - Conflicting / period-specific evidence.
    - Natural Hinglish queries.
    - Multi-turn conversational follow-up questions.
+
+---
+
+## 25. Zero-Cost Free Render Web Service + Neon PostgreSQL Deployment ($0/month)
+
+HUDCO Bot is architected for zero-cost ($0.00/month) enterprise-grade hosting using **Render Free Web Services** combined with **Neon Free Serverless PostgreSQL**.
+
+### 25.1 Target Architecture & Cost Breakdown
+
+| Component | Target Provider | Plan / Tier | Cost | Persistence Mechanism |
+| :--- | :--- | :--- | :--- | :--- |
+| **Web Application & API** | Render | Free Web Service (0.1 CPU, 512 MB RAM) | **$0.00** | Stateless container with 15-min idle spin-down |
+| **User Accounts & Chat History** | Neon | Free Serverless PostgreSQL (0.5 GB storage) | **$0.00** | Cloud PostgreSQL with SSL (`sslmode=require`) |
+| **Default Hosted LLM** | Google AI Studio | Gemini 2.5 Flash API (Free Tier) | **$0.00** | Cloud API (server-side secret) |
+| **Web Retrieval Sub-Agent** | Tavily / DuckDuckGo | Free Tier (1,000 queries/mo) + DDG Unlimited | **$0.00** | Server-side fail-safe |
+| **Offline Fallback LLM** | Local Device | Qwen 2.5 3B/7B (GPU/CPU) | **$0.00** | Local development only |
+| **Total Monthly Hosting Cost** | — | — | **$0.00 / month** | Strictly Zero Recurring Expenses |
+
+### 25.2 Dual-Environment Storage Abstraction
+
+The application seamlessly adapts its persistence layer based on the runtime environment:
+
+```mermaid
+flowchart TD
+    A["Incoming Request"] --> B{"DATABASE_URL configured?"}
+    B -- Yes --> C["PostgresConversationStorage (Neon PostgreSQL)"]
+    C --> C1["Users Table (Argon2id hashes)"]
+    C --> C2["Sessions Table (HttpOnly tokens)"]
+    C --> C3["Conversations & Messages Tables"]
+    C --> C4["Rolling Context Summaries"]
+    B -- No --> D["FileConversationStorage (Local context/ Directory)"]
+    D --> D1["Atomic JSON Files"]
+    D --> D2["Zero External Dependencies"]
+    D --> D3["100% Offline Capable"]
+```
+
+1. **Hosted Render Mode (`DATABASE_URL` set)**:
+   - Employs `PostgresConversationStorage` via connection pool (`ThreadedConnectionPool`).
+   - Transparently handles Neon sleep/wake cycles with automatic reconnect.
+   - Stores user accounts, sessions, conversations, messages, and rolling summaries in PostgreSQL.
+   - Zero Render Persistent Disk dependency.
+
+2. **Local Offline Mode (`DATABASE_URL` unset or empty)**:
+   - Employs `FileConversationStorage` storing data in `./context/` atomically.
+   - Zero cloud or database dependencies; functions completely offline.
+
+### 25.3 Render Free 512 MB RAM Ceiling Optimization
+
+Render Free enforces a hard physical memory limit of **512 MB**. Any container exceeding this limit is terminated immediately (`OOMKilled`).
+
+**Memory Optimization Measures**:
+1. **NumPy Memory Mapping (`mmap_mode='r'`)**: Vector index embeddings (`embeddings.npy`) are mapped directly from disk, reducing memory from 178 MB to under 40 MB.
+2. **Intermediate Allocation Garbage Collection**: Temporary chunk list structures during BM25 initialization are explicitly freed (`del chunks_to_index; gc.collect()`).
+3. **Cloud PyTorch Bypass (`RENDER=true`)**:
+   - On local machines, full PyTorch + SentenceTransformers can run with GPU or multi-core CPU.
+   - On Render Free, PyTorch CPU runtime consumes ~440 MB on its own. When `RENDER=true` or `DISABLE_LOCAL_EMBEDDINGS=true` is set, HUDCO Bot bypasses loading PyTorch, utilizing Okapi BM25 (330 MB) + Live Web Retrieval + Gemini Cloud LLM.
+   - Resulting Render RSS memory: **~331 MB**, providing an 181 MB safety margin.
+
+### 25.4 Step-by-Step Deployment Instructions
+
+#### Step 1: Create Free Neon PostgreSQL Database
+1. Navigate to [Neon](https://neon.tech) and sign up for a free account.
+2. Click **Create Project**, choose a project name (e.g., `hudco-bot-db`), and select the closest region.
+3. From your Neon Dashboard, copy the connection string. Ensure it uses `sslmode=require`:
+   ```text
+   postgresql://username:password@ep-xxxxxx.region.aws.neon.tech/neondb?sslmode=require
+   ```
+
+#### Step 2: Deploy Free Web Service on Render
+1. Navigate to [Render](https://render.com) and create a free account.
+2. Click **New +** -> **Web Service**.
+3. Connect your GitHub repository: `https://github.com/Praneyaarora/Hudco-Chat-Bot.git`.
+4. Configure the Web Service settings:
+   - **Name**: `hudco-chat-bot`
+   - **Region**: Same or closest region to your Neon database
+   - **Branch**: `main`
+   - **Runtime**: `Python 3`
+   - **Build Command**:
+     ```bash
+     pip install -r requirements.txt
+     ```
+   - **Start Command**:
+     ```bash
+     python ui/server.py
+     ```
+   - **Instance Type**: `Free` ($0/month)
+
+#### Step 3: Configure Environment Variables in Render Dashboard
+In the Render Web Service **Environment** tab, add:
+
+| Environment Variable | Value | Notes |
+| :--- | :--- | :--- |
+| `DATABASE_URL` | `postgresql://...neon.tech/neondb?sslmode=require` | Connection string from Step 1 |
+| `GEMINI_API_KEY` | `AIzaSy...` | Your Google Gemini API key |
+| `TAVILY_API_KEY` | `tvly-...` | Your Tavily Search key (optional) |
+| `DEFAULT_LLM_PROVIDER` | `gemini` | Cloud default LLM |
+| `RENDER` | `true` | Automatically set by Render |
+| `USE_SECURE_COOKIES` | `true` | Enforces HTTPS Secure cookies |
+
+#### Step 4: Health Check Configuration
+- Set **Health Check Path** to `/health` in the Render dashboard.
+- The server responds with `{"status": "ok", "service": "hudco-bot", "storage_backend": "postgres"}` in under 5 ms without heavy DB queries or model loading.
+
+#### Step 5: Verify Deployment
+1. Once deployed, open your Render URL (e.g., `https://hudco-chat-bot.onrender.com`).
+2. Register an account, create a conversation, and test questions in both English and Hinglish.
+3. Verify in Neon Dashboard that tables (`users`, `sessions`, `conversations`, `messages`) are populated automatically.
+4. Restart or redeploy the Render service: log back in and verify all chats and messages persist seamlessly.
 

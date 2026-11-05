@@ -103,7 +103,7 @@ class PipelineState:
 
             self.semantic_index = PersistentVectorIndex()
             if self.semantic_index.exists():
-                self.semantic_index.load(strict=False)
+                self.semantic_index.load(strict=False, mmap_mode="r")
                 manifest = self.semantic_index.manifest
                 self.index_stats = {
                     "exists": True,
@@ -147,14 +147,35 @@ class PipelineState:
 
             if chunks_to_index:
                 self.bm25_index = Layer4BM25Index(chunks=chunks_to_index)
+                if hasattr(self.bm25_index, "searchable_texts"):
+                    self.bm25_index.searchable_texts.clear()
                 logger.info("Initialized BM25 index with %d canonical chunks.", len(chunks_to_index))
+                del chunks_to_index
+                import gc
+                gc.collect()
 
-            if self.bm25_index and self.semantic_index:
-                self.hybrid_retriever = HybridRetriever(
-                    bm25_index=self.bm25_index,
-                    semantic_index=self.semantic_index,
-                )
-                logger.info("Initialized HybridRetriever (RRF) combining BM25 and Semantic search.")
+            # Render Free (512MB RAM constraint):
+            # Avoid loading PyTorch CPU runtime (~440MB) which exceeds Render Free 512MB limit.
+            is_render = bool(os.environ.get("RENDER")) or os.environ.get("DISABLE_LOCAL_EMBEDDINGS", "").lower() == "true"
+            if self.bm25_index:
+                if is_render:
+                    if self.semantic_index:
+                        del self.semantic_index.metadata_records
+                        del self.semantic_index.chunk_id_to_idx
+                        self.semantic_index.embeddings = None
+                        import gc
+                        gc.collect()
+                    self.hybrid_retriever = HybridRetriever(
+                        bm25_index=self.bm25_index,
+                        semantic_index=None,
+                    )
+                    logger.info("Initialized Render Free-optimized Retriever using BM25 lexical engine (PyTorch bypassed to conserve 512MB RAM).")
+                elif self.semantic_index:
+                    self.hybrid_retriever = HybridRetriever(
+                        bm25_index=self.bm25_index,
+                        semantic_index=self.semantic_index,
+                    )
+                    logger.info("Initialized HybridRetriever (RRF) combining BM25 and Semantic search.")
 
         except Exception as e:
             self.init_error = f"Pipeline initialization failed: {e}"
@@ -199,6 +220,18 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
         if path in ("/", "/index.html"):
             self.path = "/index.html"
             return super().do_GET()
+
+        # Health check endpoint for Render zero-downtime health checking
+        if path in ("/health", "/api/health"):
+            storage_type = "postgres" if getattr(CONV_STORAGE, "is_postgres", False) else "file"
+            health_payload = {
+                "status": "ok",
+                "service": "hudco-bot",
+                "render_deployment": bool(os.environ.get("RENDER")),
+                "storage_backend": storage_type,
+                "uptime": time.time(),
+            }
+            return self._send_json(200, health_payload)
 
         # Auth & System APIs
         if path == "/api/status":
@@ -1027,7 +1060,7 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
             self._send_json(500, {"error": f"Server error: {str(e)}"})
 
 
-def run_server(host: str = "127.0.0.1", port: int = 8501) -> None:
+def run_server(host: Optional[str] = None, port: Optional[int] = None) -> None:
     """Initializes retrieval pipeline state, storage, and starts HTTP server."""
     logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
     logger.info("Initializing HUDCO Retrieval Pipeline, Context Storage & Model Services...")
@@ -1037,13 +1070,17 @@ def run_server(host: str = "127.0.0.1", port: int = 8501) -> None:
     if get_qwen_service().enabled and not os.environ.get("RENDER"):
         threading.Thread(target=get_qwen_service().preload, daemon=True, name="qwen-background-preload").start()
 
-    server_address = (host, port)
+    effective_port = int(port or os.environ.get("PORT", 8501))
+    effective_host = host or ("0.0.0.0" if (os.environ.get("RENDER") or os.environ.get("HOST") == "0.0.0.0") else "127.0.0.1")
+
+    server_address = (effective_host, effective_port)
     httpd = ThreadingHTTPServer(server_address, HUDCOUIRequestHandler)
+    is_pg = getattr(CONV_STORAGE, "is_postgres", False)
+    storage_desc = "Neon Serverless PostgreSQL" if is_pg else f"File / Persistent Disk ({getattr(CONV_STORAGE, 'base_dir', 'context')})"
     print("\n=======================================================")
     print(" HUDCO Bot — Conversational AI & Diagnostics Server")
-    print(f" URL: http://{host}:{port}/")
-    print(" Storage Subsystem: Environment-Based Multi-User Context")
-    print(f" Storage Directory: {CONV_STORAGE.base_dir}")
+    print(f" URL: http://{effective_host}:{effective_port}/")
+    print(f" Storage Subsystem: {storage_desc}")
     print(" Authentication: Argon2id + Secure HttpOnly Cookies")
     print(" Press Ctrl+C to stop.")
     print("=======================================================\n")

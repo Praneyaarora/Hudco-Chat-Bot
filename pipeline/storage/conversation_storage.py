@@ -94,6 +94,22 @@ class ConversationStorage(abc.ABC):
     def import_conversation(self, user_id: str, data: Dict[str, Any]) -> Optional[ConversationSession]:
         pass
 
+    @abc.abstractmethod
+    def save_session(self, token: str, user_id: str, expires_at: float) -> None:
+        pass
+
+    @abc.abstractmethod
+    def get_session(self, token: str) -> Optional[Dict[str, Any]]:
+        pass
+
+    @abc.abstractmethod
+    def revoke_session(self, token: str) -> bool:
+        pass
+
+    @abc.abstractmethod
+    def cleanup_expired_sessions(self) -> int:
+        pass
+
 
 class FileConversationStorage(ConversationStorage):
     """
@@ -467,14 +483,80 @@ class FileConversationStorage(ConversationStorage):
             logger.error(f"Failed to import conversation for {user_id}: {e}")
             return None
 
+    # =========================================================================
+    # Session Token Management (sessions.json)
+    # =========================================================================
+
+    def save_session(self, token: str, user_id: str, expires_at: float) -> None:
+        """Persists a valid session token in sessions.json."""
+        sessions_file = self.base_dir / "sessions.json"
+        with self._lock:
+            sessions = self._read_json(sessions_file) or {}
+            sessions[token] = {
+                "token": token,
+                "user_id": user_id,
+                "created_at": time.time(),
+                "expires_at": expires_at,
+            }
+            self._atomic_write_json(sessions_file, sessions)
+
+    def get_session(self, token: str) -> Optional[Dict[str, Any]]:
+        """Retrieves and validates an active session token."""
+        sessions_file = self.base_dir / "sessions.json"
+        now = time.time()
+        with self._lock:
+            sessions = self._read_json(sessions_file) or {}
+            meta = sessions.get(token)
+            if not meta:
+                return None
+            if meta.get("expires_at", 0) < now:
+                del sessions[token]
+                self._atomic_write_json(sessions_file, sessions)
+                return None
+            return meta
+
+    def revoke_session(self, token: str) -> bool:
+        """Revokes an active session token upon logout."""
+        sessions_file = self.base_dir / "sessions.json"
+        with self._lock:
+            sessions = self._read_json(sessions_file) or {}
+            if token in sessions:
+                del sessions[token]
+                self._atomic_write_json(sessions_file, sessions)
+                return True
+            return False
+
+    def cleanup_expired_sessions(self) -> int:
+        """Purges expired sessions from disk."""
+        sessions_file = self.base_dir / "sessions.json"
+        now = time.time()
+        with self._lock:
+            sessions = self._read_json(sessions_file) or {}
+            valid_sessions = {t: m for t, m in sessions.items() if m.get("expires_at", 0) > now}
+            purged = len(sessions) - len(valid_sessions)
+            if purged > 0:
+                self._atomic_write_json(sessions_file, valid_sessions)
+            return purged
+
 
 # Global singleton instance
-_GLOBAL_STORAGE: Optional[FileConversationStorage] = None
+_GLOBAL_STORAGE: Optional[ConversationStorage] = None
 
 
-def get_conversation_storage() -> FileConversationStorage:
+def get_conversation_storage() -> ConversationStorage:
     global _GLOBAL_STORAGE
     if _GLOBAL_STORAGE is None:
-        _GLOBAL_STORAGE = FileConversationStorage()
+        db_url = os.environ.get("DATABASE_URL", "").strip()
+        # Only use PostgreSQL if a remote or configured URL is explicitly set (ignore local demo placeholders)
+        if db_url and not db_url.startswith("postgresql+asyncpg://hudco_admin"):
+            try:
+                from pipeline.storage.postgres_storage import PostgresConversationStorage
+                logger.info("Initializing PostgresConversationStorage (DATABASE_URL detected)...")
+                _GLOBAL_STORAGE = PostgresConversationStorage(database_url=db_url)
+            except Exception as e:
+                logger.error(f"Failed to initialize PostgresConversationStorage: {e}. Falling back to FileConversationStorage.")
+                _GLOBAL_STORAGE = FileConversationStorage()
+        else:
+            _GLOBAL_STORAGE = FileConversationStorage()
     return _GLOBAL_STORAGE
 
