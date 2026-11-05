@@ -1,3 +1,6 @@
+# Lightweight CPU PyTorch wheels index for cloud deployment (prevents 2.5 GB NVIDIA CUDA downloads)
+--extra-index-url https://download.pytorch.org/whl/cpu
+
 # Core Ingestion & PDF Processing
 pypdf>=4.0.0
 requests>=2.31.0

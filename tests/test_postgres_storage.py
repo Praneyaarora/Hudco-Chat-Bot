@@ -120,6 +120,48 @@ class TestPostgresStorage(unittest.TestCase):
         self.assertTrue(revoked)
 
     @patch("pipeline.storage.postgres_storage.pool.ThreadedConnectionPool")
+    def test_get_user_by_email(self, mock_pool_cls):
+        """Verifies get_user_by_email looks up user by email correctly."""
+        mock_conn = MagicMock()
+        mock_cursor = MagicMock()
+        mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
+        mock_pool = MagicMock()
+        mock_pool.getconn.return_value = mock_conn
+        mock_pool_cls.return_value = mock_pool
+
+        mock_cursor.fetchone.return_value = {
+            "user_id": "user_found_123",
+            "email": "analyst@hudco.in",
+            "username": "HUDCO Analyst",
+            "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$fakehash",
+            "role": "analyst",
+            "created_at": time.time(),
+            "updated_at": time.time(),
+        }
+
+        storage = PostgresConversationStorage("postgresql://test:test@localhost:5432/testdb")
+        user = storage.get_user_by_email("ANALYST@HUDCO.IN")
+        self.assertIsNotNone(user)
+        self.assertEqual(user.user_id, "user_found_123")
+        self.assertEqual(user.email, "analyst@hudco.in")
+
+    @patch("pipeline.storage.postgres_storage.pool.ThreadedConnectionPool")
+    def test_create_user_duplicate_email_raises_value_error(self, mock_pool_cls):
+        """Verifies create_user raises ValueError if user already exists."""
+        mock_conn = MagicMock()
+        mock_cursor = MagicMock()
+        mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
+        mock_cursor.fetchone.return_value = ("existing_id",)  # Found existing
+        mock_pool = MagicMock()
+        mock_pool.getconn.return_value = mock_conn
+        mock_pool_cls.return_value = mock_pool
+
+        storage = PostgresConversationStorage("postgresql://test:test@localhost:5432/testdb")
+        with self.assertRaises(ValueError) as ctx:
+            storage.create_user("duplicate@hudco.in", "Dup User", "pass12345")
+        self.assertIn("already exists", str(ctx.exception))
+
+    @patch("pipeline.storage.postgres_storage.pool.ThreadedConnectionPool")
     def test_storage_dispatch(self, mock_pool_cls):
         """Verifies get_conversation_storage dynamic dispatch between Postgres and File storage."""
         from pipeline.storage.conversation_storage import get_conversation_storage, FileConversationStorage

@@ -415,17 +415,26 @@ class LLMManager:
             emotional_context=emotional_context,
         )
 
-        # Candidate models to try in sequence. High-RPM / high-RPD models (Lite: 15 RPM / 500 RPD) prioritized first
-        clean_model = model_name.replace("models/", "") if model_name else "gemini-3.5-flash-lite"
+        if not api_key:
+            return {
+                "status": "inference_error",
+                "answer": "Google Gemini API key is not configured. Please set the GEMINI_API_KEY environment variable.",
+                "clean_answer": "Google Gemini API key is not configured. Please set the GEMINI_API_KEY environment variable.",
+                "provider": "gemini",
+                "model_name": model_name or "gemini-2.5-flash",
+                "device": "cloud_config_error",
+                "generation_time_ms": 0.0,
+                "is_refusal": True,
+            }
+
+        # Candidate models to try in sequence
+        clean_model = model_name.replace("models/", "") if model_name else "gemini-2.5-flash"
         candidate_models = [clean_model]
         priority_models = [
-            "gemini-3.5-flash-lite",  # 15 RPM / 500 RPD
-            "gemini-3.1-flash-lite",  # 15 RPM / 500 RPD
-            "gemini-3.8-flash",       # 5 RPM / 20 RPD
-            "gemini-3.5-flash",       # 5 RPM / 20 RPD
-            "gemini-3.6-flash",       # 5 RPM / 20 RPD
-            "gemini-2.5-flash",       # 5 RPM / 20 RPD
-            "gemini-flash-latest",
+            "gemini-2.5-flash",
+            "gemini-2.0-flash",
+            "gemini-1.5-flash",
+            "gemini-1.5-pro",
         ]
         for m in priority_models:
             if m not in candidate_models:
@@ -520,7 +529,21 @@ class LLMManager:
                 }
             }
 
-        # Otherwise attempt graceful fallback to local Qwen so user always gets an answer
+        # On Render or cloud deployment: never attempt local GPU/Qwen fallback
+        if os.environ.get("RENDER"):
+            logger.error(f"Gemini API call failed on Render: {last_error}")
+            return {
+                "status": "inference_error",
+                "answer": f"Unable to generate response via Google Gemini ({last_error}). Please check your GEMINI_API_KEY in Render dashboard.",
+                "clean_answer": f"Unable to generate response via Google Gemini ({last_error}). Please check your GEMINI_API_KEY in Render dashboard.",
+                "provider": "gemini",
+                "model_name": model_name or "gemini-2.5-flash",
+                "device": "cloud_error",
+                "generation_time_ms": 0.0,
+                "is_refusal": True,
+            }
+
+        # Otherwise attempt graceful fallback to local Qwen so user always gets an answer in local offline development
         logger.warning(f"Gemini API call failed ({last_error}). Triggering automatic local Qwen fallback.")
         try:
             qwen_res = cls._generate_local_qwen(query, evidence_items, max_new_tokens, temperature, is_web, web_direct_answer)

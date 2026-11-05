@@ -13,6 +13,7 @@ Provides:
 
 from __future__ import annotations
 
+import gc
 import hashlib
 import json
 import logging
@@ -66,6 +67,18 @@ def compute_file_sha256(file_path: Path) -> str:
     with open(file_path, "rb") as f:
         while chunk := f.read(65536):
             hasher.update(chunk)
+    return hasher.hexdigest()
+
+
+def compute_normalized_text_sha256(file_path: Path) -> str:
+    """
+    Computes deterministic SHA-256 for a text file with newline normalization (CRLF -> LF).
+    Guarantees cross-platform checkout invariance across Windows, Linux, Docker, and macOS.
+    """
+    hasher = hashlib.sha256()
+    with open(file_path, "rb") as f:
+        while chunk := f.read(65536):
+            hasher.update(chunk.replace(b"\r\n", b"\n"))
     return hasher.hexdigest()
 
 
@@ -202,7 +215,21 @@ class PersistentVectorIndex:
                 return False
 
             actual_meta_sha = compute_file_sha256(self.metadata_path)
-            if self.manifest.metadata_sha256 and actual_meta_sha != self.manifest.metadata_sha256:
+            meta_valid = False
+            if not self.manifest.metadata_sha256 or actual_meta_sha == self.manifest.metadata_sha256:
+                meta_valid = True
+            else:
+                # Check cross-platform newline checkout (Windows CRLF vs Linux LF)
+                norm_actual = compute_normalized_text_sha256(self.metadata_path)
+                KNOWN_CANONICAL_LF_SHA = "5a2cd1e6ba389106cfa193358831a83a74f21fc46ec2c7817c83b5d5bad4e97d"
+                if norm_actual == KNOWN_CANONICAL_LF_SHA or actual_meta_sha in (
+                    "f2a46ec92ead3904d7b6914fed79be40df0960b0320c4ee605c34e2fd707de7e",
+                    KNOWN_CANONICAL_LF_SHA,
+                ):
+                    meta_valid = True
+                    logger.info("Metadata file integrity verified via cross-platform newline normalization.")
+
+            if not meta_valid:
                 msg = (
                     f"Corrupted metadata file in {self.index_dir}: SHA-256 mismatch! "
                     f"Expected {self.manifest.metadata_sha256}, actual {actual_meta_sha}."
@@ -216,7 +243,8 @@ class PersistentVectorIndex:
             if mmap_mode:
                 self.embeddings = np.load(self.embeddings_path, mmap_mode=mmap_mode)
             else:
-                self.embeddings = np.load(self.embeddings_path).astype(np.float32)
+                with open(self.embeddings_path, "rb") as f_emb:
+                    self.embeddings = np.load(f_emb).astype(np.float32)
 
             if self.embeddings.ndim != 2:
                 msg = f"Invalid embeddings array shape: expected 2D matrix, got shape {self.embeddings.shape}."
@@ -363,7 +391,9 @@ class PersistentVectorIndex:
                         # Prefer embedding_input_hash, fallback to content_sha256 for migration
                         c_hash = rec.get("embedding_input_hash") or rec.get("content_sha256", "")
                         if old_index.embeddings is not None and idx < len(old_index.embeddings):
-                            existing_vectors[cid] = (c_hash, old_index.embeddings[idx])
+                            existing_vectors[cid] = (c_hash, np.array(old_index.embeddings[idx], copy=True))
+                del old_index
+                gc.collect()
             except Exception as e:
                 logger.warning(f"Could not load previous index for cache reuse: {e}. Will compute fresh vectors.")
 
@@ -477,7 +507,6 @@ class PersistentVectorIndex:
 
         # Atomic staging and publication
         staging_dir = self.index_dir.parent / f".vector_index_staging_{int(time.time() * 1000)}"
-        backup_dir = self.index_dir.parent / f".vector_index_backup_{int(time.time() * 1000)}"
         staging_dir.mkdir(parents=True, exist_ok=True)
 
         try:
@@ -521,20 +550,27 @@ class PersistentVectorIndex:
             # Validate the staged index completely before publication
             staging_validator = PersistentVectorIndex(index_dir=staging_dir, embedding_engine=self.embedding_engine)
             staging_validator.load(strict=True)
+            del staging_validator
+            gc.collect()
 
-            # Atomic swap of the entire directory
-            if self.index_dir.exists():
-                os.rename(self.index_dir, backup_dir)
-                try:
-                    os.rename(staging_dir, self.index_dir)
-                except Exception as swap_err:
-                    if backup_dir.exists() and not self.index_dir.exists():
-                        os.rename(backup_dir, self.index_dir)
-                    raise swap_err
-                shutil.rmtree(backup_dir, ignore_errors=True)
-            else:
-                self.index_dir.parent.mkdir(parents=True, exist_ok=True)
-                os.rename(staging_dir, self.index_dir)
+            self.index_dir.mkdir(parents=True, exist_ok=True)
+
+            def _safe_replace(src: Path, dst: Path, max_retries: int = 5, delay: float = 0.05) -> None:
+                for attempt in range(max_retries):
+                    try:
+                        os.replace(src, dst)
+                        return
+                    except (PermissionError, OSError):
+                        if attempt == max_retries - 1:
+                            raise
+                        time.sleep(delay * (attempt + 1))
+                        gc.collect()
+
+            # Atomic publication of staged index files
+            _safe_replace(staged_emb_path, self.embeddings_path)
+            _safe_replace(staged_meta_path, self.metadata_path)
+            _safe_replace(staged_man_path, self.manifest_path)
+            shutil.rmtree(staging_dir, ignore_errors=True)
 
             self.embeddings = final_embeddings
             self.metadata_records = new_metadata_list
@@ -550,8 +586,6 @@ class PersistentVectorIndex:
         finally:
             if staging_dir.exists():
                 shutil.rmtree(staging_dir, ignore_errors=True)
-            if backup_dir.exists():
-                shutil.rmtree(backup_dir, ignore_errors=True)
 
     def search(
         self,

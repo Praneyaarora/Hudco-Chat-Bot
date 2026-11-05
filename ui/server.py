@@ -145,6 +145,41 @@ class PipelineState:
                     )
                     chunks_to_index.append(chunk)
 
+            # Direct fallback: if vector index load was bypassed or empty, read chunks_metadata.jsonl directly
+            if not chunks_to_index:
+                meta_file = PROJECT_ROOT / "data" / "vector_index" / "chunks_metadata.jsonl"
+                if meta_file.exists():
+                    logger.info("Reading canonical chunks directly from %s for BM25 retrieval...", meta_file)
+                    with open(meta_file, "r", encoding="utf-8") as f:
+                        for line in f:
+                            if not line.strip():
+                                continue
+                            rec = json.loads(line)
+                            chunk = CanonicalChunk(
+                                chunk_id=rec["chunk_id"],
+                                document_id=rec["document_id"],
+                                source_id=rec.get("source_id") or "hudco_source",
+                                source_filename=rec.get("source_filename") or f"{rec.get('document_id')}.pdf",
+                                version_id=rec.get("version_id") or "v1",
+                                chunk_index_in_page=1,
+                                char_count=len(rec.get("content", "")),
+                                token_estimate=len(rec.get("content", "").split()),
+                                section_id=rec.get("section_id") or "sec_00",
+                                section_title=rec.get("section_title") or "Section",
+                                ancestor_headings=[],
+                                physical_page=rec.get("physical_page") or 1,
+                                physical_page_end=rec.get("physical_page_end"),
+                                physical_pages=rec.get("physical_pages") or [rec.get("physical_page") or 1],
+                                printed_page=rec.get("printed_page"),
+                                printed_page_end=rec.get("printed_page_end"),
+                                printed_pages=rec.get("printed_pages") or [],
+                                fiscal_year=rec.get("fiscal_year") or "Unknown",
+                                content=rec.get("content") or " ",
+                                content_sha256=rec.get("content_sha256") or ("0" * 64),
+                                has_table=bool(rec.get("has_table", False)),
+                            )
+                            chunks_to_index.append(chunk)
+
             if chunks_to_index:
                 self.bm25_index = Layer4BM25Index(chunks=chunks_to_index)
                 if hasattr(self.bm25_index, "searchable_texts"):
@@ -160,8 +195,8 @@ class PipelineState:
             if self.bm25_index:
                 if is_render:
                     if self.semantic_index:
-                        del self.semantic_index.metadata_records
-                        del self.semantic_index.chunk_id_to_idx
+                        self.semantic_index.metadata_records = []
+                        self.semantic_index.chunk_id_to_idx = {}
                         self.semantic_index.embeddings = None
                         import gc
                         gc.collect()
@@ -199,14 +234,25 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
         self.send_header("Expires", "0")
         super().end_headers()
 
+    def _is_allowed_origin(self, origin: str) -> bool:
+        """Determines if Origin header is allowed for CORS."""
+        if not origin:
+            return False
+        return (
+            origin in ("http://127.0.0.1:8501", "http://localhost:8501")
+            or origin.endswith(".onrender.com")
+            or origin.startswith("https://hudco")
+            or origin == os.environ.get("ALLOWED_ORIGIN")
+        )
+
     def do_OPTIONS(self):
         self.send_response(204)
         origin = self.headers.get("Origin", "")
-        if origin in ("http://127.0.0.1:8501", "http://localhost:8501"):
+        if self._is_allowed_origin(origin):
             self.send_header("Access-Control-Allow-Origin", origin)
+            self.send_header("Access-Control-Allow-Credentials", "true")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
-        self.send_header("Access-Control-Allow-Credentials", "true")
         self.end_headers()
 
     # =========================================================================
@@ -315,7 +361,7 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(payload)))
         origin = self.headers.get("Origin", "")
-        if origin in ("http://127.0.0.1:8501", "http://localhost:8501"):
+        if self._is_allowed_origin(origin):
             self.send_header("Access-Control-Allow-Origin", origin)
             self.send_header("Access-Control-Allow-Credentials", "true")
         if extra_headers:
@@ -331,34 +377,32 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
     def _resolve_active_user(self) -> str:
         """
         Returns authenticated user_id if logged in, or provisions/returns
-        the default local guest user for seamless out-of-the-box local usage.
+        the default guest user for seamless out-of-the-box usage.
+        Operates uniformly on PostgreSQL and local file storage without touching users_dir.
         """
         user = self._get_authenticated_user()
         if user:
             return user.user_id
 
-        # Local guest user fallback
-        guest = CONV_STORAGE.get_user_by_id("usr_guest_local")
-        if not guest:
-            try:
-                guest = CONV_STORAGE.create_user(
-                    email="guest@local.dev",
-                    username="Guest User",
-                    password="guest_local_password_secure",
-                    role="guest",
-                )
-            except Exception:
-                # If guest user was already created with different ID, find it
-                for u in CONV_STORAGE.users_dir.glob("*/profile.json"):
-                    try:
-                        with open(u, "r", encoding="utf-8") as f:
-                            udata = json.load(f)
-                            if udata.get("email") == "guest@local.dev":
-                                return udata.get("user_id")
-                    except Exception:
-                        pass
-                return "usr_guest_local"
-        return guest.user_id
+        guest_email = "guest@local.dev"
+        guest = CONV_STORAGE.get_user_by_email(guest_email)
+        if guest:
+            return guest.user_id
+
+        try:
+            guest = CONV_STORAGE.create_user(
+                email=guest_email,
+                username="Guest User",
+                password="guest_local_password_secure",
+                role="guest",
+            )
+            return guest.user_id
+        except Exception:
+            # Re-query in case of concurrent creation race condition
+            guest = CONV_STORAGE.get_user_by_email(guest_email)
+            if guest:
+                return guest.user_id
+            return "usr_guest_fallback"
 
     # =========================================================================
     # Auth Endpoints
@@ -367,8 +411,8 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
         try:
             length = int(self.headers.get("Content-Length", 0))
             body = json.loads(self.rfile.read(length).decode("utf-8") if length > 0 else "{}")
-            name = body.get("name", "").strip()
-            email = body.get("email", "").strip()
+            name = (body.get("name") or body.get("username") or "").strip()
+            email = (body.get("email") or "").strip().lower()
             password = body.get("password", "")
 
             if not name or len(name) < 2:
@@ -404,7 +448,7 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
         try:
             length = int(self.headers.get("Content-Length", 0))
             body = json.loads(self.rfile.read(length).decode("utf-8") if length > 0 else "{}")
-            email = body.get("email", "").strip()
+            email = (body.get("email") or "").strip().lower()
             password = body.get("password", "")
 
             if not email or not password:
@@ -428,6 +472,9 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                 },
                 extra_headers=[("Set-Cookie", cookie_header)]
             )
+        except Exception as e:
+            logger.error("Login error: %s", e, exc_info=True)
+            self._send_json(500, {"error": f"Authentication server error: {e}"})
         except Exception as e:
             logger.error("Login error: %s", e, exc_info=True)
             self._send_json(500, {"error": f"Authentication server error: {e}"})
@@ -561,7 +608,7 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
             "reports_count": eligible_count,
             "total_reports_inventory": len(GLOBAL_STATE.inventory),
             "bm25_chunks_indexed": GLOBAL_STATE.bm25_index.N if GLOBAL_STATE.bm25_index else 0,
-            "semantic_chunks_indexed": len(GLOBAL_STATE.semantic_index.metadata_records) if (GLOBAL_STATE.semantic_index and GLOBAL_STATE.semantic_index.metadata_records) else 0,
+            "semantic_chunks_indexed": GLOBAL_STATE.index_stats.get("total_chunks", 0) if GLOBAL_STATE.semantic_index else 0,
             "active_provider": DYNAMIC_CONFIG["provider"],
             "tavily_configured": bool(DYNAMIC_CONFIG["tavily_api_key"]),
             "context_budget": DYNAMIC_CONFIG["context_budget"],
@@ -961,6 +1008,19 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                     }
                 }
 
+            if not answer_payload:
+                answer_payload = {
+                    "status": "retrieval_only",
+                    "answer": "",
+                    "clean_answer": "",
+                    "is_refusal": False,
+                    "cited_chunk_ids": [],
+                    "evidence_truncated": False,
+                    "generation_time_ms": 0.0,
+                    "provider": provider,
+                    "device": "offline",
+                }
+
             # 6. Save Turn to Persistent Storage
             clean_ans = answer_payload.get("clean_answer") or answer_payload.get("answer") or ""
             clean_ans = strip_citation_markers(clean_ans)
@@ -984,22 +1044,23 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                     "is_web": bool(it.get("is_web", False)),
                 })
 
-            user_msg = ChatMessage(role="user", content=query, token_count=estimate_tokens(query))
-            bot_msg = ChatMessage(
-                role="assistant",
-                content=clean_ans,
-                evidence_payload=saved_evidence,
-                token_count=estimate_tokens(clean_ans),
-                provider_used=provider,
-                model_name=answer_payload.get("model_name"),
-            )
-            CONV_STORAGE.save_message(user_id=user_id, session_id=session_id, message=user_msg)
-            CONV_STORAGE.save_message(user_id=user_id, session_id=session_id, message=bot_msg)
+            if generate_answer:
+                user_msg = ChatMessage(role="user", content=query, token_count=estimate_tokens(query))
+                bot_msg = ChatMessage(
+                    role="assistant",
+                    content=clean_ans,
+                    evidence_payload=saved_evidence,
+                    token_count=estimate_tokens(clean_ans),
+                    provider_used=provider,
+                    model_name=answer_payload.get("model_name"),
+                )
+                CONV_STORAGE.save_message(user_id=user_id, session_id=session_id, message=user_msg)
+                CONV_STORAGE.save_message(user_id=user_id, session_id=session_id, message=bot_msg)
 
-            # Auto-title on first turn
-            if len(session.messages) <= 2:
-                title_suggestion = query[:36] + ("..." if len(query) > 36 else "")
-                CONV_STORAGE.rename_conversation(user_id=user_id, session_id=session_id, new_title=title_suggestion)
+                # Auto-title on first turn
+                if len(session.messages) <= 2:
+                    title_suggestion = query[:36] + ("..." if len(query) > 36 else "")
+                    CONV_STORAGE.rename_conversation(user_id=user_id, session_id=session_id, new_title=title_suggestion)
 
             # 7. Context Usage Telemetry Calculation
             context_telemetry = calculate_context_telemetry(

@@ -60,7 +60,7 @@ function toggleTheme() {
 // ============================================================================
 async function checkAuthStatus() {
   try {
-    const res = await fetch("/api/auth/me");
+    const res = await fetch("/api/auth/me", { credentials: "include" });
     const data = await res.json();
     STATE.currentUser = data;
     renderUserBadge();
@@ -172,6 +172,7 @@ async function handleAuthSubmit(e) {
     const res = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify(payload),
     });
     const data = await res.json();
@@ -195,6 +196,7 @@ async function handleSignOut() {
     await fetch("/api/auth/logout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({}),
     });
     STATE.currentUser = { authenticated: false, user: null };
@@ -376,7 +378,7 @@ function toggleSidebar() {
 
 async function loadConversations() {
   try {
-    const res = await fetch("/api/chats");
+    const res = await fetch("/api/chats", { credentials: "include" });
     const data = await res.json();
     STATE.conversations = data.conversations || [];
     renderConversationsList();
@@ -480,6 +482,7 @@ async function createNewChatSession() {
     const res = await fetch("/api/chats", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({ title: "New Conversation" }),
     });
     const data = await res.json();
@@ -845,6 +848,7 @@ async function handleChatSubmit(e) {
     const res = await fetch("/api/query", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify(payload),
     });
     const data = await res.json();

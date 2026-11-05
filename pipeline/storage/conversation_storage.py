@@ -59,6 +59,10 @@ class ConversationStorage(abc.ABC):
         pass
 
     @abc.abstractmethod
+    def get_user_by_email(self, email: str) -> Optional[UserProfile]:
+        pass
+
+    @abc.abstractmethod
     def list_conversations(self, user_id: str) -> List[ConversationSummaryItem]:
         pass
 
@@ -288,6 +292,16 @@ class FileConversationStorage(ConversationStorage):
         except Exception as e:
             logger.error(f"Failed to load user {user_id}: {e}")
             return None
+
+    def get_user_by_email(self, email: str) -> Optional[UserProfile]:
+        """Loads user profile record by email address."""
+        email_clean = email.strip().lower()
+        with self._lock:
+            index_data = self._read_json(self.index_file) or {}
+            user_id = index_data.get("email_to_id", {}).get(email_clean)
+            if not user_id:
+                return None
+            return self.get_user_by_id(user_id)
 
     # =========================================================================
     # Conversation Session Management

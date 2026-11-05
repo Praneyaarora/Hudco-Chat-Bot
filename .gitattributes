@@ -1,0 +1,9 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Ensure data and vector index artifacts are preserved bit-for-bit identical across all OS
+data/vector_index/* binary
+data/vector_index/*.jsonl binary
+data/vector_index/*.npy binary
+data/vector_index/*.json text eol=lf
+data/*.json text eol=lf

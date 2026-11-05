@@ -253,23 +253,52 @@ class PostgresConversationStorage(ConversationStorage):
             updated_at=now,
         )
 
-        with self.get_connection() as conn:
-            with conn.cursor() as cur:
-                # Check for existing email
-                cur.execute("SELECT user_id FROM users WHERE email = %s;", (email_clean,))
-                if cur.fetchone():
-                    raise ValueError("An account with this email address already exists.")
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor() as cur:
+                    # Check for existing email
+                    cur.execute("SELECT user_id FROM users WHERE email = %s;", (email_clean,))
+                    if cur.fetchone():
+                        raise ValueError("An account with this email address already exists.")
 
-                cur.execute(
-                    """
-                    INSERT INTO users (user_id, email, username, password_hash, role, created_at, updated_at)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s);
-                    """,
-                    (user.user_id, user.email, user.username, user.password_hash, user.role, user.created_at, user.updated_at),
-                )
+                    cur.execute(
+                        """
+                        INSERT INTO users (user_id, email, username, password_hash, role, created_at, updated_at)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s);
+                        """,
+                        (user.user_id, user.email, user.username, user.password_hash, user.role, user.created_at, user.updated_at),
+                    )
+        except ValueError:
+            raise
+        except Exception as e:
+            if "unique" in str(e).lower() or "duplicate" in str(e).lower() or "users_email_key" in str(e).lower():
+                raise ValueError("An account with this email address already exists.")
+            raise
 
         logger.info(f"Registered user '{user.username}' ({user.email}) -> {user.user_id} in PostgreSQL")
         return user
+
+    def get_user_by_email(self, email: str) -> Optional[UserProfile]:
+        """Loads user profile record by email address."""
+        email_clean = email.strip().lower()
+        with self.get_connection() as conn:
+            with conn.cursor(cursor_factory=extras.DictCursor) as cur:
+                cur.execute(
+                    "SELECT user_id, email, username, password_hash, role, created_at, updated_at FROM users WHERE email = %s;",
+                    (email_clean,),
+                )
+                row = cur.fetchone()
+                if not row:
+                    return None
+                return UserProfile(
+                    user_id=row["user_id"],
+                    email=row["email"],
+                    username=row["username"],
+                    password_hash=row["password_hash"],
+                    role=row["role"],
+                    created_at=row["created_at"],
+                    updated_at=row["updated_at"],
+                )
 
     def authenticate_user(self, email: str, password: str) -> Optional[UserProfile]:
         """Authenticates user credentials using Argon2id."""
