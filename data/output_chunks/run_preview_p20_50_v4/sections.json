@@ -1,0 +1,82 @@
+[
+  {
+    "section_id": "sec_01",
+    "title": "Reference Information",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Reference Information"
+    ],
+    "physical_page_start": 20,
+    "physical_page_end": 21,
+    "printed_page_start": "18",
+    "printed_page_end": "19",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 12
+  },
+  {
+    "section_id": "sec_02",
+    "title": "Board of Directors",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Board of Directors"
+    ],
+    "physical_page_start": 22,
+    "physical_page_end": 23,
+    "printed_page_start": "20",
+    "printed_page_end": "21",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 35
+  },
+  {
+    "section_id": "sec_03",
+    "title": "Chairman’s Message",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Chairman’s Message"
+    ],
+    "physical_page_start": 24,
+    "physical_page_end": 36,
+    "printed_page_start": "22",
+    "printed_page_end": "34",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 91
+  },
+  {
+    "section_id": "sec_04",
+    "title": "Notice of AGM",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Notice of AGM"
+    ],
+    "physical_page_start": 37,
+    "physical_page_end": 49,
+    "printed_page_start": "35",
+    "printed_page_end": "47",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 130
+  },
+  {
+    "section_id": "sec_05",
+    "title": "Directors’ Report",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Directors’ Report"
+    ],
+    "physical_page_start": 50,
+    "physical_page_end": 50,
+    "printed_page_start": "48",
+    "printed_page_end": "48",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 6
+  }
+]

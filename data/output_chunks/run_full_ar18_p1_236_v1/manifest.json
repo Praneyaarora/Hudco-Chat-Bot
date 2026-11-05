@@ -1,0 +1,45 @@
+{
+  "document_id": "doc_ar18",
+  "source_id": "hudco_annual_report_ar18",
+  "source_filename": "ar18.pdf",
+  "source_url": "https://www.hudco.org.in/writereaddata/ar18.pdf",
+  "report_title": "HUDCO 48th Annual Report 2017-18",
+  "fiscal_year": "2017-18",
+  "file_size_bytes": 3295844,
+  "file_sha256": "6ce2995440962be6df6a089fc4d0b626a6b7d2da269b6b1d32e916c4f1cf0aae",
+  "total_physical_pages": 236,
+  "chunk_count": 1557,
+  "unique_chunk_id_count": 1557,
+  "section_count": 5,
+  "table_chunk_count": 284,
+  "warning_count": 51,
+  "download_seconds": null,
+  "extraction_seconds": 243.77,
+  "chunking_seconds": 0.5,
+  "peak_python_memory_mb": 41.61,
+  "total_wall_clock_seconds": 244.46,
+  "chunks_sha256": "4fce8f07281a59321558068b6346951b351de54d451e7a20f98c5775b4c41f15",
+  "identity_verification": {
+    "status": "VERIFIED",
+    "detected_title": "HUDCO 48th Annual Report 2017-18",
+    "detected_fiscal_year": "2017-18",
+    "detected_report_number": 48,
+    "total_physical_pages": 236,
+    "has_company_name": true,
+    "has_annual_report_keyword": true,
+    "confidence": "HIGH",
+    "details": {
+      "fy_matches": [
+        "2014-15",
+        "2017-2018",
+        "2017-18",
+        "2013-14",
+        "2015-16"
+      ],
+      "ord_matched": true,
+      "target_fy": "2017-18"
+    },
+    "discrepancy_reason": null
+  },
+  "status": "SUCCESS"
+}

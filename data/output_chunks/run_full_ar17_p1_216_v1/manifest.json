@@ -1,0 +1,45 @@
+{
+  "document_id": "doc_ar17",
+  "source_id": "hudco_annual_report_ar17",
+  "source_filename": "ar17.pdf",
+  "source_url": "https://www.hudco.org.in/writereaddata/ar17.pdf",
+  "report_title": "HUDCO 47th Annual Report 2016-17",
+  "fiscal_year": "2016-17",
+  "file_size_bytes": 4298562,
+  "file_sha256": "4ec16549794ce1ef30517323f8433d3ec209bfa842bc850de46648379e50dea2",
+  "total_physical_pages": 216,
+  "chunk_count": 1940,
+  "unique_chunk_id_count": 1940,
+  "section_count": 7,
+  "table_chunk_count": 283,
+  "warning_count": 50,
+  "download_seconds": null,
+  "extraction_seconds": 242.49,
+  "chunking_seconds": 0.57,
+  "peak_python_memory_mb": 1243.31,
+  "total_wall_clock_seconds": 243.28,
+  "chunks_sha256": "8c11476912b3adc5ca08ea87f199720b6208fb0a07b397e3c893f48cfca77669",
+  "identity_verification": {
+    "status": "VERIFIED",
+    "detected_title": "HUDCO 47th Annual Report 2016-17",
+    "detected_fiscal_year": "2016-17",
+    "detected_report_number": 47,
+    "total_physical_pages": 216,
+    "has_company_name": true,
+    "has_annual_report_keyword": true,
+    "confidence": "HIGH",
+    "details": {
+      "fy_matches": [
+        "2012-13",
+        "2013-14",
+        "2016-2017",
+        "2016-17",
+        "2014-15"
+      ],
+      "ord_matched": true,
+      "target_fy": "2016-17"
+    },
+    "discrepancy_reason": null
+  },
+  "status": "SUCCESS"
+}

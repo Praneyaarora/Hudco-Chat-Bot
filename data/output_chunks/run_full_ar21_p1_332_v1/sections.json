@@ -1,0 +1,322 @@
+[
+  {
+    "section_id": "sec_00",
+    "title": "Document Front Matter",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Document Front Matter"
+    ],
+    "physical_page_start": 1,
+    "physical_page_end": 6,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "preamble_unclassified",
+    "confidence": "medium",
+    "block_count": 35
+  },
+  {
+    "section_id": "sec_01",
+    "title": "BOARD OF DIRECTORS",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "BOARD OF DIRECTORS"
+    ],
+    "physical_page_start": 7,
+    "physical_page_end": 7,
+    "printed_page_start": "05",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 15
+  },
+  {
+    "section_id": "sec_02",
+    "title": "CHAIRMAN'S MESSAGE",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "CHAIRMAN'S MESSAGE"
+    ],
+    "physical_page_start": 8,
+    "physical_page_end": 11,
+    "printed_page_start": "06",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 47
+  },
+  {
+    "section_id": "sec_03",
+    "title": "NOTICE OF AGM",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "NOTICE OF AGM"
+    ],
+    "physical_page_start": 12,
+    "physical_page_end": 23,
+    "printed_page_start": "10",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 166
+  },
+  {
+    "section_id": "sec_04",
+    "title": "DIRECTORS' REPORT",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "DIRECTORS' REPORT"
+    ],
+    "physical_page_start": 24,
+    "physical_page_end": 41,
+    "printed_page_start": "22",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 240
+  },
+  {
+    "section_id": "sec_05",
+    "title": "MANAGEMENT DISCUSSION & ANALYSIS REPORT",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "MANAGEMENT DISCUSSION & ANALYSIS REPORT"
+    ],
+    "physical_page_start": 42,
+    "physical_page_end": 44,
+    "printed_page_start": "40",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 32
+  },
+  {
+    "section_id": "sec_06",
+    "title": "CORPORATE GOVERNANCE REPORT",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "CORPORATE GOVERNANCE REPORT"
+    ],
+    "physical_page_start": 45,
+    "physical_page_end": 64,
+    "printed_page_start": "43",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 322
+  },
+  {
+    "section_id": "sec_07",
+    "title": "BUSINESS RESPONSIBILITY REPORT",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "BUSINESS RESPONSIBILITY REPORT"
+    ],
+    "physical_page_start": 65,
+    "physical_page_end": 72,
+    "printed_page_start": "63",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 139
+  },
+  {
+    "section_id": "sec_08",
+    "title": "SECRETARIAL AUDIT REPORT",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "SECRETARIAL AUDIT REPORT"
+    ],
+    "physical_page_start": 73,
+    "physical_page_end": 83,
+    "printed_page_start": "71",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 114
+  },
+  {
+    "section_id": "sec_09",
+    "title": "EXTRACT OF ANNUAL RETURN",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "EXTRACT OF ANNUAL RETURN"
+    ],
+    "physical_page_start": 84,
+    "physical_page_end": 94,
+    "printed_page_start": "82",
+    "printed_page_end": "7",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 54
+  },
+  {
+    "section_id": "sec_10",
+    "title": "MANAGEMENT REPLY TO INDEPENDENT AUDITOR'S REPORT",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "MANAGEMENT REPLY TO INDEPENDENT AUDITOR'S REPORT"
+    ],
+    "physical_page_start": 95,
+    "physical_page_end": 95,
+    "printed_page_start": "93",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 13
+  },
+  {
+    "section_id": "sec_11",
+    "title": "COMMENTS OF THE C&AG ON STANDALONE FINANCIAL STATEMENTS",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "COMMENTS OF THE C&AG ON STANDALONE FINANCIAL STATEMENTS"
+    ],
+    "physical_page_start": 96,
+    "physical_page_end": 96,
+    "printed_page_start": "94",
+    "printed_page_end": "9",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 10
+  },
+  {
+    "section_id": "sec_12",
+    "title": "COMMENTS OF THE C&AG ON CONSOLIDATED FINANCIAL STATEMENTS",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "COMMENTS OF THE C&AG ON CONSOLIDATED FINANCIAL STATEMENTS"
+    ],
+    "physical_page_start": 97,
+    "physical_page_end": 97,
+    "printed_page_start": "95",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 12
+  },
+  {
+    "section_id": "sec_13",
+    "title": "INDEPENDENT AUDITOR'S REPORT ON STANDALONE FINANCIAL STATEMENTS",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "INDEPENDENT AUDITOR'S REPORT ON STANDALONE FINANCIAL STATEMENTS"
+    ],
+    "physical_page_start": 98,
+    "physical_page_end": 107,
+    "printed_page_start": "96",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 103
+  },
+  {
+    "section_id": "sec_14",
+    "title": "STANDALONE FINANCIAL STATEMENTS",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "STANDALONE FINANCIAL STATEMENTS"
+    ],
+    "physical_page_start": 108,
+    "physical_page_end": 207,
+    "printed_page_start": "106",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 853
+  },
+  {
+    "section_id": "sec_15",
+    "title": "INDEPENDENT AUDITOR'S REPORT ON CONSOLIDATED FINANCIAL STATEMENTS",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "INDEPENDENT AUDITOR'S REPORT ON CONSOLIDATED FINANCIAL STATEMENTS"
+    ],
+    "physical_page_start": 208,
+    "physical_page_end": 213,
+    "printed_page_start": "206",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 72
+  },
+  {
+    "section_id": "sec_16",
+    "title": "CONSOLIDATED FINANCIAL STATEMENTS",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "CONSOLIDATED FINANCIAL STATEMENTS"
+    ],
+    "physical_page_start": 214,
+    "physical_page_end": 325,
+    "printed_page_start": "212",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 995
+  },
+  {
+    "section_id": "sec_17",
+    "title": "SENIOR EXECUTIVE",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "SENIOR EXECUTIVE"
+    ],
+    "physical_page_start": 326,
+    "physical_page_end": 326,
+    "printed_page_start": "324",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 33
+  },
+  {
+    "section_id": "sec_18",
+    "title": "HUDCO OFFICES",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "HUDCO OFFICES"
+    ],
+    "physical_page_start": 327,
+    "physical_page_end": 328,
+    "printed_page_start": "325",
+    "printed_page_end": "1",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 228
+  },
+  {
+    "section_id": "sec_19",
+    "title": "DETAILS OF THE AUDITORS AND BANKERS",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "DETAILS OF THE AUDITORS AND BANKERS"
+    ],
+    "physical_page_start": 329,
+    "physical_page_end": 332,
+    "printed_page_start": "327",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 41
+  }
+]

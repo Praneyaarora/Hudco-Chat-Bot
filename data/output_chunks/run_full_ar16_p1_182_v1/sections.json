@@ -1,0 +1,114 @@
+[
+  {
+    "section_id": "sec_01",
+    "title": "FINAL COVER PAGE F",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "FINAL COVER PAGE F"
+    ],
+    "physical_page_start": 1,
+    "physical_page_end": 1,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 0
+  },
+  {
+    "section_id": "sec_02",
+    "title": "FINAL COVER PAGE F1",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "FINAL COVER PAGE F1"
+    ],
+    "physical_page_start": 2,
+    "physical_page_end": 2,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 0
+  },
+  {
+    "section_id": "sec_03",
+    "title": "Final English Report 3-10-2016 = Four Colour",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Final English Report 3-10-2016 = Four Colour"
+    ],
+    "physical_page_start": 3,
+    "physical_page_end": 3,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 10
+  },
+  {
+    "section_id": "sec_04",
+    "title": "Standlone",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Standlone"
+    ],
+    "physical_page_start": 3,
+    "physical_page_end": 115,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 1755
+  },
+  {
+    "section_id": "sec_05",
+    "title": "Consolidated 30-9-2016",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Consolidated 30-9-2016"
+    ],
+    "physical_page_start": 116,
+    "physical_page_end": 180,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 1049
+  },
+  {
+    "section_id": "sec_06",
+    "title": "FINAL COVER PAGE b1",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "FINAL COVER PAGE b1"
+    ],
+    "physical_page_start": 181,
+    "physical_page_end": 181,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 0
+  },
+  {
+    "section_id": "sec_07",
+    "title": "FINAL COVER PAGE b",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "FINAL COVER PAGE b"
+    ],
+    "physical_page_start": 182,
+    "physical_page_end": 182,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 0
+  }
+]

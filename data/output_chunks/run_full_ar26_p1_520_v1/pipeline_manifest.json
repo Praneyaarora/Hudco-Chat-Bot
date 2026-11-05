@@ -1,0 +1,54 @@
+{
+  "pipeline_version": "2.0.0",
+  "execution_timestamp": "2026-10-21T06:40:20.302519+00:00",
+  "duration_seconds": 12.5,
+  "status": "success",
+  "source_document": {
+    "filename": "ar26.pdf",
+    "sha256": "c412ce14393a43ad741f30c8da90e9b9ed99da4b923fb6ac7c6656fa3a8d2f41",
+    "size_bytes": 12335105
+  },
+  "run_directory": "C:\\Users\\Praneya Arora\\Desktop\\Hudco\\data\\output_chunks\\run_full_ar26_p1_520_v1",
+  "artifacts_reused": true,
+  "dataset_statistics": {
+    "total_chunks": 2682,
+    "total_physical_pages": 518,
+    "has_table_chunks": 662
+  },
+  "test_summary": {
+    "total_run": 125,
+    "failures": 0,
+    "errors": 0,
+    "passed": true
+  },
+  "retrieval_metrics": {
+    "chunk_recall_at_1": 0.7059,
+    "chunk_recall_at_3": 0.7647,
+    "chunk_recall_at_5": 0.8824,
+    "page_recall_at_1": 0.8824,
+    "page_recall_at_3": 1.0,
+    "page_recall_at_5": 1.0,
+    "page_citation_accuracy_at_1": 0.8824,
+    "page_citation_accuracy_at_5": 0.3059,
+    "mrr_page": 0.9412,
+    "mrr_chunk": 0.7588,
+    "abstention_precision": 1.0,
+    "abstention_recall": 1.0,
+    "abstention_f1": 1.0
+  },
+  "acceptance_gates": {
+    "Gate 1: Test Suite 100% Pass Rate": true,
+    "Gate 2: Canonical Integrity (0 Duplicate IDs)": true,
+    "Gate 3: Retrieval Recall@5 >= 80%": true,
+    "Gate 4: Page Citation Acc@1 >= 60%": true,
+    "Gate 5: Abstention Precision == 100%": true,
+    "Gate 6: Abstention Recall >= 66%": true
+  },
+  "stage_timings_seconds": {
+    "preflight": 0.0023,
+    "source_resolution": 0.0138,
+    "chunk_validation": 0.091,
+    "index_construction": 0.3175,
+    "testing_and_eval": 12.0134
+  }
+}

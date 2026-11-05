@@ -1,0 +1,22 @@
+{
+  "document_id": "doc_ar18",
+  "source_id": "hudco_annual_report_ar18",
+  "source_filename": "ar18.pdf",
+  "content_sha256": "6ce2995440962be6df6a089fc4d0b626a6b7d2da269b6b1d32e916c4f1cf0aae",
+  "document_format": "pdf",
+  "total_physical_pages": 236,
+  "elapsed_seconds": 0.19586,
+  "effective_config": {
+    "target_chunk_size": 1200,
+    "max_chunk_size": 2000,
+    "chunk_overlap": 150
+  },
+  "section_count": 5,
+  "chunk_count": 1557,
+  "table_chunk_count": 284,
+  "oversized_chunk_count": 48,
+  "warning_count": 51,
+  "low_confidence_sections": [],
+  "processing_revision": 1,
+  "status": "success_with_warnings"
+}

@@ -1,0 +1,43 @@
+{
+  "document_id": "doc_ar19",
+  "source_id": "hudco_annual_report_ar19",
+  "source_filename": "ar19.pdf",
+  "source_url": "https://www.hudco.org.in/writereaddata/ar19.pdf",
+  "report_title": "HUDCO 49th Annual Report 2018-19",
+  "fiscal_year": "2018-19",
+  "file_size_bytes": 7138286,
+  "file_sha256": "cb68403a24eec7a5fc388ed55d9496eba475198e24e9ad5916803675d46abe12",
+  "total_physical_pages": 316,
+  "chunk_count": 2288,
+  "unique_chunk_id_count": 2288,
+  "section_count": 5,
+  "table_chunk_count": 429,
+  "warning_count": 61,
+  "download_seconds": null,
+  "extraction_seconds": 453.96,
+  "chunking_seconds": 0.66,
+  "peak_python_memory_mb": 83.01,
+  "total_wall_clock_seconds": 454.89,
+  "chunks_sha256": "1815636bbddd854de564c4d30d3a89fa189ff29e06493955a6dae76a5ebe62ae",
+  "identity_verification": {
+    "status": "VERIFIED",
+    "detected_title": "HUDCO 49th Annual Report 2018-19",
+    "detected_fiscal_year": "2018-19",
+    "detected_report_number": 49,
+    "total_physical_pages": 316,
+    "has_company_name": true,
+    "has_annual_report_keyword": true,
+    "confidence": "HIGH",
+    "details": {
+      "fy_matches": [
+        "2018-19",
+        "2015-16",
+        "2014-15"
+      ],
+      "ord_matched": true,
+      "target_fy": "2018-19"
+    },
+    "discrepancy_reason": null
+  },
+  "status": "SUCCESS"
+}

@@ -1,0 +1,42 @@
+{
+  "document_id": "doc_ar25",
+  "source_id": "hudco_annual_report_ar25",
+  "source_filename": "ar25.pdf",
+  "source_url": "https://www.hudco.org.in/writereaddata/ar25.pdf",
+  "report_title": "HUDCO 55th Annual Report 2024-25",
+  "fiscal_year": "2024-25",
+  "file_size_bytes": 138963868,
+  "file_sha256": "940efa327484e5a9297bd6c1a60c0fac6f9fbc7def75bb28035eea7b697d8904",
+  "total_physical_pages": 464,
+  "chunk_count": 2598,
+  "unique_chunk_id_count": 2598,
+  "section_count": 1308,
+  "table_chunk_count": 543,
+  "warning_count": 101,
+  "download_seconds": null,
+  "extraction_seconds": 347.47,
+  "chunking_seconds": 1.77,
+  "peak_python_memory_mb": 15.73,
+  "total_wall_clock_seconds": 350.53,
+  "chunks_sha256": "b357a6c044a621e61de3bf5cccd6c7e25d94f952aeb68bfd5e8d18598f78150d",
+  "identity_verification": {
+    "status": "VERIFIED",
+    "detected_title": "HUDCO 55th Annual Report 2024-25",
+    "detected_fiscal_year": "2024-25",
+    "detected_report_number": 55,
+    "total_physical_pages": 464,
+    "has_company_name": true,
+    "has_annual_report_keyword": true,
+    "confidence": "HIGH",
+    "details": {
+      "matched_interval": [
+        2024,
+        2025
+      ],
+      "target_num": 55,
+      "detected_num": null
+    },
+    "discrepancy_reason": null
+  },
+  "status": "SUCCESS"
+}

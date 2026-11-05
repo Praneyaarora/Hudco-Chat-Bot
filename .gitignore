@@ -1,0 +1,36 @@
+# Environment and Secrets
+.env
+.env.*
+!.env.example
+
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+env/
+venv/
+ENV/
+
+# HUDCO Bot Root Storage Directory (Sensitive User Conversations & State)
+/context/
+/data/user_chats/
+
+# Temporary, Scratch & Log files
+/scratch/
+/tmp/
+*.log
+*.tmp
+*.bak
+
+# Large Raw PDFs (>100MB exceeds GitHub push limits; generated chunks & vectors are preserved)
+data/raw/annual_reports/*.pdf
+data/raw/annual_reports/*.part
+data/intermediate/sections/*.pdf
+
+# IDE & OS Temporary Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

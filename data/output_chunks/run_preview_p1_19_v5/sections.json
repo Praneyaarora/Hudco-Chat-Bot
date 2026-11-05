@@ -1,0 +1,18 @@
+[
+  {
+    "section_id": "sec_01",
+    "title": "Document Front Matter",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Document Front Matter"
+    ],
+    "physical_page_start": 1,
+    "physical_page_end": 19,
+    "printed_page_start": null,
+    "printed_page_end": "17",
+    "segmentation_method": "toc_preamble",
+    "confidence": "high",
+    "block_count": 48
+  }
+]

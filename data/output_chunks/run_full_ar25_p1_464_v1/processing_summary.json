@@ -1,0 +1,22 @@
+{
+  "document_id": "doc_ar25",
+  "source_id": "hudco_annual_report_ar25",
+  "source_filename": "ar25.pdf",
+  "content_sha256": "940efa327484e5a9297bd6c1a60c0fac6f9fbc7def75bb28035eea7b697d8904",
+  "document_format": "pdf",
+  "total_physical_pages": 464,
+  "elapsed_seconds": 0.704425,
+  "effective_config": {
+    "target_chunk_size": 1200,
+    "max_chunk_size": 2000,
+    "chunk_overlap": 150
+  },
+  "section_count": 1308,
+  "chunk_count": 2598,
+  "table_chunk_count": 543,
+  "oversized_chunk_count": 83,
+  "warning_count": 101,
+  "low_confidence_sections": [],
+  "processing_revision": 1,
+  "status": "success_with_warnings"
+}

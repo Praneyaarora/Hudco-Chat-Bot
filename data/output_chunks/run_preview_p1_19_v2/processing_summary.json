@@ -1,0 +1,15 @@
+{
+  "document_id": "doc_ar26",
+  "source_filename": "ar26.pdf",
+  "document_format": "pdf",
+  "total_physical_pages": 19,
+  "elapsed_seconds": 0.000467,
+  "section_count": 1,
+  "chunk_count": 3,
+  "table_chunk_count": 0,
+  "oversized_chunk_count": 0,
+  "warning_count": 20,
+  "low_confidence_sections": [],
+  "processing_revision": 1,
+  "status": "success_with_warnings"
+}

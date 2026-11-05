@@ -1,0 +1,466 @@
+[
+  {
+    "section_id": "sec_01",
+    "title": "Annual Report",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Annual Report"
+    ],
+    "physical_page_start": 3,
+    "physical_page_end": 4,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 3
+  },
+  {
+    "section_id": "sec_02",
+    "title": "CONTENTSCONTENTS",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "CONTENTSCONTENTS"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_03",
+    "title": "Reference Information 18",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Reference Information 18"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_04",
+    "title": "Board of Directors 20",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Board of Directors 20"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_05",
+    "title": "Chairman’s Message 22",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Chairman’s Message 22"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_06",
+    "title": "Notice of AGM 35",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Notice of AGM 35"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_07",
+    "title": "Directors’ Report 48",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Directors’ Report 48"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_08",
+    "title": "Management Discussion & Analysis Report 78",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Management Discussion & Analysis Report 78"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_09",
+    "title": "Corporate Governance Report 82",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Corporate Governance Report 82"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_10",
+    "title": "Business Responsibility & Sustainability Report 102",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Business Responsibility & Sustainability Report 102"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_11",
+    "title": "Independent Reasonable Assurance Report on BRSR Core 153",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Independent Reasonable Assurance Report on BRSR Core 153"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_12",
+    "title": "Secretarial Audit Report 158",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Secretarial Audit Report 158"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_13",
+    "title": "Annual Report on Corporate Social Responsibility Activities 162",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Annual Report on Corporate Social Responsibility Activities 162"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_14",
+    "title": "Management Reply to Independent Auditor’s Report 181",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Management Reply to Independent Auditor’s Report 181"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_15",
+    "title": "Comments of the CAG on Standalone Financial Statements 182",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Comments of the CAG on Standalone Financial Statements 182"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_16",
+    "title": "Comments of the CAG on Consolidated Financial Statements 183",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Comments of the CAG on Consolidated Financial Statements 183"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_17",
+    "title": "Independent Auditor’s Report on Standalone Financial",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Independent Auditor’s Report on Standalone Financial"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_18",
+    "title": "Statements",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Statements"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_19",
+    "title": "Standalone Financial Statements 206",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Standalone Financial Statements 206"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_20",
+    "title": "Independent Auditor’s Report on Consolidated Financial",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Independent Auditor’s Report on Consolidated Financial"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_21",
+    "title": "Statements",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Statements"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_22",
+    "title": "Consolidated Financial Statements 360",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Consolidated Financial Statements 360"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_23",
+    "title": "Information on Sanctions/Releases 510",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Information on Sanctions/Releases 510"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_24",
+    "title": "Management Team 514",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Management Team 514"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_25",
+    "title": "HUDCO Offices 515",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "HUDCO Offices 515"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_26",
+    "title": "ANNUAL GENERAL MEETING",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "ANNUAL GENERAL MEETING"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_27",
+    "title": "Date: 24th August, 2026 | Time: 11:30 a.m. (IST)",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Date: 24th August, 2026 | Time: 11:30 a.m. (IST)"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 2
+  },
+  {
+    "section_id": "sec_28",
+    "title": "START DATE",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "START DATE"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 2
+  },
+  {
+    "section_id": "sec_29",
+    "title": "END DATE",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "END DATE"
+    ],
+    "physical_page_start": 5,
+    "physical_page_end": 19,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 16
+  }
+]

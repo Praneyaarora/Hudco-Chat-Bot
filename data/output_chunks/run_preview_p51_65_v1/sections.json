@@ -1,0 +1,498 @@
+[
+  {
+    "section_id": "sec_00",
+    "title": "Document Overview",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Document Overview"
+    ],
+    "physical_page_start": 51,
+    "physical_page_end": 51,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "preamble_unclassified",
+    "confidence": "medium",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_01",
+    "title": "Consolidated Financial Statements",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Consolidated Financial Statements"
+    ],
+    "physical_page_start": 51,
+    "physical_page_end": 51,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 11
+  },
+  {
+    "section_id": "sec_02",
+    "title": "Listing of securities and payment of listing fee",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Listing of securities and payment of listing fee"
+    ],
+    "physical_page_start": 51,
+    "physical_page_end": 52,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 3
+  },
+  {
+    "section_id": "sec_03",
+    "title": "Amounts transferred to IEPF",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Amounts transferred to IEPF"
+    ],
+    "physical_page_start": 52,
+    "physical_page_end": 52,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 3
+  },
+  {
+    "section_id": "sec_04",
+    "title": "Equity Shares transferred to IEPF",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Equity Shares transferred to IEPF"
+    ],
+    "physical_page_start": 52,
+    "physical_page_end": 52,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 4
+  },
+  {
+    "section_id": "sec_05",
+    "title": "Claim from IEPF Account",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Claim from IEPF Account"
+    ],
+    "physical_page_start": 52,
+    "physical_page_end": 52,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 5
+  },
+  {
+    "section_id": "sec_06",
+    "title": "MoU 2025 - 26: Achievement of Key Performance Parameters (as on 31.03.2026)",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "MoU 2025 - 26: Achievement of Key Performance Parameters (as on 31.03.2026)"
+    ],
+    "physical_page_start": 53,
+    "physical_page_end": 53,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 7
+  },
+  {
+    "section_id": "sec_07",
+    "title": "Urban Infrastructure Lending",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Urban Infrastructure Lending"
+    ],
+    "physical_page_start": 53,
+    "physical_page_end": 53,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 2
+  },
+  {
+    "section_id": "sec_08",
+    "title": "Housing Operations",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Housing Operations"
+    ],
+    "physical_page_start": 53,
+    "physical_page_end": 53,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 3
+  },
+  {
+    "section_id": "sec_09",
+    "title": "Transport and Logistics",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Transport and Logistics"
+    ],
+    "physical_page_start": 53,
+    "physical_page_end": 54,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 8
+  },
+  {
+    "section_id": "sec_10",
+    "title": "Energy",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Energy"
+    ],
+    "physical_page_start": 54,
+    "physical_page_end": 54,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 5
+  },
+  {
+    "section_id": "sec_11",
+    "title": "Water and Sanitation",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Water and Sanitation"
+    ],
+    "physical_page_start": 55,
+    "physical_page_end": 55,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 5
+  },
+  {
+    "section_id": "sec_12",
+    "title": "Social and Commercial Infrastructure",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Social and Commercial Infrastructure"
+    ],
+    "physical_page_start": 55,
+    "physical_page_end": 55,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 4
+  },
+  {
+    "section_id": "sec_13",
+    "title": "Housing",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Housing"
+    ],
+    "physical_page_start": 55,
+    "physical_page_end": 55,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 4
+  },
+  {
+    "section_id": "sec_14",
+    "title": "Sectorial overview and government initiative:",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Sectorial overview and government initiative:"
+    ],
+    "physical_page_start": 56,
+    "physical_page_end": 56,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_15",
+    "title": "Support to Economically Weaker Sections",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Support to Economically Weaker Sections"
+    ],
+    "physical_page_start": 56,
+    "physical_page_end": 56,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 2
+  },
+  {
+    "section_id": "sec_16",
+    "title": "HUDCO’s Support for projects in the North-Eastern Region",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "HUDCO’s Support for projects in the North-Eastern Region"
+    ],
+    "physical_page_start": 56,
+    "physical_page_end": 56,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 5
+  },
+  {
+    "section_id": "sec_17",
+    "title": "Property Development and Consultancy",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Property Development and Consultancy"
+    ],
+    "physical_page_start": 56,
+    "physical_page_end": 57,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 5
+  },
+  {
+    "section_id": "sec_18",
+    "title": "Cities in India.”",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Cities in India.”"
+    ],
+    "physical_page_start": 57,
+    "physical_page_end": 60,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 22
+  },
+  {
+    "section_id": "sec_19",
+    "title": "Domestic and International Credit Ratings",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Domestic and International Credit Ratings"
+    ],
+    "physical_page_start": 60,
+    "physical_page_end": 60,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 4
+  },
+  {
+    "section_id": "sec_20",
+    "title": "Issuance and Dematerialization of Bonds/Debentures",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Issuance and Dematerialization of Bonds/Debentures"
+    ],
+    "physical_page_start": 60,
+    "physical_page_end": 61,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 4
+  },
+  {
+    "section_id": "sec_21",
+    "title": "Redemption of Debt Securities and Repayment of Loans",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Redemption of Debt Securities and Repayment of Loans"
+    ],
+    "physical_page_start": 61,
+    "physical_page_end": 61,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 8
+  },
+  {
+    "section_id": "sec_22",
+    "title": "Transfer to Investor Education and Protection Fund (IEPF)",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Transfer to Investor Education and Protection Fund (IEPF)"
+    ],
+    "physical_page_start": 61,
+    "physical_page_end": 61,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 3
+  },
+  {
+    "section_id": "sec_23",
+    "title": "Investor Servicing and Commitment",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Investor Servicing and Commitment"
+    ],
+    "physical_page_start": 61,
+    "physical_page_end": 64,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 17
+  },
+  {
+    "section_id": "sec_24",
+    "title": "Internal Audit",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Internal Audit"
+    ],
+    "physical_page_start": 64,
+    "physical_page_end": 64,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 9
+  },
+  {
+    "section_id": "sec_25",
+    "title": "T raining Activities",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "T raining Activities"
+    ],
+    "physical_page_start": 64,
+    "physical_page_end": 64,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 2
+  },
+  {
+    "section_id": "sec_26",
+    "title": "Capacity Building and Training conducted in Financial Year 2025-26:",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Capacity Building and Training conducted in Financial Year 2025-26:"
+    ],
+    "physical_page_start": 64,
+    "physical_page_end": 65,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 3
+  },
+  {
+    "section_id": "sec_27",
+    "title": "For HUDCO and other CPSEs officers",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "For HUDCO and other CPSEs officers"
+    ],
+    "physical_page_start": 65,
+    "physical_page_end": 65,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 2
+  },
+  {
+    "section_id": "sec_28",
+    "title": "Webinars",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Webinars"
+    ],
+    "physical_page_start": 65,
+    "physical_page_end": 65,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 2
+  },
+  {
+    "section_id": "sec_29",
+    "title": "Hybrid Training Programme",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Hybrid Training Programme"
+    ],
+    "physical_page_start": 65,
+    "physical_page_end": 65,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 5
+  },
+  {
+    "section_id": "sec_30",
+    "title": "For International Participants under ITEC",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "For International Participants under ITEC"
+    ],
+    "physical_page_start": 65,
+    "physical_page_end": 65,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 3
+  }
+]

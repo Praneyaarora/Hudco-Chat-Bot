@@ -1,0 +1,818 @@
+{
+  "thresholds": {
+    "0.5": {
+      "TP": 1,
+      "FP": 0,
+      "TN": 7,
+      "FN": 7,
+      "precision": 1.0,
+      "recall": 0.125,
+      "f1": 0.2222,
+      "false_abstention_rate": 0.0,
+      "false_acceptance_rate": 0.875,
+      "queries": [
+        {
+          "id": "CALIB_01",
+          "query": "Who is the Chairman and Managing Director of HUDCO in FY 2025-26?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.020513
+        },
+        {
+          "id": "CALIB_02",
+          "query": "What is the corporate headquarters address of the company?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.029418
+        },
+        {
+          "id": "CALIB_03",
+          "query": "What was HUDCO profit after tax (PAT) in FY 2025-26?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.02152
+        },
+        {
+          "id": "CALIB_04",
+          "query": "What was the total loan disbursement in FY 2023-24?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.021749
+        },
+        {
+          "id": "CALIB_05",
+          "query": "What is the vision and mission statement of HUDCO?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.032018
+        },
+        {
+          "id": "CALIB_06",
+          "query": "What were the net loan sanctions in FY 2017-18?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_07",
+          "query": "What is HUDCO policy on Corporate Social Responsibility (CSR)?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.032266
+        },
+        {
+          "id": "CALIB_08",
+          "query": "What is HUDCO policy regarding Bitcoin and cryptocurrency mining investments?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.027289
+        },
+        {
+          "id": "CALIB_09",
+          "query": "What was the net profit reported in the FY 2019-20 annual report ar20?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.023306
+        },
+        {
+          "id": "CALIB_10",
+          "query": "Tell me all about everything with the numbers and things.",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (8.58) is below calibrated threshold (14.50).) and semantic candidate score (0.4156) did not exceed confidence threshold (0.50).",
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_11",
+          "query": "What are HUDCO projected revenue and EBITDA figures for fiscal year 2034-35?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_12",
+          "query": "When was Elon Musk appointed as Chief Technical Advisor of HUDCO?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.029139
+        },
+        {
+          "id": "CALIB_13",
+          "query": "What was the loan delinquency rate of Fannie Mae in California in 2024?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_14",
+          "query": "What dividends were paid by HUDCO Aerospace and Lunar Housing Limited in FY 2025-26?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_15",
+          "query": "Explain the quantum key distribution cryptographic architecture used in HUDCO core banking routers.",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.02886
+        }
+      ]
+    },
+    "0.55": {
+      "TP": 2,
+      "FP": 0,
+      "TN": 7,
+      "FN": 6,
+      "precision": 1.0,
+      "recall": 0.25,
+      "f1": 0.4,
+      "false_abstention_rate": 0.0,
+      "false_acceptance_rate": 0.75,
+      "queries": [
+        {
+          "id": "CALIB_01",
+          "query": "Who is the Chairman and Managing Director of HUDCO in FY 2025-26?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.020513
+        },
+        {
+          "id": "CALIB_02",
+          "query": "What is the corporate headquarters address of the company?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.029418
+        },
+        {
+          "id": "CALIB_03",
+          "query": "What was HUDCO profit after tax (PAT) in FY 2025-26?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.02152
+        },
+        {
+          "id": "CALIB_04",
+          "query": "What was the total loan disbursement in FY 2023-24?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.021749
+        },
+        {
+          "id": "CALIB_05",
+          "query": "What is the vision and mission statement of HUDCO?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.032018
+        },
+        {
+          "id": "CALIB_06",
+          "query": "What were the net loan sanctions in FY 2017-18?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_07",
+          "query": "What is HUDCO policy on Corporate Social Responsibility (CSR)?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.032266
+        },
+        {
+          "id": "CALIB_08",
+          "query": "What is HUDCO policy regarding Bitcoin and cryptocurrency mining investments?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.027289
+        },
+        {
+          "id": "CALIB_09",
+          "query": "What was the net profit reported in the FY 2019-20 annual report ar20?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.023306
+        },
+        {
+          "id": "CALIB_10",
+          "query": "Tell me all about everything with the numbers and things.",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (8.58) is below calibrated threshold (14.50).) and semantic candidate score (0.4156) did not exceed confidence threshold (0.55).",
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_11",
+          "query": "What are HUDCO projected revenue and EBITDA figures for fiscal year 2034-35?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_12",
+          "query": "When was Elon Musk appointed as Chief Technical Advisor of HUDCO?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.029139
+        },
+        {
+          "id": "CALIB_13",
+          "query": "What was the loan delinquency rate of Fannie Mae in California in 2024?",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (13.91) is below calibrated threshold (14.50).) and semantic candidate score (0.5095) did not exceed confidence threshold (0.55).",
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_14",
+          "query": "What dividends were paid by HUDCO Aerospace and Lunar Housing Limited in FY 2025-26?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_15",
+          "query": "Explain the quantum key distribution cryptographic architecture used in HUDCO core banking routers.",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.02886
+        }
+      ]
+    },
+    "0.6": {
+      "TP": 3,
+      "FP": 1,
+      "TN": 6,
+      "FN": 5,
+      "precision": 0.75,
+      "recall": 0.375,
+      "f1": 0.5,
+      "false_abstention_rate": 0.1429,
+      "false_acceptance_rate": 0.625,
+      "queries": [
+        {
+          "id": "CALIB_01",
+          "query": "Who is the Chairman and Managing Director of HUDCO in FY 2025-26?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.020513
+        },
+        {
+          "id": "CALIB_02",
+          "query": "What is the corporate headquarters address of the company?",
+          "expected": "answerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate term coverage (25.0%) is below calibrated threshold (40.0%).) and semantic candidate score (0.5906) did not exceed confidence threshold (0.60).",
+          "top_score": 0.029418
+        },
+        {
+          "id": "CALIB_03",
+          "query": "What was HUDCO profit after tax (PAT) in FY 2025-26?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.02152
+        },
+        {
+          "id": "CALIB_04",
+          "query": "What was the total loan disbursement in FY 2023-24?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.021749
+        },
+        {
+          "id": "CALIB_05",
+          "query": "What is the vision and mission statement of HUDCO?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.032018
+        },
+        {
+          "id": "CALIB_06",
+          "query": "What were the net loan sanctions in FY 2017-18?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_07",
+          "query": "What is HUDCO policy on Corporate Social Responsibility (CSR)?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.032266
+        },
+        {
+          "id": "CALIB_08",
+          "query": "What is HUDCO policy regarding Bitcoin and cryptocurrency mining investments?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.027289
+        },
+        {
+          "id": "CALIB_09",
+          "query": "What was the net profit reported in the FY 2019-20 annual report ar20?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.023306
+        },
+        {
+          "id": "CALIB_10",
+          "query": "Tell me all about everything with the numbers and things.",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (8.58) is below calibrated threshold (14.50).) and semantic candidate score (0.4156) did not exceed confidence threshold (0.60).",
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_11",
+          "query": "What are HUDCO projected revenue and EBITDA figures for fiscal year 2034-35?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_12",
+          "query": "When was Elon Musk appointed as Chief Technical Advisor of HUDCO?",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (14.39) is below calibrated threshold (14.50).) and semantic candidate score (0.5978) did not exceed confidence threshold (0.60).",
+          "top_score": 0.029139
+        },
+        {
+          "id": "CALIB_13",
+          "query": "What was the loan delinquency rate of Fannie Mae in California in 2024?",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (13.91) is below calibrated threshold (14.50).) and semantic candidate score (0.5095) did not exceed confidence threshold (0.60).",
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_14",
+          "query": "What dividends were paid by HUDCO Aerospace and Lunar Housing Limited in FY 2025-26?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_15",
+          "query": "Explain the quantum key distribution cryptographic architecture used in HUDCO core banking routers.",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.02886
+        }
+      ]
+    },
+    "0.65": {
+      "TP": 3,
+      "FP": 1,
+      "TN": 6,
+      "FN": 5,
+      "precision": 0.75,
+      "recall": 0.375,
+      "f1": 0.5,
+      "false_abstention_rate": 0.1429,
+      "false_acceptance_rate": 0.625,
+      "queries": [
+        {
+          "id": "CALIB_01",
+          "query": "Who is the Chairman and Managing Director of HUDCO in FY 2025-26?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.020513
+        },
+        {
+          "id": "CALIB_02",
+          "query": "What is the corporate headquarters address of the company?",
+          "expected": "answerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate term coverage (25.0%) is below calibrated threshold (40.0%).) and semantic candidate score (0.5906) did not exceed confidence threshold (0.65).",
+          "top_score": 0.029418
+        },
+        {
+          "id": "CALIB_03",
+          "query": "What was HUDCO profit after tax (PAT) in FY 2025-26?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.02152
+        },
+        {
+          "id": "CALIB_04",
+          "query": "What was the total loan disbursement in FY 2023-24?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.021749
+        },
+        {
+          "id": "CALIB_05",
+          "query": "What is the vision and mission statement of HUDCO?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.032018
+        },
+        {
+          "id": "CALIB_06",
+          "query": "What were the net loan sanctions in FY 2017-18?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_07",
+          "query": "What is HUDCO policy on Corporate Social Responsibility (CSR)?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.032266
+        },
+        {
+          "id": "CALIB_08",
+          "query": "What is HUDCO policy regarding Bitcoin and cryptocurrency mining investments?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.027289
+        },
+        {
+          "id": "CALIB_09",
+          "query": "What was the net profit reported in the FY 2019-20 annual report ar20?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.023306
+        },
+        {
+          "id": "CALIB_10",
+          "query": "Tell me all about everything with the numbers and things.",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (8.58) is below calibrated threshold (14.50).) and semantic candidate score (0.4156) did not exceed confidence threshold (0.65).",
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_11",
+          "query": "What are HUDCO projected revenue and EBITDA figures for fiscal year 2034-35?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_12",
+          "query": "When was Elon Musk appointed as Chief Technical Advisor of HUDCO?",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (14.39) is below calibrated threshold (14.50).) and semantic candidate score (0.5978) did not exceed confidence threshold (0.65).",
+          "top_score": 0.029139
+        },
+        {
+          "id": "CALIB_13",
+          "query": "What was the loan delinquency rate of Fannie Mae in California in 2024?",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (13.91) is below calibrated threshold (14.50).) and semantic candidate score (0.5095) did not exceed confidence threshold (0.65).",
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_14",
+          "query": "What dividends were paid by HUDCO Aerospace and Lunar Housing Limited in FY 2025-26?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_15",
+          "query": "Explain the quantum key distribution cryptographic architecture used in HUDCO core banking routers.",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.02886
+        }
+      ]
+    },
+    "0.7": {
+      "TP": 5,
+      "FP": 1,
+      "TN": 6,
+      "FN": 3,
+      "precision": 0.8333,
+      "recall": 0.625,
+      "f1": 0.7143,
+      "false_abstention_rate": 0.1429,
+      "false_acceptance_rate": 0.375,
+      "queries": [
+        {
+          "id": "CALIB_01",
+          "query": "Who is the Chairman and Managing Director of HUDCO in FY 2025-26?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.020513
+        },
+        {
+          "id": "CALIB_02",
+          "query": "What is the corporate headquarters address of the company?",
+          "expected": "answerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate term coverage (25.0%) is below calibrated threshold (40.0%).) and semantic candidate score (0.5906) did not exceed confidence threshold (0.70).",
+          "top_score": 0.029418
+        },
+        {
+          "id": "CALIB_03",
+          "query": "What was HUDCO profit after tax (PAT) in FY 2025-26?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.02152
+        },
+        {
+          "id": "CALIB_04",
+          "query": "What was the total loan disbursement in FY 2023-24?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.021749
+        },
+        {
+          "id": "CALIB_05",
+          "query": "What is the vision and mission statement of HUDCO?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.032018
+        },
+        {
+          "id": "CALIB_06",
+          "query": "What were the net loan sanctions in FY 2017-18?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_07",
+          "query": "What is HUDCO policy on Corporate Social Responsibility (CSR)?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.032266
+        },
+        {
+          "id": "CALIB_08",
+          "query": "What is HUDCO policy regarding Bitcoin and cryptocurrency mining investments?",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (10.87) is below calibrated threshold (14.50).) and semantic candidate score (0.6554) did not exceed confidence threshold (0.70).",
+          "top_score": 0.027289
+        },
+        {
+          "id": "CALIB_09",
+          "query": "What was the net profit reported in the FY 2019-20 annual report ar20?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.023306
+        },
+        {
+          "id": "CALIB_10",
+          "query": "Tell me all about everything with the numbers and things.",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (8.58) is below calibrated threshold (14.50).) and semantic candidate score (0.4156) did not exceed confidence threshold (0.70).",
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_11",
+          "query": "What are HUDCO projected revenue and EBITDA figures for fiscal year 2034-35?",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (12.85) is below calibrated threshold (14.50).) and semantic candidate score (0.6896) did not exceed confidence threshold (0.70).",
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_12",
+          "query": "When was Elon Musk appointed as Chief Technical Advisor of HUDCO?",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (14.39) is below calibrated threshold (14.50).) and semantic candidate score (0.5978) did not exceed confidence threshold (0.70).",
+          "top_score": 0.029139
+        },
+        {
+          "id": "CALIB_13",
+          "query": "What was the loan delinquency rate of Fannie Mae in California in 2024?",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (13.91) is below calibrated threshold (14.50).) and semantic candidate score (0.5095) did not exceed confidence threshold (0.70).",
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_14",
+          "query": "What dividends were paid by HUDCO Aerospace and Lunar Housing Limited in FY 2025-26?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_15",
+          "query": "Explain the quantum key distribution cryptographic architecture used in HUDCO core banking routers.",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.02886
+        }
+      ]
+    },
+    "0.75": {
+      "TP": 5,
+      "FP": 1,
+      "TN": 6,
+      "FN": 3,
+      "precision": 0.8333,
+      "recall": 0.625,
+      "f1": 0.7143,
+      "false_abstention_rate": 0.1429,
+      "false_acceptance_rate": 0.375,
+      "queries": [
+        {
+          "id": "CALIB_01",
+          "query": "Who is the Chairman and Managing Director of HUDCO in FY 2025-26?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.020513
+        },
+        {
+          "id": "CALIB_02",
+          "query": "What is the corporate headquarters address of the company?",
+          "expected": "answerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate term coverage (25.0%) is below calibrated threshold (40.0%).) and semantic candidate score (0.5906) did not exceed confidence threshold (0.75).",
+          "top_score": 0.029418
+        },
+        {
+          "id": "CALIB_03",
+          "query": "What was HUDCO profit after tax (PAT) in FY 2025-26?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.02152
+        },
+        {
+          "id": "CALIB_04",
+          "query": "What was the total loan disbursement in FY 2023-24?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.021749
+        },
+        {
+          "id": "CALIB_05",
+          "query": "What is the vision and mission statement of HUDCO?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.032018
+        },
+        {
+          "id": "CALIB_06",
+          "query": "What were the net loan sanctions in FY 2017-18?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_07",
+          "query": "What is HUDCO policy on Corporate Social Responsibility (CSR)?",
+          "expected": "answerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.032266
+        },
+        {
+          "id": "CALIB_08",
+          "query": "What is HUDCO policy regarding Bitcoin and cryptocurrency mining investments?",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (10.87) is below calibrated threshold (14.50).) and semantic candidate score (0.6554) did not exceed confidence threshold (0.75).",
+          "top_score": 0.027289
+        },
+        {
+          "id": "CALIB_09",
+          "query": "What was the net profit reported in the FY 2019-20 annual report ar20?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.023306
+        },
+        {
+          "id": "CALIB_10",
+          "query": "Tell me all about everything with the numbers and things.",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (8.58) is below calibrated threshold (14.50).) and semantic candidate score (0.4156) did not exceed confidence threshold (0.75).",
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_11",
+          "query": "What are HUDCO projected revenue and EBITDA figures for fiscal year 2034-35?",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (12.85) is below calibrated threshold (14.50).) and semantic candidate score (0.6896) did not exceed confidence threshold (0.75).",
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_12",
+          "query": "When was Elon Musk appointed as Chief Technical Advisor of HUDCO?",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (14.39) is below calibrated threshold (14.50).) and semantic candidate score (0.5978) did not exceed confidence threshold (0.75).",
+          "top_score": 0.029139
+        },
+        {
+          "id": "CALIB_13",
+          "query": "What was the loan delinquency rate of Fannie Mae in California in 2024?",
+          "expected": "unanswerable",
+          "abstained": true,
+          "abstention_reason": "Hybrid abstention: BM25 branch abstained (Top candidate score (13.91) is below calibrated threshold (14.50).) and semantic candidate score (0.5095) did not exceed confidence threshold (0.75).",
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_14",
+          "query": "What dividends were paid by HUDCO Aerospace and Lunar Housing Limited in FY 2025-26?",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.016393
+        },
+        {
+          "id": "CALIB_15",
+          "query": "Explain the quantum key distribution cryptographic architecture used in HUDCO core banking routers.",
+          "expected": "unanswerable",
+          "abstained": false,
+          "abstention_reason": null,
+          "top_score": 0.02886
+        }
+      ]
+    }
+  },
+  "bm25_baseline": {
+    "TP": 5,
+    "FP": 1,
+    "TN": 6,
+    "FN": 3,
+    "f1": 0.7142857142857143
+  },
+  "semantic_baseline": {
+    "TP": 0,
+    "FP": 0,
+    "TN": 7,
+    "FN": 8,
+    "f1": 0.0
+  },
+  "selected_threshold": 0.65,
+  "rationale": "Threshold 0.65 balances false abstention (0%) while abstaining on out-of-domain and low-confidence unanswerable queries."
+}

@@ -1,0 +1,114 @@
+[
+  {
+    "section_id": "sec_01",
+    "title": "1- cover",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "1- cover"
+    ],
+    "physical_page_start": 1,
+    "physical_page_end": 1,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 10
+  },
+  {
+    "section_id": "sec_02",
+    "title": "2-cover",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "2-cover"
+    ],
+    "physical_page_start": 2,
+    "physical_page_end": 214,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 3312
+  },
+  {
+    "section_id": "sec_03",
+    "title": "3-cover",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "3-cover"
+    ],
+    "physical_page_start": 215,
+    "physical_page_end": 215,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 0
+  },
+  {
+    "section_id": "sec_04",
+    "title": "4-cover",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "4-cover"
+    ],
+    "physical_page_start": 216,
+    "physical_page_end": 216,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 10
+  },
+  {
+    "section_id": "sec_05",
+    "title": "1- HUDCO-AR-2017-ANEXXURE",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "1- HUDCO-AR-2017-ANEXXURE"
+    ],
+    "physical_page_start": 3,
+    "physical_page_end": 67,
+    "printed_page_start": null,
+    "printed_page_end": "8",
+    "segmentation_method": "native_outline",
+    "confidence": "low",
+    "block_count": 0
+  },
+  {
+    "section_id": "sec_06",
+    "title": "2-HUDCO-AR STANDLONE 2016 -17- PDF",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "2-HUDCO-AR STANDLONE 2016 -17- PDF"
+    ],
+    "physical_page_start": 68,
+    "physical_page_end": 132,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "low",
+    "block_count": 0
+  },
+  {
+    "section_id": "sec_07",
+    "title": "3-HUDCO-AR-2017-Consolidated",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "3-HUDCO-AR-2017-Consolidated"
+    ],
+    "physical_page_start": 133,
+    "physical_page_end": 216,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "low",
+    "block_count": 0
+  }
+]

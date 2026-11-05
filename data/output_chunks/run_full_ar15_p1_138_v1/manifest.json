@@ -1,0 +1,44 @@
+{
+  "document_id": "doc_ar15",
+  "source_id": "hudco_annual_report_ar15",
+  "source_filename": "ar15.pdf",
+  "source_url": "https://www.hudco.org.in/writereaddata/ar15.pdf",
+  "report_title": "HUDCO 45th Annual Report 2014-15",
+  "fiscal_year": "2014-15",
+  "file_size_bytes": 3432605,
+  "file_sha256": "9c56a0ddc5961a9d9a84536ef744c545c915acf9edeb4dce90e19ea6589e27e2",
+  "total_physical_pages": 138,
+  "chunk_count": 1034,
+  "unique_chunk_id_count": 1034,
+  "section_count": 13,
+  "table_chunk_count": 124,
+  "warning_count": 27,
+  "download_seconds": null,
+  "extraction_seconds": 110.26,
+  "chunking_seconds": 0.31,
+  "peak_python_memory_mb": 660.86,
+  "total_wall_clock_seconds": 110.67,
+  "chunks_sha256": "17f8af1c657047a1786d93bb10f2502c8ce222f7205259345dd152134e66d96e",
+  "identity_verification": {
+    "status": "VERIFIED",
+    "detected_title": "HUDCO 45th Annual Report 2014-15",
+    "detected_fiscal_year": "2014-15",
+    "detected_report_number": 45,
+    "total_physical_pages": 138,
+    "has_company_name": true,
+    "has_annual_report_keyword": true,
+    "confidence": "HIGH",
+    "details": {
+      "fy_matches": [
+        "2014-2015",
+        "2011-12",
+        "2014-15",
+        "2010-11"
+      ],
+      "ord_matched": true,
+      "target_fy": "2014-15"
+    },
+    "discrepancy_reason": null
+  },
+  "status": "SUCCESS"
+}

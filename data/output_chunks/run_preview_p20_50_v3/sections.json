@@ -1,0 +1,706 @@
+[
+  {
+    "section_id": "sec_01",
+    "title": "REFERENCE INFORMATION",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "REFERENCE INFORMATION"
+    ],
+    "physical_page_start": 20,
+    "physical_page_end": 20,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 3
+  },
+  {
+    "section_id": "sec_02",
+    "title": "FINANCIAL HIGHLIGHTS",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "FINANCIAL HIGHLIGHTS"
+    ],
+    "physical_page_start": 21,
+    "physical_page_end": 21,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 5
+  },
+  {
+    "section_id": "sec_03",
+    "title": "OPERATIONAL HIGHLIGHTS",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "OPERATIONAL HIGHLIGHTS"
+    ],
+    "physical_page_start": 21,
+    "physical_page_end": 21,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 4
+  },
+  {
+    "section_id": "sec_04",
+    "title": "Brief Profile of Directors",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Brief Profile of Directors"
+    ],
+    "physical_page_start": 22,
+    "physical_page_end": 22,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 7
+  },
+  {
+    "section_id": "sec_05",
+    "title": "Shri Sanjay Kulshrestha",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Shri Sanjay Kulshrestha"
+    ],
+    "physical_page_start": 22,
+    "physical_page_end": 22,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_06",
+    "title": "Chairman & Managing Director",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Chairman & Managing Director"
+    ],
+    "physical_page_start": 22,
+    "physical_page_end": 22,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_07",
+    "title": "(DIN : 06428038)",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "(DIN : 06428038)"
+    ],
+    "physical_page_start": 22,
+    "physical_page_end": 22,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 5
+  },
+  {
+    "section_id": "sec_08",
+    "title": "Shri M. Nagaraj",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Shri M. Nagaraj"
+    ],
+    "physical_page_start": 22,
+    "physical_page_end": 22,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_09",
+    "title": "Director (Corporate Planning)",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Director (Corporate Planning)"
+    ],
+    "physical_page_start": 22,
+    "physical_page_end": 22,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_10",
+    "title": "(DIN : 05184848)",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "(DIN : 05184848)"
+    ],
+    "physical_page_start": 22,
+    "physical_page_end": 23,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 4
+  },
+  {
+    "section_id": "sec_11",
+    "title": "Shri Daljeet Singh Khatri",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Shri Daljeet Singh Khatri"
+    ],
+    "physical_page_start": 23,
+    "physical_page_end": 23,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_12",
+    "title": "Director (Finance) & CFO",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Director (Finance) & CFO"
+    ],
+    "physical_page_start": 23,
+    "physical_page_end": 23,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_13",
+    "title": "(DIN : 06630234)",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "(DIN : 06630234)"
+    ],
+    "physical_page_start": 23,
+    "physical_page_end": 23,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 7
+  },
+  {
+    "section_id": "sec_14",
+    "title": "Shri Sanjeet (IRAS)",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Shri Sanjeet (IRAS)"
+    ],
+    "physical_page_start": 23,
+    "physical_page_end": 23,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_15",
+    "title": "(DIN : 09833776)",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "(DIN : 09833776)"
+    ],
+    "physical_page_start": 23,
+    "physical_page_end": 23,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 3
+  },
+  {
+    "section_id": "sec_16",
+    "title": "Shri Baldeo Purushartha (IAS)",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Shri Baldeo Purushartha (IAS)"
+    ],
+    "physical_page_start": 23,
+    "physical_page_end": 23,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_17",
+    "title": "(DIN : 07570116)",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "(DIN : 07570116)"
+    ],
+    "physical_page_start": 23,
+    "physical_page_end": 26,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 12
+  },
+  {
+    "section_id": "sec_18",
+    "title": "Urban population, today → 2050",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Urban population, today → 2050"
+    ],
+    "physical_page_start": 26,
+    "physical_page_end": 35,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 69
+  },
+  {
+    "section_id": "sec_19",
+    "title": "Acknowledgements",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Acknowledgements"
+    ],
+    "physical_page_start": 36,
+    "physical_page_end": 36,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 6
+  },
+  {
+    "section_id": "sec_20",
+    "title": "Sd/-",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Sd/-"
+    ],
+    "physical_page_start": 36,
+    "physical_page_end": 36,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_21",
+    "title": "Sanjay Kulshrestha",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Sanjay Kulshrestha"
+    ],
+    "physical_page_start": 36,
+    "physical_page_end": 36,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_22",
+    "title": "Chairman & Managing Director",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Chairman & Managing Director"
+    ],
+    "physical_page_start": 36,
+    "physical_page_end": 36,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_23",
+    "title": "NOTICE",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "NOTICE"
+    ],
+    "physical_page_start": 37,
+    "physical_page_end": 37,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 2
+  },
+  {
+    "section_id": "sec_24",
+    "title": "ORDINARY BUSINESS",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "ORDINARY BUSINESS"
+    ],
+    "physical_page_start": 37,
+    "physical_page_end": 37,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 9
+  },
+  {
+    "section_id": "sec_25",
+    "title": "SPECIAL BUSINESS",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "SPECIAL BUSINESS"
+    ],
+    "physical_page_start": 37,
+    "physical_page_end": 38,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 7
+  },
+  {
+    "section_id": "sec_26",
+    "title": "By order of the Board of Directors",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "By order of the Board of Directors"
+    ],
+    "physical_page_start": 38,
+    "physical_page_end": 38,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_27",
+    "title": "Sd/-",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Sd/-"
+    ],
+    "physical_page_start": 38,
+    "physical_page_end": 38,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_28",
+    "title": "Place : New Delhi V ikas Goyal",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Place : New Delhi V ikas Goyal"
+    ],
+    "physical_page_start": 38,
+    "physical_page_end": 38,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_29",
+    "title": "Dated : 29th July, 2026 Company Secretary",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Dated : 29th July, 2026 Company Secretary"
+    ],
+    "physical_page_start": 38,
+    "physical_page_end": 38,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_30",
+    "title": "NOTES",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "NOTES"
+    ],
+    "physical_page_start": 39,
+    "physical_page_end": 43,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 28
+  },
+  {
+    "section_id": "sec_31",
+    "title": "By order of the Board of Directors",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "By order of the Board of Directors"
+    ],
+    "physical_page_start": 43,
+    "physical_page_end": 43,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_32",
+    "title": "Sd/-",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Sd/-"
+    ],
+    "physical_page_start": 43,
+    "physical_page_end": 43,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_33",
+    "title": "Place : New Delhi V ikas Goyal",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Place : New Delhi V ikas Goyal"
+    ],
+    "physical_page_start": 43,
+    "physical_page_end": 43,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_34",
+    "title": "Dated : 29th July, 2026 Company Secretary",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Dated : 29th July, 2026 Company Secretary"
+    ],
+    "physical_page_start": 43,
+    "physical_page_end": 43,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_35",
+    "title": "Charging Stations in Bus Depots, Hyderabad, Telangana",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Charging Stations in Bus Depots, Hyderabad, Telangana"
+    ],
+    "physical_page_start": 43,
+    "physical_page_end": 45,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 11
+  },
+  {
+    "section_id": "sec_36",
+    "title": "SECURITIES IN DEMAT MODE",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "SECURITIES IN DEMAT MODE"
+    ],
+    "physical_page_start": 45,
+    "physical_page_end": 45,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_37",
+    "title": "Step 1: Access to NSDL e-Voting system",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Step 1: Access to NSDL e-Voting system"
+    ],
+    "physical_page_start": 45,
+    "physical_page_end": 45,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 3
+  },
+  {
+    "section_id": "sec_38",
+    "title": "Type of",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Type of"
+    ],
+    "physical_page_start": 45,
+    "physical_page_end": 45,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 2
+  },
+  {
+    "section_id": "sec_39",
+    "title": "Login Method",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Login Method"
+    ],
+    "physical_page_start": 45,
+    "physical_page_end": 45,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_40",
+    "title": "Individual",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Individual"
+    ],
+    "physical_page_start": 45,
+    "physical_page_end": 45,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 1
+  },
+  {
+    "section_id": "sec_41",
+    "title": "Shareholders",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Shareholders"
+    ],
+    "physical_page_start": 45,
+    "physical_page_end": 46,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 5
+  },
+  {
+    "section_id": "sec_42",
+    "title": "Type of Login Method",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "Type of Login Method"
+    ],
+    "physical_page_start": 47,
+    "physical_page_end": 48,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 33
+  },
+  {
+    "section_id": "sec_43",
+    "title": "General Guidelines for shareholders",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "General Guidelines for shareholders"
+    ],
+    "physical_page_start": 48,
+    "physical_page_end": 49,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 18
+  },
+  {
+    "section_id": "sec_44",
+    "title": "DIRECTORS’ REPORT",
+    "level": 2,
+    "parent_section_id": null,
+    "heading_path": [
+      "DIRECTORS’ REPORT"
+    ],
+    "physical_page_start": 50,
+    "physical_page_end": 50,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "html_heading_tree",
+    "confidence": "high",
+    "block_count": 6
+  }
+]

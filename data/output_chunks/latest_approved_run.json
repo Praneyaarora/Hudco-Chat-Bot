@@ -1,0 +1,22 @@
+{
+  "approved_at": "2026-10-21T06:40:20.305379+00:00",
+  "approved_run_dir": "C:\\Users\\Praneya Arora\\Desktop\\Hudco\\data\\output_chunks\\run_full_ar26_p1_520_v1",
+  "source_filename": "ar26.pdf",
+  "source_sha256": "c412ce14393a43ad741f30c8da90e9b9ed99da4b923fb6ac7c6656fa3a8d2f41",
+  "total_chunks": 2682,
+  "metrics": {
+    "chunk_recall_at_1": 0.7059,
+    "chunk_recall_at_3": 0.7647,
+    "chunk_recall_at_5": 0.8824,
+    "page_recall_at_1": 0.8824,
+    "page_recall_at_3": 1.0,
+    "page_recall_at_5": 1.0,
+    "page_citation_accuracy_at_1": 0.8824,
+    "page_citation_accuracy_at_5": 0.3059,
+    "mrr_page": 0.9412,
+    "mrr_chunk": 0.7588,
+    "abstention_precision": 1.0,
+    "abstention_recall": 1.0,
+    "abstention_f1": 1.0
+  }
+}

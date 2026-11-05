@@ -1,0 +1,82 @@
+[
+  {
+    "section_id": "sec_00",
+    "title": "Document Front Matter",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Document Front Matter"
+    ],
+    "physical_page_start": 1,
+    "physical_page_end": 2,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "preamble_unclassified",
+    "confidence": "medium",
+    "block_count": 4
+  },
+  {
+    "section_id": "sec_01",
+    "title": "1-85",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "1-85"
+    ],
+    "physical_page_start": 3,
+    "physical_page_end": 87,
+    "printed_page_start": null,
+    "printed_page_end": "9",
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 1124
+  },
+  {
+    "section_id": "sec_02",
+    "title": "86-151",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "86-151"
+    ],
+    "physical_page_start": 88,
+    "physical_page_end": 153,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 580
+  },
+  {
+    "section_id": "sec_03",
+    "title": "152-221",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "152-221"
+    ],
+    "physical_page_start": 154,
+    "physical_page_end": 223,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 660
+  },
+  {
+    "section_id": "sec_04",
+    "title": "222-232",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "222-232"
+    ],
+    "physical_page_start": 224,
+    "physical_page_end": 236,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "native_outline",
+    "confidence": "high",
+    "block_count": 377
+  }
+]

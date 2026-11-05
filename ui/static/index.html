@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HUDCO Bot — Conversational AI & Research Harness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261105_09">
+</head>
+<body class="dark-theme" data-theme="dark">
+  <!-- Subtle Ambient Background Glow -->
+  <div class="ambient-glow" aria-hidden="true">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+  </div>
+
+  <div class="app-wrapper">
+    <!-- ======================================================================
+         LEFT COLLAPSIBLE SIDEBAR: CHAT HISTORY & USER PROFILE
+         ====================================================================== -->
+    <aside class="sidebar-container" id="sidebarContainer">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <div class="sidebar-brand-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </div>
+          <span>HUDCO History</span>
+        </div>
+        <button type="button" class="btn-sidebar-collapse" id="btnCloseSidebar" onclick="toggleSidebar()" title="Collapse sidebar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <div class="sidebar-actions-bar">
+        <button type="button" class="btn-new-chat" id="btnNewChat" onclick="createNewChatSession()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>New Chat</span>
+        </button>
+
+        <div class="search-box">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchChatsInput" placeholder="Search conversation history..." oninput="handleSearchChats(this.value)">
+        </div>
+      </div>
+
+      <!-- Scrollable Conversation Groups -->
+      <div class="sidebar-chat-list" id="sidebarChatList">
+        <!-- Rendered dynamically via app.js -->
+        <div style="padding: 16px; text-align: center; color: var(--text-muted); font-size: 0.78rem;">
+          Loading conversations...
+        </div>
+      </div>
+
+      <!-- Sidebar Footer with Utilities & User Profile -->
+      <div class="sidebar-footer">
+        <div class="sidebar-util-row">
+          <button type="button" class="btn-import-chat" onclick="triggerImportChat()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Import Chat</span>
+          </button>
+          <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="handleFileImport(event)">
+        </div>
+
+        <div class="user-profile-badge" id="userProfileBadge">
+          <div class="user-profile-info">
+            <div class="user-avatar-initials" id="userAvatarIcon">G</div>
+            <div class="user-name-role">
+              <span class="user-display-name" id="userDisplayName">Guest User</span>
+              <span class="user-display-role" id="userDisplayRole">Local Session</span>
+            </div>
+          </div>
+          <button type="button" class="btn-user-auth-action" id="btnUserAuthAction" onclick="handleAuthActionClick()">
+            Sign In
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ======================================================================
+         MAIN APPLICATION STAGE
+         ====================================================================== -->
+    <div class="main-stage">
+      <!-- Top Global Header -->
+      <header class="app-header">
+        <div class="header-left">
+          <button type="button" class="sidebar-toggle-btn" id="btnToggleSidebar" onclick="toggleSidebar()" title="Toggle conversation history sidebar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <div class="brand-titles">
+            <div class="brand-name-wrap">
+              <h1>HUDCO Bot</h1>
+              <span class="badge-enterprise">Enterprise AI</span>
+            </div>
+            <span class="brand-subtext">Housing & Urban Development Corporation Ltd.</span>
+          </div>
+        </div>
+
+        <!-- Center: Live Context Usage Meter with Breakdown Tooltip -->
+        <div class="header-center">
+          <div class="context-meter-pill" id="contextMeterPill" title="Current Token Window Capacity">
+            <div class="meter-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <div class="meter-label-wrap">
+              <span class="meter-label">Context:</span>
+              <span class="meter-val" id="meterTokenCount">0 / 8,192</span>
+              <span class="meter-percent" id="meterPercentage">0%</span>
+            </div>
+            <div class="meter-bar-track">
+              <div class="meter-bar-fill" id="meterBarFill"></div>
+            </div>
+
+            <!-- Hover Breakdown Popover -->
+            <div class="context-tooltip-popover" id="contextTooltipPopover">
+              <div class="tooltip-header">
+                <span class="tooltip-title">Context Budget Breakdown</span>
+                <span class="tooltip-budget" id="tooltipBudgetLabel">8,192 max</span>
+              </div>
+              <div class="breakdown-row">
+                <span>System Prompt</span>
+                <span class="breakdown-val" id="ttSysTokens">0 tokens</span>
+              </div>
+              <div class="breakdown-row">
+                <span>Rolling Summary</span>
+                <span class="breakdown-val" id="ttSummaryTokens">0 tokens (None)</span>
+              </div>
+              <div class="breakdown-row">
+                <span>History Window</span>
+                <span class="breakdown-val" id="ttHistoryTokens">0 tokens (0 turns)</span>
+              </div>
+              <div class="breakdown-row">
+                <span>Evidence Chunks</span>
+                <span class="breakdown-val" id="ttEvidenceTokens">0 tokens</span>
+              </div>
+              <div class="breakdown-row">
+                <span>Query & Completion</span>
+                <span class="breakdown-val" id="ttQueryTokens">0 tokens</span>
+              </div>
+              <div class="tooltip-note" id="ttWarningNote">
+                Token sliding window preserves recent turns and condenses older turns into factual rolling summaries.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Header Right: Mode Switch & Status Indicators -->
+        <div class="header-right">
+          <div class="mode-switch-pill" role="tablist">
+            <button type="button" class="mode-btn active" id="btnModeChat" onclick="switchUIMode('chat')" role="tab">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span>Chat</span>
+            </button>
+            <button type="button" class="mode-btn" id="btnModeDev" onclick="switchUIMode('dev')" role="tab">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+              <span>Developer</span>
+            </button>
+          </div>
+
+          <button type="button" class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Theme" aria-label="Toggle Light/Dark Theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+
+          <div class="status-chip" id="modelStatusChip" title="Active LLM">
+            <div class="status-dot indigo" id="providerDot"></div>
+            <span class="status-text" id="providerLabel">Google Gemini</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ====================================================================
+           VIEW 1: CLIENT CHAT VIEW
+           ==================================================================== -->
+      <main class="chat-view" id="chatModeView">
+        <div class="chat-scroll-area" id="chatMessagesScroll">
+          <!-- Initial Welcome Message -->
+          <div class="message-row bot">
+            <div class="msg-avatar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+            <div class="msg-content-wrap">
+              <div class="msg-meta">
+                <span class="msg-sender">HUDCO Bot</span>
+                <span>Just now</span>
+              </div>
+              <div class="msg-bubble">
+                <p>Hello! I am <strong>HUDCO Bot</strong>, your AI assistant for Housing and Urban Development Corporation Limited.</p>
+                <p>You can ask me questions about:</p>
+                <ul>
+                  <li><strong>Annual Reports & Financial Results</strong> (Loan sanctions, Net Worth, Profit After Tax FY 2014-24)</li>
+                  <li><strong>Corporate Information & Head Office</strong> (Registered address, contact numbers)</li>
+                  <li><strong>Recruitment & Careers</strong> (How to apply on official portal)</li>
+                  <li><strong>Urban Infrastructure Schemes</strong> (UiWIN platform, smart city financing)</li>
+                </ul>
+                <div class="suggested-chips-wrap">
+                  <span class="suggested-title">Suggested:</span>
+                  <button type="button" class="prompt-chip" onclick="sendSuggestedQuery('Where is HUDCO head office located?')">🏢 Where is HUDCO Head Office?</button>
+                  <button type="button" class="prompt-chip" onclick="sendSuggestedQuery('How to apply for jobs and careers at HUDCO?')">💼 How to apply for jobs at HUDCO?</button>
+                  <button type="button" class="prompt-chip" onclick="sendSuggestedQuery('What is the UiWIN platform launched by HUDCO?')">🌐 What is the UiWIN platform?</button>
+                  <button type="button" class="prompt-chip" onclick="sendSuggestedQuery('What was HUDCO\'s net profit and net worth in FY 2023-24?')">📈 FY 2023-24 Net Profit & Net Worth</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Dynamic messages will be appended here -->
+        </div>
+
+        <!-- Floating Input Dock -->
+        <div class="input-dock">
+          <form class="input-box-wrapper" id="chatInputForm" onsubmit="handleChatSubmit(event)">
+            <textarea
+              id="chatInputText"
+              class="chat-input-textarea"
+              placeholder="Ask HUDCO Bot a question about HUDCO reports, head office, careers, or financing..."
+              rows="1"
+              oninput="autoResizeTextarea(this)"
+              onkeydown="handleTextareaKeydown(event)"
+            ></textarea>
+            <button type="submit" id="chatSendBtn" class="btn-send-message" title="Send message (Enter)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </form>
+          <div class="dock-footer">
+            <span>HUDCO Bot combines audited annual reports (FY 2014-24) with guarded official web retrieval.</span>
+            <span class="dock-link" onclick="switchUIMode('dev')">⚙️ Context & Engine Settings</span>
+          </div>
+        </div>
+      </main>
+
+      
+      <!-- ====================================================================
+           VIEW 2: DEVELOPER & SETTINGS VIEW (Full Diagnostics & Engine Controls)
+           ==================================================================== -->
+      <main class="developer-workspace-view" id="devModeView" style="display: none;">
+        <div class="dev-layout-grid">
+          <!-- Left Column: Settings, Provider Selection & Filters -->
+          <aside class="dev-sidebar">
+            <!-- 1. Context Budget & Sliding Window Slider (NEW) -->
+            <div class="panel-card">
+              <div class="card-header">
+                <h2 class="card-title">Context Budget & Sliding Window</h2>
+                <span class="badge blue" id="sliderValBadge">8,192 tokens</span>
+              </div>
+              <div class="control-group">
+                <div class="slider-header" style="display: flex; justify-content: space-between; align-items: center;">
+                  <label for="contextBudgetSlider" class="control-label">Active Context Budget</label>
+                  <span class="form-hint" id="budgetRangeHint" style="font-size: 0.70rem; color: var(--text-muted);">Min: 1,024 · Max: 32,768</span>
+                </div>
+                <input
+                  type="range"
+                  id="contextBudgetSlider"
+                  class="styled-slider"
+                  min="1024"
+                  max="32768"
+                  step="512"
+                  value="8192"
+                  oninput="handleContextSliderInput(this.value)"
+                  onchange="handleContextSliderChange(this.value)"
+                  style="width: 100%; margin-top: 6px;"
+                >
+                <div class="slider-warning-banner" id="sliderWarningBanner" style="display: none; margin-top: 8px; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 0.74rem; color: #fbbf24; gap: 8px; align-items: center;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  <span id="sliderWarningText">Higher context usage may increase API consumption and exhaust usage limits faster.</span>
+                </div>
+                <small class="helper-text" style="margin-top: 6px;">When conversation history exceeds 40% of this budget, older turns are auto-condensed into factual rolling summaries.</small>
+              </div>
+            </div>
+
+            <!-- 2. AI Engine & Provider Setup Card -->
+            <div class="panel-card settings-card">
+              <div class="card-header">
+                <h2 class="card-title">AI Engine & Provider Setup</h2>
+                <span class="badge blue" id="activeProviderBadge">Google Gemini</span>
+              </div>
+
+              <!-- Provider Selector -->
+              <div class="control-group">
+                <label for="providerSelect" class="control-label">Active LLM Provider</label>
+                <select id="providerSelect" class="styled-select" onchange="handleProviderChange(this.value)">
+                  <option value="gemini" selected>Google Gemini (Cloud API - gemini-2.5-flash)</option>
+                  <option value="local_qwen">Local LLM (Offline GPU / CPU)</option>
+                  <option value="claude">Anthropic Claude API (claude-3-5-sonnet)</option>
+                  <option value="openai">OpenAI API (gpt-4o-mini)</option>
+                </select>
+                <small class="helper-text">Switch seamlessly between Google Gemini cloud inference and offline Local LLM.</small>
+              </div>
+
+              <!-- API Keys Configuration Accordion -->
+              <details class="settings-details" id="apiKeysDetails">
+                <summary class="settings-summary">
+                  <span>Manage API Keys (Gemini, Tavily, Claude, OpenAI)</span>
+                  <span class="details-chevron">▾</span>
+                </summary>
+                <div class="settings-details-body">
+                  <div class="key-input-row">
+                    <label for="geminiKeyInput" class="key-label">Gemini API Key</label>
+                    <input type="password" id="geminiKeyInput" class="styled-input" placeholder="AIzaSy...">
+                  </div>
+                  <div class="key-input-row">
+                    <label for="tavilyKeyInput" class="key-label">Tavily Search API Key</label>
+                    <input type="password" id="tavilyKeyInput" class="styled-input" placeholder="tvly-dev-..." value="">
+                  </div>
+                  <div class="key-input-row">
+                    <label for="claudeKeyInput" class="key-label">Anthropic Claude API Key</label>
+                    <input type="password" id="claudeKeyInput" class="styled-input" placeholder="sk-ant-...">
+                  </div>
+                  <div class="key-input-row">
+                    <label for="openaiKeyInput" class="key-label">OpenAI API Key</label>
+                    <input type="password" id="openaiKeyInput" class="styled-input" placeholder="sk-proj-...">
+                  </div>
+                  <button type="button" class="secondary-btn save-keys-btn" onclick="saveApiKeys()">
+                    <span>Save Configuration</span>
+                  </button>
+                </div>
+              </details>
+
+              <!-- Web Search Sub-Agent Toggle -->
+              <div class="control-group toggle-row" style="margin-top: 14px;">
+                <label for="webSearchToggle" class="control-label switch-label">
+                  <span>Tavily Web Search Sub-Agent</span>
+                  <small>Searches verified official web sources when local chunks lack answers</small>
+                </label>
+                <label class="switch">
+                  <input type="checkbox" id="webSearchToggle" checked onchange="handleWebToggleChange()">
+                  <span class="slider-round"></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- 3. Retrieval Strategy & Parameters -->
+            <div class="panel-card filters-card">
+              <div class="card-header">
+                <h2 class="card-title">Retrieval Controls</h2>
+                <span class="badge purple">Layer 4 Engine</span>
+              </div>
+
+              <!-- Method Selector -->
+              <div class="control-group">
+                <label class="control-label">Retrieval Branch Method</label>
+                <div class="method-selector">
+                  <label class="radio-card">
+                    <input type="radio" name="retrievalMethod" value="hybrid_rrf" checked>
+                    <div class="radio-content">
+                      <span class="radio-title">Hybrid (RRF)</span>
+                      <span class="radio-desc">Combines BM25 + Dense Semantic</span>
+                    </div>
+                  </label>
+                  <label class="radio-card">
+                    <input type="radio" name="retrievalMethod" value="bm25">
+                    <div class="radio-content">
+                      <span class="radio-title">BM25 Okapi</span>
+                      <span class="radio-desc">Table-aware exact term scoring</span>
+                    </div>
+                  </label>
+                  <label class="radio-card">
+                    <input type="radio" name="retrievalMethod" value="semantic">
+                    <div class="radio-content">
+                      <span class="radio-title">Dense Semantic</span>
+                      <span class="radio-desc">all-MiniLM-L6 cosine similarity</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Report Scope Filter -->
+              <div class="control-group">
+                <label for="reportFilterSelect" class="control-label">Report Scope Filter</label>
+                <select id="reportFilterSelect" class="styled-select" onchange="updateActiveFilterPills()">
+                  <option value="ALL">All Verified Reports (Cross-Year Ingestion)</option>
+                </select>
+              </div>
+
+              <!-- Top-K Slider -->
+              <div class="control-group slider-group">
+                <div class="slider-header" style="display: flex; justify-content: space-between; align-items: center;">
+                  <label for="topKSlider" class="control-label">Top-K Candidate Chunks</label>
+                  <span id="topKValue" class="slider-val" style="font-family: var(--font-mono); font-weight: 700; color: var(--primary-indigo);">5</span>
+                </div>
+                <input type="range" id="topKSlider" min="1" max="10" step="1" value="5" class="styled-slider" oninput="document.getElementById('topKValue').innerText = this.value">
+              </div>
+
+              <!-- Max Tokens Slider -->
+              <div class="control-group slider-group">
+                <div class="slider-header" style="display: flex; justify-content: space-between; align-items: center;">
+                  <label for="maxTokensSlider" class="control-label">Max New Tokens</label>
+                  <span id="maxTokensValue" class="slider-val" style="font-family: var(--font-mono); font-weight: 700; color: var(--primary-indigo);">256</span>
+                </div>
+                <input type="range" id="maxTokensSlider" min="64" max="512" step="32" value="256" class="styled-slider" oninput="document.getElementById('maxTokensValue').innerText = this.value">
+              </div>
+
+              <!-- Developer Query Execution Form -->
+              <div class="control-group" style="margin-top: 16px;">
+                <label for="devQueryInput" class="control-label">Direct Diagnostics Query</label>
+                <textarea id="devQueryInput" class="query-textarea" placeholder="Enter diagnostic query..." rows="2"></textarea>
+                <button type="button" class="primary-btn" id="devSubmitBtn" onclick="executeDevQuery()" style="margin-top: 10px; width: 100%;">
+                  <span>Execute Diagnostic Query</span>
+                </button>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Right Column: Observability & Evidence Workspace -->
+          <section class="dev-main-content">
+            <!-- Diagnostics Stat Banner -->
+            <div class="diagnostic-banner" id="diagnosticBanner">
+              <div class="diag-stat">
+                <span class="diag-title">Retrieval Latency</span>
+                <span class="diag-num" id="statRetrievalLatency">-- ms</span>
+              </div>
+              <div class="diag-stat">
+                <span class="diag-title">LLM Generation</span>
+                <span class="diag-num" id="statGenerationLatency">-- ms</span>
+              </div>
+              <div class="diag-stat">
+                <span class="diag-title">Total Latency</span>
+                <span class="diag-num" id="statTotalLatency">-- ms</span>
+              </div>
+              <div class="diag-stat">
+                <span class="diag-title">Candidates Scored</span>
+                <span class="diag-num" id="statCandidatesScored">--</span>
+              </div>
+              <div class="diag-stat">
+                <span class="diag-title">Outcome Status</span>
+                <span class="diag-status-pill green" id="statStatusPill">READY</span>
+              </div>
+            </div>
+
+            <!-- Answer Panel Card -->
+            <div class="panel-card answer-card" id="devAnswerCard" style="display: none;">
+              <div class="card-header answer-header">
+                <div class="header-left" style="display: flex; align-items: center; gap: 10px;">
+                  <h2 class="card-title">Synthesized Answer</h2>
+                  <span class="grounding-badge green" id="answerGroundingBadge" style="font-size: 0.70rem; font-weight: 700; background: rgba(16, 185, 129, 0.15); color: #34d399; padding: 2px 8px; border-radius: var(--radius-full);">Verified Grounded</span>
+                </div>
+                <div class="header-meta" style="display: flex; align-items: center; gap: 8px;">
+                  <button type="button" class="copy-answer-btn secondary-btn" onclick="copyDevAnswerText()">
+                    <span>Copy Answer</span>
+                  </button>
+                  <span class="meta-tag badge blue" id="answerModelBadge">Gemini-2.5-Flash</span>
+                  <span class="meta-tag badge purple" id="answerDeviceBadge">cuda:0</span>
+                </div>
+              </div>
+              <div class="answer-body-container" style="padding: 12px 0;">
+                <div class="answer-body" id="devAnswerContent" style="font-size: 0.88rem; line-height: 1.6;"></div>
+              </div>
+            </div>
+
+            <!-- Evidence Chunks Workspace -->
+            <div class="panel-card evidence-container-card" id="evidenceContainerCard">
+              <div class="card-header evidence-header">
+                <div class="header-left" style="display: flex; align-items: center; gap: 10px;">
+                  <h2 class="card-title">Evidence & Provenance Inspector</h2>
+                  <span class="result-count-badge badge blue" id="resultCountBadge">0 Chunks</span>
+                  <span class="sources-badge badge purple" id="sourcesCountBadge" style="display: none;">0 Reports</span>
+                </div>
+                <div class="evidence-actions">
+                  <button type="button" class="action-btn" onclick="toggleAllAccordions(true)">Expand All</button>
+                  <button type="button" class="action-btn" onclick="toggleAllAccordions(false)">Collapse All</button>
+                </div>
+              </div>
+
+              <!-- Empty State -->
+              <div class="empty-state" id="emptyStatePlaceholder">
+                <div class="empty-icon">
+                  <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                </div>
+                <h3>Diagnostic Workspace Ready</h3>
+                <p>Execute a diagnostic query above or select a query in Chat Mode to inspect retrieved canonical chunks or verified web results.</p>
+              </div>
+
+              <!-- Evidence List -->
+              <div class="evidence-list" id="evidenceList" style="display: none;"></div>
+            </div>
+
+            <!-- Verified Annual Reports Inventory Card -->
+            <div class="panel-card" id="reportsInventoryCard">
+              <div class="card-header">
+                <h2 class="card-title">Audited Annual Reports Inventory (FY 2014-24)</h2>
+                <span class="badge green" id="totalReportsCountBadge">11 Reports</span>
+              </div>
+              <div style="overflow-x: auto; margin-top: 8px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.78rem; text-align: left;">
+                  <thead>
+                    <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-muted); text-transform: uppercase; font-size: 0.68rem;">
+                      <th style="padding: 8px 10px;">Document ID</th>
+                      <th style="padding: 8px 10px;">Fiscal Year</th>
+                      <th style="padding: 8px 10px;">Filename</th>
+                      <th style="padding: 8px 10px;">Pages</th>
+                      <th style="padding: 8px 10px;">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reportsTableBody">
+                    <tr><td colspan="5" style="padding: 12px 10px; color: var(--text-muted);">Loading inventory...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       AUTHENTICATION MODAL DIALOG
+       ====================================================================== -->
+  <div class="modal-backdrop" id="authModalBackdrop" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-header-row">
+        <h3 class="modal-title" id="authModalTitle">Sign In to HUDCO Bot</h3>
+        <button type="button" class="btn-close-modal" onclick="closeAuthModal()">✕</button>
+      </div>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab-btn active" id="tabSignIn" onclick="switchAuthTab('login')">Sign In</button>
+        <button type="button" class="auth-tab-btn" id="tabRegister" onclick="switchAuthTab('register')">Create Account</button>
+      </div>
+
+      <div class="auth-error-msg" id="authErrorMsg"></div>
+
+      <form class="auth-form" id="authForm" onsubmit="handleAuthSubmit(event)">
+        <div class="form-group" id="groupRegisterName" style="display: none;">
+          <label for="authInputName" class="form-label">Full Name</label>
+          <input type="text" id="authInputName" class="styled-input" placeholder="e.g. Praneya Arora">
+        </div>
+
+        <div class="form-group">
+          <label for="authInputEmail" class="form-label">Email Address</label>
+          <input type="email" id="authInputEmail" class="styled-input" placeholder="name@hudco.in" required>
+        </div>
+
+        <div class="form-group">
+          <label for="authInputPassword" class="form-label">Password</label>
+          <input type="password" id="authInputPassword" class="styled-input" placeholder="••••••••••••" required>
+        </div>
+
+        <button type="submit" class="btn-auth-submit" id="btnAuthSubmit">
+          Sign In
+        </button>
+
+        <div style="text-align: center; margin-top: 4px;">
+          <button type="button" style="font-size: 0.74rem; color: var(--text-muted);" onclick="closeAuthModal()">
+            Continue as Guest (Local)
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js?v=20261105_09"></script>
+
+  <!-- ======================================================================
+       EVIDENCE & SOURCES MODAL POPUP (CHAT MODE)
+       ====================================================================== -->
+  <div class="sources-modal-backdrop" id="sourcesModalBackdrop" style="display: none;">
+    <div class="sources-modal-card">
+      <div class="modal-header">
+        <div class="modal-title-row">
+          <div class="modal-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+          </div>
+          <div>
+            <h3 class="modal-title">Grounded Evidence & Sources</h3>
+            <span class="modal-subtitle" id="sourcesModalSubtitle">Inspecting verified annual report chunks and web evidence</span>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeSourcesModal()">✕</button>
+      </div>
+      <div class="modal-body" id="sourcesModalBody">
+        <!-- Rendered evidence cards -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="action-btn" onclick="openInDeveloperMode()">Inspect in Developer Mode ⚙️</button>
+        <button type="button" class="primary-btn" onclick="closeSourcesModal()">Done</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

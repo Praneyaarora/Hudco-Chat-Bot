@@ -1,0 +1,210 @@
+[
+  {
+    "section_id": "sec_00",
+    "title": "Document Front Matter",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Document Front Matter"
+    ],
+    "physical_page_start": 1,
+    "physical_page_end": 5,
+    "printed_page_start": null,
+    "printed_page_end": null,
+    "segmentation_method": "preamble_unclassified",
+    "confidence": "medium",
+    "block_count": 34
+  },
+  {
+    "section_id": "sec_01",
+    "title": "Board of Directors",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Board of Directors"
+    ],
+    "physical_page_start": 6,
+    "physical_page_end": 7,
+    "printed_page_start": "5",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 17
+  },
+  {
+    "section_id": "sec_02",
+    "title": "Chairman’s Speech",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Chairman’s Speech"
+    ],
+    "physical_page_start": 8,
+    "physical_page_end": 12,
+    "printed_page_start": "7",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 37
+  },
+  {
+    "section_id": "sec_03",
+    "title": "Notice of AGM",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Notice of AGM"
+    ],
+    "physical_page_start": 13,
+    "physical_page_end": 13,
+    "printed_page_start": "12",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 18
+  },
+  {
+    "section_id": "sec_04",
+    "title": "Directors’ Report",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Directors’ Report"
+    ],
+    "physical_page_start": 14,
+    "physical_page_end": 33,
+    "printed_page_start": "13",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 257
+  },
+  {
+    "section_id": "sec_05",
+    "title": "Corporate Governance Report",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Corporate Governance Report"
+    ],
+    "physical_page_start": 34,
+    "physical_page_end": 52,
+    "printed_page_start": "33",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 243
+  },
+  {
+    "section_id": "sec_06",
+    "title": "Extract of Annual Return",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Extract of Annual Return"
+    ],
+    "physical_page_start": 53,
+    "physical_page_end": 56,
+    "printed_page_start": "52",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 38
+  },
+  {
+    "section_id": "sec_07",
+    "title": "Secretarial Audit Report",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Secretarial Audit Report"
+    ],
+    "physical_page_start": 57,
+    "physical_page_end": 59,
+    "printed_page_start": "56",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 70
+  },
+  {
+    "section_id": "sec_08",
+    "title": "Independent Auditor’s Report",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Independent Auditor’s Report"
+    ],
+    "physical_page_start": 60,
+    "physical_page_end": 70,
+    "printed_page_start": "59",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 123
+  },
+  {
+    "section_id": "sec_09",
+    "title": "Comments of The C&AG",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Comments of The C&AG"
+    ],
+    "physical_page_start": 71,
+    "physical_page_end": 130,
+    "printed_page_start": "70",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 492
+  },
+  {
+    "section_id": "sec_10",
+    "title": "Senior Executives",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Senior Executives"
+    ],
+    "physical_page_start": 131,
+    "physical_page_end": 132,
+    "printed_page_start": "130",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 41
+  },
+  {
+    "section_id": "sec_11",
+    "title": "HUDCO Offices",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "HUDCO Offices"
+    ],
+    "physical_page_start": 133,
+    "physical_page_end": 134,
+    "printed_page_start": "132",
+    "printed_page_end": "1",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 207
+  },
+  {
+    "section_id": "sec_12",
+    "title": "Details of the Auditors & Bankers",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Details of the Auditors & Bankers"
+    ],
+    "physical_page_start": 135,
+    "physical_page_end": 138,
+    "printed_page_start": "134",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 96
+  }
+]

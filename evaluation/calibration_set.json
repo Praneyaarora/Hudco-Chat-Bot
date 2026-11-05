@@ -1,0 +1,119 @@
+[
+  {
+    "id": "CALIB_01",
+    "query": "Who is the Chairman and Managing Director of HUDCO in FY 2025-26?",
+    "answerability": "answerable",
+    "target_doc": "doc_ar26",
+    "target_fy": "2025-26",
+    "expected_chunks": [
+      "doc_ar26_v1_badf2a22_sec_02_p022_c03"
+    ],
+    "notes": "Direct lexical match"
+  },
+  {
+    "id": "CALIB_02",
+    "query": "What is the corporate headquarters address of the company?",
+    "answerability": "answerable",
+    "target_doc": "doc_ar26",
+    "target_fy": "2025-26",
+    "expected_chunks": [
+      "doc_ar26_v1_78b76c39_sec_01_p020_c01"
+    ],
+    "notes": "Paraphrase: registered office -> headquarters"
+  },
+  {
+    "id": "CALIB_03",
+    "query": "What was HUDCO profit after tax (PAT) in FY 2025-26?",
+    "answerability": "answerable",
+    "target_doc": "doc_ar26",
+    "target_fy": "2025-26",
+    "expected_chunks": [
+      "doc_ar26_v1_3879ec25_sec_03_p032_c01"
+    ],
+    "notes": "Financial tables and highlights"
+  },
+  {
+    "id": "CALIB_04",
+    "query": "What was the total loan disbursement in FY 2023-24?",
+    "answerability": "answerable",
+    "target_doc": "doc_ar24",
+    "target_fy": "2023-24",
+    "expected_chunks": [],
+    "notes": "FY 2023-24 disbursement"
+  },
+  {
+    "id": "CALIB_05",
+    "query": "What is the vision and mission statement of HUDCO?",
+    "answerability": "answerable",
+    "target_doc": "doc_ar25",
+    "target_fy": "2024-25",
+    "expected_chunks": [],
+    "notes": "Vision and Mission"
+  },
+  {
+    "id": "CALIB_06",
+    "query": "What were the net loan sanctions in FY 2017-18?",
+    "answerability": "answerable",
+    "target_doc": "doc_ar18",
+    "target_fy": "2017-18",
+    "expected_chunks": [],
+    "notes": "Historical loan sanctions"
+  },
+  {
+    "id": "CALIB_07",
+    "query": "What is HUDCO policy on Corporate Social Responsibility (CSR)?",
+    "answerability": "answerable",
+    "target_doc": "doc_ar26",
+    "target_fy": "2025-26",
+    "expected_chunks": [],
+    "notes": "CSR policy narrative"
+  },
+  {
+    "id": "CALIB_08",
+    "query": "What is HUDCO policy regarding Bitcoin and cryptocurrency mining investments?",
+    "answerability": "unanswerable",
+    "notes": "Unsupported entity"
+  },
+  {
+    "id": "CALIB_09",
+    "query": "What was the net profit reported in the FY 2019-20 annual report ar20?",
+    "answerability": "unanswerable",
+    "notes": "Excluded / blocked report"
+  },
+  {
+    "id": "CALIB_10",
+    "query": "Tell me all about everything with the numbers and things.",
+    "answerability": "unanswerable",
+    "notes": "Vague query"
+  },
+  {
+    "id": "CALIB_11",
+    "query": "What are HUDCO projected revenue and EBITDA figures for fiscal year 2034-35?",
+    "answerability": "unanswerable",
+    "notes": "Future non-existent period"
+  },
+  {
+    "id": "CALIB_12",
+    "query": "When was Elon Musk appointed as Chief Technical Advisor of HUDCO?",
+    "answerability": "unanswerable",
+    "notes": "Hallucinated executive"
+  },
+  {
+    "id": "CALIB_13",
+    "query": "What was the loan delinquency rate of Fannie Mae in California in 2024?",
+    "answerability": "unanswerable",
+    "notes": "Foreign entity"
+  },
+  {
+    "id": "CALIB_14",
+    "query": "What dividends were paid by HUDCO Aerospace and Lunar Housing Limited in FY 2025-26?",
+    "answerability": "unanswerable",
+    "notes": "Fictitious subsidiary"
+  },
+  {
+    "id": "CALIB_15",
+    "query": "Explain the quantum key distribution cryptographic architecture used in HUDCO core banking routers.",
+    "answerability": "unanswerable",
+    "notes": "Unrelated tech query"
+  }
+]

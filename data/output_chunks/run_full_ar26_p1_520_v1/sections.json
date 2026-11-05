@@ -1,0 +1,306 @@
+[
+  {
+    "section_id": "sec_00",
+    "title": "Document Front Matter",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Document Front Matter"
+    ],
+    "physical_page_start": 1,
+    "physical_page_end": 19,
+    "printed_page_start": null,
+    "printed_page_end": "17",
+    "segmentation_method": "preamble_unclassified",
+    "confidence": "medium",
+    "block_count": 48
+  },
+  {
+    "section_id": "sec_01",
+    "title": "Reference Information",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Reference Information"
+    ],
+    "physical_page_start": 20,
+    "physical_page_end": 21,
+    "printed_page_start": "18",
+    "printed_page_end": "19",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 12
+  },
+  {
+    "section_id": "sec_02",
+    "title": "Board of Directors",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Board of Directors"
+    ],
+    "physical_page_start": 22,
+    "physical_page_end": 23,
+    "printed_page_start": "20",
+    "printed_page_end": "21",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 35
+  },
+  {
+    "section_id": "sec_03",
+    "title": "Chairman’s Message",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Chairman’s Message"
+    ],
+    "physical_page_start": 24,
+    "physical_page_end": 36,
+    "printed_page_start": "22",
+    "printed_page_end": "34",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 91
+  },
+  {
+    "section_id": "sec_04",
+    "title": "Notice of AGM",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Notice of AGM"
+    ],
+    "physical_page_start": 37,
+    "physical_page_end": 49,
+    "printed_page_start": "35",
+    "printed_page_end": "47",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 130
+  },
+  {
+    "section_id": "sec_05",
+    "title": "Directors’ Report",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Directors’ Report"
+    ],
+    "physical_page_start": 50,
+    "physical_page_end": 79,
+    "printed_page_start": "48",
+    "printed_page_end": "77",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 356
+  },
+  {
+    "section_id": "sec_06",
+    "title": "Management Discussion & Analysis Report",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Management Discussion & Analysis Report"
+    ],
+    "physical_page_start": 80,
+    "physical_page_end": 83,
+    "printed_page_start": "78",
+    "printed_page_end": "81",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 45
+  },
+  {
+    "section_id": "sec_07",
+    "title": "Corporate Governance Report",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Corporate Governance Report"
+    ],
+    "physical_page_start": 84,
+    "physical_page_end": 103,
+    "printed_page_start": "82",
+    "printed_page_end": "101",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 316
+  },
+  {
+    "section_id": "sec_08",
+    "title": "Business Responsibility & Sustainability Report",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Business Responsibility & Sustainability Report"
+    ],
+    "physical_page_start": 104,
+    "physical_page_end": 154,
+    "printed_page_start": "102",
+    "printed_page_end": "152",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 546
+  },
+  {
+    "section_id": "sec_09",
+    "title": "Independent Reasonable Assurance Report on BRSR Core",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Independent Reasonable Assurance Report on BRSR Core"
+    ],
+    "physical_page_start": 155,
+    "physical_page_end": 159,
+    "printed_page_start": "153",
+    "printed_page_end": "157",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 88
+  },
+  {
+    "section_id": "sec_10",
+    "title": "Secretarial Audit Report",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Secretarial Audit Report"
+    ],
+    "physical_page_start": 160,
+    "physical_page_end": 182,
+    "printed_page_start": "158",
+    "printed_page_end": "180",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 173
+  },
+  {
+    "section_id": "sec_11",
+    "title": "Management Reply to Independent Auditor’s Report",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Management Reply to Independent Auditor’s Report"
+    ],
+    "physical_page_start": 183,
+    "physical_page_end": 183,
+    "printed_page_start": "181",
+    "printed_page_end": "181",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 14
+  },
+  {
+    "section_id": "sec_12",
+    "title": "Comments of the CAG on Standalone Financial Statements",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Comments of the CAG on Standalone Financial Statements"
+    ],
+    "physical_page_start": 184,
+    "physical_page_end": 184,
+    "printed_page_start": "182",
+    "printed_page_end": "182",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 15
+  },
+  {
+    "section_id": "sec_13",
+    "title": "Comments of the CAG on Consolidated Financial Statements",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Comments of the CAG on Consolidated Financial Statements"
+    ],
+    "physical_page_start": 185,
+    "physical_page_end": 207,
+    "printed_page_start": "183",
+    "printed_page_end": "205",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 176
+  },
+  {
+    "section_id": "sec_14",
+    "title": "Standalone Financial Statements",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Standalone Financial Statements"
+    ],
+    "physical_page_start": 208,
+    "physical_page_end": 361,
+    "printed_page_start": "206",
+    "printed_page_end": "359",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 1086
+  },
+  {
+    "section_id": "sec_15",
+    "title": "Consolidated Financial Statements",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Consolidated Financial Statements"
+    ],
+    "physical_page_start": 362,
+    "physical_page_end": 511,
+    "printed_page_start": "360",
+    "printed_page_end": "509",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 1146
+  },
+  {
+    "section_id": "sec_16",
+    "title": "Information on Sanctions/Releases",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Information on Sanctions/Releases"
+    ],
+    "physical_page_start": 512,
+    "physical_page_end": 515,
+    "printed_page_start": "510",
+    "printed_page_end": "513",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 17
+  },
+  {
+    "section_id": "sec_17",
+    "title": "Management Team",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "Management Team"
+    ],
+    "physical_page_start": 516,
+    "physical_page_end": 516,
+    "printed_page_start": "514",
+    "printed_page_end": "514",
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 47
+  },
+  {
+    "section_id": "sec_18",
+    "title": "HUDCO Offices",
+    "level": 1,
+    "parent_section_id": null,
+    "heading_path": [
+      "HUDCO Offices"
+    ],
+    "physical_page_start": 517,
+    "physical_page_end": 520,
+    "printed_page_start": "515",
+    "printed_page_end": null,
+    "segmentation_method": "toc_page_discovery",
+    "confidence": "medium",
+    "block_count": 139
+  }
+]

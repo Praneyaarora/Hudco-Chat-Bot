@@ -1,0 +1,219 @@
+{
+  "raw_outline": [
+    {
+      "title": "1",
+      "destination_page_index": 0,
+      "physical_page": 1
+    },
+    {
+      "title": "2",
+      "destination_page_index": 1,
+      "physical_page": 2
+    },
+    {
+      "title": "Final_Final_ANNUAL REPORT HUDCO 2026",
+      "destination_page_index": 2,
+      "physical_page": 3
+    },
+    {
+      "title": "3",
+      "destination_page_index": 518,
+      "physical_page": 519
+    },
+    {
+      "title": "4",
+      "destination_page_index": 519,
+      "physical_page": 520
+    }
+  ],
+  "outline_quality": "WEAK",
+  "outline_validation_issues": [
+    "High proportion of meaningless titles (5/5)."
+  ],
+  "selected_strategy": "toc_page_discovery",
+  "toc_pages": [
+    5
+  ],
+  "parsed_entries": [
+    {
+      "title": "Reference Information",
+      "printed_page": 18,
+      "raw_line": "Reference Information 18"
+    },
+    {
+      "title": "Board of Directors",
+      "printed_page": 20,
+      "raw_line": "Board of Directors 20"
+    },
+    {
+      "title": "Chairman\u2019s Message",
+      "printed_page": 22,
+      "raw_line": "Chairman\u2019s Message 22"
+    },
+    {
+      "title": "Notice of AGM",
+      "printed_page": 35,
+      "raw_line": "Notice of AGM 35"
+    },
+    {
+      "title": "Directors\u2019 Report",
+      "printed_page": 48,
+      "raw_line": "Directors\u2019 Report 48"
+    },
+    {
+      "title": "Management Discussion & Analysis Report",
+      "printed_page": 78,
+      "raw_line": "Management Discussion & Analysis Report 78"
+    },
+    {
+      "title": "Corporate Governance Report",
+      "printed_page": 82,
+      "raw_line": "Corporate Governance Report 82"
+    },
+    {
+      "title": "Business Responsibility & Sustainability Report",
+      "printed_page": 102,
+      "raw_line": "Business Responsibility & Sustainability Report 102"
+    },
+    {
+      "title": "Independent Reasonable Assurance Report on BRSR Core",
+      "printed_page": 153,
+      "raw_line": "Independent Reasonable Assurance Report on BRSR Core 153"
+    },
+    {
+      "title": "Secretarial Audit Report",
+      "printed_page": 158,
+      "raw_line": "Secretarial Audit Report 158"
+    },
+    {
+      "title": "Annual Report on Corporate Social Responsibility Activities",
+      "printed_page": 162,
+      "raw_line": "Annual Report on Corporate Social Responsibility Activities 162"
+    },
+    {
+      "title": "Management Reply to Independent Auditor\u2019s Report",
+      "printed_page": 181,
+      "raw_line": "Management Reply to Independent Auditor\u2019s Report 181"
+    },
+    {
+      "title": "Comments of the CAG on Standalone Financial Statements",
+      "printed_page": 182,
+      "raw_line": "Comments of the CAG on Standalone Financial Statements 182"
+    },
+    {
+      "title": "Comments of the CAG on Consolidated Financial Statements",
+      "printed_page": 183,
+      "raw_line": "Comments of the CAG on Consolidated Financial Statements 183"
+    },
+    {
+      "title": "Standalone Financial Statements",
+      "printed_page": 206,
+      "raw_line": "Standalone Financial Statements 206"
+    },
+    {
+      "title": "Consolidated Financial Statements",
+      "printed_page": 360,
+      "raw_line": "Consolidated Financial Statements 360"
+    },
+    {
+      "title": "Information on Sanctions/Releases",
+      "printed_page": 510,
+      "raw_line": "Information on Sanctions/Releases 510"
+    },
+    {
+      "title": "Management Team",
+      "printed_page": 514,
+      "raw_line": "Management Team 514"
+    },
+    {
+      "title": "HUDCO Offices",
+      "printed_page": 515,
+      "raw_line": "HUDCO Offices 515"
+    }
+  ],
+  "page_mapping_diagnostics": {
+    "applied_offset": 2,
+    "details": {
+      "heading_matches": [
+        {
+          "title": "Reference Information",
+          "printed_page": 18,
+          "matched_physical_page": 20,
+          "inferred_offset": 2
+        },
+        {
+          "title": "Board of Directors",
+          "printed_page": 20,
+          "matched_physical_page": 22,
+          "inferred_offset": 2
+        },
+        {
+          "title": "Chairman\u2019s Message",
+          "printed_page": 22,
+          "matched_physical_page": 22,
+          "inferred_offset": 0
+        },
+        {
+          "title": "Notice of AGM",
+          "printed_page": 35,
+          "matched_physical_page": 37,
+          "inferred_offset": 2
+        },
+        {
+          "title": "Directors\u2019 Report",
+          "printed_page": 48,
+          "matched_physical_page": 50,
+          "inferred_offset": 2
+        },
+        {
+          "title": "Management Discussion & Analysis Report",
+          "printed_page": 78,
+          "matched_physical_page": 79,
+          "inferred_offset": 1
+        },
+        {
+          "title": "Corporate Governance Report",
+          "printed_page": 82,
+          "matched_physical_page": 82,
+          "inferred_offset": 0
+        },
+        {
+          "title": "Business Responsibility & Sustainability Report",
+          "printed_page": 102,
+          "matched_physical_page": 102,
+          "inferred_offset": 0
+        },
+        {
+          "title": "Consolidated Financial Statements",
+          "printed_page": 360,
+          "matched_physical_page": 360,
+          "inferred_offset": 0
+        },
+        {
+          "title": "Information on Sanctions/Releases",
+          "printed_page": 510,
+          "matched_physical_page": 510,
+          "inferred_offset": 0
+        },
+        {
+          "title": "Management Team",
+          "printed_page": 514,
+          "matched_physical_page": 516,
+          "inferred_offset": 2
+        },
+        {
+          "title": "HUDCO Offices",
+          "printed_page": 515,
+          "matched_physical_page": 517,
+          "inferred_offset": 2
+        }
+      ],
+      "offset_distribution": {
+        "2": 6,
+        "0": 5,
+        "1": 1
+      }
+    }
+  },
+  "warnings": []
+}

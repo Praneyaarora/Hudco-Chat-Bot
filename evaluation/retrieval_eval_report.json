@@ -1,0 +1,2220 @@
+{
+  "dataset_total_chunks": 2682,
+  "total_questions": 20,
+  "answerable_questions": 17,
+  "unanswerable_questions": 3,
+  "parameters": {
+    "k1": 1.2,
+    "b": 0.45,
+    "abstention_threshold": 14.5,
+    "min_term_coverage": 0.4
+  },
+  "metrics": {
+    "chunk_recall_at_1": 0.7059,
+    "chunk_recall_at_3": 0.7647,
+    "chunk_recall_at_5": 0.8824,
+    "page_recall_at_1": 0.8824,
+    "page_recall_at_3": 1.0,
+    "page_recall_at_5": 1.0,
+    "page_citation_accuracy_at_1": 0.8824,
+    "page_citation_accuracy_at_5": 0.3059,
+    "mrr_page": 0.9412,
+    "mrr_chunk": 0.7588,
+    "abstention_precision": 1.0,
+    "abstention_recall": 1.0,
+    "abstention_f1": 1.0
+  },
+  "denominators": {
+    "chunk_recall_denominator": "Total Answerable Questions = 17",
+    "page_recall_denominator": "Total Answerable Questions = 17",
+    "page_citation_accuracy_at_1_denominator": "Total Answerable Questions = 17 (Note: Identical to Page Recall@1 under exact page-support definition)",
+    "page_citation_accuracy_at_5_denominator": "Total Citations Emitted in Top-5 = 85 (Precision: supported citations / emitted citations)",
+    "mrr_page_denominator": "Total Answerable Questions = 17",
+    "mrr_chunk_denominator": "Total Answerable Questions = 17",
+    "abstention_precision_denominator": "Total Abstentions Triggered = 3",
+    "abstention_recall_denominator": "Total Unanswerable Questions = 3"
+  },
+  "detailed_results": [
+    {
+      "question_id": "Q01",
+      "category": "direct_fact",
+      "question": "Who is the Chairman and Managing Director (CMD) of HUDCO and when did he assume charge?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 818,
+      "expected_pages": [
+        22
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_badf2a22_sec_02_p022_c03"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_7a0af2a9_sec_02_p022_c00",
+          "physical_page": 22,
+          "score": 25.2615,
+          "term_coverage": 0.8571,
+          "matched_terms": [
+            "managing",
+            "charge",
+            "chairman",
+            "hudco",
+            "director",
+            "cmd"
+          ],
+          "snippet": "Brief Profile of Directors  Shri Sanjay Kulshrestha, aged 57 years, assumed charge as the Chairman & Managing Director (CMD) of the Company on 16 th O"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_e3512a61_sec_07_p101_c00",
+          "physical_page": 101,
+          "score": 18.2509,
+          "term_coverage": 0.5714,
+          "matched_terms": [
+            "managing",
+            "chairman",
+            "hudco",
+            "director"
+          ],
+          "snippet": "| 1. | The Board | : | As on 31st March, 2026, the Board of HUDCO consists of eight directors comprising three functional directors including Chairman"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_5a845253_sec_14_p327_c00",
+          "physical_page": 327,
+          "score": 18.1377,
+          "term_coverage": 0.7143,
+          "matched_terms": [
+            "managing",
+            "charge",
+            "chairman",
+            "hudco",
+            "director"
+          ],
+          "snippet": "NOTE 41 : (Contd.)  a. Shri Sanjay Kulshrestha, Chairman and Managing Director, joined HUDCO on 16th October, 2023. However, He has not taken any adva"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_5ae18297_sec_15_p482_c02",
+          "physical_page": 482,
+          "score": 17.6308,
+          "term_coverage": 0.7143,
+          "matched_terms": [
+            "managing",
+            "charge",
+            "chairman",
+            "hudco",
+            "director"
+          ],
+          "snippet": "(d) Transactions with Key Management Personnel:  The statement of loans / advances given to Key Managerial Personnel for the year ended 31st March, 20"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_fae32aab_sec_10_p166_c09",
+          "physical_page": 166,
+          "score": 15.0591,
+          "term_coverage": 0.4286,
+          "matched_terms": [
+            "managing",
+            "chairman",
+            "director"
+          ],
+          "snippet": "Place: New Delhi Chairman & Managing Director Chairman, CSR Committee"
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 1,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": false,
+      "chunk_hit_at_5": false,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 0.0
+    },
+    {
+      "question_id": "Q02",
+      "category": "direct_fact",
+      "question": "Who is the Director (Finance) of HUDCO and when was he appointed?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 829,
+      "expected_pages": [
+        44,
+        22,
+        23
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_836ce547_sec_02_p022_c09",
+        "doc_ar26_v1_09117a51_sec_04_p044_c00",
+        "doc_ar26_v1_15143c84_sec_02_p023_c00"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_09117a51_sec_04_p044_c00",
+          "physical_page": 44,
+          "score": 15.58,
+          "term_coverage": 1.0,
+          "matched_terms": [
+            "hudco",
+            "appoint",
+            "director",
+            "finance"
+          ],
+          "snippet": "| Brief of Director(s) seeking appointment/ re-appointment at the 56th Annual General Meeting. |  |  | | --- | --- | --- | | Name of Director | Shri D"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_7b3681b2_sec_07_p084_c03",
+          "physical_page": 84,
+          "score": 14.6955,
+          "term_coverage": 0.75,
+          "matched_terms": [
+            "appoint",
+            "director",
+            "finance"
+          ],
+          "snippet": "| Sl. No. | Name | Category | Designation | Date of appointment | | --- | --- | --- | --- | --- | | 1. | Shri Sanjay Kulshrestha (DIN: 06428038) | Exe"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_342ca7e8_sec_08_p106_c04",
+          "physical_page": 106,
+          "score": 14.5641,
+          "term_coverage": 1.0,
+          "matched_terms": [
+            "hudco",
+            "appoint",
+            "director",
+            "finance"
+          ],
+          "snippet": "*Shri LVS Sudhakar Babu was appointed as KMP w.e.f. 22.01.2025. Further, on account of his appointment as Managing Director of Sagarmala Finance Corpo"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_9472218e_sec_05_p070_c01",
+          "physical_page": 70,
+          "score": 13.19,
+          "term_coverage": 0.75,
+          "matched_terms": [
+            "appoint",
+            "director",
+            "finance"
+          ],
+          "snippet": "Appointment of Part-time Official (Government) Director  Ministry of Housing and Urban Affairs (MoHUA), Government of India vide order dated 26th Augu"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_d2bf52f9_sec_07_p084_c01",
+          "physical_page": 84,
+          "score": 12.2964,
+          "term_coverage": 1.0,
+          "matched_terms": [
+            "hudco",
+            "appoint",
+            "director",
+            "finance"
+          ],
+          "snippet": "The guidelines may be accessed at -  https://hudco.org.in//Site/FormTemplete/frmTemp1PLargeTC1C.aspx?MnId=466&ParentID=311  2. BOARD OF DIRECTORS  Bei"
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 1,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": true,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 1.0
+    },
+    {
+      "question_id": "Q03",
+      "category": "direct_fact",
+      "question": "Where is the registered office of Housing and Urban Development Corporation Limited (HUDCO) located?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 796,
+      "expected_pages": [
+        20,
+        517,
+        215
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_4730308b_sec_14_p215_c01",
+        "doc_ar26_v1_72ed092e_sec_18_p517_c04",
+        "doc_ar26_v1_eb1f5dd1_sec_18_p517_c10",
+        "doc_ar26_v1_78b76c39_sec_01_p020_c01"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_4730308b_sec_14_p215_c01",
+          "physical_page": 215,
+          "score": 28.5565,
+          "term_coverage": 0.8889,
+          "matched_terms": [
+            "corporation",
+            "office",
+            "urban",
+            "limited",
+            "registered",
+            "housing",
+            "hudco",
+            "development"
+          ],
+          "snippet": "Financial Statements  1. Company Overview Housing and Urban Development Corporation Limited is a Listed Public Limited Company (A Government of India "
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_c4d0f317_sec_05_p065_c04",
+          "physical_page": 65,
+          "score": 25.956,
+          "term_coverage": 0.7778,
+          "matched_terms": [
+            "corporation",
+            "office",
+            "urban",
+            "limited",
+            "housing",
+            "hudco",
+            "development"
+          ],
+          "snippet": "Apart from the above 7 training programmes, HSMI also conducted 2 programmes of 3 days duration under the Rashtriya Karmayogi Jan Seva Training Progra"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_8642bae2_sec_10_p160_c05",
+          "physical_page": 160,
+          "score": 25.6328,
+          "term_coverage": 0.6667,
+          "matched_terms": [
+            "corporation",
+            "urban",
+            "limited",
+            "housing",
+            "hudco",
+            "development"
+          ],
+          "snippet": "Housing and Urban Development Corporation Limited (\u201cHUDCO\u201d)  HUDCO Bhawan, India Habitat Centre, Lodhi Road, New Delhi \u2013 110003.  We have conducted th"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_9a12f381_sec_07_p102_c04",
+          "physical_page": 102,
+          "score": 25.2048,
+          "term_coverage": 0.8889,
+          "matched_terms": [
+            "corporation",
+            "office",
+            "urban",
+            "limited",
+            "registered",
+            "housing",
+            "hudco",
+            "development"
+          ],
+          "snippet": "New Delhi-110003  I have examined the relevant registers, records, forms, returns and disclosures received from the Directors of Housing and Urban Dev"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_33d51a31_sec_07_p094_c01",
+          "physical_page": 94,
+          "score": 25.1828,
+          "term_coverage": 0.4444,
+          "matched_terms": [
+            "office",
+            "registered",
+            "hudco",
+            "located"
+          ],
+          "snippet": "| Meeting No. | Financi Year | al Location | Date | Time | Whether any special resolution passed | | --- | --- | --- | --- | --- | --- | | 55th | 2024"
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 1,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": true,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 1.0
+    },
+    {
+      "question_id": "Q04",
+      "category": "direct_fact",
+      "question": "When and at what time was the 56th Annual General Meeting (AGM) of HUDCO scheduled to be held?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 1096,
+      "expected_pages": [
+        37,
+        95
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_f1edf682_sec_07_p095_c01",
+        "doc_ar26_v1_6703c80b_sec_04_p037_c00"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_f1edf682_sec_07_p095_c01",
+          "physical_page": 95,
+          "score": 38.8746,
+          "term_coverage": 0.8,
+          "matched_terms": [
+            "agm",
+            "meeting",
+            "at",
+            "annual",
+            "hudco",
+            "general",
+            "56th",
+            "time"
+          ],
+          "snippet": "| Number | 56th | | --- | --- | | Day and Date | Monday, 24th August, 2026 | | Time | 11:30 a.m. (IST) | | Venue | The Company is conducting AGM throu"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_6703c80b_sec_04_p037_c00",
+          "physical_page": 37,
+          "score": 31.6887,
+          "term_coverage": 0.8,
+          "matched_terms": [
+            "agm",
+            "meeting",
+            "at",
+            "annual",
+            "hudco",
+            "held",
+            "general",
+            "56th"
+          ],
+          "snippet": "NOTICE  Notice is hereby given that the 56th Annual General Meeting (AGM) of Housing and Urban Development Corporation Limited (HUDCO) will be held on"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_33d51a31_sec_07_p094_c01",
+          "physical_page": 94,
+          "score": 27.7582,
+          "term_coverage": 0.7,
+          "matched_terms": [
+            "meeting",
+            "at",
+            "annual",
+            "hudco",
+            "held",
+            "general",
+            "time"
+          ],
+          "snippet": "| Meeting No. | Financi Year | al Location | Date | Time | Whether any special resolution passed | | --- | --- | --- | --- | --- | --- | | 55th | 2024"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_2acbd886_sec_07_p086_c04",
+          "physical_page": 86,
+          "score": 26.718,
+          "term_coverage": 0.6,
+          "matched_terms": [
+            "meeting",
+            "at",
+            "annual",
+            "held",
+            "general",
+            "56th"
+          ],
+          "snippet": "vi. In accordance with the provisions of the Companies Act, 2013 and Articles of Association of the Company, Shri Daljeet Singh Khatri, Director (Fina"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_7a645d71_sec_04_p039_c01",
+          "physical_page": 39,
+          "score": 26.458,
+          "term_coverage": 0.7,
+          "matched_terms": [
+            "agm",
+            "meeting",
+            "at",
+            "annual",
+            "hudco",
+            "held",
+            "general"
+          ],
+          "snippet": "2. The Ministry of Corporate Affairs (\u201cMCA\u201d) vide its General Circular No. 03/2025 dated September 22, 2025 read with circulars issued earlier on the "
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 2,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": true,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 1.0
+    },
+    {
+      "question_id": "Q05",
+      "category": "numeric_table",
+      "question": "What was HUDCO's Profit After Tax (PAT) for FY 2025-26 and FY 2024-25 according to the Financial Highlights table?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 2217,
+      "expected_pages": [
+        21
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_e102ddd4_sec_01_p021_c01"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_e102ddd4_sec_01_p021_c01",
+          "physical_page": 21,
+          "score": 38.8355,
+          "term_coverage": 0.7857,
+          "matched_terms": [
+            "highlight",
+            "2025-26",
+            "profit",
+            "2024",
+            "table",
+            "pat",
+            "2024-25",
+            "2026",
+            "2025",
+            "financial",
+            "tax"
+          ],
+          "snippet": "| PARTICULARS | 2021-22 | 2022-23 | 2023-24 | 2024-25 | 2025-26 | | --- | --- | --- | --- | --- | --- | | Revenue from Operations | 6,954.08 | 7,049.4"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_c7a0c6e4_sec_15_p451_c02",
+          "physical_page": 451,
+          "score": 34.6393,
+          "term_coverage": 0.6429,
+          "matched_terms": [
+            "2025-26",
+            "2024",
+            "table",
+            "2024-25",
+            "2026",
+            "2025",
+            "fy",
+            "financial",
+            "tax"
+          ],
+          "snippet": "| Sr. No. | Particulars | FY 2025-26 | FY 2024-25 | | --- | --- | --- | --- | | A. | Effective Portion of Cash flow Hedges |  |  | | (a) | Opening bal"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_c7a0c6e4_sec_14_p298_c02",
+          "physical_page": 298,
+          "score": 34.614,
+          "term_coverage": 0.6429,
+          "matched_terms": [
+            "2025-26",
+            "2024",
+            "table",
+            "2024-25",
+            "2026",
+            "2025",
+            "fy",
+            "financial",
+            "tax"
+          ],
+          "snippet": "| Sr. No. | Particulars | FY 2025-26 | FY 2024-25 | | --- | --- | --- | --- | | A. | Effective Portion of Cash flow Hedges |  |  | | (a) | Opening bal"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_dd3ad9c7_sec_14_p296_c02",
+          "physical_page": 296,
+          "score": 32.3555,
+          "term_coverage": 0.6429,
+          "matched_terms": [
+            "2025-26",
+            "profit",
+            "2024",
+            "table",
+            "2024-25",
+            "2026",
+            "2025",
+            "financial",
+            "tax"
+          ],
+          "snippet": "| c Currency | Change in urrency rate in % | Effect on profit before tax | Effect on equity | Change in currency rate in % | Effect on profit before t"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_1f13081d_sec_15_p449_c02",
+          "physical_page": 449,
+          "score": 32.2868,
+          "term_coverage": 0.6429,
+          "matched_terms": [
+            "2025-26",
+            "profit",
+            "2024",
+            "table",
+            "2024-25",
+            "2026",
+            "2025",
+            "financial",
+            "tax"
+          ],
+          "snippet": "| Currency | Change in currency rate in % | Effect on profit before tax | Effect on equity | Change in Eff currency rate in % | ect on profit before t"
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 1,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": true,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 1.0
+    },
+    {
+      "question_id": "Q06",
+      "category": "numeric_table",
+      "question": "What was HUDCO's Revenue from Operations for the financial year 2025-26 in the Financial Highlights?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 2304,
+      "expected_pages": [
+        209,
+        50,
+        21
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_4b4c5398_sec_05_p050_c01",
+        "doc_ar26_v1_e102ddd4_sec_01_p021_c01",
+        "doc_ar26_v1_f64c9ff4_sec_14_p209_c01"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_9e0e4026_sec_08_p138_c02",
+          "physical_page": 138,
+          "score": 24.1568,
+          "term_coverage": 0.7,
+          "matched_terms": [
+            "revenue",
+            "2025-26",
+            "operations",
+            "in",
+            "hudco",
+            "2026",
+            "2025"
+          ],
+          "snippet": "| Parameter | FY 2025-26 | FY 2024-25 | | --- | --- | --- | | Total Waste generated (in metric tonnes) |  |  | | Plastic waste (A) | The Company does "
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_89d68435_sec_05_p050_c00",
+          "physical_page": 50,
+          "score": 23.3878,
+          "term_coverage": 0.8,
+          "matched_terms": [
+            "2025-26",
+            "highlight",
+            "operations",
+            "in",
+            "year",
+            "2026",
+            "2025",
+            "financial"
+          ],
+          "snippet": "DIRECTORS\u2019 REPORT  Dear Members, Your directors are pleased to present the 56th Annual Report on the business and operations of the Company along with"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_177f31eb_sec_08_p135_c02",
+          "physical_page": 135,
+          "score": 22.1917,
+          "term_coverage": 0.6,
+          "matched_terms": [
+            "revenue",
+            "2025-26",
+            "operations",
+            "in",
+            "2026",
+            "2025"
+          ],
+          "snippet": "| Parameter | FY 2025-26 | FY 2024-25 | | --- | --- | --- | | Water withdrawal by source (in kilolitres) |  |  | | (i) Surface water | NIL | NIL | | ("
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_8c6112f1_sec_08_p137_c00",
+          "physical_page": 137,
+          "score": 21.4081,
+          "term_coverage": 0.6,
+          "matched_terms": [
+            "revenue",
+            "2025-26",
+            "operations",
+            "in",
+            "2026",
+            "2025"
+          ],
+          "snippet": "| Parameter | Unit | FY 2025-26 |  | FY 2024-25 |  | | --- | --- | --- | --- | --- | --- | | Total Scope 2 emissions (Break-up of the GHG into CO, CH,"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_e102ddd4_sec_01_p021_c01",
+          "physical_page": 21,
+          "score": 21.3486,
+          "term_coverage": 0.8,
+          "matched_terms": [
+            "revenue",
+            "2025-26",
+            "highlight",
+            "operations",
+            "in",
+            "2026",
+            "2025",
+            "financial"
+          ],
+          "snippet": "| PARTICULARS | 2021-22 | 2022-23 | 2023-24 | 2024-25 | 2025-26 | | --- | --- | --- | --- | --- | --- | | Revenue from Operations | 6,954.08 | 7,049.4"
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 2,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": false,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": false,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 0.5,
+      "chunk_reciprocal_rank": 0.2
+    },
+    {
+      "question_id": "Q07",
+      "category": "definition",
+      "question": "What is the stated objective of PMAY(U)-2.0 as supported by HUDCO in the Directors' Report?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 2101,
+      "expected_pages": [
+        56
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_44c61612_sec_05_p056_c03"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_44c61612_sec_05_p056_c03",
+          "physical_page": 56,
+          "score": 24.4544,
+          "term_coverage": 0.6667,
+          "matched_terms": [
+            "-2.0",
+            "in",
+            "report",
+            "hudco",
+            "pmay",
+            "director"
+          ],
+          "snippet": "HUDCO\u2019 s role in Government of India scheme(s) \u2013 Pradhan Mantri Awas Yojana HUDCO is committed to supporting the Ministry of Housing and Urban Affairs"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_ad808ccf_sec_03_p032_c03",
+          "physical_page": 32,
+          "score": 13.8086,
+          "term_coverage": 0.4444,
+          "matched_terms": [
+            "in",
+            "hudco",
+            "pmay",
+            "supported"
+          ],
+          "snippet": "As on 31st March 2026, your Company has disbursed \u20b944,986 Crore under Pradhan Mantri Awas Yojana (Urban) [PMAY(U)-1.0] and Pradhan Mantri Awas Yojana "
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_c6387d2f_sec_05_p056_c06",
+          "physical_page": 56,
+          "score": 12.634,
+          "term_coverage": 0.5556,
+          "matched_terms": [
+            "objective",
+            "in",
+            "report",
+            "hudco",
+            "director"
+          ],
+          "snippet": "HUDCO has undertaken project works for development of its vacant properties through development of commercial office/ institutional properties in a mo"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_bb78a786_sec_05_p078_c00",
+          "physical_page": 78,
+          "score": 12.5944,
+          "term_coverage": 0.5556,
+          "matched_terms": [
+            "in",
+            "report",
+            "hudco",
+            "director",
+            "supported"
+          ],
+          "snippet": "In line with this accelerating infrastructure push, HUDCO has strengthened its strategic positioning to support the next phase of growth. Backed by it"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_e29969d1_sec_08_p142_c06",
+          "physical_page": 142,
+          "score": 12.3857,
+          "term_coverage": 0.4444,
+          "matched_terms": [
+            "in",
+            "report",
+            "hudco",
+            "pmay"
+          ],
+          "snippet": "Under the flagship programme Pradhan Mantri Awas Yojana (PMAY), HUDCO has been designated as one of the Nodal Agencies for channelizing Government of "
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 2,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": true,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 1.0
+    },
+    {
+      "question_id": "Q08",
+      "category": "numeric_table",
+      "question": "What was the total outstanding loan balance on Affordable Housing (EWS, LIG, PMAY & Rural Housing) as on 31.03.2026?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 1312,
+      "expected_pages": [
+        116
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_53c8319c_sec_08_p116_c00"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_53c8319c_sec_08_p116_c00",
+          "physical_page": 116,
+          "score": 42.821,
+          "term_coverage": 0.9167,
+          "matched_terms": [
+            "outstanding",
+            "31.03.2026",
+            "on",
+            "housing",
+            "ews",
+            "pmay",
+            "affordable",
+            "total",
+            "lig",
+            "rural",
+            "loan"
+          ],
+          "snippet": "|  |  | centralized monitoring of NCLT cases, revision of the One-Time Settlement policy, and enhanced recovery mechanisms, resulting in recoveries of"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_a79090a2_sec_16_p515_c01",
+          "physical_page": 515,
+          "score": 35.4583,
+          "term_coverage": 0.5833,
+          "matched_terms": [
+            "31.03.2026",
+            "on",
+            "housing",
+            "ews",
+            "total",
+            "lig",
+            "loan"
+          ],
+          "snippet": "| CATEGORY | CUMULATIVE |  | CURRENT |  | | --- | --- | --- | --- | --- | |  | Loan Sanctioned | Dwell. Units | Loan Sanctione | d Dwell. Units | | EW"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_2531bb83_sec_05_p053_c04",
+          "physical_page": 53,
+          "score": 34.1489,
+          "term_coverage": 0.6667,
+          "matched_terms": [
+            "31.03.2026",
+            "on",
+            "housing",
+            "ews",
+            "affordable",
+            "lig",
+            "rural",
+            "loan"
+          ],
+          "snippet": "Since its establishment in 1970, HUDCO has built a distinguished legacy spanning 56 years of dedicated service to the nation. Over this period, the or"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_9d305d22_sec_05_p056_c01",
+          "physical_page": 56,
+          "score": 32.5805,
+          "term_coverage": 0.5,
+          "matched_terms": [
+            "housing",
+            "ews",
+            "affordable",
+            "total",
+            "lig",
+            "rural"
+          ],
+          "snippet": "Support to Economically Weaker Sections  HUDCO has consistently made focused efforts to serve underserved sections of society while supporting the fla"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_44c61612_sec_05_p056_c03",
+          "physical_page": 56,
+          "score": 31.3196,
+          "term_coverage": 0.5,
+          "matched_terms": [
+            "housing",
+            "ews",
+            "pmay",
+            "affordable",
+            "lig",
+            "loan"
+          ],
+          "snippet": "HUDCO\u2019 s role in Government of India scheme(s) \u2013 Pradhan Mantri Awas Yojana HUDCO is committed to supporting the Ministry of Housing and Urban Affairs"
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 1,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": true,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 1.0
+    },
+    {
+      "question_id": "Q09",
+      "category": "direct_fact",
+      "question": "Under which section of the Companies Act, 2013 does HUDCO formulate its Annual Report on Corporate Social Responsibility (CSR) Activities?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 2682,
+      "expected_pages": [
+        164
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_3d3795d6_sec_10_p164_c00"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_3d3795d6_sec_10_p164_c00",
+          "physical_page": 164,
+          "score": 42.6355,
+          "term_coverage": 0.8667,
+          "matched_terms": [
+            "act",
+            "section",
+            "on",
+            "activities",
+            "annual",
+            "report",
+            "csr",
+            "hudco",
+            "companies",
+            "social",
+            "2013",
+            "responsibility",
+            "corporate"
+          ],
+          "snippet": "Annual Report on Corporate Social Responsibility (CSR)  [Pursuant to section 135 of the Companies Act, 2013 read with Rule 8(1) of the Companies (Corp"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_ef390a66_sec_07_p088_c03",
+          "physical_page": 88,
+          "score": 39.7337,
+          "term_coverage": 0.8667,
+          "matched_terms": [
+            "act",
+            "section",
+            "on",
+            "activities",
+            "annual",
+            "report",
+            "csr",
+            "hudco",
+            "companies",
+            "social",
+            "2013",
+            "responsibility",
+            "corporate"
+          ],
+          "snippet": "Brief Description of terms of reference  The role and terms of reference of the Corporate Social Responsibility Committee is as defined in the Compani"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_58aba313_sec_05_p072_c00",
+          "physical_page": 72,
+          "score": 31.2218,
+          "term_coverage": 0.7333,
+          "matched_terms": [
+            "act",
+            "section",
+            "on",
+            "activities",
+            "annual",
+            "report",
+            "csr",
+            "hudco",
+            "under",
+            "companies",
+            "2013"
+          ],
+          "snippet": "The CSR Policy and other information on CSR is available on HUDCO W ebsite at: http://www.hudco.org.in The \u2018Annual Report on CSR activities for Financ"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_caf4a3e2_sec_10_p164_c02",
+          "physical_page": 164,
+          "score": 31.0005,
+          "term_coverage": 0.8,
+          "matched_terms": [
+            "section",
+            "on",
+            "activities",
+            "annual",
+            "report",
+            "csr",
+            "hudco",
+            "under",
+            "companies",
+            "social",
+            "responsibility",
+            "corporate"
+          ],
+          "snippet": "In addition to this, HUDCO has also implemented CSR projects in areas related to education, environment, sports, rural infrastructure development, art"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_5cb41522_sec_10_p166_c01",
+          "physical_page": 166,
+          "score": 30.9223,
+          "term_coverage": 0.7333,
+          "matched_terms": [
+            "act",
+            "section",
+            "on",
+            "annual",
+            "report",
+            "csr",
+            "companies",
+            "social",
+            "2013",
+            "responsibility",
+            "corporate"
+          ],
+          "snippet": "(%) Includes amount disbursed to agencies for which UC is awaited.  (@) The unspent amount was transferred to \u2018Swachh Bharat Kosh\u2019 from the unspent CS"
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 2,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": true,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 1.0
+    },
+    {
+      "question_id": "Q10",
+      "category": "numeric_table",
+      "question": "What is the paid-up equity share capital of HUDCO as stated in the Financial Highlights?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 2232,
+      "expected_pages": [
+        208,
+        51,
+        21
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_e102ddd4_sec_01_p021_c01",
+        "doc_ar26_v1_2fe3e371_sec_14_p208_c01",
+        "doc_ar26_v1_af9515d0_sec_05_p051_c02"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_060e1412_sec_05_p051_c06",
+          "physical_page": 51,
+          "score": 27.8204,
+          "term_coverage": 0.6667,
+          "matched_terms": [
+            "capital",
+            "in",
+            "paid-up",
+            "share",
+            "financial",
+            "equity"
+          ],
+          "snippet": "3. SHARE CAPITAL  As on 31st March, 2026, the authorized share capital of the Company was Rs.2,500 Crore with issued, subscribed and paid-up equity sh"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_2a385ddd_sec_14_p274_c07",
+          "physical_page": 274,
+          "score": 25.3574,
+          "term_coverage": 0.6667,
+          "matched_terms": [
+            "capital",
+            "in",
+            "paid-up",
+            "share",
+            "financial",
+            "equity"
+          ],
+          "snippet": "| S. No. | PARTICULARS | As at 31st March, 2026 | As at 31st March, 2025 | | --- | --- | --- | --- | | A | Authorised 2,500,000,000 equity shares of \u20b9"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_6d9bc98b_sec_15_p428_c06",
+          "physical_page": 428,
+          "score": 25.3132,
+          "term_coverage": 0.6667,
+          "matched_terms": [
+            "capital",
+            "in",
+            "paid-up",
+            "share",
+            "financial",
+            "equity"
+          ],
+          "snippet": "| S.No. | Particulars | As at 31st March, 2026 | As at 31st March, 2025 | | --- | --- | --- | --- | | A | Authorised |  |  | |  | 2,500,000,000 equity"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_57173c36_sec_01_p021_c03",
+          "physical_page": 21,
+          "score": 19.5491,
+          "term_coverage": 0.5556,
+          "matched_terms": [
+            "highlight",
+            "in",
+            "paid-up",
+            "financial",
+            "equity"
+          ],
+          "snippet": "**The Face value of Equity Shares of company has been sub-divided from \u20b91000/- to \u20b910/- in the Extraordinary General Meeting held on 28th March, 2016."
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_6debd84f_sec_14_p284_c04",
+          "physical_page": 284,
+          "score": 17.9276,
+          "term_coverage": 0.5556,
+          "matched_terms": [
+            "capital",
+            "in",
+            "share",
+            "financial",
+            "equity"
+          ],
+          "snippet": "Capital Management  For the purpose of the Company\u2019s capital management, capital includes issued equity capital, share premium and all other equity re"
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 2,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": false,
+      "chunk_hit_at_5": false,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 0.0
+    },
+    {
+      "question_id": "Q11",
+      "category": "unanswerable",
+      "question": "What is HUDCO's investment policy regarding international cryptocurrency exchanges and Bitcoin holdings?",
+      "answerability": "unanswerable",
+      "is_abstention": true,
+      "abstention_reason": "Top candidate score (12.01) is below calibrated threshold (14.50).",
+      "top_candidates_scored": 723,
+      "expected_pages": [],
+      "expected_chunks": [],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_9c62e1ea_sec_08_p113_c05",
+          "physical_page": 113,
+          "score": 12.0123,
+          "term_coverage": 0.3333,
+          "matched_terms": [
+            "hudco",
+            "policy",
+            "international"
+          ],
+          "snippet": "| Disclosures Questions |  | P1 | P2 | P3 | P4 | P5 P | 6 P7 | P8 | P9 | | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | | Policy and ma"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_1ff2f868_sec_08_p120_c04",
+          "physical_page": 120,
+          "score": 11.8115,
+          "term_coverage": 0.3333,
+          "matched_terms": [
+            "hudco",
+            "policy",
+            "regarding"
+          ],
+          "snippet": "Not Applicable  4. Does the entity have an anti-corruption or anti-bribery policy? If yes, provide details in brief and if available, provide a web-li"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_53c8319c_sec_08_p116_c00",
+          "physical_page": 116,
+          "score": 11.5458,
+          "term_coverage": 0.4444,
+          "matched_terms": [
+            "hudco",
+            "policy",
+            "regarding",
+            "international"
+          ],
+          "snippet": "|  |  | centralized monitoring of NCLT cases, revision of the One-Time Settlement policy, and enhanced recovery mechanisms, resulting in recoveries of"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_6f17972d_sec_05_p065_c05",
+          "physical_page": 65,
+          "score": 11.2917,
+          "term_coverage": 0.3333,
+          "matched_terms": [
+            "hudco",
+            "policy",
+            "international"
+          ],
+          "snippet": "For International Participants under ITEC  HUDCO\u2019 s HSMI also conducted 5 training courses under the ITEC programme sponsored by the Ministry of Exter"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_9d5b59a9_sec_08_p129_c02",
+          "physical_page": 129,
+          "score": 11.0946,
+          "term_coverage": 0.3333,
+          "matched_terms": [
+            "hudco",
+            "policy",
+            "exchanges"
+          ],
+          "snippet": "ESSENTIAL INDICATORS  1. Describe the processes for identifying key stakeholder groups of the entity:  HUDCO has developed a thorough and well-structu"
+        }
+      ],
+      "abstention_verdict": "CORRECT_ABSTENTION"
+    },
+    {
+      "question_id": "Q12",
+      "category": "unanswerable",
+      "question": "What is the procedure and contact email for opening a commercial retail branch of HUDCO in Frankfurt, Germany?",
+      "answerability": "unanswerable",
+      "is_abstention": true,
+      "abstention_reason": "Top candidate term coverage (36.4%) is below calibrated threshold (40.0%).",
+      "top_candidates_scored": 1672,
+      "expected_pages": [],
+      "expected_chunks": [],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_276da773_sec_08_p104_c02",
+          "physical_page": 104,
+          "score": 15.0835,
+          "term_coverage": 0.3636,
+          "matched_terms": [
+            "in",
+            "hudco",
+            "email",
+            "contact"
+          ],
+          "snippet": "| 1. | Corporate Identity Number (CIN) of the Listed Entity | L74899DL1970GOI005276 | | --- | --- | --- | | 2. | Name of the Listed Entity | Housing a"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_d649de5f_sec_07_p096_c21",
+          "physical_page": 96,
+          "score": 14.9369,
+          "term_coverage": 0.1818,
+          "matched_terms": [
+            "email",
+            "contact"
+          ],
+          "snippet": "Email: contact@beacontrustee.co.in"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_330fed5a_sec_07_p096_c20",
+          "physical_page": 96,
+          "score": 14.6065,
+          "term_coverage": 0.1818,
+          "matched_terms": [
+            "email",
+            "contact"
+          ],
+          "snippet": "Contact No. 022-46060278"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_de2f3987_sec_15_p491_c01",
+          "physical_page": 491,
+          "score": 13.9935,
+          "term_coverage": 0.2727,
+          "matched_terms": [
+            "retail",
+            "in",
+            "commercial"
+          ],
+          "snippet": "| Category |  |  | 2025-26 | 2024-25 | | --- | --- | --- | --- | --- | | a) | Direct Exposure |  |  |  | |  | (i) | Residential Mortgages- |  |  | |  "
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_78b76c39_sec_01_p020_c01",
+          "physical_page": 20,
+          "score": 13.7518,
+          "term_coverage": 0.2727,
+          "matched_terms": [
+            "hudco",
+            "email",
+            "contact"
+          ],
+          "snippet": "| Registered Office HUDCO Bhawan, India Habitat Centre, Lodhi Road, New Delhi-110003 (India) | Shares listed at National Stock Exchange of India Limit"
+        }
+      ],
+      "abstention_verdict": "CORRECT_ABSTENTION"
+    },
+    {
+      "question_id": "Q13",
+      "category": "numeric_fact",
+      "question": "What was HUDCO's Capital Adequacy Ratio (CAR) for FY 2025-26 as reported in the Chairman's Message?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 1858,
+      "expected_pages": [
+        29
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_53658aa1_sec_03_p029_c01"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_53658aa1_sec_03_p029_c01",
+          "physical_page": 29,
+          "score": 30.8819,
+          "term_coverage": 0.8462,
+          "matched_terms": [
+            "2025-26",
+            "capital",
+            "in",
+            "chairman",
+            "message",
+            "hudco",
+            "2026",
+            "2025",
+            "adequacy",
+            "fy",
+            "ratio"
+          ],
+          "snippet": "y Capital Adequacy Ratio stood at a healthy 39.93%, comfortably above the regulatory requirement of 15%.  y Highest-Ever Dividend of \u20b96.05 per equity "
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_f563b330_sec_15_p437_c04",
+          "physical_page": 437,
+          "score": 27.1692,
+          "term_coverage": 0.4615,
+          "matched_terms": [
+            "capital",
+            "in",
+            "hudco",
+            "2025",
+            "adequacy",
+            "ratio"
+          ],
+          "snippet": "Capital to Risk-weighted Assets Ratio  RBI vide letter dated August 23, 2024 granted Certificate of Registration (CoR) as NBFC-IFC to HUDCO. According"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_4d45d3c1_sec_14_p284_c05",
+          "physical_page": 284,
+          "score": 27.1168,
+          "term_coverage": 0.4615,
+          "matched_terms": [
+            "capital",
+            "in",
+            "hudco",
+            "2025",
+            "adequacy",
+            "ratio"
+          ],
+          "snippet": "Capital to Risk-weighted Assets Ratio (CRAR)  RBI vide letter dated August 23, 2024 granted Certificate of Registration (CoR) as NBFC-IFC to HUDCO. Ac"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_a94006f2_sec_08_p133_c03",
+          "physical_page": 133,
+          "score": 23.2303,
+          "term_coverage": 0.4615,
+          "matched_terms": [
+            "2025-26",
+            "reported",
+            "in",
+            "2026",
+            "2025",
+            "fy"
+          ],
+          "snippet": "|  | FY 2025-26 | FY 2024-25 | | --- | --- | --- | | Total Complaints reported under Sexual Harassment of Women at Workplace (Prevention, Prohibition "
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_1a655be8_sec_03_p029_c00",
+          "physical_page": 29,
+          "score": 20.8653,
+          "term_coverage": 0.4615,
+          "matched_terms": [
+            "capital",
+            "in",
+            "chairman",
+            "message",
+            "adequacy",
+            "ratio"
+          ],
+          "snippet": "The strength of these strategic initiatives is reflected in the Company's robust operational and financial performance during the year.  07 Operationa"
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 2,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": true,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 1.0
+    },
+    {
+      "question_id": "Q14",
+      "category": "direct_fact",
+      "question": "Who serves as the Chief Vigilance Officer (CVO) and Company Secretary in HUDCO's Management Team?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 1821,
+      "expected_pages": [
+        516
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_555bade1_sec_17_p516_c21",
+        "doc_ar26_v1_e2ae5ba8_sec_17_p516_c23"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_555bade1_sec_17_p516_c21",
+          "physical_page": 516,
+          "score": 26.844,
+          "term_coverage": 0.4545,
+          "matched_terms": [
+            "management",
+            "vigilance",
+            "officer",
+            "team",
+            "chief"
+          ],
+          "snippet": "Sh. Vineet Gupta  (Chief Vigilance Officer)"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_ada41787_sec_07_p091_c07",
+          "physical_page": 91,
+          "score": 24.649,
+          "term_coverage": 0.4545,
+          "matched_terms": [
+            "secretary",
+            "management",
+            "company",
+            "officer",
+            "chief"
+          ],
+          "snippet": "Composition, name of members and Chairman, number of meeting and attendance  As on 31st March, 2026, the Risk Management Committee comprised 5 members"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_47ad7fcd_sec_15_p481_c02",
+          "physical_page": 481,
+          "score": 23.8451,
+          "term_coverage": 0.4545,
+          "matched_terms": [
+            "secretary",
+            "in",
+            "company",
+            "officer",
+            "chief"
+          ],
+          "snippet": "| Sl. No. | Director(s) | Status | | --- | --- | --- | | 1. | Shri Sanjay Kulshrestha | Chairman & Managing Director (w.e.f. 16.10.2023) (A/N) | | 2. "
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_47ad7fcd_sec_14_p326_c01",
+          "physical_page": 326,
+          "score": 23.7056,
+          "term_coverage": 0.4545,
+          "matched_terms": [
+            "secretary",
+            "in",
+            "company",
+            "officer",
+            "chief"
+          ],
+          "snippet": "| Sl. No. | Director(s) | Status | | --- | --- | --- | | 1. | Shri Sanjay Kulshrestha | Chairman & Managing Director (w.e.f. 16.10.2023) (A/N) | | 2. "
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_d09fad55_sec_05_p071_c03",
+          "physical_page": 71,
+          "score": 21.7396,
+          "term_coverage": 0.3636,
+          "matched_terms": [
+            "secretary",
+            "company",
+            "officer",
+            "chief"
+          ],
+          "snippet": "| Sl. No. | Name of Key Managerial Personnel | Designation | | --- | --- | --- | | 1. | Shri Sanjay Kulshrestha | Chairman & Managing Director | | 2. "
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 1,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": true,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 1.0
+    },
+    {
+      "question_id": "Q15",
+      "category": "direct_fact",
+      "question": "Which Statutory Auditor firm signed the report on the Standalone Financial Statements for FY 2025-26?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 2459,
+      "expected_pages": [
+        208,
+        71
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_44f7cfa4_sec_14_p208_c07",
+        "doc_ar26_v1_0b368cc5_sec_05_p071_c05"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_0b368cc5_sec_05_p071_c05",
+          "physical_page": 71,
+          "score": 24.7725,
+          "term_coverage": 0.7692,
+          "matched_terms": [
+            "2025-26",
+            "financial",
+            "on",
+            "statement",
+            "report",
+            "standalone",
+            "2026",
+            "2025",
+            "auditor",
+            "statutory"
+          ],
+          "snippet": "23. AUDITORS & AUDITORS REPORT  As per section 139(5) of the Companies Act, 2013, the Statutory Auditors of your Company are appointed by Comptroller "
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_f73fc96e_sec_05_p079_c01",
+          "physical_page": 79,
+          "score": 22.9603,
+          "term_coverage": 0.6923,
+          "matched_terms": [
+            "2025-26",
+            "financial",
+            "on",
+            "statement",
+            "report",
+            "2026",
+            "2025",
+            "auditor",
+            "statutory"
+          ],
+          "snippet": "| Particulars | Annexure | | --- | --- | | Management Discussion & Analysis Report | 1 | | Corporate Governance Report | 2 | | Business Responsibility"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_d3bd896e_sec_05_p071_c06",
+          "physical_page": 71,
+          "score": 21.9077,
+          "term_coverage": 0.7692,
+          "matched_terms": [
+            "2025-26",
+            "financial",
+            "on",
+            "statement",
+            "report",
+            "standalone",
+            "2026",
+            "2025",
+            "auditor",
+            "statutory"
+          ],
+          "snippet": "Comments of Comptroller and Auditor General of India (CAG)  CAG vide their letter dated 17th July, 2026 has given \u2018NIL comments\u2019 on the Statutory Audi"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_c7a0c6e4_sec_14_p298_c02",
+          "physical_page": 298,
+          "score": 19.7945,
+          "term_coverage": 0.6154,
+          "matched_terms": [
+            "2025-26",
+            "financial",
+            "on",
+            "statement",
+            "standalone",
+            "2026",
+            "2025",
+            "fy"
+          ],
+          "snippet": "| Sr. No. | Particulars | FY 2025-26 | FY 2024-25 | | --- | --- | --- | --- | | A. | Effective Portion of Cash flow Hedges |  |  | | (a) | Opening bal"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_7632fa5f_sec_08_p126_c02",
+          "physical_page": 126,
+          "score": 19.7218,
+          "term_coverage": 0.4615,
+          "matched_terms": [
+            "2025-26",
+            "on",
+            "report",
+            "2026",
+            "2025",
+            "fy"
+          ],
+          "snippet": "| Category | FY 2025-26 |  |  |  |  | FY 2024-25 |  |  |  |  | | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | |  | Total (A) | On"
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 2,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": true,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 1.0
+    },
+    {
+      "question_id": "Q16",
+      "category": "numeric_table",
+      "question": "What was the Profit Before Tax in the Standalone Cash Flow Statement for the period ended 31st March 2026?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 2118,
+      "expected_pages": [
+        210
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_ccaaa447_sec_14_p210_c01"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_ccaaa447_sec_14_p210_c01",
+          "physical_page": 210,
+          "score": 41.6469,
+          "term_coverage": 1.0,
+          "matched_terms": [
+            "31st",
+            "march",
+            "profit",
+            "statement",
+            "ended",
+            "in",
+            "standalone",
+            "cash",
+            "2026",
+            "period",
+            "flow",
+            "tax"
+          ],
+          "snippet": "| S. No. | Particulars | Period ended 31st March 2026 | Period ended 31st March 2025 | | --- | --- | --- | --- | | A | Operating activities |  |  | | "
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_69220682_sec_15_p364_c01",
+          "physical_page": 364,
+          "score": 41.3407,
+          "term_coverage": 0.9167,
+          "matched_terms": [
+            "31st",
+            "march",
+            "profit",
+            "statement",
+            "ended",
+            "in",
+            "cash",
+            "2026",
+            "period",
+            "flow",
+            "tax"
+          ],
+          "snippet": "| S. No. | Particulars | Period Ended 31st March, 2026 | Period Ended 31st March, 2025 | | --- | --- | --- | --- | | A | Operating activities |  |  | "
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_f64c9ff4_sec_14_p209_c01",
+          "physical_page": 209,
+          "score": 39.8765,
+          "term_coverage": 1.0,
+          "matched_terms": [
+            "31st",
+            "march",
+            "profit",
+            "statement",
+            "ended",
+            "in",
+            "standalone",
+            "cash",
+            "2026",
+            "period",
+            "flow",
+            "tax"
+          ],
+          "snippet": "| S. No. | PARTICULARS | NOTE No. | Year Ended 31st March, 2026 | Year Ended 31st March, 2025 | | --- | --- | --- | --- | --- | | I | INCOME |  |  |  "
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_2ae401c0_sec_15_p363_c00",
+          "physical_page": 363,
+          "score": 39.2897,
+          "term_coverage": 0.9167,
+          "matched_terms": [
+            "31st",
+            "march",
+            "profit",
+            "statement",
+            "ended",
+            "in",
+            "cash",
+            "2026",
+            "period",
+            "flow",
+            "tax"
+          ],
+          "snippet": "| S. No. | PARTICULARS | NOTE No. | Year Ended 31st March, 2026 | Year Ended 31st March, 2025 | | --- | --- | --- | --- | --- | | I | INCOME |  |  |  "
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_55a6275d_sec_14_p299_c03",
+          "physical_page": 299,
+          "score": 36.0456,
+          "term_coverage": 0.8333,
+          "matched_terms": [
+            "31st",
+            "march",
+            "profit",
+            "statement",
+            "ended",
+            "in",
+            "standalone",
+            "2026",
+            "period",
+            "tax"
+          ],
+          "snippet": "| Particulars | Period ended 31s March, 2026 | t Period ended 31st March, 2025 | | --- | --- | --- | | Accounting profit before tax | 3,221.45 | 3636."
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 1,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": true,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 1.0
+    },
+    {
+      "question_id": "Q17",
+      "category": "direct_fact",
+      "question": "What is the contact address, telephone, and email for HUDCO's Regional Office in Thiruvananthapuram?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 1684,
+      "expected_pages": [
+        518
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_a02a34fd_sec_18_p518_c10",
+        "doc_ar26_v1_50719fcd_sec_18_p518_c09"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_50719fcd_sec_18_p518_c09",
+          "physical_page": 518,
+          "score": 31.3312,
+          "term_coverage": 0.6667,
+          "matched_terms": [
+            "telephone",
+            "regional",
+            "office",
+            "thiruvananthapuram",
+            "hudco",
+            "email"
+          ],
+          "snippet": "Thiruvananthapuram  3rd Floor, SAPHALYAM, Palayam University, P.O., Thiruvananthapuram-695 034,"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_276da773_sec_08_p104_c02",
+          "physical_page": 104,
+          "score": 29.8745,
+          "term_coverage": 0.7778,
+          "matched_terms": [
+            "telephone",
+            "office",
+            "in",
+            "hudco",
+            "email",
+            "contact",
+            "address"
+          ],
+          "snippet": "| 1. | Corporate Identity Number (CIN) of the Listed Entity | L74899DL1970GOI005276 | | --- | --- | --- | | 2. | Name of the Listed Entity | Housing a"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_78b76c39_sec_01_p020_c01",
+          "physical_page": 20,
+          "score": 22.1543,
+          "term_coverage": 0.5556,
+          "matched_terms": [
+            "telephone",
+            "office",
+            "hudco",
+            "email",
+            "contact"
+          ],
+          "snippet": "| Registered Office HUDCO Bhawan, India Habitat Centre, Lodhi Road, New Delhi-110003 (India) | Shares listed at National Stock Exchange of India Limit"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_8dc7fcfe_sec_18_p517_c53",
+          "physical_page": 517,
+          "score": 20.0192,
+          "term_coverage": 0.5556,
+          "matched_terms": [
+            "telephone",
+            "regional",
+            "office",
+            "hudco",
+            "email"
+          ],
+          "snippet": "HUDCO Bhawan, OB-8, Rail Head  Complex, Jammu-180 012,"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_b8e8077c_sec_18_p517_c49",
+          "physical_page": 517,
+          "score": 19.9772,
+          "term_coverage": 0.5556,
+          "matched_terms": [
+            "telephone",
+            "regional",
+            "office",
+            "hudco",
+            "email"
+          ],
+          "snippet": "HUDCO Bhawan, Vidhyut Marg, Jyoti  Nagar, Jaipur - 302 005,"
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 1,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": true,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 1.0
+    },
+    {
+      "question_id": "Q18",
+      "category": "numeric_fact",
+      "question": "What was the record annual loan sanctions amount achieved by HUDCO in FY 2025-26 as highlighted in the Chairman's Message?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 1881,
+      "expected_pages": [
+        29
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_1a655be8_sec_03_p029_c00"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_58aba313_sec_05_p072_c00",
+          "physical_page": 72,
+          "score": 24.0887,
+          "term_coverage": 0.5333,
+          "matched_terms": [
+            "2025-26",
+            "in",
+            "annual",
+            "achieved",
+            "hudco",
+            "2026",
+            "2025",
+            "amount"
+          ],
+          "snippet": "The CSR Policy and other information on CSR is available on HUDCO W ebsite at: http://www.hudco.org.in The \u2018Annual Report on CSR activities for Financ"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_1a655be8_sec_03_p029_c00",
+          "physical_page": 29,
+          "score": 23.8829,
+          "term_coverage": 0.4667,
+          "matched_terms": [
+            "in",
+            "annual",
+            "chairman",
+            "sanctions",
+            "record",
+            "message",
+            "loan"
+          ],
+          "snippet": "The strength of these strategic initiatives is reflected in the Company's robust operational and financial performance during the year.  07 Operationa"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_0c8ca0de_sec_03_p035_c00",
+          "physical_page": 35,
+          "score": 23.5864,
+          "term_coverage": 0.6,
+          "matched_terms": [
+            "2025-26",
+            "in",
+            "annual",
+            "highlighted",
+            "chairman",
+            "hudco",
+            "message",
+            "2026",
+            "2025"
+          ],
+          "snippet": "| ANNUAL REPORT 2025-26 | \\| | 33 | Column_4 | Column_5 | Column_6 | Column_7 | Column_8 | Column_9 | Column_10 | Column_11 | Column_12 | Column_13 | "
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_0cb782c5_sec_10_p166_c02",
+          "physical_page": 166,
+          "score": 22.9587,
+          "term_coverage": 0.5333,
+          "matched_terms": [
+            "2025-26",
+            "in",
+            "record",
+            "hudco",
+            "2026",
+            "2025",
+            "fy",
+            "amount"
+          ],
+          "snippet": "Yes  If Yes, enter the number of Capital assets created/ acquired; 193 nos.  Furnish the details relating to such asset(s) so created or acquired thro"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_9d8b5fe4_sec_05_p053_c03",
+          "physical_page": 53,
+          "score": 22.7285,
+          "term_coverage": 0.4667,
+          "matched_terms": [
+            "2025-26",
+            "in",
+            "achieved",
+            "sanctions",
+            "hudco",
+            "2026",
+            "2025"
+          ],
+          "snippet": "During the Financial Year 2025-26, HUDCO, driven by proactive management, prudent business strategies and policies, recorded remarkable growth in its "
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 1,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": false,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": false,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 0.5,
+      "chunk_reciprocal_rank": 0.5
+    },
+    {
+      "question_id": "Q19",
+      "category": "ambiguous",
+      "question": "What was the total dividend per equity share declared or recommended by HUDCO for FY 2025-26?",
+      "answerability": "answerable",
+      "is_abstention": false,
+      "abstention_reason": null,
+      "top_candidates_scored": 1376,
+      "expected_pages": [
+        37,
+        50,
+        51,
+        29,
+        95
+      ],
+      "expected_chunks": [
+        "doc_ar26_v1_7e2b35eb_sec_07_p095_c04",
+        "doc_ar26_v1_53658aa1_sec_03_p029_c01",
+        "doc_ar26_v1_af9515d0_sec_05_p051_c02",
+        "doc_ar26_v1_4b4c5398_sec_05_p050_c01",
+        "doc_ar26_v1_d21aab23_sec_07_p095_c05",
+        "doc_ar26_v1_525d18b7_sec_04_p037_c01"
+      ],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_9268fd7d_sec_04_p037_c02",
+          "physical_page": 37,
+          "score": 40.7298,
+          "term_coverage": 0.75,
+          "matched_terms": [
+            "2025-26",
+            "2025",
+            "declared",
+            "recommended",
+            "dividend",
+            "2026",
+            "per",
+            "share",
+            "equity"
+          ],
+          "snippet": "\u201cRESOL VED THAT 1st interim dividend @ Rs.1.15/- per equity share, 2nd interim dividend @ Re.1.00/- per equity share, 3rd interim dividend @ Rs.1.15/-"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_bc8c29b9_sec_14_p323_c04",
+          "physical_page": 323,
+          "score": 39.5758,
+          "term_coverage": 0.75,
+          "matched_terms": [
+            "2025-26",
+            "2025",
+            "declared",
+            "recommended",
+            "dividend",
+            "2026",
+            "per",
+            "fy",
+            "share"
+          ],
+          "snippet": "(b) The company has declared an interim dividend-II of \u20b9200.19 Crore @ \u20b91.00 per Share of \u20b910/- each, to its shareholders, during the FY 2025-26 after"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_bc8c29b9_sec_15_p478_c05",
+          "physical_page": 478,
+          "score": 39.5758,
+          "term_coverage": 0.75,
+          "matched_terms": [
+            "2025-26",
+            "2025",
+            "declared",
+            "recommended",
+            "dividend",
+            "2026",
+            "per",
+            "fy",
+            "share"
+          ],
+          "snippet": "(b) The company has declared an interim dividend-II of \u20b9200.19 Crore @ \u20b91.00 per Share of \u20b910/- each, to its shareholders, during the FY 2025-26 after"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_df7d3240_sec_05_p051_c05",
+          "physical_page": 51,
+          "score": 38.6679,
+          "term_coverage": 0.8333,
+          "matched_terms": [
+            "2025-26",
+            "2025",
+            "declared",
+            "recommended",
+            "dividend",
+            "total",
+            "2026",
+            "per",
+            "share",
+            "equity"
+          ],
+          "snippet": "In view of above, total dividend declared and paid for the Financial Year 2025-26 would be amounting to Rs.6.05 per equity share (60.50%).  In complia"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_d21aab23_sec_07_p095_c05",
+          "physical_page": 95,
+          "score": 36.2313,
+          "term_coverage": 0.75,
+          "matched_terms": [
+            "2025-26",
+            "2025",
+            "recommended",
+            "dividend",
+            "total",
+            "2026",
+            "per",
+            "share",
+            "equity"
+          ],
+          "snippet": "Further, the Board of Directors, have also recommended payment of Final Dividend @ 15.00%, i.e., Rs. 1.50/- per Equity Share having Face Value of Rs. "
+        }
+      ],
+      "abstention_verdict": "RETRIEVED",
+      "supported_citations_in_top5": 3,
+      "total_citations_emitted_top5": 5,
+      "chunk_hit_at_1": false,
+      "chunk_hit_at_5": true,
+      "page_hit_at_1": true,
+      "page_hit_at_5": true,
+      "page_reciprocal_rank": 1.0,
+      "chunk_reciprocal_rank": 0.2
+    },
+    {
+      "question_id": "Q20",
+      "category": "unanswerable",
+      "question": "What is HUDCO's investment policy regarding offshore nuclear reactor construction projects in Antarctica?",
+      "answerability": "unanswerable",
+      "is_abstention": true,
+      "abstention_reason": "Top candidate score (14.12) is below calibrated threshold (14.50).",
+      "top_candidates_scored": 1684,
+      "expected_pages": [],
+      "expected_chunks": [],
+      "results": [
+        {
+          "rank": 1,
+          "chunk_id": "doc_ar26_v1_53c8319c_sec_08_p116_c00",
+          "physical_page": 116,
+          "score": 14.1242,
+          "term_coverage": 0.4545,
+          "matched_terms": [
+            "in",
+            "projects",
+            "hudco",
+            "policy",
+            "regarding"
+          ],
+          "snippet": "|  |  | centralized monitoring of NCLT cases, revision of the One-Time Settlement policy, and enhanced recovery mechanisms, resulting in recoveries of"
+        },
+        {
+          "rank": 2,
+          "chunk_id": "doc_ar26_v1_ac6508e6_sec_05_p056_c02",
+          "physical_page": 56,
+          "score": 14.0935,
+          "term_coverage": 0.3636,
+          "matched_terms": [
+            "in",
+            "projects",
+            "hudco",
+            "construction"
+          ],
+          "snippet": "HUDCO\u2019s Support for projects in the North-Eastern Region  HUDCO continues to support the development of the North Eastern Region through financial ass"
+        },
+        {
+          "rank": 3,
+          "chunk_id": "doc_ar26_v1_1ff2f868_sec_08_p120_c04",
+          "physical_page": 120,
+          "score": 12.7995,
+          "term_coverage": 0.3636,
+          "matched_terms": [
+            "in",
+            "hudco",
+            "policy",
+            "regarding"
+          ],
+          "snippet": "Not Applicable  4. Does the entity have an anti-corruption or anti-bribery policy? If yes, provide details in brief and if available, provide a web-li"
+        },
+        {
+          "rank": 4,
+          "chunk_id": "doc_ar26_v1_bc263546_sec_15_p408_c00",
+          "physical_page": 408,
+          "score": 12.6604,
+          "term_coverage": 0.3636,
+          "matched_terms": [
+            "in",
+            "hudco",
+            "regarding",
+            "construction"
+          ],
+          "snippet": "| Name of Regional Office | Address of Property | AREA (Sq. Mt.) | Nature of Ownership | Cost of the purchase of property including applicable Stamp D"
+        },
+        {
+          "rank": 5,
+          "chunk_id": "doc_ar26_v1_785b8d4f_sec_08_p110_c00",
+          "physical_page": 110,
+          "score": 12.6226,
+          "term_coverage": 0.4545,
+          "matched_terms": [
+            "investment",
+            "in",
+            "projects",
+            "hudco",
+            "policy"
+          ],
+          "snippet": "| Sl. No. | Material issu identified | e Indicate whether risk or opportunit (R/O) | Rationale for identifying the risk/opportunity y | In case of ris"
+        }
+      ],
+      "abstention_verdict": "CORRECT_ABSTENTION"
+    }
+  ]
+}

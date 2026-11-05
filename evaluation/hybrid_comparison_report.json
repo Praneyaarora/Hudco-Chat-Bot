@@ -1,0 +1,4074 @@
+{
+  "evaluation_timestamp": "2026-10-27T17:43:23Z",
+  "corpus_statistics": {
+    "total_chunks_indexed": 22607,
+    "eligible_reports_count": 11,
+    "eligible_reports": [
+      "doc_ar15",
+      "doc_ar16",
+      "doc_ar17",
+      "doc_ar18",
+      "doc_ar19",
+      "doc_ar21",
+      "doc_ar22",
+      "doc_ar23",
+      "doc_ar24",
+      "doc_ar25",
+      "doc_ar26"
+    ],
+    "excluded_reports": {
+      "ar20.pdf": "Document does not contain HUDCO company name and 'Annual Report' keyword in front matter."
+    }
+  },
+  "multi_report_benchmark": {
+    "BM25 Baseline": {
+      "retriever_name": "BM25 Baseline",
+      "sample_size": {
+        "total_questions": 32,
+        "answerable_questions": 27,
+        "unanswerable_questions": 5,
+        "chunk_annotated_questions": 12
+      },
+      "page_recall": {
+        "recall_at_1": 0.2593,
+        "recall_at_1_numerator": 7,
+        "recall_at_1_denominator": 27,
+        "recall_at_3": 0.2593,
+        "recall_at_3_numerator": 7,
+        "recall_at_3_denominator": 27,
+        "recall_at_5": 0.3333,
+        "recall_at_5_numerator": 9,
+        "recall_at_5_denominator": 27,
+        "page_mrr": 0.2759,
+        "rank1_citation_accuracy": 0.2593
+      },
+      "document_accuracy": {
+        "doc_acc_at_1": 0.7037,
+        "doc_acc_at_1_numerator": 19,
+        "doc_acc_at_1_denominator": 27,
+        "doc_acc_at_5": 0.7778,
+        "doc_acc_at_5_numerator": 21,
+        "doc_acc_at_5_denominator": 27
+      },
+      "chunk_recall": {
+        "recall_at_1": 0.3333,
+        "recall_at_1_numerator": 4,
+        "recall_at_1_denominator": 12,
+        "recall_at_3": 0.4167,
+        "recall_at_3_numerator": 5,
+        "recall_at_3_denominator": 12,
+        "recall_at_5": 0.4167,
+        "recall_at_5_numerator": 5,
+        "recall_at_5_denominator": 12,
+        "chunk_mrr": 0.375
+      },
+      "abstention_metrics": {
+        "true_abstentions": 3,
+        "false_abstentions": 1,
+        "missed_abstentions": 2,
+        "precision": 0.75,
+        "recall": 0.6,
+        "f1_score": 0.6667
+      },
+      "latency_statistics_ms": {
+        "warmup_latency_ms": 161.62,
+        "steady_state_mean_ms": 55.48,
+        "steady_state_p50_ms": 37.62,
+        "steady_state_p95_ms": 182.92,
+        "steady_state_p99_ms": 188.36
+      },
+      "questions": [
+        {
+          "question_id": "MR01",
+          "query": "Who is the Chairman and Managing Director (CMD) of HUDCO and when did he assume charge?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            22
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar21_v1_c804f457_sec_04_p036_c03",
+          "top1_page": 36,
+          "top1_pages": [
+            36
+          ],
+          "top1_citation": "Page 36",
+          "top1_score": 32.7673,
+          "latency_ms": 15.91
+        },
+        {
+          "question_id": "MR02",
+          "query": "Who is the Director (Finance) of HUDCO and when was he appointed?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            22,
+            23,
+            44
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar25_v1_a9b8d541_sec_179_p078_c00",
+          "top1_page": 78,
+          "top1_pages": [
+            78
+          ],
+          "top1_citation": "Page 78",
+          "top1_score": 16.5202,
+          "latency_ms": 15.13
+        },
+        {
+          "question_id": "MR03",
+          "query": "Where is the registered corporate office of Housing and Urban Development Corporation Limited located?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            20,
+            215,
+            517
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar18_v1_a9c4d447_sec_01_p062_c02",
+          "top1_page": 62,
+          "top1_pages": [
+            62
+          ],
+          "top1_citation": "Page 62",
+          "top1_score": 33.6946,
+          "latency_ms": 19.48
+        },
+        {
+          "question_id": "MR04",
+          "query": "When and at what time was the 56th Annual General Meeting of HUDCO scheduled to be held?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            37,
+            95
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_f1edf682_sec_07_p095_c01",
+          "top1_page": 95,
+          "top1_pages": [
+            95
+          ],
+          "top1_citation": "Page 95",
+          "top1_score": 34.3178,
+          "latency_ms": 24.37
+        },
+        {
+          "question_id": "MR05",
+          "query": "What was HUDCO's Profit After Tax (PAT) for FY 2025-26 and FY 2024-25 in the Financial Highlights table?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_e102ddd4_sec_01_p021_c01",
+          "top1_page": 21,
+          "top1_pages": [
+            21
+          ],
+          "top1_citation": "Page 21",
+          "top1_score": 50.0493,
+          "latency_ms": 49.48
+        },
+        {
+          "question_id": "MR06",
+          "query": "What was HUDCO's Revenue from Operations for the financial year 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21,
+            50,
+            209
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_9e0e4026_sec_08_p138_c02",
+          "top1_page": 138,
+          "top1_pages": [
+            138
+          ],
+          "top1_citation": "Page 138",
+          "top1_score": 32.7864,
+          "latency_ms": 31.43
+        },
+        {
+          "question_id": "MR07",
+          "query": "What was the total outstanding loan balance on Affordable Housing as on 31.03.2026?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            116
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_53c8319c_sec_08_p116_c00",
+          "top1_page": 116,
+          "top1_pages": [
+            116
+          ],
+          "top1_citation": "Page 116",
+          "top1_score": 26.8125,
+          "latency_ms": 160.02
+        },
+        {
+          "question_id": "MR08",
+          "query": "What was HUDCO's Capital Adequacy Ratio for FY 2025-26 reported in the Chairman's Message?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_53658aa1_sec_03_p029_c01",
+          "top1_page": 29,
+          "top1_pages": [
+            29
+          ],
+          "top1_citation": "Page 29",
+          "top1_score": 36.7681,
+          "latency_ms": 36.06
+        },
+        {
+          "question_id": "MR09",
+          "query": "Which Statutory Auditor firm signed the report on Standalone Financial Statements for FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            71,
+            208
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_0b368cc5_sec_05_p071_c05",
+          "top1_page": 71,
+          "top1_pages": [
+            71
+          ],
+          "top1_citation": "Page 71",
+          "top1_score": 34.7856,
+          "latency_ms": 43.29
+        },
+        {
+          "question_id": "MR10",
+          "query": "What was the record annual loan sanctions amount achieved by HUDCO in FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_c7a0c6e4_sec_15_p451_c02",
+          "top1_page": 451,
+          "top1_pages": [
+            451
+          ],
+          "top1_citation": "Page 451",
+          "top1_score": 33.6868,
+          "latency_ms": 40.68
+        },
+        {
+          "question_id": "MR11",
+          "query": "When and where was the 54th Annual General Meeting of HUDCO scheduled to be held according to the Notice of AGM in ar24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_379c5280_sec_04_p029_c00",
+          "top1_page": 29,
+          "top1_pages": [
+            29
+          ],
+          "top1_citation": "Page 29",
+          "top1_score": 37.0587,
+          "latency_ms": 38.92
+        },
+        {
+          "question_id": "MR12",
+          "query": "What was HUDCO's Standalone Profit After Tax (PAT) for the financial year 2023-24 as reported in ar24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            156
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_8433369f_sec_05_p054_c00",
+          "top1_page": 54,
+          "top1_pages": [
+            54
+          ],
+          "top1_citation": "Page 54",
+          "top1_score": 36.1592,
+          "latency_ms": 186.36
+        },
+        {
+          "question_id": "MR13",
+          "query": "What was HUDCO's total loan sanction amount in FY 2023-24 as highlighted in the Chairman's Message of ar24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            24
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_dd297d88_sec_03_p025_c04",
+          "top1_page": 25,
+          "top1_pages": [
+            25
+          ],
+          "top1_citation": "Page 25",
+          "top1_score": 32.9619,
+          "latency_ms": 41.41
+        },
+        {
+          "question_id": "MR14",
+          "query": "What corporate photo narrative and operational highlights are documented across physical pages 5 through 16 of the 54th Annual Report?",
+          "answerability": "answerable",
+          "is_abstention": true,
+          "expected_pages": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_21b2540c_sec_05_p045_c00",
+          "top1_page": 45,
+          "top1_pages": [
+            45
+          ],
+          "top1_citation": "Page 45",
+          "top1_score": 21.6375,
+          "latency_ms": 22.53
+        },
+        {
+          "question_id": "MR15",
+          "query": "Who served as Director (Corporate Planning) in HUDCO's Board of Directors in FY 2023-24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            20
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_b6c4a76f_sec_08_p099_c04",
+          "top1_page": 99,
+          "top1_pages": [
+            99
+          ],
+          "top1_citation": "Page 99",
+          "top1_score": 29.7814,
+          "latency_ms": 37.53
+        },
+        {
+          "question_id": "MR16",
+          "query": "In what currency unit and scale are financial statements reported in the 54th Annual Report (FY 2023-24)?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            155,
+            156
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_03c7ff87_sec_08_p110_c04",
+          "top1_page": 110,
+          "top1_pages": [
+            110
+          ],
+          "top1_citation": "Page 110",
+          "top1_score": 33.7525,
+          "latency_ms": 50.69
+        },
+        {
+          "question_id": "MR17",
+          "query": "How did HUDCO's Profit After Tax change between FY 2023-24 and FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21,
+            156
+          ],
+          "expected_doc": "doc_ar24, doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_e102ddd4_sec_01_p021_c01",
+          "top1_page": 21,
+          "top1_pages": [
+            21
+          ],
+          "top1_citation": "Page 21",
+          "top1_score": 43.4703,
+          "latency_ms": 21.3
+        },
+        {
+          "question_id": "MR18",
+          "query": "What was HUDCO's Profit After Tax for the financial year 2022-23 as reported in ar23?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar23",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar23_v1_6af965ee_sec_03_p009_c02",
+          "top1_page": 9,
+          "top1_pages": [
+            9
+          ],
+          "top1_citation": "Page 9",
+          "top1_score": 34.0333,
+          "latency_ms": 189.26
+        },
+        {
+          "question_id": "MR19",
+          "query": "When was the 53rd Annual General Meeting of HUDCO held?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar23",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_33d51a31_sec_07_p094_c01",
+          "top1_page": 94,
+          "top1_pages": [
+            94
+          ],
+          "top1_citation": "Page 94",
+          "top1_score": 21.7945,
+          "latency_ms": 15.31
+        },
+        {
+          "question_id": "MR20",
+          "query": "What was HUDCO's Standalone Profit After Tax for the financial year 2021-22 in ar22?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar22",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_a6a70cb0_sec_13_p175_c00",
+          "top1_page": 175,
+          "top1_pages": [
+            175
+          ],
+          "top1_citation": "Page 175",
+          "top1_score": 33.0345,
+          "latency_ms": 47.01
+        },
+        {
+          "question_id": "MR21",
+          "query": "When was the 52nd Annual General Meeting of HUDCO held?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar22",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_7c8693f4_sec_07_p080_c06",
+          "top1_page": 80,
+          "top1_pages": [
+            80
+          ],
+          "top1_citation": "Page 80",
+          "top1_score": 21.7038,
+          "latency_ms": 16.37
+        },
+        {
+          "question_id": "MR22",
+          "query": "What was HUDCO's Standalone Profit After Tax for the financial year 2020-21 as stated in ar21?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar21",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar21_v1_4d514ea2_sec_14_p174_c05",
+          "top1_page": 174,
+          "top1_pages": [
+            174
+          ],
+          "top1_citation": "Page 174",
+          "top1_score": 33.8936,
+          "latency_ms": 53.83
+        },
+        {
+          "question_id": "MR23",
+          "query": "Who held additional charge as Chairman and Managing Director (CMD) during the 51st Annual Report period in FY 2020-21?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar21",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar21_v1_3c6c81e7_sec_06_p045_c04",
+          "top1_page": 45,
+          "top1_pages": [
+            45,
+            46
+          ],
+          "top1_citation": "Pages 45-46",
+          "top1_score": 52.7625,
+          "latency_ms": 50.11
+        },
+        {
+          "question_id": "MR24",
+          "query": "What was the progression of HUDCO's Standalone Profit After Tax across the financial years 2020-21, 2021-22, 2022-23, 2023-24, and 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar21, doc_ar22, doc_ar23, doc_ar24, doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_e102ddd4_sec_01_p021_c01",
+          "top1_page": 21,
+          "top1_pages": [
+            21
+          ],
+          "top1_citation": "Page 21",
+          "top1_score": 70.4452,
+          "latency_ms": 44.78
+        },
+        {
+          "question_id": "MR25",
+          "query": "Where is HUDCO's central corporate headquarters located in New Delhi?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            20
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_9e5edfde_sec_03_p066_c02",
+          "top1_page": 66,
+          "top1_pages": [
+            66
+          ],
+          "top1_citation": "Page 66",
+          "top1_score": 22.5597,
+          "latency_ms": 168.7
+        },
+        {
+          "question_id": "MR26",
+          "query": "What was the total dividend per equity share declared for financial year 2023-24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_4f56b7c7_sec_07_p081_c06",
+          "top1_page": 81,
+          "top1_pages": [
+            81
+          ],
+          "top1_citation": "Page 81",
+          "top1_score": 40.7001,
+          "latency_ms": 36.73
+        },
+        {
+          "question_id": "MR27",
+          "query": "What was HUDCO's Standalone Net Worth as of 31st March 2024?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            155
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_d7650bfb_sec_05_p055_c01",
+          "top1_page": 55,
+          "top1_pages": [
+            55
+          ],
+          "top1_citation": "Page 55",
+          "top1_score": 22.4198,
+          "latency_ms": 23.67
+        },
+        {
+          "question_id": "MR28",
+          "query": "What is HUDCO's investment strategy regarding Bitcoin mining and crypto ETF allocations?",
+          "answerability": "unanswerable",
+          "is_abstention": true,
+          "abstention_reason": "Top candidate term coverage (33.3%) is below calibrated threshold (40.0%).",
+          "latency_ms": 12.93
+        },
+        {
+          "question_id": "MR29",
+          "query": "What is the contact email and address of HUDCO's retail banking branch in London, UK?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 32.22
+        },
+        {
+          "question_id": "MR30",
+          "query": "What was HUDCO's total revenue from commercial airline passenger flights in FY 2021-22?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 37.71
+        },
+        {
+          "question_id": "MR31",
+          "query": "What was the budget allocated by HUDCO for deep sea mining expeditions in Antarctica?",
+          "answerability": "unanswerable",
+          "is_abstention": true,
+          "abstention_reason": "Top candidate term coverage (22.2%) is below calibrated threshold (40.0%).",
+          "latency_ms": 180.11
+        },
+        {
+          "question_id": "MR32",
+          "query": "What is HUDCO's projected net profit for the financial year 2035-36?",
+          "answerability": "unanswerable",
+          "is_abstention": true,
+          "abstention_reason": "Top candidate term coverage (33.3%) is below calibrated threshold (40.0%).",
+          "latency_ms": 32.11
+        }
+      ]
+    },
+    "Semantic Dense": {
+      "retriever_name": "Semantic Dense",
+      "sample_size": {
+        "total_questions": 32,
+        "answerable_questions": 27,
+        "unanswerable_questions": 5,
+        "chunk_annotated_questions": 12
+      },
+      "page_recall": {
+        "recall_at_1": 0.037,
+        "recall_at_1_numerator": 1,
+        "recall_at_1_denominator": 27,
+        "recall_at_3": 0.0741,
+        "recall_at_3_numerator": 2,
+        "recall_at_3_denominator": 27,
+        "recall_at_5": 0.1111,
+        "recall_at_5_numerator": 3,
+        "recall_at_5_denominator": 27,
+        "page_mrr": 0.063,
+        "rank1_citation_accuracy": 0.037
+      },
+      "document_accuracy": {
+        "doc_acc_at_1": 0.0,
+        "doc_acc_at_1_numerator": 0,
+        "doc_acc_at_1_denominator": 27,
+        "doc_acc_at_5": 0.2963,
+        "doc_acc_at_5_numerator": 8,
+        "doc_acc_at_5_denominator": 27
+      },
+      "chunk_recall": {
+        "recall_at_1": 0.0,
+        "recall_at_1_numerator": 0,
+        "recall_at_1_denominator": 12,
+        "recall_at_3": 0.0,
+        "recall_at_3_numerator": 0,
+        "recall_at_3_denominator": 12,
+        "recall_at_5": 0.0,
+        "recall_at_5_numerator": 0,
+        "recall_at_5_denominator": 12,
+        "chunk_mrr": 0.0
+      },
+      "abstention_metrics": {
+        "true_abstentions": 0,
+        "false_abstentions": 0,
+        "missed_abstentions": 5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0
+      },
+      "latency_statistics_ms": {
+        "warmup_latency_ms": 6693.49,
+        "steady_state_mean_ms": 49.23,
+        "steady_state_p50_ms": 49.49,
+        "steady_state_p95_ms": 61.17,
+        "steady_state_p99_ms": 63.24
+      },
+      "questions": [
+        {
+          "question_id": "MR01",
+          "query": "Who is the Chairman and Managing Director (CMD) of HUDCO and when did he assume charge?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            22
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_fdc4a596_sec_07_p074_c02",
+          "top1_page": 74,
+          "top1_pages": [
+            74
+          ],
+          "top1_citation": "Page 74",
+          "top1_score": 0.7903,
+          "latency_ms": 44.55
+        },
+        {
+          "question_id": "MR02",
+          "query": "Who is the Director (Finance) of HUDCO and when was he appointed?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            22,
+            23,
+            44
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_806b09de_sec_04_p186_c02",
+          "top1_page": 186,
+          "top1_pages": [
+            186
+          ],
+          "top1_citation": "Page 186",
+          "top1_score": 0.7668,
+          "latency_ms": 56.84
+        },
+        {
+          "question_id": "MR03",
+          "query": "Where is the registered corporate office of Housing and Urban Development Corporation Limited located?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            20,
+            215,
+            517
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar23_v1_91d4d33c_sec_03_p240_c01",
+          "top1_page": 240,
+          "top1_pages": [
+            240
+          ],
+          "top1_citation": "Page 240",
+          "top1_score": 0.7232,
+          "latency_ms": 52.82
+        },
+        {
+          "question_id": "MR04",
+          "query": "When and at what time was the 56th Annual General Meeting of HUDCO scheduled to be held?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            37,
+            95
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar18_v1_f23963c6_sec_01_p008_c01",
+          "top1_page": 8,
+          "top1_pages": [
+            8
+          ],
+          "top1_citation": "Page 8",
+          "top1_score": 0.7704,
+          "latency_ms": 41.32
+        },
+        {
+          "question_id": "MR05",
+          "query": "What was HUDCO's Profit After Tax (PAT) for FY 2025-26 and FY 2024-25 in the Financial Highlights table?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar23_v1_81b06a8f_sec_03_p031_c01",
+          "top1_page": 31,
+          "top1_pages": [
+            31
+          ],
+          "top1_citation": "Page 31",
+          "top1_score": 0.697,
+          "latency_ms": 54.87
+        },
+        {
+          "question_id": "MR06",
+          "query": "What was HUDCO's Revenue from Operations for the financial year 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21,
+            50,
+            209
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_e0a975dc_sec_05_p258_c00",
+          "top1_page": 258,
+          "top1_pages": [
+            258
+          ],
+          "top1_citation": "Page 258",
+          "top1_score": 0.7977,
+          "latency_ms": 44.82
+        },
+        {
+          "question_id": "MR07",
+          "query": "What was the total outstanding loan balance on Affordable Housing as on 31.03.2026?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            116
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_aa4b03da_sec_14_p269_c05",
+          "top1_page": 269,
+          "top1_pages": [
+            269
+          ],
+          "top1_citation": "Page 269",
+          "top1_score": 0.6497,
+          "latency_ms": 44.04
+        },
+        {
+          "question_id": "MR08",
+          "query": "What was HUDCO's Capital Adequacy Ratio for FY 2025-26 reported in the Chairman's Message?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_e0a975dc_sec_05_p299_c00",
+          "top1_page": 299,
+          "top1_pages": [
+            299
+          ],
+          "top1_citation": "Page 299",
+          "top1_score": 0.6804,
+          "latency_ms": 55.0
+        },
+        {
+          "question_id": "MR09",
+          "query": "Which Statutory Auditor firm signed the report on Standalone Financial Statements for FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            71,
+            208
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_2f095975_sec_12_p093_c00",
+          "top1_page": 93,
+          "top1_pages": [
+            93
+          ],
+          "top1_citation": "Page 93",
+          "top1_score": 0.8083,
+          "latency_ms": 52.41
+        },
+        {
+          "question_id": "MR10",
+          "query": "What was the record annual loan sanctions amount achieved by HUDCO in FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar17_v1_fe9adea1_sec_02_p008_c13",
+          "top1_page": 8,
+          "top1_pages": [
+            8
+          ],
+          "top1_citation": "Page 8",
+          "top1_score": 0.7271,
+          "latency_ms": 55.06
+        },
+        {
+          "question_id": "MR11",
+          "query": "When and where was the 54th Annual General Meeting of HUDCO scheduled to be held according to the Notice of AGM in ar24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar18_v1_f23963c6_sec_01_p008_c01",
+          "top1_page": 8,
+          "top1_pages": [
+            8
+          ],
+          "top1_citation": "Page 8",
+          "top1_score": 0.7853,
+          "latency_ms": 44.72
+        },
+        {
+          "question_id": "MR12",
+          "query": "What was HUDCO's Standalone Profit After Tax (PAT) for the financial year 2023-24 as reported in ar24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            156
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_fdafbe8b_sec_05_p264_c08",
+          "top1_page": 264,
+          "top1_pages": [
+            264,
+            265
+          ],
+          "top1_citation": "Pages 264-265",
+          "top1_score": 0.6903,
+          "latency_ms": 54.44
+        },
+        {
+          "question_id": "MR13",
+          "query": "What was HUDCO's total loan sanction amount in FY 2023-24 as highlighted in the Chairman's Message of ar24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            24
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_654bfeb0_sec_02_p009_c00",
+          "top1_page": 9,
+          "top1_pages": [
+            9
+          ],
+          "top1_citation": "Page 9",
+          "top1_score": 0.7113,
+          "latency_ms": 49.37
+        },
+        {
+          "question_id": "MR14",
+          "query": "What corporate photo narrative and operational highlights are documented across physical pages 5 through 16 of the 54th Annual Report?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_6adfd4a9_sec_00_p006_c06",
+          "top1_page": 6,
+          "top1_pages": [
+            6
+          ],
+          "top1_citation": "Page 6",
+          "top1_score": 0.6585,
+          "latency_ms": 57.21
+        },
+        {
+          "question_id": "MR15",
+          "query": "Who served as Director (Corporate Planning) in HUDCO's Board of Directors in FY 2023-24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            20
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar25_v1_c3193ca8_sec_176_p076_c02",
+          "top1_page": 76,
+          "top1_pages": [
+            76
+          ],
+          "top1_citation": "Page 76",
+          "top1_score": 0.7784,
+          "latency_ms": 60.58
+        },
+        {
+          "question_id": "MR16",
+          "query": "In what currency unit and scale are financial statements reported in the 54th Annual Report (FY 2023-24)?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            155,
+            156
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_d54d3eb9_sec_14_p275_c01",
+          "top1_page": 275,
+          "top1_pages": [
+            275
+          ],
+          "top1_citation": "Page 275",
+          "top1_score": 0.6834,
+          "latency_ms": 56.84
+        },
+        {
+          "question_id": "MR17",
+          "query": "How did HUDCO's Profit After Tax change between FY 2023-24 and FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21,
+            156
+          ],
+          "expected_doc": "doc_ar24, doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_fdafbe8b_sec_05_p264_c08",
+          "top1_page": 264,
+          "top1_pages": [
+            264,
+            265
+          ],
+          "top1_citation": "Pages 264-265",
+          "top1_score": 0.6403,
+          "latency_ms": 61.89
+        },
+        {
+          "question_id": "MR18",
+          "query": "What was HUDCO's Profit After Tax for the financial year 2022-23 as reported in ar23?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar23",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_fdafbe8b_sec_05_p264_c08",
+          "top1_page": 264,
+          "top1_pages": [
+            264,
+            265
+          ],
+          "top1_citation": "Pages 264-265",
+          "top1_score": 0.7384,
+          "latency_ms": 40.46
+        },
+        {
+          "question_id": "MR19",
+          "query": "When was the 53rd Annual General Meeting of HUDCO held?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar23",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar18_v1_f23963c6_sec_01_p008_c01",
+          "top1_page": 8,
+          "top1_pages": [
+            8
+          ],
+          "top1_citation": "Page 8",
+          "top1_score": 0.7813,
+          "latency_ms": 44.94
+        },
+        {
+          "question_id": "MR20",
+          "query": "What was HUDCO's Standalone Profit After Tax for the financial year 2021-22 in ar22?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar22",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_e0a975dc_sec_04_p165_c00",
+          "top1_page": 165,
+          "top1_pages": [
+            165
+          ],
+          "top1_citation": "Page 165",
+          "top1_score": 0.6829,
+          "latency_ms": 63.85
+        },
+        {
+          "question_id": "MR21",
+          "query": "When was the 52nd Annual General Meeting of HUDCO held?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar22",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar18_v1_f23963c6_sec_01_p008_c01",
+          "top1_page": 8,
+          "top1_pages": [
+            8
+          ],
+          "top1_citation": "Page 8",
+          "top1_score": 0.7454,
+          "latency_ms": 49.69
+        },
+        {
+          "question_id": "MR22",
+          "query": "What was HUDCO's Standalone Profit After Tax for the financial year 2020-21 as stated in ar21?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar21",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_fdafbe8b_sec_05_p264_c08",
+          "top1_page": 264,
+          "top1_pages": [
+            264,
+            265
+          ],
+          "top1_citation": "Pages 264-265",
+          "top1_score": 0.7115,
+          "latency_ms": 49.61
+        },
+        {
+          "question_id": "MR23",
+          "query": "Who held additional charge as Chairman and Managing Director (CMD) during the 51st Annual Report period in FY 2020-21?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar21",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_65bc43e8_sec_06_p050_c00",
+          "top1_page": 50,
+          "top1_pages": [
+            50
+          ],
+          "top1_citation": "Page 50",
+          "top1_score": 0.7153,
+          "latency_ms": 45.9
+        },
+        {
+          "question_id": "MR24",
+          "query": "What was the progression of HUDCO's Standalone Profit After Tax across the financial years 2020-21, 2021-22, 2022-23, 2023-24, and 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar21, doc_ar22, doc_ar23, doc_ar24, doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_390d18f4_sec_05_p204_c02",
+          "top1_page": 204,
+          "top1_pages": [
+            204,
+            205
+          ],
+          "top1_citation": "Pages 204-205",
+          "top1_score": 0.7007,
+          "latency_ms": 40.28
+        },
+        {
+          "question_id": "MR25",
+          "query": "Where is HUDCO's central corporate headquarters located in New Delhi?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            20
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_072a9bf2_sec_18_p423_c53",
+          "top1_page": 423,
+          "top1_pages": [
+            423
+          ],
+          "top1_citation": "Page 423",
+          "top1_score": 0.797,
+          "latency_ms": 53.81
+        },
+        {
+          "question_id": "MR26",
+          "query": "What was the total dividend per equity share declared for financial year 2023-24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_c3270904_sec_04_p040_c02",
+          "top1_page": 40,
+          "top1_pages": [],
+          "top1_citation": "Page 40",
+          "top1_score": 0.7626,
+          "latency_ms": 40.63
+        },
+        {
+          "question_id": "MR27",
+          "query": "What was HUDCO's Standalone Net Worth as of 31st March 2024?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            155
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar23_v1_c773278c_sec_03_p193_c02",
+          "top1_page": 193,
+          "top1_pages": [
+            193
+          ],
+          "top1_citation": "Page 193",
+          "top1_score": 0.6619,
+          "latency_ms": 42.68
+        },
+        {
+          "question_id": "MR28",
+          "query": "What is HUDCO's investment strategy regarding Bitcoin mining and crypto ETF allocations?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 39.72
+        },
+        {
+          "question_id": "MR29",
+          "query": "What is the contact email and address of HUDCO's retail banking branch in London, UK?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 41.08
+        },
+        {
+          "question_id": "MR30",
+          "query": "What was HUDCO's total revenue from commercial airline passenger flights in FY 2021-22?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 40.16
+        },
+        {
+          "question_id": "MR31",
+          "query": "What was the budget allocated by HUDCO for deep sea mining expeditions in Antarctica?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 41.92
+        },
+        {
+          "question_id": "MR32",
+          "query": "What is HUDCO's projected net profit for the financial year 2035-36?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 53.93
+        }
+      ]
+    },
+    "Hybrid RRF (k=60)": {
+      "retriever_name": "Hybrid RRF (k=60)",
+      "sample_size": {
+        "total_questions": 32,
+        "answerable_questions": 27,
+        "unanswerable_questions": 5,
+        "chunk_annotated_questions": 12
+      },
+      "page_recall": {
+        "recall_at_1": 0.0741,
+        "recall_at_1_numerator": 2,
+        "recall_at_1_denominator": 27,
+        "recall_at_3": 0.2593,
+        "recall_at_3_numerator": 7,
+        "recall_at_3_denominator": 27,
+        "recall_at_5": 0.3333,
+        "recall_at_5_numerator": 9,
+        "recall_at_5_denominator": 27,
+        "page_mrr": 0.1772,
+        "rank1_citation_accuracy": 0.0741
+      },
+      "document_accuracy": {
+        "doc_acc_at_1": 0.3704,
+        "doc_acc_at_1_numerator": 10,
+        "doc_acc_at_1_denominator": 27,
+        "doc_acc_at_5": 0.6667,
+        "doc_acc_at_5_numerator": 18,
+        "doc_acc_at_5_denominator": 27
+      },
+      "chunk_recall": {
+        "recall_at_1": 0.0,
+        "recall_at_1_numerator": 0,
+        "recall_at_1_denominator": 12,
+        "recall_at_3": 0.25,
+        "recall_at_3_numerator": 3,
+        "recall_at_3_denominator": 12,
+        "recall_at_5": 0.4167,
+        "recall_at_5_numerator": 5,
+        "recall_at_5_denominator": 12,
+        "chunk_mrr": 0.1486
+      },
+      "abstention_metrics": {
+        "true_abstentions": 0,
+        "false_abstentions": 0,
+        "missed_abstentions": 5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0
+      },
+      "latency_statistics_ms": {
+        "warmup_latency_ms": 89.79,
+        "steady_state_mean_ms": 141.73,
+        "steady_state_p50_ms": 124.31,
+        "steady_state_p95_ms": 361.34,
+        "steady_state_p99_ms": 375.86
+      },
+      "questions": [
+        {
+          "question_id": "MR01",
+          "query": "Who is the Chairman and Managing Director (CMD) of HUDCO and when did he assume charge?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            22
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_61acc9cc_sec_05_p062_c03",
+          "top1_page": 62,
+          "top1_pages": [
+            62
+          ],
+          "top1_citation": "Page 62",
+          "top1_score": 0.031754,
+          "latency_ms": 67.53
+        },
+        {
+          "question_id": "MR02",
+          "query": "Who is the Director (Finance) of HUDCO and when was he appointed?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            22,
+            23,
+            44
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_87351ff9_sec_05_p063_c01",
+          "top1_page": 63,
+          "top1_pages": [
+            63
+          ],
+          "top1_citation": "Page 63",
+          "top1_score": 0.031754,
+          "latency_ms": 68.37
+        },
+        {
+          "question_id": "MR03",
+          "query": "Where is the registered corporate office of Housing and Urban Development Corporation Limited located?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            20,
+            215,
+            517
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar23_v1_91d4d33c_sec_03_p240_c01",
+          "top1_page": 240,
+          "top1_pages": [
+            240
+          ],
+          "top1_citation": "Page 240",
+          "top1_score": 0.031778,
+          "latency_ms": 78.63
+        },
+        {
+          "question_id": "MR04",
+          "query": "When and at what time was the 56th Annual General Meeting of HUDCO scheduled to be held?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            37,
+            95
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar18_v1_f23963c6_sec_01_p008_c01",
+          "top1_page": 8,
+          "top1_pages": [
+            8
+          ],
+          "top1_citation": "Page 8",
+          "top1_score": 0.016393,
+          "latency_ms": 123.63
+        },
+        {
+          "question_id": "MR05",
+          "query": "What was HUDCO's Profit After Tax (PAT) for FY 2025-26 and FY 2024-25 in the Financial Highlights table?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar23_v1_81b06a8f_sec_03_p031_c01",
+          "top1_page": 31,
+          "top1_pages": [
+            31
+          ],
+          "top1_citation": "Page 31",
+          "top1_score": 0.016393,
+          "latency_ms": 166.91
+        },
+        {
+          "question_id": "MR06",
+          "query": "What was HUDCO's Revenue from Operations for the financial year 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21,
+            50,
+            209
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_e0a975dc_sec_05_p258_c00",
+          "top1_page": 258,
+          "top1_pages": [
+            258
+          ],
+          "top1_citation": "Page 258",
+          "top1_score": 0.016393,
+          "latency_ms": 135.83
+        },
+        {
+          "question_id": "MR07",
+          "query": "What was the total outstanding loan balance on Affordable Housing as on 31.03.2026?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            116
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_91eacfeb_sec_14_p307_c04",
+          "top1_page": 307,
+          "top1_pages": [
+            307
+          ],
+          "top1_citation": "Page 307",
+          "top1_score": 0.025131,
+          "latency_ms": 110.37
+        },
+        {
+          "question_id": "MR08",
+          "query": "What was HUDCO's Capital Adequacy Ratio for FY 2025-26 reported in the Chairman's Message?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_3395ffc1_sec_16_p354_c04",
+          "top1_page": 354,
+          "top1_pages": [
+            354
+          ],
+          "top1_citation": "Page 354",
+          "top1_score": 0.024359,
+          "latency_ms": 367.87
+        },
+        {
+          "question_id": "MR09",
+          "query": "Which Statutory Auditor firm signed the report on Standalone Financial Statements for FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            71,
+            208
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_2f095975_sec_12_p093_c00",
+          "top1_page": 93,
+          "top1_pages": [
+            93
+          ],
+          "top1_citation": "Page 93",
+          "top1_score": 0.016393,
+          "latency_ms": 124.18
+        },
+        {
+          "question_id": "MR10",
+          "query": "What was the record annual loan sanctions amount achieved by HUDCO in FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_9d8b5fe4_sec_05_p053_c03",
+          "top1_page": 53,
+          "top1_pages": [
+            53
+          ],
+          "top1_citation": "Page 53",
+          "top1_score": 0.029857,
+          "latency_ms": 140.53
+        },
+        {
+          "question_id": "MR11",
+          "query": "When and where was the 54th Annual General Meeting of HUDCO scheduled to be held according to the Notice of AGM in ar24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_379c5280_sec_04_p029_c00",
+          "top1_page": 29,
+          "top1_pages": [
+            29
+          ],
+          "top1_citation": "Page 29",
+          "top1_score": 0.031778,
+          "latency_ms": 124.37
+        },
+        {
+          "question_id": "MR12",
+          "query": "What was HUDCO's Standalone Profit After Tax (PAT) for the financial year 2023-24 as reported in ar24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            156
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar21_v1_eb4a412f_sec_04_p028_c03",
+          "top1_page": 28,
+          "top1_pages": [
+            28
+          ],
+          "top1_citation": "Page 28",
+          "top1_score": 0.028629,
+          "latency_ms": 125.42
+        },
+        {
+          "question_id": "MR13",
+          "query": "What was HUDCO's total loan sanction amount in FY 2023-24 as highlighted in the Chairman's Message of ar24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            24
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_f4101ac4_sec_03_p025_c03",
+          "top1_page": 25,
+          "top1_pages": [
+            25
+          ],
+          "top1_citation": "Page 25",
+          "top1_score": 0.023215,
+          "latency_ms": 118.31
+        },
+        {
+          "question_id": "MR14",
+          "query": "What corporate photo narrative and operational highlights are documented across physical pages 5 through 16 of the 54th Annual Report?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_6adfd4a9_sec_00_p006_c06",
+          "top1_page": 6,
+          "top1_pages": [
+            6
+          ],
+          "top1_citation": "Page 6",
+          "top1_score": 0.028158,
+          "latency_ms": 107.65
+        },
+        {
+          "question_id": "MR15",
+          "query": "Who served as Director (Corporate Planning) in HUDCO's Board of Directors in FY 2023-24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            20
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_b6c4a76f_sec_08_p099_c04",
+          "top1_page": 99,
+          "top1_pages": [
+            99
+          ],
+          "top1_citation": "Page 99",
+          "top1_score": 0.016393,
+          "latency_ms": 127.05
+        },
+        {
+          "question_id": "MR16",
+          "query": "In what currency unit and scale are financial statements reported in the 54th Annual Report (FY 2023-24)?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            155,
+            156
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_d54d3eb9_sec_14_p275_c01",
+          "top1_page": 275,
+          "top1_pages": [
+            275
+          ],
+          "top1_citation": "Page 275",
+          "top1_score": 0.016393,
+          "latency_ms": 379.44
+        },
+        {
+          "question_id": "MR17",
+          "query": "How did HUDCO's Profit After Tax change between FY 2023-24 and FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21,
+            156
+          ],
+          "expected_doc": "doc_ar24, doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_fdafbe8b_sec_05_p264_c08",
+          "top1_page": 264,
+          "top1_pages": [
+            264,
+            265
+          ],
+          "top1_citation": "Pages 264-265",
+          "top1_score": 0.016393,
+          "latency_ms": 106.64
+        },
+        {
+          "question_id": "MR18",
+          "query": "What was HUDCO's Profit After Tax for the financial year 2022-23 as reported in ar23?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar23",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar23_v1_81b06a8f_sec_03_p031_c01",
+          "top1_page": 31,
+          "top1_pages": [
+            31
+          ],
+          "top1_citation": "Page 31",
+          "top1_score": 0.029206,
+          "latency_ms": 142.54
+        },
+        {
+          "question_id": "MR19",
+          "query": "When was the 53rd Annual General Meeting of HUDCO held?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar23",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar17_v1_bcd2e505_sec_02_p011_c00",
+          "top1_page": 11,
+          "top1_pages": [
+            11
+          ],
+          "top1_citation": "Page 11",
+          "top1_score": 0.02486,
+          "latency_ms": 95.13
+        },
+        {
+          "question_id": "MR20",
+          "query": "What was HUDCO's Standalone Profit After Tax for the financial year 2021-22 in ar22?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar22",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_3add29f6_sec_04_p028_c03",
+          "top1_page": 28,
+          "top1_pages": [
+            28
+          ],
+          "top1_citation": "Page 28",
+          "top1_score": 0.020072,
+          "latency_ms": 127.68
+        },
+        {
+          "question_id": "MR21",
+          "query": "When was the 52nd Annual General Meeting of HUDCO held?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar22",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar17_v1_bcd2e505_sec_02_p011_c00",
+          "top1_page": 11,
+          "top1_pages": [
+            11
+          ],
+          "top1_citation": "Page 11",
+          "top1_score": 0.025726,
+          "latency_ms": 86.45
+        },
+        {
+          "question_id": "MR22",
+          "query": "What was HUDCO's Standalone Profit After Tax for the financial year 2020-21 as stated in ar21?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar21",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar21_v1_eb4a412f_sec_04_p028_c03",
+          "top1_page": 28,
+          "top1_pages": [
+            28
+          ],
+          "top1_citation": "Page 28",
+          "top1_score": 0.023025,
+          "latency_ms": 148.83
+        },
+        {
+          "question_id": "MR23",
+          "query": "Who held additional charge as Chairman and Managing Director (CMD) during the 51st Annual Report period in FY 2020-21?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar21",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_65bc43e8_sec_06_p050_c00",
+          "top1_page": 50,
+          "top1_pages": [
+            50
+          ],
+          "top1_citation": "Page 50",
+          "top1_score": 0.032522,
+          "latency_ms": 166.56
+        },
+        {
+          "question_id": "MR24",
+          "query": "What was the progression of HUDCO's Standalone Profit After Tax across the financial years 2020-21, 2021-22, 2022-23, 2023-24, and 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [],
+          "expected_doc": "doc_ar21, doc_ar22, doc_ar23, doc_ar24, doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_390d18f4_sec_05_p204_c02",
+          "top1_page": 204,
+          "top1_pages": [
+            204,
+            205
+          ],
+          "top1_citation": "Pages 204-205",
+          "top1_score": 0.016393,
+          "latency_ms": 124.25
+        },
+        {
+          "question_id": "MR25",
+          "query": "Where is HUDCO's central corporate headquarters located in New Delhi?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            20
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar21_v1_7456d816_sec_06_p059_c06",
+          "top1_page": 59,
+          "top1_pages": [
+            59
+          ],
+          "top1_citation": "Page 59",
+          "top1_score": 0.031746,
+          "latency_ms": 110.61
+        },
+        {
+          "question_id": "MR26",
+          "query": "What was the total dividend per equity share declared for financial year 2023-24?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_4f56b7c7_sec_07_p081_c06",
+          "top1_page": 81,
+          "top1_pages": [
+            81
+          ],
+          "top1_citation": "Page 81",
+          "top1_score": 0.032266,
+          "latency_ms": 111.94
+        },
+        {
+          "question_id": "MR27",
+          "query": "What was HUDCO's Standalone Net Worth as of 31st March 2024?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            155
+          ],
+          "expected_doc": "doc_ar24",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": null,
+          "chunk_hit_5": null,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_d7650bfb_sec_05_p055_c01",
+          "top1_page": 55,
+          "top1_pages": [
+            55
+          ],
+          "top1_citation": "Page 55",
+          "top1_score": 0.029052,
+          "latency_ms": 356.0
+        },
+        {
+          "question_id": "MR28",
+          "query": "What is HUDCO's investment strategy regarding Bitcoin mining and crypto ETF allocations?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 78.23
+        },
+        {
+          "question_id": "MR29",
+          "query": "What is the contact email and address of HUDCO's retail banking branch in London, UK?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 126.74
+        },
+        {
+          "question_id": "MR30",
+          "query": "What was HUDCO's total revenue from commercial airline passenger flights in FY 2021-22?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 136.14
+        },
+        {
+          "question_id": "MR31",
+          "query": "What was the budget allocated by HUDCO for deep sea mining expeditions in Antarctica?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 131.8
+        },
+        {
+          "question_id": "MR32",
+          "query": "What is HUDCO's projected net profit for the financial year 2035-36?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 119.73
+        }
+      ]
+    }
+  },
+  "single_report_benchmark": {
+    "BM25 Baseline": {
+      "retriever_name": "BM25 Baseline",
+      "sample_size": {
+        "total_questions": 20,
+        "answerable_questions": 17,
+        "unanswerable_questions": 3,
+        "chunk_annotated_questions": 17
+      },
+      "page_recall": {
+        "recall_at_1": 0.4706,
+        "recall_at_1_numerator": 8,
+        "recall_at_1_denominator": 17,
+        "recall_at_3": 0.6471,
+        "recall_at_3_numerator": 11,
+        "recall_at_3_denominator": 17,
+        "recall_at_5": 0.7059,
+        "recall_at_5_numerator": 12,
+        "recall_at_5_denominator": 17,
+        "page_mrr": 0.551,
+        "rank1_citation_accuracy": 0.4706
+      },
+      "document_accuracy": {
+        "doc_acc_at_1": 0.6471,
+        "doc_acc_at_1_numerator": 11,
+        "doc_acc_at_1_denominator": 17,
+        "doc_acc_at_5": 0.7647,
+        "doc_acc_at_5_numerator": 13,
+        "doc_acc_at_5_denominator": 17
+      },
+      "chunk_recall": {
+        "recall_at_1": 0.4706,
+        "recall_at_1_numerator": 8,
+        "recall_at_1_denominator": 17,
+        "recall_at_3": 0.4706,
+        "recall_at_3_numerator": 8,
+        "recall_at_3_denominator": 17,
+        "recall_at_5": 0.6471,
+        "recall_at_5_numerator": 11,
+        "recall_at_5_denominator": 17,
+        "chunk_mrr": 0.5088
+      },
+      "abstention_metrics": {
+        "true_abstentions": 2,
+        "false_abstentions": 0,
+        "missed_abstentions": 1,
+        "precision": 1.0,
+        "recall": 0.6667,
+        "f1_score": 0.8
+      },
+      "latency_statistics_ms": {
+        "warmup_latency_ms": 41.9,
+        "steady_state_mean_ms": 62.76,
+        "steady_state_p50_ms": 38.88,
+        "steady_state_p95_ms": 281.93,
+        "steady_state_p99_ms": 299.66
+      },
+      "questions": [
+        {
+          "question_id": "Q01",
+          "query": "Who is the Chairman and Managing Director (CMD) of HUDCO and when did he assume charge?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            22
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar21_v1_c804f457_sec_04_p036_c03",
+          "top1_page": 36,
+          "top1_pages": [
+            36
+          ],
+          "top1_citation": "Page 36",
+          "top1_score": 32.7673,
+          "latency_ms": 21.74
+        },
+        {
+          "question_id": "Q02",
+          "query": "Who is the Director (Finance) of HUDCO and when was he appointed?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            22,
+            23,
+            44
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar25_v1_a9b8d541_sec_179_p078_c00",
+          "top1_page": 78,
+          "top1_pages": [
+            78
+          ],
+          "top1_citation": "Page 78",
+          "top1_score": 16.5202,
+          "latency_ms": 22.42
+        },
+        {
+          "question_id": "Q03",
+          "query": "Where is the registered office of Housing and Urban Development Corporation Limited (HUDCO) located?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            20,
+            215,
+            517
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar18_v1_a9c4d447_sec_01_p062_c02",
+          "top1_page": 62,
+          "top1_pages": [
+            62
+          ],
+          "top1_citation": "Page 62",
+          "top1_score": 32.0027,
+          "latency_ms": 34.45
+        },
+        {
+          "question_id": "Q04",
+          "query": "When and at what time was the 56th Annual General Meeting (AGM) of HUDCO scheduled to be held?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            37,
+            95
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_f1edf682_sec_07_p095_c01",
+          "top1_page": 95,
+          "top1_pages": [
+            95
+          ],
+          "top1_citation": "Page 95",
+          "top1_score": 40.845,
+          "latency_ms": 38.86
+        },
+        {
+          "question_id": "Q05",
+          "query": "What was HUDCO's Profit After Tax (PAT) for FY 2025-26 and FY 2024-25 according to the Financial Highlights table?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_e102ddd4_sec_01_p021_c01",
+          "top1_page": 21,
+          "top1_pages": [
+            21
+          ],
+          "top1_citation": "Page 21",
+          "top1_score": 48.8426,
+          "latency_ms": 49.76
+        },
+        {
+          "question_id": "Q06",
+          "query": "What was HUDCO's Revenue from Operations for the financial year 2025-26 in the Financial Highlights?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21,
+            50,
+            209
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_9e0e4026_sec_08_p138_c02",
+          "top1_page": 138,
+          "top1_pages": [
+            138
+          ],
+          "top1_citation": "Page 138",
+          "top1_score": 33.8391,
+          "latency_ms": 280.76
+        },
+        {
+          "question_id": "Q07",
+          "query": "What is the stated objective of PMAY(U)-2.0 as supported by HUDCO in the Directors' Report?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            56
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_44c61612_sec_05_p056_c03",
+          "top1_page": 56,
+          "top1_pages": [
+            56
+          ],
+          "top1_citation": "Page 56",
+          "top1_score": 26.5991,
+          "latency_ms": 38.89
+        },
+        {
+          "question_id": "Q08",
+          "query": "What was the total outstanding loan balance on Affordable Housing (EWS, LIG, PMAY & Rural Housing) as on 31.03.2026?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            116
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_53c8319c_sec_08_p116_c00",
+          "top1_page": 116,
+          "top1_pages": [
+            116
+          ],
+          "top1_citation": "Page 116",
+          "top1_score": 40.377,
+          "latency_ms": 29.56
+        },
+        {
+          "question_id": "Q09",
+          "query": "Under which section of the Companies Act, 2013 does HUDCO formulate its Annual Report on Corporate Social Responsibility (CSR) Activities?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            164
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_e08b8f02_sec_08_p079_c00",
+          "top1_page": 79,
+          "top1_pages": [
+            79
+          ],
+          "top1_citation": "Page 79",
+          "top1_score": 45.1192,
+          "latency_ms": 72.33
+        },
+        {
+          "question_id": "Q10",
+          "query": "What is the paid-up equity share capital of HUDCO as stated in the Financial Highlights?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21,
+            51,
+            208
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_a4bd74e0_sec_05_p046_c04",
+          "top1_page": 46,
+          "top1_pages": [
+            46
+          ],
+          "top1_citation": "Page 46",
+          "top1_score": 28.8972,
+          "latency_ms": 45.21
+        },
+        {
+          "question_id": "Q13",
+          "query": "What was HUDCO's Capital Adequacy Ratio (CAR) for FY 2025-26 as reported in the Chairman's Message?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_53658aa1_sec_03_p029_c01",
+          "top1_page": 29,
+          "top1_pages": [
+            29
+          ],
+          "top1_citation": "Page 29",
+          "top1_score": 36.7681,
+          "latency_ms": 36.83
+        },
+        {
+          "question_id": "Q14",
+          "query": "Who serves as the Chief Vigilance Officer (CVO) and Company Secretary in HUDCO's Management Team?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            516
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_555bade1_sec_17_p516_c21",
+          "top1_page": 516,
+          "top1_pages": [
+            516
+          ],
+          "top1_citation": "Page 516",
+          "top1_score": 29.5561,
+          "latency_ms": 39.15
+        },
+        {
+          "question_id": "Q15",
+          "query": "Which Statutory Auditor firm signed the report on the Standalone Financial Statements for FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            71,
+            208
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_0b368cc5_sec_05_p071_c05",
+          "top1_page": 71,
+          "top1_pages": [
+            71
+          ],
+          "top1_citation": "Page 71",
+          "top1_score": 34.7856,
+          "latency_ms": 44.55
+        },
+        {
+          "question_id": "Q16",
+          "query": "What was the Profit Before Tax in the Standalone Cash Flow Statement for the period ended 31st March 2026?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            210
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_ccaaa447_sec_14_p210_c01",
+          "top1_page": 210,
+          "top1_pages": [
+            210
+          ],
+          "top1_citation": "Page 210",
+          "top1_score": 43.9462,
+          "latency_ms": 45.77
+        },
+        {
+          "question_id": "Q17",
+          "query": "What is the contact address, telephone, and email for HUDCO's Regional Office in Thiruvananthapuram?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            518
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar18_v1_0af18bca_sec_01_p078_c04",
+          "top1_page": 78,
+          "top1_pages": [
+            78
+          ],
+          "top1_citation": "Page 78",
+          "top1_score": 29.7707,
+          "latency_ms": 304.09
+        },
+        {
+          "question_id": "Q18",
+          "query": "What was the record annual loan sanctions amount achieved by HUDCO in FY 2025-26 as highlighted in the Chairman's Message?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_c7a0c6e4_sec_15_p451_c02",
+          "top1_page": 451,
+          "top1_pages": [
+            451
+          ],
+          "top1_citation": "Page 451",
+          "top1_score": 33.6868,
+          "latency_ms": 42.77
+        },
+        {
+          "question_id": "Q19",
+          "query": "What was the total dividend per equity share declared or recommended by HUDCO for FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29,
+            37,
+            50,
+            51,
+            95
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_bc8c29b9_sec_14_p323_c04",
+          "top1_page": 323,
+          "top1_pages": [
+            323
+          ],
+          "top1_citation": "Page 323",
+          "top1_score": 48.7715,
+          "latency_ms": 25.45
+        },
+        {
+          "question_id": "Q11",
+          "query": "What is HUDCO's investment policy regarding international cryptocurrency exchanges and Bitcoin holdings?",
+          "answerability": "unanswerable",
+          "is_abstention": true,
+          "abstention_reason": "Top candidate score (14.24) is below calibrated threshold (14.50).",
+          "latency_ms": 13.54
+        },
+        {
+          "question_id": "Q12",
+          "query": "What is the procedure and contact email for opening a commercial retail branch of HUDCO in Frankfurt, Germany?",
+          "answerability": "unanswerable",
+          "is_abstention": true,
+          "abstention_reason": "Top candidate term coverage (36.4%) is below calibrated threshold (40.0%).",
+          "latency_ms": 34.42
+        },
+        {
+          "question_id": "Q20",
+          "query": "What is HUDCO's investment policy regarding offshore nuclear reactor construction projects in Antarctica?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 34.73
+        }
+      ]
+    },
+    "Semantic Dense": {
+      "retriever_name": "Semantic Dense",
+      "sample_size": {
+        "total_questions": 20,
+        "answerable_questions": 17,
+        "unanswerable_questions": 3,
+        "chunk_annotated_questions": 17
+      },
+      "page_recall": {
+        "recall_at_1": 0.0,
+        "recall_at_1_numerator": 0,
+        "recall_at_1_denominator": 17,
+        "recall_at_3": 0.1176,
+        "recall_at_3_numerator": 2,
+        "recall_at_3_denominator": 17,
+        "recall_at_5": 0.1765,
+        "recall_at_5_numerator": 3,
+        "recall_at_5_denominator": 17,
+        "page_mrr": 0.051,
+        "rank1_citation_accuracy": 0.0
+      },
+      "document_accuracy": {
+        "doc_acc_at_1": 0.0,
+        "doc_acc_at_1_numerator": 0,
+        "doc_acc_at_1_denominator": 17,
+        "doc_acc_at_5": 0.3529,
+        "doc_acc_at_5_numerator": 6,
+        "doc_acc_at_5_denominator": 17
+      },
+      "chunk_recall": {
+        "recall_at_1": 0.0,
+        "recall_at_1_numerator": 0,
+        "recall_at_1_denominator": 17,
+        "recall_at_3": 0.0588,
+        "recall_at_3_numerator": 1,
+        "recall_at_3_denominator": 17,
+        "recall_at_5": 0.1176,
+        "recall_at_5_numerator": 2,
+        "recall_at_5_denominator": 17,
+        "chunk_mrr": 0.0314
+      },
+      "abstention_metrics": {
+        "true_abstentions": 0,
+        "false_abstentions": 0,
+        "missed_abstentions": 3,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0
+      },
+      "latency_statistics_ms": {
+        "warmup_latency_ms": 48.2,
+        "steady_state_mean_ms": 52.05,
+        "steady_state_p50_ms": 52.45,
+        "steady_state_p95_ms": 59.44,
+        "steady_state_p99_ms": 66.41
+      },
+      "questions": [
+        {
+          "question_id": "Q01",
+          "query": "Who is the Chairman and Managing Director (CMD) of HUDCO and when did he assume charge?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            22
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_fdc4a596_sec_07_p074_c02",
+          "top1_page": 74,
+          "top1_pages": [
+            74
+          ],
+          "top1_citation": "Page 74",
+          "top1_score": 0.7903,
+          "latency_ms": 52.78
+        },
+        {
+          "question_id": "Q02",
+          "query": "Who is the Director (Finance) of HUDCO and when was he appointed?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            22,
+            23,
+            44
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_806b09de_sec_04_p186_c02",
+          "top1_page": 186,
+          "top1_pages": [
+            186
+          ],
+          "top1_citation": "Page 186",
+          "top1_score": 0.7668,
+          "latency_ms": 58.73
+        },
+        {
+          "question_id": "Q03",
+          "query": "Where is the registered office of Housing and Urban Development Corporation Limited (HUDCO) located?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            20,
+            215,
+            517
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_1ebd9672_sec_16_p354_c78",
+          "top1_page": 354,
+          "top1_pages": [
+            354
+          ],
+          "top1_citation": "Page 354",
+          "top1_score": 0.8282,
+          "latency_ms": 43.17
+        },
+        {
+          "question_id": "Q04",
+          "query": "When and at what time was the 56th Annual General Meeting (AGM) of HUDCO scheduled to be held?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            37,
+            95
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar18_v1_f23963c6_sec_01_p008_c01",
+          "top1_page": 8,
+          "top1_pages": [
+            8
+          ],
+          "top1_citation": "Page 8",
+          "top1_score": 0.8345,
+          "latency_ms": 42.52
+        },
+        {
+          "question_id": "Q05",
+          "query": "What was HUDCO's Profit After Tax (PAT) for FY 2025-26 and FY 2024-25 according to the Financial Highlights table?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar23_v1_81b06a8f_sec_03_p031_c01",
+          "top1_page": 31,
+          "top1_pages": [
+            31
+          ],
+          "top1_citation": "Page 31",
+          "top1_score": 0.6874,
+          "latency_ms": 42.62
+        },
+        {
+          "question_id": "Q06",
+          "query": "What was HUDCO's Revenue from Operations for the financial year 2025-26 in the Financial Highlights?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21,
+            50,
+            209
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_69a9eae3_sec_14_p349_c02",
+          "top1_page": 349,
+          "top1_pages": [
+            349
+          ],
+          "top1_citation": "Page 349",
+          "top1_score": 0.8023,
+          "latency_ms": 42.67
+        },
+        {
+          "question_id": "Q07",
+          "query": "What is the stated objective of PMAY(U)-2.0 as supported by HUDCO in the Directors' Report?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            56
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar25_v1_04a3f2f3_sec_102_p052_c00",
+          "top1_page": 52,
+          "top1_pages": [
+            52
+          ],
+          "top1_citation": "Page 52",
+          "top1_score": 0.6361,
+          "latency_ms": 57.18
+        },
+        {
+          "question_id": "Q08",
+          "query": "What was the total outstanding loan balance on Affordable Housing (EWS, LIG, PMAY & Rural Housing) as on 31.03.2026?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            116
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar23_v1_642f5272_sec_03_p339_c01",
+          "top1_page": 339,
+          "top1_pages": [
+            339
+          ],
+          "top1_citation": "Page 339",
+          "top1_score": 0.6438,
+          "latency_ms": 46.46
+        },
+        {
+          "question_id": "Q09",
+          "query": "Under which section of the Companies Act, 2013 does HUDCO formulate its Annual Report on Corporate Social Responsibility (CSR) Activities?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            164
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar25_v1_4132d257_sec_476_p151_c02",
+          "top1_page": 151,
+          "top1_pages": [
+            151
+          ],
+          "top1_citation": "Page 151",
+          "top1_score": 0.8421,
+          "latency_ms": 48.34
+        },
+        {
+          "question_id": "Q10",
+          "query": "What is the paid-up equity share capital of HUDCO as stated in the Financial Highlights?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21,
+            51,
+            208
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar17_v1_96e894bb_sec_02_p037_c04",
+          "top1_page": 37,
+          "top1_pages": [
+            37
+          ],
+          "top1_citation": "Page 37",
+          "top1_score": 0.7756,
+          "latency_ms": 58.98
+        },
+        {
+          "question_id": "Q13",
+          "query": "What was HUDCO's Capital Adequacy Ratio (CAR) for FY 2025-26 as reported in the Chairman's Message?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_e0a975dc_sec_05_p299_c00",
+          "top1_page": 299,
+          "top1_pages": [
+            299
+          ],
+          "top1_citation": "Page 299",
+          "top1_score": 0.6384,
+          "latency_ms": 52.27
+        },
+        {
+          "question_id": "Q14",
+          "query": "Who serves as the Chief Vigilance Officer (CVO) and Company Secretary in HUDCO's Management Team?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            516
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_cd988a56_sec_05_p307_c25",
+          "top1_page": 307,
+          "top1_pages": [
+            307
+          ],
+          "top1_citation": "Page 307",
+          "top1_score": 0.75,
+          "latency_ms": 68.15
+        },
+        {
+          "question_id": "Q15",
+          "query": "Which Statutory Auditor firm signed the report on the Standalone Financial Statements for FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            71,
+            208
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_2f095975_sec_12_p093_c00",
+          "top1_page": 93,
+          "top1_pages": [
+            93
+          ],
+          "top1_citation": "Page 93",
+          "top1_score": 0.8005,
+          "latency_ms": 49.38
+        },
+        {
+          "question_id": "Q16",
+          "query": "What was the Profit Before Tax in the Standalone Cash Flow Statement for the period ended 31st March 2026?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            210
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_ed525e68_sec_14_p160_c02",
+          "top1_page": 160,
+          "top1_pages": [
+            160
+          ],
+          "top1_citation": "Page 160",
+          "top1_score": 0.6746,
+          "latency_ms": 52.13
+        },
+        {
+          "question_id": "Q17",
+          "query": "What is the contact address, telephone, and email for HUDCO's Regional Office in Thiruvananthapuram?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            518
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar21_v1_4a1621f6_sec_18_p328_c23",
+          "top1_page": 328,
+          "top1_pages": [
+            328
+          ],
+          "top1_citation": "Page 328",
+          "top1_score": 0.8263,
+          "latency_ms": 53.54
+        },
+        {
+          "question_id": "Q18",
+          "query": "What was the record annual loan sanctions amount achieved by HUDCO in FY 2025-26 as highlighted in the Chairman's Message?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar17_v1_fe9adea1_sec_02_p008_c13",
+          "top1_page": 8,
+          "top1_pages": [
+            8
+          ],
+          "top1_citation": "Page 8",
+          "top1_score": 0.7153,
+          "latency_ms": 58.96
+        },
+        {
+          "question_id": "Q19",
+          "query": "What was the total dividend per equity share declared or recommended by HUDCO for FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29,
+            37,
+            50,
+            51,
+            95
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar21_v1_ff4ccc85_sec_04_p025_c02",
+          "top1_page": 25,
+          "top1_pages": [
+            25
+          ],
+          "top1_citation": "Page 25",
+          "top1_score": 0.7588,
+          "latency_ms": 52.64
+        },
+        {
+          "question_id": "Q11",
+          "query": "What is HUDCO's investment policy regarding international cryptocurrency exchanges and Bitcoin holdings?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 57.06
+        },
+        {
+          "question_id": "Q12",
+          "query": "What is the procedure and contact email for opening a commercial retail branch of HUDCO in Frankfurt, Germany?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 44.76
+        },
+        {
+          "question_id": "Q20",
+          "query": "What is HUDCO's investment policy regarding offshore nuclear reactor construction projects in Antarctica?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 58.63
+        }
+      ]
+    },
+    "Hybrid RRF (k=60)": {
+      "retriever_name": "Hybrid RRF (k=60)",
+      "sample_size": {
+        "total_questions": 20,
+        "answerable_questions": 17,
+        "unanswerable_questions": 3,
+        "chunk_annotated_questions": 17
+      },
+      "page_recall": {
+        "recall_at_1": 0.2941,
+        "recall_at_1_numerator": 5,
+        "recall_at_1_denominator": 17,
+        "recall_at_3": 0.4118,
+        "recall_at_3_numerator": 7,
+        "recall_at_3_denominator": 17,
+        "recall_at_5": 0.5882,
+        "recall_at_5_numerator": 10,
+        "recall_at_5_denominator": 17,
+        "page_mrr": 0.3912,
+        "rank1_citation_accuracy": 0.2941
+      },
+      "document_accuracy": {
+        "doc_acc_at_1": 0.3529,
+        "doc_acc_at_1_numerator": 6,
+        "doc_acc_at_1_denominator": 17,
+        "doc_acc_at_5": 0.7647,
+        "doc_acc_at_5_numerator": 13,
+        "doc_acc_at_5_denominator": 17
+      },
+      "chunk_recall": {
+        "recall_at_1": 0.2941,
+        "recall_at_1_numerator": 5,
+        "recall_at_1_denominator": 17,
+        "recall_at_3": 0.4118,
+        "recall_at_3_numerator": 7,
+        "recall_at_3_denominator": 17,
+        "recall_at_5": 0.5294,
+        "recall_at_5_numerator": 9,
+        "recall_at_5_denominator": 17,
+        "chunk_mrr": 0.3794
+      },
+      "abstention_metrics": {
+        "true_abstentions": 0,
+        "false_abstentions": 0,
+        "missed_abstentions": 3,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0
+      },
+      "latency_statistics_ms": {
+        "warmup_latency_ms": 103.22,
+        "steady_state_mean_ms": 142.45,
+        "steady_state_p50_ms": 116.66,
+        "steady_state_p95_ms": 381.57,
+        "steady_state_p99_ms": 393.54
+      },
+      "questions": [
+        {
+          "question_id": "Q01",
+          "query": "Who is the Chairman and Managing Director (CMD) of HUDCO and when did he assume charge?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            22
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_61acc9cc_sec_05_p062_c03",
+          "top1_page": 62,
+          "top1_pages": [
+            62
+          ],
+          "top1_citation": "Page 62",
+          "top1_score": 0.031754,
+          "latency_ms": 81.1
+        },
+        {
+          "question_id": "Q02",
+          "query": "Who is the Director (Finance) of HUDCO and when was he appointed?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            22,
+            23,
+            44
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_87351ff9_sec_05_p063_c01",
+          "top1_page": 63,
+          "top1_pages": [
+            63
+          ],
+          "top1_citation": "Page 63",
+          "top1_score": 0.031754,
+          "latency_ms": 75.88
+        },
+        {
+          "question_id": "Q03",
+          "query": "Where is the registered office of Housing and Urban Development Corporation Limited (HUDCO) located?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            20,
+            215,
+            517
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_d37590dc_sec_05_p311_c00",
+          "top1_page": 311,
+          "top1_pages": [
+            311
+          ],
+          "top1_citation": "Page 311",
+          "top1_score": 0.02753,
+          "latency_ms": 106.28
+        },
+        {
+          "question_id": "Q04",
+          "query": "When and at what time was the 56th Annual General Meeting (AGM) of HUDCO scheduled to be held?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            37,
+            95
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_6703c80b_sec_04_p037_c00",
+          "top1_page": 37,
+          "top1_pages": [
+            37
+          ],
+          "top1_citation": "Page 37",
+          "top1_score": 0.030835,
+          "latency_ms": 102.04
+        },
+        {
+          "question_id": "Q05",
+          "query": "What was HUDCO's Profit After Tax (PAT) for FY 2025-26 and FY 2024-25 according to the Financial Highlights table?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar23_v1_81b06a8f_sec_03_p031_c01",
+          "top1_page": 31,
+          "top1_pages": [
+            31
+          ],
+          "top1_citation": "Page 31",
+          "top1_score": 0.016393,
+          "latency_ms": 135.09
+        },
+        {
+          "question_id": "Q06",
+          "query": "What was HUDCO's Revenue from Operations for the financial year 2025-26 in the Financial Highlights?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21,
+            50,
+            209
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_69a9eae3_sec_14_p349_c02",
+          "top1_page": 349,
+          "top1_pages": [
+            349
+          ],
+          "top1_citation": "Page 349",
+          "top1_score": 0.016393,
+          "latency_ms": 118.51
+        },
+        {
+          "question_id": "Q07",
+          "query": "What is the stated objective of PMAY(U)-2.0 as supported by HUDCO in the Directors' Report?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            56
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_44c61612_sec_05_p056_c03",
+          "top1_page": 56,
+          "top1_pages": [
+            56
+          ],
+          "top1_citation": "Page 56",
+          "top1_score": 0.032266,
+          "latency_ms": 380.78
+        },
+        {
+          "question_id": "Q08",
+          "query": "What was the total outstanding loan balance on Affordable Housing (EWS, LIG, PMAY & Rural Housing) as on 31.03.2026?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            116
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar16_v1_b74f11b2_sec_04_p015_c01",
+          "top1_page": 15,
+          "top1_pages": [
+            15
+          ],
+          "top1_citation": "Page 15",
+          "top1_score": 0.030536,
+          "latency_ms": 106.21
+        },
+        {
+          "question_id": "Q09",
+          "query": "Under which section of the Companies Act, 2013 does HUDCO formulate its Annual Report on Corporate Social Responsibility (CSR) Activities?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            164
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar25_v1_ec5a22df_sec_476_p151_c00",
+          "top1_page": 151,
+          "top1_pages": [
+            151
+          ],
+          "top1_citation": "Page 151",
+          "top1_score": 0.030777,
+          "latency_ms": 162.62
+        },
+        {
+          "question_id": "Q10",
+          "query": "What is the paid-up equity share capital of HUDCO as stated in the Financial Highlights?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            21,
+            51,
+            208
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar24_v1_a4bd74e0_sec_05_p046_c04",
+          "top1_page": 46,
+          "top1_pages": [
+            46
+          ],
+          "top1_citation": "Page 46",
+          "top1_score": 0.029052,
+          "latency_ms": 111.11
+        },
+        {
+          "question_id": "Q13",
+          "query": "What was HUDCO's Capital Adequacy Ratio (CAR) for FY 2025-26 as reported in the Chairman's Message?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": false,
+          "doc_hit_5": false,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar23_v1_cc2903db_sec_03_p294_c03",
+          "top1_page": 294,
+          "top1_pages": [
+            294
+          ],
+          "top1_citation": "Page 294",
+          "top1_score": 0.025654,
+          "latency_ms": 112.12
+        },
+        {
+          "question_id": "Q14",
+          "query": "Who serves as the Chief Vigilance Officer (CVO) and Company Secretary in HUDCO's Management Team?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            516
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar19_v1_cd988a56_sec_05_p307_c25",
+          "top1_page": 307,
+          "top1_pages": [
+            307
+          ],
+          "top1_citation": "Page 307",
+          "top1_score": 0.031778,
+          "latency_ms": 116.9
+        },
+        {
+          "question_id": "Q15",
+          "query": "Which Statutory Auditor firm signed the report on the Standalone Financial Statements for FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            71,
+            208
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": false,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar22_v1_2f095975_sec_12_p093_c00",
+          "top1_page": 93,
+          "top1_pages": [
+            93
+          ],
+          "top1_citation": "Page 93",
+          "top1_score": 0.016393,
+          "latency_ms": 128.23
+        },
+        {
+          "question_id": "Q16",
+          "query": "What was the Profit Before Tax in the Standalone Cash Flow Statement for the period ended 31st March 2026?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            210
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_ccaaa447_sec_14_p210_c01",
+          "top1_page": 210,
+          "top1_pages": [
+            210
+          ],
+          "top1_citation": "Page 210",
+          "top1_score": 0.029727,
+          "latency_ms": 126.6
+        },
+        {
+          "question_id": "Q17",
+          "query": "What is the contact address, telephone, and email for HUDCO's Regional Office in Thiruvananthapuram?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            518
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_50719fcd_sec_18_p518_c09",
+          "top1_page": 518,
+          "top1_pages": [
+            518
+          ],
+          "top1_citation": "Page 518",
+          "top1_score": 0.03031,
+          "latency_ms": 116.42
+        },
+        {
+          "question_id": "Q18",
+          "query": "What was the record annual loan sanctions amount achieved by HUDCO in FY 2025-26 as highlighted in the Chairman's Message?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": false,
+          "page_hit_3": false,
+          "page_hit_5": false,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": false,
+          "chunk_hit_5": false,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_9d8b5fe4_sec_05_p053_c03",
+          "top1_page": 53,
+          "top1_pages": [
+            53
+          ],
+          "top1_citation": "Page 53",
+          "top1_score": 0.030777,
+          "latency_ms": 396.53
+        },
+        {
+          "question_id": "Q19",
+          "query": "What was the total dividend per equity share declared or recommended by HUDCO for FY 2025-26?",
+          "answerability": "answerable",
+          "is_abstention": false,
+          "expected_pages": [
+            29,
+            37,
+            50,
+            51,
+            95
+          ],
+          "expected_doc": "doc_ar26",
+          "page_hit_1": true,
+          "page_hit_3": true,
+          "page_hit_5": true,
+          "doc_hit_1": true,
+          "doc_hit_5": true,
+          "chunk_hit_1": true,
+          "chunk_hit_5": true,
+          "missing_annotation_chunks": [],
+          "top1_chunk_id": "doc_ar26_v1_d21aab23_sec_07_p095_c05",
+          "top1_page": 95,
+          "top1_pages": [
+            95
+          ],
+          "top1_citation": "Page 95",
+          "top1_score": 0.03055,
+          "latency_ms": 124.71
+        },
+        {
+          "question_id": "Q11",
+          "query": "What is HUDCO's investment policy regarding international cryptocurrency exchanges and Bitcoin holdings?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 100.64
+        },
+        {
+          "question_id": "Q12",
+          "query": "What is the procedure and contact email for opening a commercial retail branch of HUDCO in Frankfurt, Germany?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 113.67
+        },
+        {
+          "question_id": "Q20",
+          "query": "What is HUDCO's investment policy regarding offshore nuclear reactor construction projects in Antarctica?",
+          "answerability": "unanswerable",
+          "is_abstention": false,
+          "abstention_reason": null,
+          "latency_ms": 133.62
+        }
+      ]
+    }
+  }
+}

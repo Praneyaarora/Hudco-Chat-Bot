@@ -1,0 +1,20 @@
+{
+  "document_id": "doc_ar26",
+  "source_filename": "ar26.pdf",
+  "document_format": "pdf",
+  "total_physical_pages": 65,
+  "elapsed_seconds": 0.007933,
+  "effective_config": {
+    "target_chunk_size": 1200,
+    "max_chunk_size": 2000,
+    "chunk_overlap": 150
+  },
+  "section_count": 31,
+  "chunk_count": 77,
+  "table_chunk_count": 4,
+  "oversized_chunk_count": 1,
+  "warning_count": 1,
+  "low_confidence_sections": [],
+  "processing_revision": 1,
+  "status": "success_with_warnings"
+}
