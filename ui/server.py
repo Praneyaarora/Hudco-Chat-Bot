@@ -958,13 +958,6 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                             language=lang,
                             emotional_context=emotional_context,
                         )
-                                is_web=True,
-                                web_direct_answer=web_res.get("tavily_answer"),
-                                conversation_history=[{"role": m.role, "content": m.content} for m in active_turns],
-                                rolling_summary=rolling_summary,
-                                language=lang,
-                                emotional_context=emotional_context,
-                            )
 
             # Refusal fallback if both branches yielded no groundable results
             if generate_answer and not answer_payload:
