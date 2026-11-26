@@ -1290,6 +1290,34 @@ function updateDevViewWithData(data) {
     }
   }
 
+  // Grounding Strategy Banner
+  const stratBanner = document.getElementById("groundingStrategyBanner");
+  const stratIcon = document.getElementById("groundingStrategyIcon");
+  const stratTitle = document.getElementById("groundingStrategyTitle");
+  const stratReason = document.getElementById("groundingStrategyReason");
+  const stratPill = document.getElementById("groundingStrategyPill");
+
+  if (stratBanner) {
+    stratBanner.style.display = "flex";
+    if (data.used_web_search) {
+      if (stratIcon) stratIcon.textContent = "🌐";
+      if (stratTitle) stratTitle.textContent = "Retrieval Strategy: Official Web Search (hudco.org.in first)";
+      if (stratReason) stratReason.textContent = (data.local_sufficiency && data.local_sufficiency.reason) || "Local reports yielded insufficient groundable evidence.";
+      if (stratPill) {
+        stratPill.textContent = "WEB SEARCH";
+        stratPill.className = "diag-status-pill amber";
+      }
+    } else {
+      if (stratIcon) stratIcon.textContent = "📚";
+      if (stratTitle) stratTitle.textContent = "Retrieval Strategy: Local Chunks Prioritized (Tavily Bypassed)";
+      if (stratReason) stratReason.textContent = (data.local_sufficiency && data.local_sufficiency.reason) || "Verified groundable evidence found in annual reports.";
+      if (stratPill) {
+        stratPill.textContent = "CHUNKS FIRST";
+        stratPill.className = "diag-status-pill green";
+      }
+    }
+  }
+
   // Answer Card
   const devCard = document.getElementById("devAnswerCard");
   const devContent = document.getElementById("devAnswerContent");
@@ -1330,6 +1358,24 @@ function updateDevViewWithData(data) {
         card.className = "evidence-card";
         const title = item.title || item.section_title || `Candidate [${idx+1}]`;
         const docLabel = item.is_web ? (item.domain || "Web") : `${item.document_id}.pdf · Page ${item.physical_page || ''}`;
+        const scoreVal = typeof item.composite_score === "number" ? item.composite_score : (typeof item.score === "number" ? item.score : 0);
+        const scoreDisplay = (scoreVal || 0).toFixed(3);
+        const recencyLabel = item.recency_tier || (item.is_web ? "Web" : (item.fiscal_year ? `FY ${item.fiscal_year}` : "Report"));
+
+        let breakdownHtml = "";
+        if (item.scoring_breakdown) {
+          const relVal = typeof item.relevance_score === "number" ? item.relevance_score.toFixed(2) : "--";
+          const recVal = typeof item.recency_score === "number" ? item.recency_score.toFixed(2) : "--";
+          breakdownHtml = `
+            <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin: 6px 0 10px 0; font-size: 0.74rem; background: rgba(0,0,0,0.25); padding: 5px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+              <span style="color:#38bdf8; font-weight:600;">🎯 Rel: ${relVal}</span>
+              <span style="color:#64748b;">•</span>
+              <span style="color:#34d399; font-weight:600;">📅 Recency: ${recVal} (${escapeHtml(recencyLabel)})</span>
+              <span style="color:#64748b;">•</span>
+              <span style="color:#fbbf24; font-weight:600;">⭐ Composite Score: ${scoreDisplay}</span>
+            </div>
+          `;
+        }
 
         card.innerHTML = `
           <div class="evidence-card-header" onclick="this.parentElement.classList.toggle('highlighted')">
@@ -1337,11 +1383,13 @@ function updateDevViewWithData(data) {
               <span class="evidence-num-tag">[${idx+1}]</span>
               <span class="evidence-title-text">${escapeHtml(title)}</span>
             </div>
-            <div class="evidence-header-right">
+            <div class="evidence-header-right" style="display:flex; align-items:center; gap:6px;">
+              <span class="evidence-badge ${item.is_web ? 'web' : ''}" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8; font-weight:600;">Score: ${scoreDisplay}</span>
               <span class="evidence-badge ${item.is_web ? 'web' : ''}">${escapeHtml(docLabel)}</span>
             </div>
           </div>
           <div class="evidence-card-body">
+            ${breakdownHtml}
             <div class="evidence-text-content">${escapeHtml(item.content || "")}</div>
             ${item.url ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" class="web-link-btn" style="display:inline-block; margin-top:8px; color:var(--primary-indigo); font-size:0.78rem;">🔗 Visit Source: ${escapeHtml(item.url)}</a>` : ""}
           </div>
@@ -1392,17 +1440,31 @@ function openSourcesModal() {
 
         const linkHtml = url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:8px; color:var(--accent-cyan); font-size:0.8rem;">🔗 Open Official Source: ${escapeHtml(url)}</a>` : "";
 
+        const scoreVal = typeof item.composite_score === "number" ? item.composite_score : (typeof item.score === "number" ? item.score : null);
+        const scoreTag = scoreVal !== null ? `<span class="evidence-badge" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8; font-weight:600;">Score: ${scoreVal.toFixed(3)}</span>` : "";
+        const recencyLabel = item.recency_tier || (item.is_web ? "Web" : (item.fiscal_year ? `FY ${item.fiscal_year}` : "Report"));
+
         card.innerHTML = `
           <div class="evidence-card-header" style="cursor: default;">
             <div class="evidence-header-left">
               <span class="evidence-num-tag">[${idx+1}]</span>
               <span class="evidence-title-text">${escapeHtml(title)}</span>
             </div>
-            <div class="evidence-header-right">
+            <div class="evidence-header-right" style="display:flex; align-items:center; gap:6px;">
+              ${scoreTag}
               <span class="evidence-badge ${item.is_web ? 'web' : ''}">${escapeHtml(pageInfo)}</span>
             </div>
           </div>
           <div class="evidence-card-body" style="padding: 12px;">
+            ${item.scoring_breakdown ? `
+              <div style="font-size:0.75rem; color:#94a3b8; margin-bottom:8px;">
+                <span style="color:#34d399; font-weight:600;">📅 ${escapeHtml(recencyLabel)}</span>
+                <span style="margin: 0 4px;">•</span>
+                <span>Rel: ${(item.relevance_score || 0).toFixed(2)}</span>
+                <span style="margin: 0 4px;">•</span>
+                <span>Rec: ${(item.recency_score || 0).toFixed(2)}</span>
+              </div>
+            ` : ""}
             <div class="evidence-text-content" style="white-space: pre-wrap; font-size: 0.85rem; line-height: 1.5;">${escapeHtml(item.content || "")}</div>
             ${linkHtml}
           </div>

@@ -23,6 +23,7 @@ ENV/
 *.log
 *.tmp
 *.bak
+*.mp4
 
 # Large Raw PDFs (>100MB exceeds GitHub push limits; generated chunks & vectors are preserved)
 data/raw/annual_reports/*.pdf

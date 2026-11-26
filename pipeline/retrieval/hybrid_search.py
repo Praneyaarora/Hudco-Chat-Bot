@@ -26,6 +26,7 @@ from pipeline.retrieval.contracts import (
 )
 from pipeline.retrieval.bm25 import Layer4BM25Index
 from pipeline.retrieval.semantic_search import PersistentVectorIndex
+from pipeline.retrieval.scoring import rerank_chunks_with_recency
 
 logger = logging.getLogger(__name__)
 
@@ -306,14 +307,15 @@ class HybridRetriever:
                 branch_candidate_counts=branch_counts,
             )
 
-        # 8. Reciprocal Rank Fusion calculation
-        result_items = self.fuse_rankings(
+        # 8. Reciprocal Rank Fusion calculation with recency scoring
+        candidate_pool = self.fuse_rankings(
             bm25_results=bm25_results,
             semantic_results=semantic_results,
-            top_k=top_k,
+            top_k=max(top_k * 3, 20),
             rrf_k=effective_k,
             min_rrf_threshold=min_rrf_threshold,
         )
+        result_items = rerank_chunks_with_recency(candidate_pool, query=query, top_k=top_k)
 
         # 9. Calibrated abstention check for hybrid retrieval:
         # Preserve BM25's abstention signal if semantic similarity is weak (< sem_conf_thresh)

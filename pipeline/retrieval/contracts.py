@@ -54,6 +54,7 @@ class RetrievalResultItem(BaseModel):
     Carries complete provenance, scoring diagnostics, and table metadata.
     """
     rank: int = Field(..., ge=1, description="1-based candidate rank")
+    evidence_index: Optional[int] = Field(None, description="1-based candidate rank in fused or reranked evidence")
     chunk_id: str = Field(..., description="Deterministic canonical chunk identifier")
     score: float = Field(..., description="BM25 lexical relevance score")
     matched_terms: List[str] = Field(default_factory=list, description="Query terms contributing to score")
@@ -87,6 +88,11 @@ class RetrievalResultItem(BaseModel):
     semantic_score: Optional[float] = Field(None, description="Cosine similarity score if retrieved by semantic branch")
     semantic_rank: Optional[int] = Field(None, description="1-based candidate rank in semantic branch")
     rrf_score: Optional[float] = Field(None, description="Reciprocal Rank Fusion fused score")
+    composite_score: Optional[float] = Field(None, description="Unified relevance + recency composite score (0.0 to 1.0)")
+    relevance_score: Optional[float] = Field(None, description="Normalized relevance component")
+    recency_score: Optional[float] = Field(None, description="Recency weighting component (1.0 for latest FY 2025-26)")
+    recency_tier: Optional[str] = Field(None, description="Human-readable recency tier label")
+    scoring_breakdown: Optional[Dict[str, Any]] = Field(None, description="Diagnostic breakdown of scoring components")
 
 
 class RetrievalResponse(BaseModel):

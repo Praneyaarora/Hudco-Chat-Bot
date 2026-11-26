@@ -110,6 +110,12 @@ A deterministic, audit-grade document ingestion, coordinate-aware structural seg
   - [25.2 Dual-Environment Storage Abstraction](#252-dual-environment-storage-abstraction)
   - [25.3 Render Free 512 MB RAM Ceiling Optimization](#253-render-free-512-mb-ram-ceiling-optimization)
   - [25.4 Step-by-Step Deployment Instructions](#254-step-by-step-deployment-instructions)
+- [26. Recency-Weighted Scoring Engine & Chunks-First Grounding Priority](#26-recency-weighted-scoring-engine--chunks-first-grounding-priority)
+  - [26.1 Chunk-First Grounding Priority & Local Sufficiency Gate](#261-chunk-first-grounding-priority--local-sufficiency-gate)
+  - [26.2 Mathematical Scoring Engine & Recency Calibration](#262-mathematical-scoring-engine--recency-calibration)
+  - [26.3 Official Domain Priority: Tavily `hudco.org.in` Fallback](#263-official-domain-priority-tavily-hudcoorgin-fallback)
+  - [26.4 Developer Workspace Telemetry & Score Breakdown](#264-developer-workspace-telemetry--score-breakdown)
+  - [26.5 Verified Local Run Commands (PowerShell Guide)](#265-verified-local-run-commands-powershell-guide)
 
 ---
 
@@ -1787,4 +1793,122 @@ In the Render Web Service **Environment** tab, add:
 2. Register an account, create a conversation, and test questions in both English and Hinglish.
 3. Verify in Neon Dashboard that tables (`users`, `sessions`, `conversations`, `messages`) are populated automatically.
 4. Restart or redeploy the Render service: log back in and verify all chats and messages persist seamlessly.
+
+---
+
+## 26. Recency-Weighted Scoring Engine & Chunks-First Grounding Priority
+
+### 26.1 Chunk-First Grounding Priority & Local Sufficiency Gate
+
+To prevent excessive and premature external web searches (e.g., via Tavily), HUDCO Bot implements a strict **Chunk-First Grounding Hierarchy**:
+
+1. **Local Corpus First**: Every query is evaluated first against the canonical chunk repository across all HUDCO annual reports (FY 2014-15 through FY 2025-26).
+2. **Elimination of Keyword Hijacking**: Broad keywords such as `"contact"`, `"address"`, `"cmd"`, `"director"`, or `"delhi"` no longer bypass the local retriever.
+3. **Local Sufficiency Evaluator (`evaluate_local_sufficiency()`)**:
+   - Evaluates retrieved candidate chunks using composite scoring:
+     $$\text{Local Sufficiency Gate} = (\text{Top Composite Score} \ge 0.40) \land (\text{Relatable Chunks Count} \ge 1)$$
+   - When sufficient local evidence exists, Tavily web search is completely **bypassed**, saving API quota and eliminating latency.
+   - Tavily is strictly treated as a **fail-safe fallback** invoked only when local documents have zero relevant coverage.
+
+```mermaid
+flowchart TD
+    UserQuery["User Query"] --> LocalRetriever["Hybrid Retriever (BM25 + Semantic Cosine)"]
+    LocalRetriever --> RecencyScoring["Recency-Weighted Scoring Engine"]
+    RecencyScoring --> SufficiencyCheck{"Top Score >= 0.40 & Chunks Available?"}
+    SufficiencyCheck -- "Yes (Local Grounding Sufficient)" --> LocalAnswer["Synthesize Answer from Local Chunks\n(Tavily Bypassed)"]
+    SufficiencyCheck -- "No (Zero / Insufficient Coverage)" --> TavilyFallback["Tavily Web Agent Fallback\n(Approach 1: hudco.org.in Priority)"]
+```
+
+### 26.2 Mathematical Scoring Engine & Recency Calibration
+
+The scoring engine (`pipeline/retrieval/scoring.py`) combines semantic relatability with fiscal year publication recency to guarantee that the **latest verified information** (FY 2025-26) is always prioritized over historical data, unless the user explicitly requests an older period:
+
+1. **Target Year Detection (`detect_query_target_year()`)**:
+   - Scans user queries for explicit historical year mentions (e.g., `"in 2018"`, `"during FY 2019-20"`, `"for year 2017"`).
+   - If an explicit past year is targeted, that specific year receives maximum recency weight ($1.00$).
+   - If no past year is mentioned, the query defaults to current/general intent and awards maximum weight ($1.00$) to the latest report (**FY 2025-26**).
+
+2. **Fiscal Year Recency Decay Scale**:
+   | Fiscal Year | Ending Year | Recency Score | Recency Tier |
+   | :--- | :--- | :--- | :--- |
+   | **FY 2025-26** | 2026 | **1.00** | `Latest Verified (FY 2025-26)` |
+   | **FY 2024-25** | 2025 | **0.88** | `Recent (FY 2024-25)` |
+   | **FY 2023-24** | 2024 | **0.75** | `Recent (FY 2023-24)` |
+   | **FY 2022-23** | 2023 | **0.60** | `Historical (FY 2022-23)` |
+   | **FY 2021-22** | 2022 | **0.45** | `Historical (FY 2021-22)` |
+   | **FY 2020-21** | 2020 | **0.30** | `Archival (FY 2020-21)` |
+   | **FY 2014-19** | 2014–2019 | **0.03–0.15** | `Archival (Historical Report)` |
+
+3. **Composite Scoring Formulation**:
+   $$\text{Composite Score} = (0.60 \times \text{Relevance}) + (0.40 \times \text{Recency}) + \text{Latest Bonus}$$
+   - **Relevance Score ($0.0 \dots 1.0$)**: Normalized BM25 score, semantic cosine similarity, or reciprocal rank fusion (RRF).
+   - **Latest Bonus ($+0.05$)**: Awarded strictly to FY 2025-26 chunks that clear relevance threshold ($\ge 0.35$).
+   - **Relevance Gate**: Any chunk with relevance $< 0.28$ is penalized ($\times 0.30$) to prevent irrelevant text from ranking high purely due to newness.
+
+### 26.3 Official Domain Priority: Tavily `hudco.org.in` Fallback
+
+When local chunks lack sufficient evidence and web search is required, the web agent strictly executes a two-tier discovery process:
+
+1. **Approach 1 — Official HUDCO Domain Search**:
+   - Tavily search is executed with `include_domains: ["hudco.org.in", "hudco.org"]`.
+   - DuckDuckGo fallback executes `site:hudco.org.in <query>`.
+   - Results from `hudco.org.in` receive an **official authority bonus (+0.15)** and latest year bonus (+0.10 for 2026, +0.08 for 2025).
+2. **Approach 2 — Guarded General Search (Fallback Only)**:
+   - Only executed if Approach 1 returns 0 valid results.
+   - Restricts domains to authoritative financial and government portals (`pib.gov.in`, `bseindia.com`, `nseindia.com`, `mohua.gov.in`).
+   - Third-party blog spam, scraper sites, and non-authoritative forums are rejected.
+
+### 26.4 Developer Workspace Telemetry & Score Breakdown
+
+Full transparency is exposed in both the **Developer Section** (`ui/static/index.html`) and the **Grounding & Provenance Sources Modal**:
+- **Grounding Strategy Banner**:
+  - `CHUNKS FIRST (Tavily Bypassed)`: Displayed when local grounding is sufficient, showing the top composite score.
+  - `WEB SEARCH (hudco.org.in first)`: Displayed when local chunks were insufficient.
+- **Per-Chunk Score Cards**:
+  - `Composite Score`: e.g., `Score: 0.824`
+  - `Recency Tier Pill`: e.g., `Latest Verified (FY 2025-26)` (green), `Recent` (blue), or `Historical` (orange).
+  - `Score Breakdown Bar`: `Rel: 0.78 | Recency: 1.00 | Bonus: +0.05`
+
+### 26.5 Verified Local Run Commands (PowerShell Guide)
+
+To execute HUDCO Bot locally on Windows using PowerShell:
+
+#### Prerequisites Check
+Ensure Python 3.12+ and Git are installed:
+```powershell
+# Navigate to repository root
+cd "C:\Users\Praneya Arora\Desktop\Hudco"
+
+# Check Python environment
+.\.venv\Scripts\python.exe --version
+```
+
+#### Option A: Launch Web Server Locally (Gemini Cloud LLM)
+```powershell
+# In PowerShell terminal:
+$env:DEFAULT_LLM_PROVIDER="gemini"
+$env:GEMINI_API_KEY="your_gemini_api_key_here"
+$env:TAVILY_API_KEY="your_tavily_key_here"   # Optional
+
+.\.venv\Scripts\python.exe ui/server.py
+```
+Open browser at: **`http://127.0.0.1:7860`**
+
+#### Option B: Launch Local Qwen LLM + Server (100% Offline)
+```powershell
+# Terminal 1: Launch Local Qwen Worker
+.\.venv\Scripts\python.exe pipeline/local_llm/qwen_worker.py --model-dir models/qwen2.5-coder-7b-instruct
+
+# Terminal 2: Launch Web Server pointing to Local Qwen
+$env:DEFAULT_LLM_PROVIDER="local"
+$env:LOCAL_LLM_ENDPOINT="http://127.0.0.1:8000/v1"
+
+.\.venv\Scripts\python.exe ui/server.py
+```
+
+#### Run All Automated Unit & Integration Tests
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -p "test_*.py"
+```
+
 

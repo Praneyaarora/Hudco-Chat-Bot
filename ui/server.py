@@ -44,6 +44,11 @@ from pipeline.retrieval.bm25 import Layer4BM25Index
 from pipeline.retrieval.semantic_search import PersistentVectorIndex
 from pipeline.retrieval.hybrid_search import HybridRetriever
 from pipeline.retrieval.tavily_search import TavilySearchAgent
+from pipeline.retrieval.scoring import (
+    rerank_chunks_with_recency,
+    evaluate_local_sufficiency,
+    compute_composite_score,
+)
 from pipeline.inference.gpu_telemetry import get_gpu_telemetry
 from pipeline.inference.qwen_service import get_qwen_service
 from pipeline.inference.conversational_agent import check_conversational_intent, detect_language, detect_emotional_tone
@@ -849,12 +854,12 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                 if not GLOBAL_STATE.bm25_index:
                     self._send_json(503, {"error": "BM25 index not loaded."})
                     return
-                retrieval_response = GLOBAL_STATE.bm25_index.search(query=search_query, top_k=top_k, filters=filters)
+                retrieval_response = GLOBAL_STATE.bm25_index.search(query=search_query, top_k=max(top_k * 3, 15), filters=filters)
             elif method == "semantic":
                 if not GLOBAL_STATE.semantic_index or not GLOBAL_STATE.semantic_index.exists():
                     self._send_json(503, {"error": "Semantic index not loaded."})
                     return
-                retrieval_response = GLOBAL_STATE.semantic_index.search(query=search_query, top_k=top_k, filters=filters)
+                retrieval_response = GLOBAL_STATE.semantic_index.search(query=search_query, top_k=max(top_k * 3, 15), filters=filters)
             else:  # hybrid_rrf
                 if not GLOBAL_STATE.hybrid_retriever:
                     self._send_json(503, {"error": "Hybrid retriever not loaded."})
@@ -863,24 +868,33 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
 
             retrieval_latency_ms = round((time.perf_counter() - t0) * 1000.0, 2)
 
+            # Apply score-based recency prioritization across retrieved local chunks
+            reranked_local = rerank_chunks_with_recency(retrieval_response.results, query=search_query, top_k=top_k)
+
             evidence_items = []
-            for item in retrieval_response.results:
+            for item in reranked_local:
+                breakdown = getattr(item, "scoring_breakdown", None) or (item.get("scoring_breakdown") if isinstance(item, dict) else None)
                 evidence_items.append({
-                    "rank": item.rank,
-                    "evidence_index": item.rank,
-                    "chunk_id": item.chunk_id,
-                    "document_id": item.document_id,
-                    "source_filename": item.source_filename,
-                    "fiscal_year": item.fiscal_year,
-                    "section_title": item.section_title,
-                    "physical_page": item.physical_page,
-                    "printed_page": item.printed_page,
-                    "citation_label": item.citation_label,
-                    "content": item.content,
-                    "score": item.score,
-                    "bm25_score": item.bm25_score,
-                    "semantic_score": item.semantic_score,
-                    "rrf_score": item.rrf_score,
+                    "rank": getattr(item, "rank", 1),
+                    "evidence_index": getattr(item, "evidence_index", 1),
+                    "chunk_id": getattr(item, "chunk_id", ""),
+                    "document_id": getattr(item, "document_id", "DOC"),
+                    "source_filename": getattr(item, "source_filename", ""),
+                    "fiscal_year": getattr(item, "fiscal_year", None),
+                    "section_title": getattr(item, "section_title", ""),
+                    "physical_page": getattr(item, "physical_page", None),
+                    "printed_page": getattr(item, "printed_page", None),
+                    "citation_label": getattr(item, "citation_label", ""),
+                    "content": getattr(item, "content", ""),
+                    "score": getattr(item, "composite_score", getattr(item, "score", 0.0)),
+                    "composite_score": getattr(item, "composite_score", getattr(item, "score", 0.0)),
+                    "relevance_score": getattr(item, "relevance_score", 0.0),
+                    "recency_score": getattr(item, "recency_score", 0.5),
+                    "recency_tier": getattr(item, "recency_tier", "Archive"),
+                    "scoring_breakdown": breakdown,
+                    "bm25_score": getattr(item, "bm25_score", None),
+                    "semantic_score": getattr(item, "semantic_score", None),
+                    "rrf_score": getattr(item, "rrf_score", None),
                     "is_web": False,
                 })
 
@@ -888,14 +902,41 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
             web_results = []
             answer_payload = None
 
-            # 5. Live Corporate Inquiry Detection & Web Fallback
-            local_evidence_valid = (not retrieval_response.is_abstention) and (len(retrieval_response.results) > 0)
-            live_public_keywords = ["job", "career", "apply", "recruitment", "vacancy", "opening", "hire", "head office", "registered office", "contact", "phone", "helpline", "telephone", "mobile", "number", "email", "address", "website", "portal", "toll free", "cmd", "managing director", "complaint", "grievance", "shikayat", "problem", "issue", "dispute", "redressal", "consumer", "ombudsman", "action", "haryana", "gurgaon", "chandigarh", "delhi", "branch"]
-            is_live_public_query = any(kw in search_query.lower() for kw in live_public_keywords)
+            # 5. Local-First Grounding Sufficiency & Restricted Web Fallback
+            local_evidence_valid = (not retrieval_response.is_abstention) and (len(evidence_items) > 0)
+            local_sufficiency = evaluate_local_sufficiency(evidence_items, min_threshold=0.40)
 
-            # Prioritize official web retrieval for live corporate inquiries
-            if is_live_public_query and enable_web:
-                logger.info("Query '%s' detected as live corporate inquiry. Prioritizing official web retrieval.", search_query)
+            # PRIORITY 1: Always attempt answer generation from local report chunks first
+            if local_evidence_valid and local_sufficiency["is_sufficient"] and generate_answer:
+                logger.info(
+                    "Local evidence sufficient (Top score: %s, %s). Prioritizing annual reports; web search bypassed.",
+                    local_sufficiency["top_composite_score"], local_sufficiency["top_recency_tier"]
+                )
+                answer_payload = LLMManager.generate(
+                    query=query,
+                    evidence_items=evidence_items,
+                    provider=provider,
+                    api_keys=merged_keys,
+                    max_new_tokens=max_new_tokens,
+                    temperature=temperature,
+                    is_web=False,
+                    conversation_history=[{"role": m.role, "content": m.content} for m in active_turns],
+                    rolling_summary=rolling_summary,
+                    language=lang,
+                    emotional_context=emotional_context,
+                )
+
+            # PRIORITY 2: Fall back to Web Agent ONLY if local reports are genuinely insufficient or abstained
+            local_insufficient = (
+                (not local_evidence_valid)
+                or (not local_sufficiency["is_sufficient"])
+                or (answer_payload and answer_payload.get("is_refusal"))
+                or (answer_payload and "sufficient information" in answer_payload.get("clean_answer", "").lower())
+            )
+
+            if local_insufficient and enable_web:
+                logger.info("Local reports insufficient for '%s'. Fallback to Web Search (hudco.org.in first): %s",
+                            search_query, local_sufficiency.get("reason"))
                 tavily_agent = TavilySearchAgent(api_key=merged_keys["tavily"])
                 web_res = tavily_agent.search(query=search_query, max_results=top_k)
                 if web_res.get("success") and web_res.get("evidence"):
@@ -917,47 +958,6 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                             language=lang,
                             emotional_context=emotional_context,
                         )
-
-            # Local evidence answer generation
-            if not used_web_search:
-                if local_evidence_valid and generate_answer:
-                    answer_payload = LLMManager.generate(
-                        query=query,
-                        evidence_items=retrieval_response.results,
-                        provider=provider,
-                        api_keys=merged_keys,
-                        max_new_tokens=max_new_tokens,
-                        temperature=temperature,
-                        is_web=False,
-                        conversation_history=[{"role": m.role, "content": m.content} for m in active_turns],
-                        rolling_summary=rolling_summary,
-                        language=lang,
-                        emotional_context=emotional_context,
-                    )
-
-                # Fallback to Web if local retrieval abstained or produced refusal
-                local_insufficient = (
-                    (not local_evidence_valid)
-                    or (answer_payload and answer_payload.get("is_refusal"))
-                    or (answer_payload and "sufficient information" in answer_payload.get("clean_answer", "").lower())
-                )
-
-                if local_insufficient and enable_web:
-                    logger.info("Local retrieval insufficient for '%s'. Falling back to Web Agent.", search_query)
-                    tavily_agent = TavilySearchAgent(api_key=merged_keys["tavily"])
-                    web_res = tavily_agent.search(query=search_query, max_results=top_k)
-                    if web_res.get("success") and web_res.get("evidence"):
-                        used_web_search = True
-                        web_results = web_res["evidence"]
-                        evidence_items = web_results
-                        if generate_answer:
-                            answer_payload = LLMManager.generate(
-                                query=query,
-                                evidence_items=web_results,
-                                provider=provider,
-                                api_keys=merged_keys,
-                                max_new_tokens=max_new_tokens,
-                                temperature=temperature,
                                 is_web=True,
                                 web_direct_answer=web_res.get("tavily_answer"),
                                 conversation_history=[{"role": m.role, "content": m.content} for m in active_turns],
@@ -1042,6 +1042,12 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                     "url": it.get("url"),
                     "domain": it.get("domain"),
                     "is_web": bool(it.get("is_web", False)),
+                    "score": it.get("score"),
+                    "composite_score": it.get("composite_score"),
+                    "relevance_score": it.get("relevance_score"),
+                    "recency_score": it.get("recency_score"),
+                    "recency_tier": it.get("recency_tier"),
+                    "scoring_breakdown": it.get("scoring_breakdown"),
                 })
 
             if generate_answer:
@@ -1107,6 +1113,7 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                 "abstention_reason": None if (local_evidence_valid or used_web_search) else retrieval_response.abstention_reason,
                 "total_results": len(evidence_items),
                 "results": evidence_items,
+                "local_sufficiency": local_sufficiency,
                 "retrieval_latency_ms": retrieval_latency_ms,
                 "total_query_latency_ms": total_elapsed_ms,
                 "answer": answer_payload,
