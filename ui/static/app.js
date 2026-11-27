@@ -1123,13 +1123,25 @@ function escapeHtml(str) {
     .replace(/'/g, "&#039;");
 }
 
+function formatInline(text) {
+  let esc = escapeHtml(text);
+  // Bold **text**
+  esc = esc.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+  // Italic *text* or _text_
+  esc = esc.replace(/(?<!\*)\*(?!\*)(.*?)(?<!\*)\*(?!\*)/g, "<em>$1</em>");
+  esc = esc.replace(/\b_(.*?)_\b/g, "<em>$1</em>");
+  // Inline code `code`
+  esc = esc.replace(/`([^`]+)`/g, "<code>$1</code>");
+  // Markdown links [text](url)
+  esc = esc.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  return esc;
+}
+
 function formatMessageContent(text) {
   if (!text) return "";
   let cleaned = text;
 
   // 1. Strip raw internal evidence markers with arbitrary descriptive text inside brackets:
-  // e.g. [Citation: Evidence Item – Headquarters: New Delhi, Delhi, India]
-  // e.g. [Citation: Evidence Item – Key people: Sanjay Kulshrestha (Chairman & MD)]
   cleaned = cleaned.replace(/\[\s*(?:Citation:\s*|Evidence\s*(?:Item\s*)?|Source:\s*|Ref:\s*)[^\]\n]*\]/gi, "");
 
   // 2. Strip bracketed numeric citations: [1], [2], [1, 2, 3]
@@ -1141,6 +1153,11 @@ function formatMessageContent(text) {
 
   // 4. Strip prompt echo & intro phrases and dangling Evidence Item references:
   cleaned = cleaned.replace(/^\*?\*?(?:Evidence|Answer|Response):\*?\*?\s*/gi, "");
+  cleaned = cleaned.replace(/^(?:Certainly!|Sure!|Of course!|Hello!|Hi!|Certainly,|Sure,)\s*/gi, "");
+  cleaned = cleaned.replace(
+    /^(?:Here is|Here are|Below is|Below are|To answer your question|Regarding your query|As requested|Based on (?:the )?(?:provided )?(?:evidence|records|documents|annual reports?|sources?))[^:\n]*[:\.]\s*/gi,
+    ""
+  );
   cleaned = cleaned.replace(/^Based on (?:the )?(?:provided )?(?:evidence|annual reports?|documents?|sources?)[,\s]*/gi, "");
   cleaned = cleaned.replace(/^[,\s]*(?:and\s+)?(?:in\s+|as\s+per\s+|according\s+to\s+)?Evidence\s*(?:Item\s*)?(?:\[?\d*\]?)?.*$/gim, "");
   cleaned = cleaned.replace(/(?:,\s*)?(?:and\s+)?(?:in\s+|as\s+per\s+|according\s+to\s+)?Evidence\s*(?:Item\s*)?(?:\[?\d*\]?)?[:\s,]*/gi, "");
@@ -1156,16 +1173,93 @@ function formatMessageContent(text) {
   cleaned = cleaned.replace(/(?:\s*,\s*)+(?=[.!?])/g, "");
   cleaned = cleaned.replace(/(?:\s*,\s*)+$/gm, ".");
   cleaned = cleaned.replace(/\s+([.,;:!?])/g, "$1");
-  cleaned = cleaned.replace(/\.{2,}(?!\.)/g, ".");
+  cleaned = cleaned.replace(/(?<!\.)\.\.(?!\.)/g, ".");
   cleaned = cleaned.replace(/[ \t]{2,}/g, " ");
 
-  // Format paragraphs and bold text
-  const paragraphs = cleaned.split("\n\n").filter(p => p.trim().length > 0);
-  return paragraphs.map(p => {
-    let formatted = escapeHtml(p.trim());
-    formatted = formatted.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-    return `<p>${formatted}</p>`;
-  }).join("");
+  // 8. Normalise collapsed inline bullets into proper line breaks
+  // e.g. "Term: desc. - Next: desc" -> "Term: desc.\n- Next: desc"
+  cleaned = cleaned.replace(/([.:])\s+[-*•–]\s+(?=[A-Z0-9])/g, "$1\n- ");
+  cleaned = cleaned.replace(/\s+[-*•–]\s+(?=(?:Shri|Smt|Dr|Mr|Ms|Executive|Director|General|CMD|ED|GM|Government|President|LIC)\b)/g, "\n- ");
+
+  // 9. Structured Markdown Block Parsing (Paragraphs, Unordered Lists, Ordered Lists, Blockquotes)
+  const rawLines = cleaned.split("\n");
+  const htmlParts = [];
+  let inUl = false;
+  let inOl = false;
+  let inBlockquote = false;
+  let currentParagraph = [];
+
+  function flushParagraph() {
+    if (currentParagraph.length > 0) {
+      const pText = currentParagraph.join("<br>");
+      htmlParts.push(`<p>${formatInline(pText)}</p>`);
+      currentParagraph = [];
+    }
+  }
+
+  function flushLists() {
+    if (inUl) {
+      htmlParts.push("</ul>");
+      inUl = false;
+    }
+    if (inOl) {
+      htmlParts.push("</ol>");
+      inOl = false;
+    }
+    if (inBlockquote) {
+      htmlParts.push("</blockquote>");
+      inBlockquote = false;
+    }
+  }
+
+  for (let i = 0; i < rawLines.length; i++) {
+    const line = rawLines[i].trimEnd();
+    const trimmed = line.trim();
+
+    if (!trimmed) {
+      flushParagraph();
+      flushLists();
+      continue;
+    }
+
+    // Check for unordered list items: -, *, •, or –
+    const ulMatch = trimmed.match(/^[-*•–]\s+(.*)$/);
+    if (ulMatch) {
+      flushParagraph();
+      if (inOl) { htmlParts.push("</ol>"); inOl = false; }
+      if (!inUl) { htmlParts.push("<ul>"); inUl = true; }
+      htmlParts.push(`<li>${formatInline(ulMatch[1])}</li>`);
+      continue;
+    }
+
+    // Check for ordered list items: 1. , 2. , etc.
+    const olMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
+    if (olMatch) {
+      flushParagraph();
+      if (inUl) { htmlParts.push("</ul>"); inUl = false; }
+      if (!inOl) { htmlParts.push("<ol>"); inOl = true; }
+      htmlParts.push(`<li>${formatInline(olMatch[2])}</li>`);
+      continue;
+    }
+
+    // Check for blockquotes: >
+    const bqMatch = trimmed.match(/^>\s*(.*)$/);
+    if (bqMatch) {
+      flushParagraph();
+      flushLists();
+      htmlParts.push(`<blockquote>${formatInline(bqMatch[1])}</blockquote>`);
+      continue;
+    }
+
+    // Regular paragraph line
+    flushLists();
+    currentParagraph.push(trimmed);
+  }
+
+  flushParagraph();
+  flushLists();
+
+  return htmlParts.join("");
 }
 
 function formatTime(timestamp) {
