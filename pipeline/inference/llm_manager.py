@@ -82,7 +82,7 @@ def build_synthesis_prompt(
     for idx, raw_item in enumerate(evidence_items, start=1):
         item = _normalize_item(raw_item)
         src_type = item.get("source_type", "")
-        if src_type == "official_link" or (item.get("url") and not is_web and not item.get("is_web")):
+        if src_type in ("official_link", "official_department_live") or (item.get("url") and not is_web and not item.get("is_web")):
             title = item.get("title") or item.get("section_title") or "Official Live HUDCO Link"
             url = item.get("url") or ""
             content = item.get("content") or item.get("text") or ""
@@ -129,6 +129,10 @@ Rules:
 5. If the question cannot be answered from the evidence, state clearly and politely that verified records do not contain this specific information, and guide them where to find it.
 6. Be concise and crisp. Use 1 to 2 short paragraphs or clean bullet points if multiple details are requested. Maintain conversational context across follow-up queries.
 7. ACTIVE LEADERSHIP & DIRECTORS: When answering questions about current board members, CMD, or management, state the active appointments directly from the official portal evidence (e.g. CMD: Shri Sanjay Kulshrestha, Functional Directors: Shri M. Nagaraj, Shri Daljeet Singh Khatri, Nominee Director: Shri Sanjeet IRAS). Do not state that current records are missing when this official leadership evidence is provided.
+8. LATEST FINANCIAL METRICS & LOAN BOOK: When asked for financial numbers (such as Loan Book / Loan Outstanding, Sanctions, Disbursements, Net Worth, Profit, or Asset Quality / NPA):
+   - Prioritize and state the latest available period and numbers from official presentations (e.g., as of September 30, 2026 / H1 FY 2026-27: Loan Book is ₹1,86,111 crore; Gross NPA is 0.71%; Net NPA is 0.044%).
+   - Clearly state the relevant reporting period (e.g., H1 FY27 or FY26 as of March 31, 2026: ₹1,60,724 crore).
+   - Never provide older historical numbers (such as 2024 or September 2025) as the current figure when newer official portal updates are present in the evidence.
 {empathy_rule}
 Language Instruction:
 {lang_rule}

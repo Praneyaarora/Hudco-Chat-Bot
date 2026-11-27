@@ -50,6 +50,7 @@ from pipeline.retrieval.scoring import (
     compute_composite_score,
 )
 from pipeline.retrieval.curated_retriever import CuratedLinksRetriever
+from pipeline.retrieval.department_router import DepartmentRouter
 from pipeline.inference.gpu_telemetry import get_gpu_telemetry
 from pipeline.inference.qwen_service import get_qwen_service
 from pipeline.inference.conversational_agent import check_conversational_intent, detect_language, detect_emotional_tone
@@ -97,6 +98,7 @@ class PipelineState:
         self.semantic_index: Optional[PersistentVectorIndex] = None
         self.hybrid_retriever: Optional[HybridRetriever] = None
         self.curated_retriever: Optional[CuratedLinksRetriever] = None
+        self.department_router: Optional[DepartmentRouter] = None
         self.inventory: List[Dict[str, Any]] = []
         self.index_stats: Dict[str, Any] = {}
         self.init_error: Optional[str] = None
@@ -225,6 +227,13 @@ class PipelineState:
                 logger.info("Initialized CuratedLinksRetriever with verified official HUDCO website sources.")
             except Exception as cl_err:
                 logger.warning(f"Could not initialize CuratedLinksRetriever: {cl_err}")
+
+            # Initialize Department-Aware Semantic Router & Dynamic Fetcher
+            try:
+                self.department_router = DepartmentRouter(curated_retriever=self.curated_retriever)
+                logger.info("Initialized DepartmentRouter for dynamic departmental link routing and live fetching.")
+            except Exception as dr_err:
+                logger.warning(f"Could not initialize DepartmentRouter: {dr_err}")
 
         except Exception as e:
             self.init_error = f"Pipeline initialization failed: {e}"
@@ -877,19 +886,27 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
 
             retrieval_latency_ms = round((time.perf_counter() - t0) * 1000.0, 2)
 
-            # 1. Retrieve from Curated Official HUDCO Links (Tier 1: Live verified website pages)
+            # 1. Retrieve from Department Router & Curated Official HUDCO Links (Tier 1: Live verified website & departmental portals)
             curated_items = []
-            if GLOBAL_STATE.curated_retriever:
+            if GLOBAL_STATE.department_router:
+                try:
+                    _, dept_items = GLOBAL_STATE.department_router.route_and_retrieve(query=search_query, top_k=top_k)
+                    if dept_items:
+                        curated_items.extend(dept_items)
+                except Exception as d_err:
+                    logger.warning(f"DepartmentRouter routing failed: {d_err}")
+
+            if not curated_items and GLOBAL_STATE.curated_retriever:
                 try:
                     curated_items = GLOBAL_STATE.curated_retriever.retrieve(query=search_query, top_k=top_k)
                 except Exception as c_err:
                     logger.warning(f"CuratedLinksRetriever search failed: {c_err}")
 
-            # 2. Combine with Hybrid Annual Report candidate chunks (Tier 2)
+            # 2. Combine with Hybrid Annual Report candidate chunks (Tier 2, subject to Annual Report Sleeping Filter)
             combined_candidates = list(curated_items) + list(retrieval_response.results if retrieval_response else [])
 
-            # Apply score-based recency prioritization across all candidate chunks
-            reranked_local = rerank_chunks_with_recency(combined_candidates, query=search_query, top_k=top_k)
+            # Apply score-based recency prioritization and temporal sleeping filter across all candidate chunks
+            reranked_local = rerank_chunks_with_recency(combined_candidates, query=search_query, top_k=top_k, filter_sleeping=True)
 
             evidence_items = []
             for item in reranked_local:

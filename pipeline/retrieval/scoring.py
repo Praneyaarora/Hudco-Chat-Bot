@@ -116,28 +116,188 @@ def detect_query_target_year(query: str) -> Optional[int]:
         'Who is the CMD of HUDCO?' -> None (wants current / latest)
         'HUDCO contact number' -> None (wants current / latest)
     """
+    temporal = detect_query_temporal_intent(query)
+    return temporal.get("target_year")
+
+
+def detect_query_temporal_intent(query: str) -> Dict[str, Any]:
+    """
+    Analyzes user query to determine if historical annual reports should be awakened.
+    Requirements:
+    1. Default Mode: If user does not ask for previous years, historical data, or past trends,
+       ALL previous annual report chunks (ar15 through ar25) are put to SLEEP.
+       Only the latest Annual Report (ar26, FY 2025-26) and official live portal links are active.
+    2. Explicit Historical Mode:
+       - 'last N years' (e.g. 'last 4 years') awakens FY 2023 to 2026.
+       - 'past N years' (e.g. 'past 3 years') awakens FY 2024 to 2026.
+       - Explicit year (e.g. 'in 2022', 'FY 2021-22') awakens that specific year.
+       - General historical keywords ('trend', 'history', 'previous years', 'earlier') awakens all relevant years.
+    """
     if not query:
-        return None
+        return {
+            "historical_requested": False,
+            "active_years": {LATEST_CORPUS_YEAR},
+            "target_year": None,
+            "range_years": None,
+            "intent_label": "Default Latest (Historical Reports Sleeping)"
+        }
 
     q = query.lower()
 
-    # Match FY 2021-22 or 2021-2022
+    # 1. Match relative past years: "last 4 years", "past 3 years", "last four years"
+    word_to_num = {
+        "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+        "seven": 7, "eight": 8, "nine": 9, "ten": 10
+    }
+    m_rel = re.search(r"\b(?:last|past|previous)\s+(\d+|two|three|four|five|six|seven|eight|nine|ten)\s+years?\b", q)
+    if m_rel:
+        num_str = m_rel.group(1)
+        n_years = word_to_num.get(num_str, int(num_str) if num_str.isdigit() else 1)
+        n_years = max(1, min(12, n_years))
+        start_yr = max(OLDEST_CORPUS_YEAR, LATEST_CORPUS_YEAR - n_years + 1)
+        active_set = set(range(start_yr, LATEST_CORPUS_YEAR + 1))
+        return {
+            "historical_requested": True,
+            "active_years": active_set,
+            "target_year": None,
+            "range_years": (start_yr, LATEST_CORPUS_YEAR),
+            "intent_label": f"Relative Historical Window: FY {start_yr}-{LATEST_CORPUS_YEAR} ({n_years} Years)"
+        }
+
+    # 2. Match FY span: "FY 2021-22", "2021-2022", "financial year 2023-24"
     m_fy = re.search(r"(?:fy|financial\s+year|year)\s*(?:19|20)?(\d{2})\s*[-–/]\s*(?:(?:19|20)?(\d{2}))", q)
     if m_fy:
         end_yy = int(m_fy.group(2))
-        return 2000 + end_yy
+        target_yr = 2000 + end_yy
+        return {
+            "historical_requested": True,
+            "active_years": {target_yr, target_yr - 1},
+            "target_year": target_yr,
+            "range_years": (target_yr - 1, target_yr),
+            "intent_label": f"Target Financial Year: FY {target_yr}"
+        }
 
-    # Match explicit "in 2019", "for 2020", "during 2017", "2018 annual report"
+    # 3. Match explicit past year: "in 2019", "for 2020", "during 2017", "2022 annual report"
     m_explicit = re.search(r"\b(?:in|for|during|of|dated|year)\s+(20\d{2})\b", q)
     if m_explicit:
-        return int(m_explicit.group(1))
+        target_yr = int(m_explicit.group(1))
+        if target_yr < LATEST_CORPUS_YEAR:
+            return {
+                "historical_requested": True,
+                "active_years": {target_yr},
+                "target_year": target_yr,
+                "range_years": (target_yr, target_yr),
+                "intent_label": f"Historical Year Match: {target_yr}"
+            }
+        else:
+            return {
+                "historical_requested": False,
+                "active_years": {LATEST_CORPUS_YEAR},
+                "target_year": target_yr,
+                "range_years": None,
+                "intent_label": "Target Latest Year"
+            }
 
-    # Match standalone historical 4-digit year <= 2024 (past reference)
+    # 4. Standalone historical 4-digit year <= 2024
     m_standalone = re.findall(r"\b(201\d|202[0-4])\b", q)
     if m_standalone:
-        return int(m_standalone[0])
+        target_yr = int(m_standalone[0])
+        return {
+            "historical_requested": True,
+            "active_years": {target_yr},
+            "target_year": target_yr,
+            "range_years": (target_yr, target_yr),
+            "intent_label": f"Historical Year Reference: {target_yr}"
+        }
 
-    return None
+    # 5. General historical trend keywords
+    if any(k in q for k in ["historical", "trend", "past years", "previous years", "earlier", "history", "over the years", "comparative", "comparison"]):
+        return {
+            "historical_requested": True,
+            "active_years": set(range(OLDEST_CORPUS_YEAR, LATEST_CORPUS_YEAR + 1)),
+            "target_year": None,
+            "range_years": (OLDEST_CORPUS_YEAR, LATEST_CORPUS_YEAR),
+            "intent_label": "Full Historical Trend Analysis (All Reports Awakened)"
+        }
+
+    # Default Mode: User did NOT ask for past years or history.
+    # ALL previous reports (ar15-ar25) are put to SLEEP!
+    return {
+        "historical_requested": False,
+        "active_years": {LATEST_CORPUS_YEAR},
+        "target_year": None,
+        "range_years": None,
+        "intent_label": "Default Latest (Previous Annual Reports Sleeping)"
+    }
+
+
+def filter_candidate_chunks_by_temporal_intent(
+    candidates: List[Any],
+    query: str = "",
+) -> List[Any]:
+    """
+    Applies the Annual Report Sleeping Filter.
+    Unless the user explicitly asks for previous years or historical data,
+    chunks from prior annual reports (ar15 to ar25) are suppressed/put to sleep.
+    Curated official portal links and the latest Annual Report (ar26, FY 2025-26)
+    remain fully active.
+    """
+    if not candidates:
+        return []
+
+    temporal_info = detect_query_temporal_intent(query)
+    historical_requested = temporal_info.get("historical_requested", False)
+    active_years = temporal_info.get("active_years", {LATEST_CORPUS_YEAR})
+
+    # If historical data is requested with wide or explicit scope, retain matching candidates
+    active_candidates = []
+    sleeping_count = 0
+
+    for item in candidates:
+        # Curated live links and department live links are always awake (Tier 1)
+        src_type = getattr(item, "source_type", None) or (item.get("source_type") if isinstance(item, dict) else None)
+        chunk_id = getattr(item, "chunk_id", "") or (item.get("chunk_id") if isinstance(item, dict) else "")
+
+        if src_type in ("official_link", "official_department_live") or str(chunk_id).startswith("link_"):
+            active_candidates.append(item)
+            continue
+
+        item_year = parse_fiscal_year(item)
+
+        # If chunk is an Annual Report chunk with a known fiscal year
+        if item_year is not None:
+            if not historical_requested:
+                # Default mode: only latest year is awake
+                if item_year >= LATEST_CORPUS_YEAR:
+                    active_candidates.append(item)
+                else:
+                    sleeping_count += 1
+            else:
+                # Explicit historical mode: check if year is in awakened active_years set
+                if item_year in active_years:
+                    active_candidates.append(item)
+                else:
+                    sleeping_count += 1
+        else:
+            # Undated chunk
+            active_candidates.append(item)
+
+    # Safety Fallback: If filtering put ALL candidates to sleep (rare edge case where ar26 had 0 lexical hits),
+    # retain the original candidate pool rather than returning an empty set, but mark them as historical.
+    if not active_candidates and candidates:
+        logger.warning(
+            "Temporal sleep filter put all %d candidates to sleep for '%s'. Falling back to top candidates.",
+            len(candidates), query
+        )
+        return candidates
+
+    if sleeping_count > 0:
+        logger.info(
+            "Temporal Sleep Filter: %d older annual report chunks put to sleep (%s). %d active chunks retained.",
+            sleeping_count, temporal_info.get("intent_label"), len(active_candidates)
+        )
+
+    return active_candidates
 
 
 def calculate_recency_score(
@@ -307,18 +467,29 @@ def rerank_chunks_with_recency(
     results: List[Any],
     query: str = "",
     top_k: int = 5,
+    filter_sleeping: bool = False,
 ) -> List[Any]:
     """
     Scores and re-ranks candidate chunks, giving highest priority to latest data
-    and relevant information. Attaches score breakdown telemetry to every item.
+    and relevant information. If filter_sleeping=True, enforces the Annual Report Sleeping Filter
+    so older reports remain asleep unless historical analysis was explicitly requested.
+    Attaches score breakdown telemetry to every item.
     """
     if not results:
         return []
 
+    # Apply temporal sleep filter when requested
+    if filter_sleeping:
+        active_pool = filter_candidate_chunks_by_temporal_intent(results, query=query)
+        if not active_pool:
+            active_pool = results
+    else:
+        active_pool = results
+
     target_year = detect_query_target_year(query)
     scored_items = []
 
-    for idx, item in enumerate(results):
+    for idx, item in enumerate(active_pool):
         score_info = compute_composite_score(item, query, target_year=target_year)
 
         # Mutate or wrap item with transparent scoring telemetry

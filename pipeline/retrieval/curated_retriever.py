@@ -125,32 +125,78 @@ class CuratedLinksRetriever:
             url = chunk.get("url", "").lower()
 
             bonus_score = 0.0
-            # Leadership match
-            if any(k in query.lower() for k in ["cmd", "chairman", "managing director", "director", "leadership", "board", "kulshrestha"]):
+            q_lower = query.lower()
+
+            # 1. Leadership & Board match
+            if any(k in q_lower for k in ["cmd", "chairman", "managing director", "director", "leadership", "board", "kulshrestha"]):
                 if chunk.get("chunk_id") == "link_board_complete":
-                    bonus_score += 7.0
+                    bonus_score += 8.0
                 elif "leadership_board" in category or "board" in url:
-                    bonus_score += 4.0
+                    bonus_score += 4.5
                 elif "leadership_management" in category:
                     bonus_score += 2.5
-            # Management match
-            if any(k in query.lower() for k in ["cvo", "vigilance", "executive director", "company secretary", "management"]):
+
+            # 2. Management & Vigilance match
+            if any(k in q_lower for k in ["cvo", "vigilance", "executive director", "company secretary", "management"]):
                 if chunk.get("chunk_id") == "link_management_complete":
-                    bonus_score += 7.0
+                    bonus_score += 8.0
                 elif "leadership_management" in category:
-                    bonus_score += 4.0
-            # Corporate office / Head office match
-            if any(k in query.lower() for k in ["corporate office", "head office", "headquarter", "address", "lodhi road", "registered office"]):
+                    bonus_score += 4.5
+
+            # 3. Finances, Loan Book, Sanctions, Disbursements & Asset Quality match
+            if any(k in q_lower for k in ["loan book", "loan outstanding", "sanction", "disburse", "profit", "pat", "net worth", "gnpa", "nnpa", "asset quality", "presentation", "financial result", "financial year", "interest income", "borrowing", "balance sheet", "p&l"]):
+                if chunk.get("chunk_id") == "link_fin_latest_h1fy27_presentation":
+                    bonus_score += 9.0
+                elif "finances" in category:
+                    bonus_score += 5.5
+
+            # 4. Bonds & 54EC & Debentures match
+            if any(k in q_lower for k in ["54ec", "bond", "bonds", "debenture", "debenture trustee", "rta", "kfin", "unclaimed bond", "series ii", "capital gain"]):
+                if "bonds" in category or "unclaimed_bonds" in category or "stock_exchange" in category:
+                    bonus_score += 6.5
+
+            # 5. Careers & Recruitment match
+            if any(k in q_lower for k in ["career", "careers", "job", "jobs", "recruitment", "vacancy", "vacancies", "lateral", "ciso", "apprentice"]):
+                if "careers" in category:
+                    bonus_score += 7.0
+
+            # 6. Tenders & E-Procurement match
+            if any(k in q_lower for k in ["tender", "tenders", "procurement", "e-tender", "rfp", "eoi", "bidding"]):
+                if "tenders" in category:
+                    bonus_score += 7.0
+
+            # 7. Grievances & Redressal match
+            if any(k in q_lower for k in ["grievance", "complaint", "cpgrams", "redressal"]):
+                if "grievance" in category:
+                    bonus_score += 7.0
+
+            # 8. Corporate office & Contacts match
+            if any(k in q_lower for k in ["corporate office", "head office", "headquarter", "address", "lodhi road", "registered office"]):
                 if "corporate_office" in category or "contact_directory" in category:
-                    bonus_score += 4.0
-            # Contact / Grievance match
-            if any(k in query.lower() for k in ["contact", "helpline", "phone", "email", "grievance", "complaint", "toll free"]):
+                    bonus_score += 5.0
+            if any(k in q_lower for k in ["contact", "helpline", "phone", "email", "toll free", "regional office"]):
                 if "contact_directory" in category:
-                    bonus_score += 4.0
-            # AGM / Shareholder match
-            if any(k in query.lower() for k in ["agm", "egm", "shareholder", "meeting", "dividend"]):
+                    bonus_score += 5.0
+
+            # 9. Listing Compliance, Corporate Governance & Shareholding match
+            if any(k in q_lower for k in ["corporate governance", "shareholding", "promoter", "liquidity", "lcr", "sebi", "listing", "code of conduct", "reg 46", "reg 62"]):
+                if "corporate_governance" in category or "shareholding" in category or "liquidity" in category or "sebi" in category or "listing" in category:
+                    bonus_score += 6.0
+
+            # 10. Dividend & IEPF match
+            if any(k in q_lower for k in ["dividend", "interim dividend", "final dividend", "iepf", "unclaimed dividend"]):
+                if "dividend" in category or "iepf" in category:
+                    bonus_score += 6.5
+
+            # 11. Offerings & Services match
+            if any(k in q_lower for k in ["services", "schemes", "social housing", "urban infrastructure", "consultancy"]):
+                if "offerings" in category or "services" in category:
+                    bonus_score += 5.0
+
+            # 12. AGM & Shareholder meetings match
+            if any(k in q_lower for k in ["agm", "egm", "shareholder", "meeting"]):
                 if "shareholder_meetings" in category:
-                    bonus_score += 4.0
+                    bonus_score += 5.0
 
             total_lexical = bm25_raw + bonus_score
 
