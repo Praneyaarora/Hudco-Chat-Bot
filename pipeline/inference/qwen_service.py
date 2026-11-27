@@ -133,9 +133,16 @@ def strip_citation_markers(text: str) -> str:
         flags=re.IGNORECASE | re.MULTILINE
     )
 
-    # 4. Remove prompt echo / prefix phrases and dangling Evidence Item references:
-    # e.g. "Answer: ...", "Based on the provided evidence, ...", "According to Evidence Item 1, ...", "and Evidence Item"
+    # 4. Remove prompt echo / prefix phrases, conversational filler preamble, and dangling Evidence Item references:
+    # e.g. "Certainly! Here is the list of EDs:", "Based on the provided evidence, ...", "According to Evidence Item 1, ..."
     cleaned = re.sub(r"^\*?\*?(?:Evidence|Answer|Response):\*?\*?\s*", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"^(?:Certainly!|Sure!|Of course!|Hello!|Hi!|Certainly,|Sure,)\s*", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(
+        r"^(?:Here is|Here are|Below is|Below are|To answer your question|Regarding your query|As requested|Based on (?:the )?(?:provided )?(?:evidence|records|documents|annual reports?|sources?))[^:\n]*[:\.]\s*",
+        "",
+        cleaned,
+        flags=re.IGNORECASE
+    )
     cleaned = re.sub(r"^Based on (?:the )?(?:provided )?(?:evidence|annual reports?|documents?|sources?)[,\s]*", "", cleaned, flags=re.IGNORECASE)
     cleaned = re.sub(r"^[,\s]*(?:and\s+)?(?:in\s+|as\s+per\s+|according\s+to\s+)?Evidence\s*(?:Item\s*)?(?:\[?\d*\]?)?.*$", "", cleaned, flags=re.IGNORECASE | re.MULTILINE)
     cleaned = re.sub(r"(?:,\s*)?(?:and\s+)?(?:in\s+|as\s+per\s+|according\s+to\s+)?Evidence\s*(?:Item\s*)?(?:\[?\d*\]?)?[:\s,]*", "", cleaned, flags=re.IGNORECASE)

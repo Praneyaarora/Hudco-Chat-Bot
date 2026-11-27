@@ -2062,6 +2062,42 @@ The **QueryContextRewriter (`pipeline/context/query_context_rewriter.py`)** elim
 - **No Topic Bleed / Stickiness**: Completely independent questions (e.g. *"who is the head of hr?"* asked after discussing CMD) are never contaminated with previous entities.
 - **Precise Pronoun Grounding**: Follow-up queries containing pronouns (e.g. *"how can I apply for it?"* following 54EC bonds) seamlessly extract the target topic (`54ec bond`) and rewrite to *"how can I apply for 54ec bond?"* without falsely routing to recruitment or careers.
 
+## 29. Conversational Safety & Guardrails: Spam & Abusive Language Defense
+
+HUDCO Bot integrates enterprise-grade guardrails (`pipeline/inference/conversational_agent.py`) to maintain a professional, dignified user experience:
+1. **Spam & Repetition Shield (`detect_spam`)**:
+   - Detects keysmash patterns (e.g. `asdasdasd`, `qwrtpsdfg`), character loops (`aaaaa...`), and multi-word flooding (`test test test...`).
+   - Identifies session query flooding (consecutive identical submissions).
+   - Responds politely, requesting the user to cease spamming and ask an official question.
+2. **Abusive Language Detection (`detect_abusive_content`)**:
+   - Analyzes English and Hindi/Hinglish vulgarities, profanity, and offensive slurs using strict regex boundaries.
+   - Responds with courteous manners, requesting civil communication and reiterating HUDCO assistance channels.
+
+## 30. Context Pyramid Architecture & Ambiguity Clarification
+
+HUDCO Bot employs a **Context Pyramid**:
+1. **Recency Weighting (Pyramid Base to Peak)**:
+   - The latest turns form the base of the pyramid with highest weightage (1.0), with decaying weights (0.7, 0.4, 0.1) for earlier conversational turns.
+2. **Multi-Department Ambiguity Resolution (`detect_ambiguity_or_conflict`)**:
+   - When a user asks about a role or metric that exists across multiple functional departments (e.g., *"who is ed?"* or *"who is the gm?"*), rather than randomly picking a department or getting confused, HUDCO Bot proactively requests **user clarification**:
+     > *"HUDCO has Executive Directors (EDs) leading multiple functional wings, such as Executive Director (Finance), Executive Director (Projects & Operations), Executive Director (Law), and Executive Director (HSMI). Which department's Executive Director are you inquiring about?"*
+
+## 31. Context Budget Warnings & Dynamic Top-of-Pyramid Pruning
+
+Real-time telemetry continuously tracks conversation context consumption:
+- **50% Capacity**: Employs an inline notice informing the user that conversation context has reached 50% and older turns will not be retained indefinitely.
+- **75% Capacity**: Warns that context capacity is filling up.
+- **90% Capacity**: Warns that older messages will soon be rolled over to preserve space.
+- **100% Capacity & Top-of-Pyramid Pruning**: Shows a 100% capacity notice and automatically executes FIFO pruning (`prune_oldest_messages` in `ConversationStorage` / `PostgresConversationStorage`) to drop the oldest turns from the top of the pyramid while keeping the active lower section intact.
+
+## 32. Crisp, Direct & Pointer-Based Answer Synthesis
+
+To ensure answers are immediately actionable and clear:
+1. **Zero Filler Words**: Strips introductory preamble, conversational fluff, and pleasantries (`Certainly!`, `Sure, here is...`, `Based on the provided documents...`).
+2. **Mandatory Pointer / Bullet Format**:
+   - Whenever an answer lists people, designations, board/management members, executive directors, numbers, steps, or multi-fact answers, it is strictly formatted as clean bullet points (`•`).
+   - Dense prose paragraphs are replaced with concise, direct bulleted items.
+
 
 
 

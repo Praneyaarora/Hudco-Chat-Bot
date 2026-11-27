@@ -761,6 +761,7 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
             conv_res = check_conversational_intent(query, recent_turns=session.messages)
             if conv_res:
                 conv_reply = conv_res.get("answer", "")
+                intent_type = conv_res.get("intent", "conversational")
                 user_msg = ChatMessage(role="user", content=query, token_count=estimate_tokens(query))
                 bot_msg = ChatMessage(
                     role="assistant",
@@ -784,7 +785,7 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                     "query": query,
                     "session_id": session_id,
                     "retrieval_method": "conversational_intent",
-                    "status": "conversational_greeting",
+                    "status": intent_type,
                     "is_abstention": False,
                     "is_conversational": True,
                     "results": [],
@@ -793,13 +794,15 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                         "answer": conv_reply,
                         "clean_answer": conv_reply,
                         "provider": "conversational_guardrail",
-                        "model_name": "Direct Intent Handler",
+                        "model_name": "Direct Intent & Safety Handler",
                         "device": "in-memory",
                         "generation_time_ms": 0.5,
                         "is_refusal": False,
                         "citation_validation": {"is_valid": True, "has_citations": False}
                     },
                     "context_telemetry": telemetry.dict(),
+                    "context_warning": telemetry.warning_message,
+                    "context_percentage": telemetry.percentage,
                     "live_gpu_telemetry": get_gpu_telemetry(),
                 })
                 return
@@ -1128,6 +1131,15 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                 reserved_output_tokens=max_new_tokens
             )
 
+            # Context Pyramid: at 100% capacity, prune oldest turns from the top of the pyramid
+            if context_telemetry.percentage >= 100.0:
+                if hasattr(CONV_STORAGE, "prune_oldest_messages"):
+                    CONV_STORAGE.prune_oldest_messages(
+                        user_id=user_id,
+                        session_id=session_id,
+                        keep_last_n=max(4, len(active_turns))
+                    )
+
             total_elapsed_ms = round(
                 retrieval_latency_ms + (answer_payload.get("generation_time_ms", 0.0) if answer_payload else 0.0),
                 2
@@ -1167,6 +1179,8 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                 "total_query_latency_ms": total_elapsed_ms,
                 "answer": answer_payload,
                 "context_telemetry": context_telemetry.dict(),
+                "context_warning": context_telemetry.warning_message,
+                "context_percentage": context_telemetry.percentage,
                 "live_gpu_telemetry": get_gpu_telemetry(),
             }
 

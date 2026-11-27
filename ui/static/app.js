@@ -902,6 +902,9 @@ async function handleChatSubmit(e) {
     // Update Live Context Meter Telemetry
     if (data.context_telemetry) {
       updateContextMeter(data.context_telemetry);
+      if (data.context_telemetry.warning_message) {
+        appendContextWarningToChat(data.context_telemetry.warning_message, data.context_telemetry.percentage);
+      }
     }
   } catch (err) {
     replacePlaceholderWithContent(
@@ -945,6 +948,31 @@ function appendMessageToDOM(role, content, timestamp) {
   `;
 
   container.appendChild(row);
+  container.scrollTop = container.scrollHeight;
+}
+
+function appendContextWarningToChat(warningText, percentage) {
+  const container = document.getElementById("chatMessagesScroll");
+  if (!container || !warningText) return;
+
+  // Prevent duplicate warning banner if already displayed as the last element
+  const lastElem = container.lastElementChild;
+  if (lastElem && lastElem.classList && lastElem.classList.contains("chat-context-warning-banner")) {
+    if (lastElem.textContent.includes(warningText)) return;
+  }
+
+  const pct = Number(percentage || 0);
+  const colorClass = pct >= 100 ? "context-banner-red" : (pct >= 90 ? "context-banner-rose" : (pct >= 75 ? "context-banner-amber" : "context-banner-blue"));
+  const banner = document.createElement("div");
+  banner.className = `chat-context-warning-banner ${colorClass}`;
+  banner.innerHTML = `
+    <div class="context-banner-inner">
+      <span class="context-banner-icon">⚠️</span>
+      <span class="context-banner-text">${escapeHtml(warningText)}</span>
+      <span class="context-banner-badge">${pct}% Context</span>
+    </div>
+  `;
+  container.appendChild(banner);
   container.scrollTop = container.scrollHeight;
 }
 

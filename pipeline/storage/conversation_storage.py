@@ -424,6 +424,24 @@ class FileConversationStorage(ConversationStorage):
             logger.info(f"Updated rolling summary for session {session_id} (pruned {pruned_turns} turns).")
             return True
 
+    def prune_oldest_messages(self, user_id: str, session_id: str, keep_last_n: int) -> bool:
+        """Deletes oldest turns from the top of the pyramid when context reaches capacity."""
+        with self._lock:
+            session = self.get_conversation(user_id, session_id)
+            if not session:
+                return False
+
+            if len(session.messages) > keep_last_n:
+                dropped_count = len(session.messages) - keep_last_n
+                session.messages = session.messages[-keep_last_n:]
+                session.updated_at = time.time()
+                conv_dir = self._get_conversations_dir(user_id)
+                file_path = conv_dir / f"{session.session_id}.json"
+                self._atomic_write_json(file_path, session.model_dump())
+                logger.info(f"Pruned {dropped_count} oldest turns from top of pyramid for session {session_id}.")
+                return True
+            return False
+
     def rename_conversation(self, user_id: str, session_id: str, new_title: str) -> bool:
         """Renames a conversation session with ownership check."""
         clean_title = new_title.strip()

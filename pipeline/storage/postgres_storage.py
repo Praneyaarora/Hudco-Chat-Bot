@@ -628,6 +628,28 @@ class PostgresConversationStorage(ConversationStorage):
             logger.info(f"Updated rolling summary for session {session_id} in PostgreSQL (pruned {pruned_turns} turns).")
         return affected
 
+    def prune_oldest_messages(self, user_id: str, session_id: str, keep_last_n: int) -> bool:
+        """Deletes oldest turns from the top of the pyramid when context reaches capacity."""
+        with self.get_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    DELETE FROM messages
+                    WHERE session_id = %s AND user_id = %s
+                    AND message_id NOT IN (
+                        SELECT message_id FROM messages
+                        WHERE session_id = %s AND user_id = %s
+                        ORDER BY timestamp DESC
+                        LIMIT %s
+                    );
+                    """,
+                    (session_id, user_id, session_id, user_id, keep_last_n)
+                )
+                affected = cur.rowcount > 0
+        if affected:
+            logger.info(f"Pruned oldest turns from PostgreSQL top of pyramid for session {session_id}.")
+        return affected
+
     def rename_conversation(self, user_id: str, session_id: str, new_title: str) -> bool:
         """Renames a conversation session with ownership check."""
         clean_title = new_title.strip()

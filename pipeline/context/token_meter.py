@@ -124,10 +124,14 @@ def calculate_context_telemetry(
     percentage = round(min(100.0, (total_used / max(1, max_budget)) * 100.0), 1)
 
     warning = None
-    if percentage >= 90.0:
-        warning = "Context window is nearly full (>=90%). Auto-summarization of earlier turns is active."
+    if percentage >= 100.0:
+        warning = f"Context capacity reached ({percentage}%). Oldest conversations from the top of the pyramid are no longer saved to preserve space for new messages."
+    elif percentage >= 90.0:
+        warning = f"Warning: Conversation context is at {percentage}%. Oldest messages will soon be rolled over to preserve space."
     elif percentage >= 75.0:
-        warning = "Context usage is approaching threshold (>=75%)."
+        warning = f"Notice: Conversation context is at {percentage}%. Context capacity is filling up."
+    elif percentage >= 50.0:
+        warning = f"Notice: Conversation context is at {percentage}%. Older conversation turns will not be saved indefinitely in longer chats."
 
     return ContextUsageTelemetry(
         used_tokens=total_used,

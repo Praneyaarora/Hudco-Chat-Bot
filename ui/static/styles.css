@@ -1949,3 +1949,83 @@ body.light-theme .evidence-text-content {
   background: rgba(245, 158, 11, 0.18);
   border-color: #f59e0b;
 }
+
+/* Chat Context Warning Banner */
+.chat-context-warning-banner {
+  margin: 10px auto;
+  max-width: 92%;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.context-banner-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.context-banner-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.context-banner-text {
+  flex: 1;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.context-banner-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.context-banner-blue {
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #93c5fd;
+}
+.context-banner-blue .context-banner-badge {
+  background: rgba(59, 130, 246, 0.25);
+  color: #bfdbfe;
+}
+
+.context-banner-amber {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fde68a;
+}
+.context-banner-amber .context-banner-badge {
+  background: rgba(245, 158, 11, 0.25);
+  color: #fef3c7;
+}
+
+.context-banner-rose {
+  background: rgba(244, 63, 94, 0.14);
+  border: 1px solid rgba(244, 63, 94, 0.35);
+  color: #fecdd3;
+}
+.context-banner-rose .context-banner-badge {
+  background: rgba(244, 63, 94, 0.3);
+  color: #ffe4e6;
+}
+
+.context-banner-red {
+  background: rgba(220, 38, 38, 0.18);
+  border: 1px solid rgba(220, 38, 38, 0.45);
+  color: #fca5a5;
+  box-shadow: 0 0 12px rgba(220, 38, 38, 0.15);
+}
+.context-banner-red .context-banner-badge {
+  background: rgba(220, 38, 38, 0.35);
+  color: #fee2e2;
+}

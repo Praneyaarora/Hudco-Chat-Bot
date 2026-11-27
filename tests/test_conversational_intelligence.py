@@ -8,7 +8,13 @@ from pipeline.inference.conversational_agent import (
     detect_language,
     detect_emotional_tone,
     check_conversational_intent,
+    detect_spam,
+    detect_abusive_content,
+    detect_ambiguity_or_conflict,
 )
+from pipeline.context.token_meter import calculate_context_telemetry
+from pipeline.storage.conversation_storage import FileConversationStorage
+from pipeline.inference.qwen_service import strip_citation_markers
 from pipeline.context.query_context_rewriter import QueryContextRewriter
 from pipeline.storage.contracts import ChatMessage
 from pipeline.inference.llm_manager import build_synthesis_prompt
@@ -146,6 +152,131 @@ class TestConversationalIntelligence(unittest.TestCase):
         self.assertIn("Emotional Empathy & Grievance", prompt)
         self.assertIn("sincere acknowledgment", prompt)
         self.assertIn("CPGRAMS", prompt)
+
+    def test_spam_detection(self):
+        # Keysmash & repeated patterns
+        is_spam, msg = detect_spam("asdasdasdasdasd")
+        self.assertTrue(is_spam)
+        self.assertIn("spam", msg.lower())
+
+        is_spam2, _ = detect_spam("aaaaaaaaaaaa")
+        self.assertTrue(is_spam2)
+
+        is_spam3, _ = detect_spam("hello hello hello hello hello hello")
+        self.assertTrue(is_spam3)
+
+        # Repeated turns flooding
+        history = [
+            ChatMessage(role="user", content="tell me profit"),
+            ChatMessage(role="assistant", content="Profit is Rs 2,116 cr"),
+            ChatMessage(role="user", content="tell me profit"),
+            ChatMessage(role="assistant", content="Profit is Rs 2,116 cr"),
+        ]
+        is_spam4, msg4 = detect_spam("tell me profit", recent_turns=history)
+        self.assertTrue(is_spam4)
+
+        # Genuine query must NOT be flagged as spam
+        not_spam, _ = detect_spam("who is the chairman and managing director of hudco?")
+        self.assertFalse(not_spam)
+
+    def test_abusive_language_detection(self):
+        # English abuse
+        is_abusive, msg = detect_abusive_content("You are an idiot and stupid bot")
+        self.assertTrue(is_abusive)
+        self.assertIn("polite", msg.lower())
+
+        # Hindi/Hinglish abuse
+        is_abusive_hi, msg_hi = detect_abusive_content("bhosdike mera loan approve kar")
+        self.assertTrue(is_abusive_hi)
+        self.assertIn("vinamra", msg_hi.lower())
+
+        # Normal queries must NOT be flagged
+        not_abusive, _ = detect_abusive_content("What is the asset quality and gross NPA of HUDCO?")
+        self.assertFalse(not_abusive)
+
+    def test_ambiguity_and_conflict_clarification(self):
+        # Asking vague "who is ed?" must ask for department clarification
+        res_ed = check_conversational_intent("who is ed?")
+        self.assertIsNotNone(res_ed)
+        self.assertEqual(res_ed["intent"], "clarification_conflict")
+        self.assertIn("Finance", res_ed["answer"])
+        self.assertIn("Law", res_ed["answer"])
+        self.assertIn("Executive Director", res_ed["answer"])
+
+        # Asking vague "who is gm?" must ask for department clarification
+        res_gm = check_conversational_intent("who is the gm?")
+        self.assertIsNotNone(res_gm)
+        self.assertEqual(res_gm["intent"], "clarification_conflict")
+        self.assertIn("Human Resources", res_gm["answer"])
+        self.assertIn("Information Technology", res_gm["answer"])
+
+        # Asking specifically for "who is ed finance?" must pass to factual retrieval (not intercepted)
+        res_spec = check_conversational_intent("who is ed finance?")
+        self.assertIsNone(res_spec)
+
+        # Asking for full list "list of all ed" must pass to factual retrieval (not intercepted)
+        res_list = check_conversational_intent("give me the list of ed")
+        self.assertIsNone(res_list)
+
+    def test_context_budget_warnings_and_pyramid_pruning(self):
+        # Test 50% warning
+        t_50 = calculate_context_telemetry(
+            system_prompt="Test",
+            rolling_summary=None,
+            active_turns=[{"role": "user", "content": "hello " * 800}],
+            evidence_items=[],
+            user_query="hi",
+            max_budget=2000,
+        )
+        self.assertGreaterEqual(t_50.percentage, 50.0)
+        self.assertIsNotNone(t_50.warning_message)
+        self.assertIn("Older conversation turns will not be saved indefinitely", t_50.warning_message)
+
+        # Test 100% capacity warning
+        t_100 = calculate_context_telemetry(
+            system_prompt="Test",
+            rolling_summary=None,
+            active_turns=[{"role": "user", "content": "hello " * 2000}],
+            evidence_items=[],
+            user_query="hi",
+            max_budget=1000,
+        )
+        self.assertEqual(t_100.percentage, 100.0)
+        self.assertIn("pyramid", t_100.warning_message.lower())
+
+        # Test pyramid pruning in storage
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            storage = FileConversationStorage(base_dir=tmp_dir)
+            session = storage.create_conversation("user_test", "Test Chat")
+            for i in range(10):
+                storage.save_message("user_test", session.session_id, ChatMessage(role="user", content=f"msg_{i}"))
+
+            s_before = storage.get_conversation("user_test", session.session_id)
+            self.assertEqual(len(s_before.messages), 10)
+
+            # Prune to keep last 4 turns
+            storage.prune_oldest_messages("user_test", session.session_id, keep_last_n=4)
+            s_after = storage.get_conversation("user_test", session.session_id)
+            self.assertEqual(len(s_after.messages), 4)
+            self.assertEqual(s_after.messages[-1].content, "msg_9")
+
+    def test_crisp_bullet_points_prompt_and_sanitizer(self):
+        # Verify synthesis prompt enforces crisp bullets and zero filler words
+        prompt = build_synthesis_prompt(
+            query="list the executive directors of hudco",
+            evidence_items=[{"title": "Management", "content": "Daljeet Singh Khatri, Varsha Punhani"}],
+            language="english"
+        )
+        self.assertIn("CRISP, DIRECT & ZERO FILLER WORDS", prompt)
+        self.assertIn("MANDATORY POINTER / BULLET FORMAT FOR LISTS", prompt)
+
+        # Verify sanitizer strips conversational preamble
+        raw = "Certainly! Here is the list of Executive Directors:\n• Shri Daljeet Singh Khatri\n• Ms. Varsha Punhani"
+        cleaned = strip_citation_markers(raw)
+        self.assertNotIn("Certainly", cleaned)
+        self.assertNotIn("Here is the list", cleaned)
+        self.assertIn("Shri Daljeet Singh Khatri", cleaned)
 
 
 if __name__ == "__main__":
