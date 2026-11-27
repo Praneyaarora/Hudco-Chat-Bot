@@ -594,20 +594,32 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
             self._send_json(404, {"error": "Conversation not found."})
             return
 
-        # Calculate context telemetry for loaded session
-        turns = [m.dict() if hasattr(m, "dict") else m for m in session.messages]
-        telemetry = calculate_context_telemetry(
-            system_prompt="You are HUDCO Bot, the official AI research and customer assistant for Housing and Urban Development Corporation Limited.",
-            rolling_summary=session.rolling_summary,
-            active_turns=turns,
-            evidence_items=[],
-            user_query="",
-            max_budget=DYNAMIC_CONFIG.get("context_budget", 8192),
-        )
+        # Use stored authoritative telemetry if available to avoid drop on page refresh
+        telemetry_dict = getattr(session, "last_context_telemetry", None)
+        if not telemetry_dict:
+            # Reconstruct telemetry using latest bot message's evidence payload if present
+            latest_evidence = []
+            for m in reversed(session.messages):
+                if m.role == "assistant" and getattr(m, "evidence_payload", None):
+                    latest_evidence = m.evidence_payload
+                    break
+
+            turns = [m.dict() if hasattr(m, "dict") else m for m in session.messages]
+            telemetry = calculate_context_telemetry(
+                system_prompt="HUDCO Bot Enterprise Assistant",
+                rolling_summary=session.rolling_summary,
+                active_turns=turns,
+                evidence_items=latest_evidence,
+                user_query="",
+                max_budget=DYNAMIC_CONFIG.get("context_budget", 8192),
+                reserved_output_tokens=256,
+            )
+            telemetry_dict = telemetry.dict()
+
         self._send_json(200, {
             "success": True,
             "session": session.dict(),
-            "context_telemetry": telemetry.dict(),
+            "context_telemetry": telemetry_dict,
         })
 
     def _handle_update_chat(self, session_id: str) -> None:
@@ -827,6 +839,13 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                     user_query=query,
                     max_budget=context_budget,
                 )
+
+                if session_id and hasattr(CONV_STORAGE, "update_context_telemetry"):
+                    CONV_STORAGE.update_context_telemetry(
+                        user_id=user_id,
+                        session_id=session_id,
+                        telemetry=telemetry.dict()
+                    )
 
                 self._send_json(200, {
                     "query": query,
@@ -1209,6 +1228,14 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                         session_id=session_id,
                         keep_last_n=max(4, len(active_turns))
                     )
+
+            # Persist authoritative context telemetry for session reloads/refreshes
+            if session_id and hasattr(CONV_STORAGE, "update_context_telemetry"):
+                CONV_STORAGE.update_context_telemetry(
+                    user_id=user_id,
+                    session_id=session_id,
+                    telemetry=context_telemetry.dict()
+                )
 
             total_elapsed_ms = round(
                 retrieval_latency_ms + (answer_payload.get("generation_time_ms", 0.0) if answer_payload else 0.0),

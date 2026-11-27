@@ -278,6 +278,36 @@ class TestConversationalIntelligence(unittest.TestCase):
         self.assertNotIn("Here is the list", cleaned)
         self.assertIn("Shri Daljeet Singh Khatri", cleaned)
 
+    def test_context_telemetry_persistence_across_refresh(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            storage = FileConversationStorage(base_dir=tmp_dir)
+            session = storage.create_conversation("user_refresh", "Refresh Test")
+
+            # Simulate a 50.5% context state
+            telemetry_data = {
+                "used_tokens": 4136,
+                "max_budget": 8192,
+                "percentage": 50.5,
+                "warning_message": "Notice: Conversation context is at 50.5%. Older conversation turns will not be saved indefinitely in longer chats.",
+                "system_tokens": 250,
+                "summary_tokens": 0,
+                "history_tokens": 1200,
+                "evidence_tokens": 2400,
+                "query_tokens": 30,
+            }
+
+            # Update context telemetry
+            ok = storage.update_context_telemetry("user_refresh", session.session_id, telemetry_data)
+            self.assertTrue(ok)
+
+            # Reload session as happens during page refresh
+            reloaded = storage.get_conversation("user_refresh", session.session_id)
+            self.assertIsNotNone(reloaded)
+            self.assertIsNotNone(reloaded.last_context_telemetry)
+            self.assertEqual(reloaded.last_context_telemetry["percentage"], 50.5)
+            self.assertIn("50.5%", reloaded.last_context_telemetry["warning_message"])
+
 
 if __name__ == "__main__":
     unittest.main()

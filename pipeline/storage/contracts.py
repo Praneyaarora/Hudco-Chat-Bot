@@ -63,6 +63,7 @@ class ConversationSession(BaseModel):
     messages: List[ChatMessage] = Field(default_factory=list)
     rolling_summary: Optional[str] = None
     pruned_turns_count: int = 0
+    last_context_telemetry: Optional[Dict[str, Any]] = None
 
 
 class ConversationSummaryItem(BaseModel):

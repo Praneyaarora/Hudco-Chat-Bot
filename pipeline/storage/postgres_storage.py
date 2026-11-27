@@ -205,8 +205,10 @@ class PostgresConversationStorage(ConversationStorage):
             created_at DOUBLE PRECISION NOT NULL,
             updated_at DOUBLE PRECISION NOT NULL,
             rolling_summary TEXT,
-            pruned_turns_count INTEGER NOT NULL DEFAULT 0
+            pruned_turns_count INTEGER NOT NULL DEFAULT 0,
+            last_context_telemetry JSONB
         );
+        ALTER TABLE conversations ADD COLUMN IF NOT EXISTS last_context_telemetry JSONB;
         CREATE INDEX IF NOT EXISTS idx_conversations_user_updated ON conversations(user_id, updated_at DESC);
 
         CREATE TABLE IF NOT EXISTS messages (
@@ -510,6 +512,13 @@ class PostgresConversationStorage(ConversationStorage):
                 )
             )
 
+        last_telem = conv_row["last_context_telemetry"] if "last_context_telemetry" in conv_row else None
+        if isinstance(last_telem, str):
+            try:
+                last_telem = json.loads(last_telem)
+            except Exception:
+                last_telem = None
+
         return ConversationSession(
             session_id=conv_row["session_id"],
             user_id=conv_row["user_id"],
@@ -519,6 +528,7 @@ class PostgresConversationStorage(ConversationStorage):
             messages=messages,
             rolling_summary=conv_row["rolling_summary"],
             pruned_turns_count=int(conv_row["pruned_turns_count"] or 0),
+            last_context_telemetry=last_telem,
         )
 
     def create_conversation(self, user_id: str, title: str = "New Conversation") -> ConversationSession:
@@ -627,6 +637,26 @@ class PostgresConversationStorage(ConversationStorage):
         if affected:
             logger.info(f"Updated rolling summary for session {session_id} in PostgreSQL (pruned {pruned_turns} turns).")
         return affected
+
+    def update_context_telemetry(self, user_id: str, session_id: str, telemetry: Dict[str, Any]) -> bool:
+        """Updates stored context telemetry in PostgreSQL."""
+        now = time.time()
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        UPDATE conversations
+                        SET last_context_telemetry = %s,
+                            updated_at = %s
+                        WHERE session_id = %s AND user_id = %s;
+                        """,
+                        (json.dumps(telemetry), now, session_id, user_id),
+                    )
+                    return cur.rowcount > 0
+        except Exception as e:
+            logger.warning(f"Failed to update context telemetry in PG: {e}")
+            return False
 
     def prune_oldest_messages(self, user_id: str, session_id: str, keep_last_n: int) -> bool:
         """Deletes oldest turns from the top of the pyramid when context reaches capacity."""

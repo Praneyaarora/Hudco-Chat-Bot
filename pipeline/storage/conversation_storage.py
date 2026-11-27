@@ -83,6 +83,10 @@ class ConversationStorage(abc.ABC):
         pass
 
     @abc.abstractmethod
+    def update_context_telemetry(self, user_id: str, session_id: str, telemetry: Dict[str, Any]) -> bool:
+        pass
+
+    @abc.abstractmethod
     def rename_conversation(self, user_id: str, session_id: str, new_title: str) -> bool:
         pass
 
@@ -422,6 +426,21 @@ class FileConversationStorage(ConversationStorage):
             file_path = conv_dir / f"{session.session_id}.json"
             self._atomic_write_json(file_path, session.model_dump())
             logger.info(f"Updated rolling summary for session {session_id} (pruned {pruned_turns} turns).")
+            return True
+
+    def update_context_telemetry(self, user_id: str, session_id: str, telemetry: Dict[str, Any]) -> bool:
+        """Stores the authoritative context telemetry metrics for persistence across page reloads."""
+        with self._lock:
+            session = self.get_conversation(user_id, session_id)
+            if not session:
+                return False
+
+            session.last_context_telemetry = telemetry
+            session.updated_at = time.time()
+
+            conv_dir = self._get_conversations_dir(user_id)
+            file_path = conv_dir / f"{session.session_id}.json"
+            self._atomic_write_json(file_path, session.model_dump())
             return True
 
     def prune_oldest_messages(self, user_id: str, session_id: str, keep_last_n: int) -> bool:

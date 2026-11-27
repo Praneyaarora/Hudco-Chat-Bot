@@ -538,6 +538,9 @@ async function selectConversation(sessionId) {
 
     if (data.context_telemetry) {
       updateContextMeter(data.context_telemetry);
+      if (data.context_telemetry.warning_message) {
+        appendContextWarningToChat(data.context_telemetry.warning_message, data.context_telemetry.percentage);
+      }
     } else {
       let estTokens = 0;
       (data.session.messages || []).forEach(m => {
