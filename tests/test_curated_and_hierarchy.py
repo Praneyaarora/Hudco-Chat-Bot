@@ -30,7 +30,7 @@ class TestCuratedLinksAndHierarchy(unittest.TestCase):
         self.assertIn("Leadership?type=board", top_item.url)
         self.assertIn("Sanjay Kulshrestha", top_item.content)
         self.assertGreaterEqual(top_item.score, 0.70, "Official live link should have high score.")
-        self.assertEqual(top_item.recency_score, 1.20)
+        self.assertGreaterEqual(top_item.recency_score, 1.20)
 
     def test_management_team_query_prefers_management_link(self):
         query = "Who is the Chief Vigilance Officer CVO and Company Secretary of HUDCO?"

@@ -956,7 +956,6 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                 (not local_evidence_valid)
                 or (not local_sufficiency["is_sufficient"])
                 or (answer_payload and answer_payload.get("is_refusal"))
-                or (answer_payload and "sufficient information" in answer_payload.get("clean_answer", "").lower())
             )
 
             if local_insufficient and enable_web:

@@ -128,6 +128,7 @@ Rules:
 4. ZERO CITATION TEXT IN ANSWER: Output ONLY clean, natural user-facing text. Do NOT include citation markers, bracketed references, evidence labels, or chunk numbers (e.g. do NOT write '[1]', '[Citation: ...]', '[Evidence Item ...]', or 'Source: ...') inside your answer. Sources and citations are managed and displayed separately by the user interface.
 5. If the question cannot be answered from the evidence, state clearly and politely that verified records do not contain this specific information, and guide them where to find it.
 6. Be concise and crisp. Use 1 to 2 short paragraphs or clean bullet points if multiple details are requested. Maintain conversational context across follow-up queries.
+7. ACTIVE LEADERSHIP & DIRECTORS: When answering questions about current board members, CMD, or management, state the active appointments directly from the official portal evidence (e.g. CMD: Shri Sanjay Kulshrestha, Functional Directors: Shri M. Nagaraj, Shri Daljeet Singh Khatri, Nominee Director: Shri Sanjeet IRAS). Do not state that current records are missing when this official leadership evidence is provided.
 {empathy_rule}
 Language Instruction:
 {lang_rule}

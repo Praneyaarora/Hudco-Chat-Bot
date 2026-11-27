@@ -52,6 +52,9 @@ DISQUALIFYING_PATTERNS = [
     r"\bhudco\.co\b",
     r"\bdobbs\s+ferry\b",
     r"\bwestchester\b",
+    r"editorial\s+board",
+    r"cessationintimation",
+    r"basic-html/page\d+\.html",
 ]
 
 
@@ -108,10 +111,19 @@ class TavilySearchAgent:
 
             combined_text = f"{title} {content} {url}".lower()
 
-            # Guardrail: Check for false entities (e.g. Dobbs Ferry coworking space)
-            if any(re.search(pat, combined_text) for pat in DISQUALIFYING_PATTERNS):
-                logger.warning(f"Guardrail dropped false entity match: '{title}' ({url})")
+            # Guardrail: Check for false entities (e.g. Dobbs Ferry coworking space, magazine editorial boards)
+            if any(re.search(pat, combined_text, re.IGNORECASE) for pat in DISQUALIFYING_PATTERNS):
+                logger.warning(f"Guardrail dropped false entity or irrelevant match: '{title}' ({url})")
                 continue
+
+            # Stale notice filter: If user asks for current/latest board/leadership, drop ancient cessation or archive notices
+            q_clean = (original_query or "").lower()
+            is_current_query = any(k in q_clean for k in ["current", "currently", "latest", "today", "now", "present", "board member", "who are the board", "name the board"])
+            if is_current_query:
+                if re.search(r"\b(201[5-9]|202[0-2])\b", combined_text) and not re.search(r"\b(202[5-6])\b", combined_text):
+                    if any(w in combined_text.lower() for w in ["ceased to be", "cessation", "editorial board", "former director", "order dated"]):
+                        logger.warning(f"Guardrail dropped stale obsolete notice for current query: '{title}' ({url})")
+                        continue
 
             # Must match Indian HUDCO indicators or official domains
             is_official = ("hudco.org" in domain) or ("hudco.org.in" in domain) or ("gov.in" in domain)

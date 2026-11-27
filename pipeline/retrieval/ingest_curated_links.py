@@ -178,6 +178,37 @@ def run_ingestion():
         try:
             if t["type"] == "html":
                 content = extract_html(t["url"])
+
+                # Add a unified complete chunk for leadership and management so full board is never fragmented
+                if t["id"] == "link_board":
+                    chunks.append({
+                        "chunk_id": "link_board_complete",
+                        "title": "HUDCO Board of Directors (Chairman & MD Sanjay Kulshrestha, Functional Directors, Govt Nominee Directors)",
+                        "url": t["url"],
+                        "priority_tier": t["tier"],
+                        "recency_score": 1.30,
+                        "recency_tier": "Official Live Website (Latest Active)",
+                        "category": t["category"],
+                        "source_type": "official_link",
+                        "fiscal_year": "2026",
+                        "content": content,
+                        "content_sha256": hashlib.sha256(content.encode("utf-8")).hexdigest()
+                    })
+                elif t["id"] == "link_management":
+                    chunks.append({
+                        "chunk_id": "link_management_complete",
+                        "title": "HUDCO Management Team (Chief Vigilance Officer, Senior EDs, EDs, Company Secretary)",
+                        "url": t["url"],
+                        "priority_tier": t["tier"],
+                        "recency_score": 1.30,
+                        "recency_tier": "Official Live Website (Latest Active)",
+                        "category": t["category"],
+                        "source_type": "official_link",
+                        "fiscal_year": "2026",
+                        "content": content,
+                        "content_sha256": hashlib.sha256(content.encode("utf-8")).hexdigest()
+                    })
+
                 paragraphs = content.split("\n\n")
                 cur_chunk = []
                 cur_len = 0

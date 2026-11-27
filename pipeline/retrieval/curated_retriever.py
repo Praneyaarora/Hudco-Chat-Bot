@@ -127,13 +127,17 @@ class CuratedLinksRetriever:
             bonus_score = 0.0
             # Leadership match
             if any(k in query.lower() for k in ["cmd", "chairman", "managing director", "director", "leadership", "board", "kulshrestha"]):
-                if "leadership_board" in category or "board" in url:
+                if chunk.get("chunk_id") == "link_board_complete":
+                    bonus_score += 7.0
+                elif "leadership_board" in category or "board" in url:
                     bonus_score += 4.0
                 elif "leadership_management" in category:
                     bonus_score += 2.5
             # Management match
             if any(k in query.lower() for k in ["cvo", "vigilance", "executive director", "company secretary", "management"]):
-                if "leadership_management" in category:
+                if chunk.get("chunk_id") == "link_management_complete":
+                    bonus_score += 7.0
+                elif "leadership_management" in category:
                     bonus_score += 4.0
             # Corporate office / Head office match
             if any(k in query.lower() for k in ["corporate office", "head office", "headquarter", "address", "lodhi road", "registered office"]):
