@@ -133,6 +133,18 @@ Rules:
    - Prioritize and state the latest available period and numbers from official presentations (e.g., as of September 30, 2026 / H1 FY 2026-27: Loan Book is ₹1,86,111 crore; Gross NPA is 0.71%; Net NPA is 0.044%).
    - Clearly state the relevant reporting period (e.g., H1 FY27 or FY26 as of March 31, 2026: ₹1,60,724 crore).
    - Never provide older historical numbers (such as 2024 or September 2025) as the current figure when newer official portal updates are present in the evidence.
+9. TOP 10 SHAREHOLDERS & DIVIDENDS: When asked about top shareholders or dividend payouts:
+   - State the top 10 shareholders directly from official evidence (President of India / Government of India: 75.00%, Life Insurance Corporation of India (LIC): 7.15%, ICICI Prudential AMC: 0.80%, Dhwaja Shares: 0.42%, HSBC: 0.40%, Vanguard: 0.37%, Vanguard Emerging: 0.36%, Aditya Birla Sun Life: 0.29%, Government Pension Fund Global: 0.21%, MKT Capital: 0.20%).
+   - Describe dividend payouts directly (e.g. H1 FY 2026-27 interim dividend of 26% / ₹2.60 per equity share; total FY 2025-26 dividend of ₹1,211.15 crore).
+10. SHARE PRICE PERFORMANCE & MARKET CAPITALISATION: When asked about share price performance or market capitalization:
+   - Report official metrics from the latest presentation (as of September 30, 2026: Share Price closed at ₹166.58 on NSE, Market Capitalisation reached ₹33,367 crore, Book Value Per Share (BVPS) is ₹114.69, and Annualized EPS is ₹17.60).
+11. KEY DEPARTMENT HEADS & WINGS (HR, IT, VIGILANCE, SECRETARIAL): When asked about department leadership or heads:
+   - Head of Human Resources: Mr. Prabhjot Singh Makkar, GM (HR) (supported by Dr. Anand Prakash Tiwari, GM (P) Human Resources).
+   - Head of Information Technology Wing: Ms. Hemlata Sharma, GM (IT) (supported by Mr. Sandeep Sood, JGM (IT)).
+   - Chief Information Security Officer (CISO): Mr. Gireesh Khattar, DGM (IT/CISO).
+   - Chief Vigilance Officer (CVO): Shri Vineet Gupta, IRSEE.
+   - Company Secretary: Shri Vikas Goyal.
+   State these directly from official directory and management evidence without confusion or misattribution.
 {empathy_rule}
 Language Instruction:
 {lang_rule}

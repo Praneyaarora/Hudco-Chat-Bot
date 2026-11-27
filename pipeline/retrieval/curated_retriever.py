@@ -17,6 +17,7 @@ import logging
 from typing import List, Dict, Any, Optional
 
 from pipeline.retrieval.contracts import RetrievalResultItem, TableMetadata
+from pipeline.retrieval.department_router import expand_query_acronyms
 
 logger = logging.getLogger("QwenWorker")
 
@@ -93,7 +94,8 @@ class CuratedLinksRetriever:
         if not self._is_loaded or not self.chunks:
             return []
 
-        q_tokens = self._tokenize(query)
+        expanded_query = expand_query_acronyms(query)
+        q_tokens = self._tokenize(expanded_query)
         if not q_tokens:
             return []
 
@@ -126,9 +128,10 @@ class CuratedLinksRetriever:
 
             bonus_score = 0.0
             q_lower = query.lower()
+            exp_q_lower = expanded_query.lower()
 
             # 1. Leadership & Board match
-            if any(k in q_lower for k in ["cmd", "chairman", "managing director", "director", "leadership", "board", "kulshrestha"]):
+            if any(k in q_lower or k in exp_q_lower for k in ["cmd", "chairman", "managing director", "director", "leadership", "board", "kulshrestha"]):
                 if chunk.get("chunk_id") == "link_board_complete":
                     bonus_score += 8.0
                 elif "leadership_board" in category or "board" in url:
@@ -137,18 +140,46 @@ class CuratedLinksRetriever:
                     bonus_score += 2.5
 
             # 2. Management & Vigilance match
-            if any(k in q_lower for k in ["cvo", "vigilance", "executive director", "company secretary", "management"]):
+            if any(k in q_lower or k in exp_q_lower for k in ["cvo", "vigilance", "executive director", "company secretary", "management"]):
                 if chunk.get("chunk_id") == "link_management_complete":
                     bonus_score += 8.0
                 elif "leadership_management" in category:
                     bonus_score += 4.5
 
+            # 2b. Human Resources (HR) match
+            if any(k in q_lower or k in exp_q_lower for k in ["hr", "human resource", "human resources", "personnel", "makkar"]):
+                if "link_webdirectory_pdf_page_02" in chunk.get("chunk_id", ""):
+                    bonus_score += 8.5
+                elif "webdirectory" in chunk.get("chunk_id", "") or "leadership_management" in category:
+                    bonus_score += 4.0
+
+            # 2c. Information Technology (IT) match
+            if any(k in q_lower or k in exp_q_lower for k in ["it", "information technology", "head of it", "gm it", "it wing", "ciso", "cyber security", "hemlata", "infotech"]):
+                if "link_webdirectory_pdf_page_03" in chunk.get("chunk_id", ""):
+                    bonus_score += 8.5
+                elif "careers" in category or "webdirectory" in chunk.get("chunk_id", "") or "leadership_management" in category:
+                    bonus_score += 4.0
+
             # 3. Finances, Loan Book, Sanctions, Disbursements & Asset Quality match
-            if any(k in q_lower for k in ["loan book", "loan outstanding", "sanction", "disburse", "profit", "pat", "net worth", "gnpa", "nnpa", "asset quality", "presentation", "financial result", "financial year", "interest income", "borrowing", "balance sheet", "p&l"]):
+            if any(k in q_lower or k in exp_q_lower for k in ["loan book", "loan outstanding", "sanction", "disburse", "profit", "pat", "net worth", "gnpa", "nnpa", "asset quality", "presentation", "financial result", "financial year", "interest income", "borrowing", "balance sheet", "p&l"]):
                 if chunk.get("chunk_id") == "link_fin_latest_h1fy27_presentation":
                     bonus_score += 9.0
                 elif "finances" in category:
                     bonus_score += 5.5
+
+            # 3b. Shareholders, Top 10 Ownership & Dividends match
+            if any(k in q_lower or k in exp_q_lower for k in ["shareholder", "shareholders", "top 10 shareholders", "shareholding", "promoter", "lic"]):
+                if chunk.get("chunk_id") == "link_fin_latest_h1fy27_presentation":
+                    bonus_score += 8.5
+                elif "shareholding" in category or "dividend" in category:
+                    bonus_score += 6.0
+
+            # 3c. Share Price Performance & Market Cap match
+            if any(k in q_lower or k in exp_q_lower for k in ["share price", "stock price", "market cap", "market capitalisation", "pe ratio", "eps", "bvps"]):
+                if chunk.get("chunk_id") == "link_fin_latest_h1fy27_presentation":
+                    bonus_score += 8.5
+                elif "finances" in category:
+                    bonus_score += 5.0
 
             # 4. Bonds & 54EC & Debentures match
             if any(k in q_lower for k in ["54ec", "bond", "bonds", "debenture", "debenture trustee", "rta", "kfin", "unclaimed bond", "series ii", "capital gain"]):

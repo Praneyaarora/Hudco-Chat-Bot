@@ -2032,6 +2032,35 @@ HUDCO Bot synthesizes verified figures directly from HUDCO's Q2 & H1 FY27 Invest
 - **Loan Disbursements**: ₹35,372 crore (H1 FY27) vs ₹25,838 crore (H1 FY26, 37% YoY growth).
 - **Pristine Asset Quality**: Gross NPA reduced to **0.71%**, Net NPA reduced to **0.044%**, Provision Coverage Ratio (PCR) at **93.76%**.
 - **Portfolio Composition**: **99.25%** of total loans are to Government and government-sponsored entities.
+- **Top 10 Shareholders (Slide 9)**: Government of India (President of India): 75.00%, LIC of India: 7.15%, ICICI Prudential AMC: 0.80%, Dhwaja Shares: 0.42%, HSBC: 0.40%, Vanguard: 0.37%, Vanguard Emerging: 0.36%, Aditya Birla Sun Life: 0.29%, Govt Pension Fund Global: 0.21%, MKT Capital: 0.20%.
+- **Dividend Payout (Slide 9)**: H1 FY 2026–27 Interim Dividend of 26% (₹2.60 per equity share); total FY 2025–26 dividend of ₹1,211.15 crore.
+- **Share Price Performance (Slide 10)**: As of September 30, 2026, NSE closing share price is ₹166.58, Market Capitalisation reached ₹33,367 crore, BVPS is ₹114.69, and Annualized EPS is ₹17.60.
+
+### 28.5 Domain Acronym Expansion & Department Short Forms
+
+Domain short forms are automatically expanded into canonical search terms without losing the original acronym:
+- `HR` $\rightarrow$ `human resources hr` (matched to GM (HR) Prabhjot Singh Makkar & HR Wing in `webdirectory.pdf`)
+- `IT` $\rightarrow$ `information technology it` (matched to GM (IT) Hemlata Sharma & CISO Gireesh Khattar in `webdirectory.pdf`)
+- `MD` / `CMD` $\rightarrow$ `managing director md` / `chairman and managing director cmd` (Sanjay Kulshrestha)
+- `ACC` $\rightarrow$ `accounts acc`
+- `54EC` $\rightarrow$ `54ec capital gain bonds`
+- `PAT` / `PBT` $\rightarrow$ `profit after tax pat` / `profit before tax pbt`
+- `EPS` / `BVPS` $\rightarrow$ `earnings per share eps` / `book value per share bvps`
+- `GNPA` / `NNPA` $\rightarrow$ `gross non performing assets gnpa` / `net non performing assets nnpa`
+
+### 28.6 Dynamic Linked Document Crawler (No Hardcoding)
+
+Rather than force-feeding static PDFs, the **Dynamic Linked Document Crawler** in `pipeline/retrieval/department_router.py`:
+1. Dynamically discovers quarterly investor presentation and disclosure PDFs hosted on `https://hudco.org.in/financial-presentations`.
+2. Inspects and downloads newly published PDFs (e.g. `MPQ2FY27.pdf`), parsing slides in real-time with `pypdf`.
+3. Employs slide-level scoring to pinpoint specific presentation pages (Slide 9 for Top 10 Shareholders & Dividends, Slide 10 for Share Price Performance & Market Cap, Slide 13 for Loan Book).
+4. Employs in-memory caching (`LIVE_PDF_CACHE`) to deliver sub-millisecond query responses across repetitive user requests.
+
+### 28.7 Conversation Context Disambiguation & Pronoun Resolution
+
+The **QueryContextRewriter (`pipeline/context/query_context_rewriter.py`)** eliminates conversational stickiness while accurately handling pronouns:
+- **No Topic Bleed / Stickiness**: Completely independent questions (e.g. *"who is the head of hr?"* asked after discussing CMD) are never contaminated with previous entities.
+- **Precise Pronoun Grounding**: Follow-up queries containing pronouns (e.g. *"how can I apply for it?"* following 54EC bonds) seamlessly extract the target topic (`54ec bond`) and rewrite to *"how can I apply for 54ec bond?"* without falsely routing to recruitment or careers.
 
 
 

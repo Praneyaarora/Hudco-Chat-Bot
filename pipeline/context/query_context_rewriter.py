@@ -39,7 +39,7 @@ INTENT_NORMALIZATIONS = [
     ),
     # Careers / Jobs
     (
-        re.compile(r"\b(job|naukri|career|apply|vacancy|recruitment|bharti)\b", re.IGNORECASE),
+        re.compile(r"\b(job|naukri|career|careers|vacancy|vacancies|recruitment|bharti)\b", re.IGNORECASE),
         "HUDCO recruitment careers apply job vacancies official portal"
     ),
     # Office visit / Location inquiries
@@ -60,6 +60,18 @@ INTENT_NORMALIZATIONS = [
 ]
 
 
+def _get_turn_role(turn: Any) -> str:
+    if isinstance(turn, dict):
+        return turn.get("role", "")
+    return getattr(turn, "role", "")
+
+
+def _get_turn_content(turn: Any) -> str:
+    if isinstance(turn, dict):
+        return turn.get("content", "")
+    return getattr(turn, "content", "")
+
+
 class QueryContextRewriter:
     """
     Enriches conversational follow-ups and informal Hinglish queries into canonical,
@@ -71,21 +83,28 @@ class QueryContextRewriter:
 
     def needs_rewriting(self, query: str, recent_turns: List[ChatMessage]) -> bool:
         """Determines if the query is a follow-up or requires entity augmentation."""
+        if not recent_turns:
+            return False
+
         q_strip = query.strip()
-        word_count = len(q_strip.split())
+        q_lower = q_strip.lower()
 
-        # If it's a short reply (e.g. "Haryana mein", "Gurgaon mein kya?", "aur loans?")
-        if recent_turns and word_count <= 6:
+        # 1. An explicit pronoun or follow-up starter definitely needs resolution
+        if PRONOUN_PATTERN.search(q_strip) or FOLLOW_UP_STARTERS.search(q_strip):
             return True
 
-        if recent_turns and (PRONOUN_PATTERN.search(q_strip) or FOLLOW_UP_STARTERS.search(q_strip)):
+        # 2. Incomplete elliptical follow-up fragments (e.g. "and loans?", "aur dividend?", "what about 54ec?")
+        if any(q_lower.startswith(prefix) for prefix in ["and ", "what about ", "how about ", "also ", "aur ", "or ", "in addition "]):
             return True
 
-        # Check if query mentions a location or office intent informally
-        if any(w in q_strip.lower() for w in ["haryana", "gurgaon", "punjab", "chandigarh", "delhi", "bhopal", "patna", "jaipur"]):
-            if "hudco" not in q_strip.lower():
+        # 3. Location clarification replies (e.g. "Haryana mein", "Gurgaon mein kya?")
+        if any(w in q_lower for w in ["haryana", "gurgaon", "gurugram", "chandigarh", "punjab", "delhi", "mumbai", "chennai", "kolkata", "bangalore", "bengaluru", "hyderabad", "lucknow", "patna", "jaipur", "bhopal"]):
+            if "hudco" not in q_lower and len(q_strip.split()) <= 4:
                 return True
 
+        # If query is a complete grammatically independent question with its own subject
+        # (e.g., "who is the head of hr?", "who are the board members?", "what is the share price of hudco?"),
+        # NEVER rewrite or contaminate with previous turn's entities.
         return False
 
     def rewrite_query(
@@ -103,7 +122,7 @@ class QueryContextRewriter:
         # 1. Check if previous bot response was asking for location clarification
         if recent_turns:
             last_turn = recent_turns[-1]
-            last_bot_content = last_turn.content.lower() if last_turn.role == "assistant" else ""
+            last_bot_content = _get_turn_content(last_turn).lower() if _get_turn_role(last_turn) == "assistant" else ""
 
             # If previous bot response asked for a location / city / state:
             if any(term in last_bot_content for term in ["city or state", "regional office", "registered head office", "sheher ya rajya"]):
@@ -114,7 +133,6 @@ class QueryContextRewriter:
                     return rewritten
 
         # 2. Check if query is an informal Hinglish office inquiry with location
-        # e.g., "mereko hudco jana ha haryana mien office ha kya?" or "hudco ka office gurgaon mein hai kya?"
         loc_match = re.search(r"\b(haryana|gurgaon|gurugram|chandigarh|punjab|delhi|mumbai|chennai|kolkata|bangalore|bengaluru|hyderabad|lucknow|ahmedabad|patna|jaipur|bhopal|shimla|ranchi|bhubaneswar|dehradun|guwahati|thiruvananthapuram)\b", q_lower)
         if loc_match and any(w in q_lower for w in ["office", "branch", "jana", "visit", "kahan", "kaha", "hai kya", "kaha ha"]):
             city = loc_match.group(1).title()
@@ -122,39 +140,52 @@ class QueryContextRewriter:
             logger.info("Informal Hinglish location query canonicalized: '%s' -> '%s'", current_query, rewritten)
             return rewritten
 
-        # 3. Check for specific informal Hinglish intents (complaint, careers, financials)
+        # 3. Standard Multi-turn Pronoun & Elliptical Resolution
+        if self.needs_rewriting(current_query, recent_turns):
+            # Extract core entity from prior user / assistant turns
+            stop_words = {
+                "what", "is", "the", "are", "of", "and", "in", "to", "for", "a", "an", "hudco",
+                "hai", "kya", "ka", "ki", "ke", "tell", "me", "about", "explain", "give", "details",
+                "information", "please", "batao", "bataiye", "how", "can", "i", "we", "do", "you",
+                "know", "show", "many", "much", "sir", "madam", "who", "whom"
+            }
+
+            prior_entity = ""
+            # Search backwards through user messages first for the primary topic
+            for msg in reversed(recent_turns):
+                if _get_turn_role(msg) == "user":
+                    words = [re.sub(r"[^\w]", "", w) for w in _get_turn_content(msg).split()]
+                    meaningful = [w for w in words if w.lower() not in stop_words and len(w) > 1]
+                    if meaningful:
+                        prior_entity = " ".join(meaningful[:2])
+                        break
+
+            if not prior_entity:
+                for msg in reversed(recent_turns):
+                    words = [re.sub(r"[^\w]", "", w) for w in _get_turn_content(msg).split()]
+                    meaningful = [w for w in words if w.lower() not in stop_words and len(w) > 1]
+                    if meaningful:
+                        prior_entity = " ".join(meaningful[:2])
+                        break
+
+            if prior_entity:
+                # If current query contains a pronoun, replace the pronoun directly with the prior entity
+                if PRONOUN_PATTERN.search(current_query):
+                    rewritten = PRONOUN_PATTERN.sub(prior_entity, current_query, count=1)
+                    logger.info("Contextual pronoun resolved: '%s' -> '%s'", current_query, rewritten)
+                    return rewritten
+
+                # If current query is an elliptical follow-up starter (e.g. "and loans?", "aur dividend?"):
+                if FOLLOW_UP_STARTERS.search(current_query):
+                    enhanced = f"{current_query} ({prior_entity})"
+                    logger.info("Enhanced elliptical follow-up: '%s' -> '%s'", current_query, enhanced)
+                    return enhanced
+
+        # 4. Check for standalone informal Hinglish intents (complaint, careers, financials)
         if "hudco" not in q_lower:
-            # Check if current turn is asking about complaint, jobs, or profit
             for pattern, canonical_text in INTENT_NORMALIZATIONS:
                 if pattern.search(q_lower):
                     logger.info("Intent normalized: '%s' -> '%s'", current_query, canonical_text)
                     return canonical_text
-
-        # 4. Standard Multi-turn Pronoun Resolution
-        if not self.needs_rewriting(current_query, recent_turns):
-            return current_query
-
-        # Extract last user query and entities
-        last_user_query = ""
-        for msg in reversed(recent_turns):
-            if msg.role == "user":
-                last_user_query = msg.content.strip()
-                break
-
-        keywords = []
-        for word in last_user_query.split():
-            clean = re.sub(r"[^\w]", "", word)
-            if clean.lower() not in {"what", "is", "the", "are", "of", "and", "in", "to", "for", "a", "an", "hudco", "hai", "kya", "ka", "ki", "ke"}:
-                keywords.append(clean)
-
-        topic = " ".join(keywords[:4])
-        if topic:
-            rewritten = PRONOUN_PATTERN.sub(topic, current_query, count=1)
-            if rewritten.lower() != current_query.lower():
-                logger.info("Contextually rewritten query: '%s' -> '%s'", current_query, rewritten)
-                return rewritten
-            enhanced = f"{current_query} ({topic})"
-            logger.info("Enhanced follow-up query: '%s' -> '%s'", current_query, enhanced)
-            return enhanced
 
         return current_query

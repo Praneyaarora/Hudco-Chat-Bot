@@ -9,8 +9,9 @@ from pipeline.retrieval.scoring import (
     filter_candidate_chunks_by_temporal_intent,
     rerank_chunks_with_recency,
 )
-from pipeline.retrieval.department_router import DepartmentRouter, DEPARTMENTS
+from pipeline.retrieval.department_router import DepartmentRouter, DEPARTMENTS, expand_query_acronyms
 from pipeline.retrieval.curated_retriever import CuratedLinksRetriever
+from pipeline.context.query_context_rewriter import QueryContextRewriter
 
 
 class TestDepartmentAndTemporalRouting(unittest.TestCase):
@@ -133,6 +134,79 @@ class TestDepartmentAndTemporalRouting(unittest.TestCase):
         self.assertGreater(len(items), 0)
         has_cmd = any("Sanjay Kulshrestha" in it.content for it in items)
         self.assertTrue(has_cmd, "CMD Shri Sanjay Kulshrestha must be retrieved in leadership evidence")
+
+    def test_acronym_expansion(self):
+        self.assertIn("human resources", expand_query_acronyms("who is head of hr?"))
+        self.assertIn("information technology", expand_query_acronyms("who is head of it?"))
+        self.assertIn("managing director", expand_query_acronyms("who is the md of hudco?"))
+        self.assertIn("profit after tax", expand_query_acronyms("what is pat in q2?"))
+
+    def test_human_resources_department_retrieval(self):
+        q = "who is the head of hr?"
+        dept = self.router.classify_query(q)
+        self.assertIsNotNone(dept)
+        self.assertEqual(dept.dept_id, "human_resources_department")
+
+        _, items = self.router.route_and_retrieve(q, top_k=3)
+        self.assertGreater(len(items), 0)
+        has_hr_head = any("Prabhjot Singh Makkar" in it.content or "GM(HR)" in it.content for it in items)
+        self.assertTrue(has_hr_head, "Head of HR Prabhjot Singh Makkar must be retrieved in HR evidence")
+
+    def test_information_technology_department_retrieval(self):
+        q = "who is the head of it?"
+        dept = self.router.classify_query(q)
+        self.assertIsNotNone(dept)
+        self.assertEqual(dept.dept_id, "information_technology_department")
+
+        _, items = self.router.route_and_retrieve(q, top_k=3)
+        self.assertGreater(len(items), 0)
+        has_it_head = any("Hemlata Sharma" in it.content or "GM(IT)" in it.content for it in items)
+        self.assertTrue(has_it_head, "Head of IT Hemlata Sharma must be retrieved in IT evidence")
+
+    def test_shareholders_and_dividend_routing(self):
+        q = "who are top 10 shareholders of hudco? and describe their dividend."
+        dept = self.router.classify_query(q)
+        self.assertIsNotNone(dept)
+        self.assertEqual(dept.dept_id, "shareholders_and_dividends")
+
+        _, items = self.router.route_and_retrieve(q, top_k=3)
+        self.assertGreater(len(items), 0)
+        has_lic_or_dividend = any("LIC" in it.content or "dividend" in it.content.lower() or "shareholding" in it.content.lower() for it in items)
+        self.assertTrue(has_lic_or_dividend, "Evidence must contain shareholder/dividend details")
+
+    def test_share_price_performance_routing(self):
+        q = "what is share price performance of hudco?"
+        dept = self.router.classify_query(q)
+        self.assertIsNotNone(dept)
+        self.assertEqual(dept.dept_id, "market_and_share_price")
+
+        _, items = self.router.route_and_retrieve(q, top_k=3)
+        self.assertGreater(len(items), 0)
+        has_mcap_or_price = any("market capitalisation" in it.content.lower() or "share price" in it.content.lower() for it in items)
+        self.assertTrue(has_mcap_or_price, "Evidence must contain share price / market capitalisation details")
+
+    def test_query_context_rewriter_no_stickiness_and_pronoun_resolution(self):
+        rewriter = QueryContextRewriter()
+
+        # Case 1: Independent question after asking about CMD must NOT stick to CMD
+        history_cmd = [
+            {"role": "user", "content": "who is the chairman and cmd?"},
+            {"role": "assistant", "content": "The Chairman & Managing Director of HUDCO is Shri Sanjay Kulshrestha."}
+        ]
+        rewritten_hr = rewriter.rewrite_query("who is the head of hr?", history_cmd)
+        self.assertNotIn("cmd", rewritten_hr.lower())
+        self.assertNotIn("sanjay kulshrestha", rewritten_hr.lower())
+        self.assertEqual(rewritten_hr.strip(), "who is the head of hr?")
+
+        # Case 2: Pronoun follow-up "how can I apply for it?" after 54EC bond must resolve to 54ec bond
+        history_54ec = [
+            {"role": "user", "content": "what are the features of 54ec bonds?"},
+            {"role": "assistant", "content": "54EC Capital Gain Bonds offer tax exemption on long-term capital gains."}
+        ]
+        rewritten_apply = rewriter.rewrite_query("how can I apply for it?", history_54ec)
+        self.assertIn("54ec", rewritten_apply.lower())
+        self.assertNotIn("job", rewritten_apply.lower())
+        self.assertNotIn("recruitment", rewritten_apply.lower())
 
 
 if __name__ == "__main__":
