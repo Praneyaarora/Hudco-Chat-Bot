@@ -116,6 +116,11 @@ A deterministic, audit-grade document ingestion, coordinate-aware structural seg
   - [26.3 Official Domain Priority: Tavily `hudco.org.in` Fallback](#263-official-domain-priority-tavily-hudcoorgin-fallback)
   - [26.4 Developer Workspace Telemetry & Score Breakdown](#264-developer-workspace-telemetry--score-breakdown)
   - [26.5 Verified Local Run Commands (PowerShell Guide)](#265-verified-local-run-commands-powershell-guide)
+- [27. 4-Tier Source Preference Hierarchy, Curated Live Portal Ingestion & Autofill Immunity](#27-4-tier-source-preference-hierarchy-curated-live-portal-ingestion--autofill-immunity)
+  - [27.1 4-Tier Grounding Hierarchy](#271-4-tier-grounding-hierarchy)
+  - [27.2 Curated Official Live Sources & Ingestion Store](#272-curated-official-live-sources--ingestion-store)
+  - [27.3 General Web Search Fallback Disclaimer](#273-general-web-search-fallback-disclaimer)
+  - [27.4 Browser Autofill Immunity Fix](#274-browser-autofill-immunity-fix)
 
 ---
 
@@ -1910,5 +1915,71 @@ $env:LOCAL_LLM_ENDPOINT="http://127.0.0.1:8000/v1"
 ```powershell
 .\.venv\Scripts\python.exe -m unittest discover -s tests -p "test_*.py"
 ```
+
+---
+
+## 27. 4-Tier Source Preference Hierarchy, Curated Live Portal Ingestion & Autofill Immunity
+
+### 27.1 4-Tier Grounding Hierarchy
+
+HUDCO Bot enforces a strict mathematical preference hierarchy for all user queries:
+
+```mermaid
+flowchart TD
+    UserQuery["User Query"] --> Tier1{"Tier 1: Curated Official Live HUDCO Links\n(Recency: 1.02 - 1.20)"}
+    Tier1 -- "High Relevance Match (>= 0.25)" --> Ans1["Synthesize Answer with Direct Link Provenance\n(Highest Priority)"]
+    Tier1 -- "No Match / Low Relevance" --> Tier2{"Tier 2: Audited Annual Reports (FY 2014-26)\n(Latest FY 2025-26 Recency: 1.00)"}
+    Tier2 -- "Grounding Sufficient (>= 0.40)" --> Ans2["Synthesize from Annual Report Canonical Chunks\n(Web Search Bypassed)"]
+    Tier2 -- "Insufficient Local Coverage" --> Tier3{"Tier 3: Targeted Official Web Search\n(hudco.org.in Priority)"}
+    Tier3 -- "Official Web Match Found" --> Ans3["Synthesize from Verified hudco.org.in Web Pages"]
+    Tier3 -- "Zero Official Web Results" --> Tier4["Tier 4: General Web Search Fallback\n(Mandatory Independent Verification Disclaimer)"]
+```
+
+1. **Tier 1 — Curated Official Live HUDCO Links (Highest Preference)**:
+   - Covers official leadership, corporate office, contact directory, shareholder meetings, organogram, telephone directory, and FAQs.
+   - Awarded highest recency scores ($1.02 \dots 1.20$), ensuring live website changes take precedence over older published annual reports.
+2. **Tier 2 — Audited Annual Reports**:
+   - Covers audited financial figures, loan schemes, balance sheets, and regulatory disclosures from FY 2014-15 through FY 2025-26.
+   - FY 2025-26 receives maximum annual report recency ($1.00$); historical queries dynamically target the requested year.
+3. **Tier 3 — Targeted Official Web Search (`site:hudco.org.in`)**:
+   - Invoked only if Tier 1 and Tier 2 lack coverage. Scoped strictly to `hudco.org.in`.
+4. **Tier 4 — General Web Search Fallback (Last Resort)**:
+   - Invoked only if all previous tiers yield 0 results.
+   - Mandatory disclaimer attached to response:
+     > ⚠️ *Please note: This information was retrieved via general web search as it was not available in HUDCO's official website pages or annual reports, and may require independent verification.*
+
+### 27.2 Curated Official Live Sources & Ingestion Store
+
+All curated sources are ingested and indexed in `data/curated_links/official_hudco_links.json` by `pipeline/retrieval/ingest_curated_links.py`:
+
+| Source URL | Content & Scope | Tier Category | Recency Score |
+| :--- | :--- | :--- | :--- |
+| `https://hudco.org.in/Leadership?type=board` | Chairman & MD (Sanjay Kulshrestha), Functional Directors, Govt Nominees | Tier 1A - Official Live Web Page | **1.20** |
+| `https://hudco.org.in/Leadership?type=management` | CVO (Vineet Gupta), Senior EDs, EDs, Company Secretary | Tier 1A - Official Live Web Page | **1.20** |
+| `https://hudco.org.in/corporate-office` | Registered & Corporate Office, Headquarters, Phone, Email | Tier 1A - Official Live Web Page | **1.15** |
+| `https://hudco.org.in/contact-us` | Helpline, Grievance Officer, RTI, Regional Offices | Tier 1A - Official Live Web Page | **1.15** |
+| `https://hudco.org.in/shareholders-meetings` | AGMs, EGMs, voting results, shareholder disclosures | Tier 1A - Official Live Web Page | **1.15** |
+| `https://hudco.org.in/writereaddata/orgchart.pdf` | Official organogram & organizational structure | Tier 1B - Official Organogram PDF | **1.05** |
+| `https://hudco.org.in/writereaddata/webdirectory.pdf` | Internal telephone directory & officer extensions | Tier 1C - Internal Directory PDF | **1.02** |
+| `https://www.hudco.org.in/writereaddata/FAQ-hudco.pdf` | Official corporate FAQs | Tier 1C - Official FAQ PDF | **1.03** |
+
+To refresh curated link chunks at any time:
+```powershell
+.\.venv\Scripts\python.exe pipeline/retrieval/ingest_curated_links.py
+```
+
+### 27.3 General Web Search Fallback Disclaimer
+
+When Tier 4 general web search is invoked, the server automatically appends the explicit note:
+> ⚠️ **Note**: *Please note: This information was retrieved via general web search as it was not available in HUDCO's official website pages or annual reports, and may require independent verification.*
+
+### 27.4 Browser Autofill Immunity Fix
+
+Browsers previously mistook `searchChatsInput` or `chatInputText` for credential inputs due to background password forms. This has been permanently resolved:
+- `searchChatsInput`: Equipped with `autocomplete="off"`, `autocorrect="off"`, `autocapitalize="off"`, `spellcheck="false"`, `name="hudco_conversation_filter_search"`, `data-lpignore="true"`, and `data-form-type="other"`.
+- `chatInputText`: Enclosed in `autocomplete="off"` form with non-credential input identifiers.
+- Developer API key inputs: Configured with `autocomplete="new-password"` and `data-lpignore="true"`.
+- JavaScript DOM immunity: Auto-clears erroneously injected credentials on page load.
+
 
 

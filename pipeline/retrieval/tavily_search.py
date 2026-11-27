@@ -150,6 +150,9 @@ class TavilySearchAgent:
 
             final_score = round(min(1.0, max(0.0, base_score + domain_bonus + recency_bonus)), 4)
 
+            is_hudco_domain = ("hudco.org" in domain) or ("hudco.org.in" in domain)
+            src_type = "hudco_web_search" if is_hudco_domain else "general_web_search"
+
             validated_items.append({
                 "rank": len(validated_items) + 1,
                 "evidence_index": len(validated_items) + 1,
@@ -168,9 +171,11 @@ class TavilySearchAgent:
                     "domain_bonus": domain_bonus,
                     "recency_bonus": recency_bonus,
                     "domain": domain,
+                    "source_type": src_type,
                     "formula": f"{base_score:.2f} (base) + {domain_bonus:.2f} (domain) + {recency_bonus:.2f} (recency)",
                 },
                 "is_web": True,
+                "source_type": src_type,
                 "source_provider": provider_name,
                 "source_filename": f"{provider_label} ({domain or 'hudco.org.in'})",
                 "citation_label": f"Web [{provider_label}]: {title[:48]}",

@@ -81,7 +81,14 @@ def build_synthesis_prompt(
 
     for idx, raw_item in enumerate(evidence_items, start=1):
         item = _normalize_item(raw_item)
-        if is_web or item.get("is_web"):
+        src_type = item.get("source_type", "")
+        if src_type == "official_link" or (item.get("url") and not is_web and not item.get("is_web")):
+            title = item.get("title") or item.get("section_title") or "Official Live HUDCO Link"
+            url = item.get("url") or ""
+            content = item.get("content") or item.get("text") or ""
+            tier = item.get("recency_tier") or "Official Live Website"
+            context_lines.append(f"--- EVIDENCE ITEM [{idx}] (Official HUDCO Live Source: {title} | {url} | Tier: {tier}) ---\n{content}\n")
+        elif is_web or item.get("is_web"):
             title = item.get("title") or item.get("section_title") or "Web Source"
             url = item.get("url") or ""
             content = item.get("content") or item.get("snippet") or item.get("body") or ""

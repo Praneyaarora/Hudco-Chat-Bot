@@ -93,6 +93,8 @@ class RetrievalResultItem(BaseModel):
     recency_score: Optional[float] = Field(None, description="Recency weighting component (1.0 for latest FY 2025-26)")
     recency_tier: Optional[str] = Field(None, description="Human-readable recency tier label")
     scoring_breakdown: Optional[Dict[str, Any]] = Field(None, description="Diagnostic breakdown of scoring components")
+    url: Optional[str] = Field(None, description="Direct URL if retrieved from official website or web search")
+    source_type: Optional[str] = Field("annual_report", description="'official_link', 'annual_report', 'hudco_web_search', or 'general_web_search'")
 
 
 class RetrievalResponse(BaseModel):

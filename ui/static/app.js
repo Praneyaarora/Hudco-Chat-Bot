@@ -34,6 +34,31 @@ const STATE = {
 // ============================================================================
 document.addEventListener("DOMContentLoaded", async () => {
   initTheme();
+
+  // Defuse browser autofill filling credentials into search & chat input
+  const searchInput = document.getElementById("searchChatsInput");
+  const chatInput = document.getElementById("chatInputText");
+  if (searchInput) {
+    searchInput.value = "";
+    setTimeout(() => {
+      if (searchInput && document.activeElement !== searchInput && (searchInput.value.includes("@") || searchInput.value.length > 0)) {
+        searchInput.value = "";
+      }
+    }, 150);
+    setTimeout(() => {
+      if (searchInput && document.activeElement !== searchInput && (searchInput.value.includes("@") || searchInput.value.length > 0)) {
+        searchInput.value = "";
+      }
+    }, 600);
+  }
+  if (chatInput) {
+    setTimeout(() => {
+      if (chatInput && document.activeElement !== chatInput && (chatInput.value.includes("@") || chatInput.value.length > 0)) {
+        chatInput.value = "";
+      }
+    }, 200);
+  }
+
   await checkAuthStatus();
   await loadServerConfig();
   await loadConversations();
@@ -1299,17 +1324,39 @@ function updateDevViewWithData(data) {
 
   if (stratBanner) {
     stratBanner.style.display = "flex";
-    if (data.used_web_search) {
-      if (stratIcon) stratIcon.textContent = "🌐";
-      if (stratTitle) stratTitle.textContent = "Retrieval Strategy: Official Web Search (hudco.org.in first)";
-      if (stratReason) stratReason.textContent = (data.local_sufficiency && data.local_sufficiency.reason) || "Local reports yielded insufficient groundable evidence.";
+    const topItem = (data.results && data.results[0]) || (lastEvidenceResults && lastEvidenceResults[0]);
+    const isOfficialLink = topItem && (topItem.source_type === "official_link" || (topItem.url && !data.used_web_search));
+
+    if (isOfficialLink) {
+      if (stratIcon) stratIcon.textContent = "🏛️";
+      if (stratTitle) stratTitle.textContent = "Retrieval Strategy: Official Live HUDCO Link (Top Preference)";
+      if (stratReason) stratReason.textContent = "Verified live web information retrieved directly from official HUDCO corporate portal.";
       if (stratPill) {
-        stratPill.textContent = "WEB SEARCH";
-        stratPill.className = "diag-status-pill amber";
+        stratPill.textContent = "OFFICIAL LINK";
+        stratPill.className = "diag-status-pill green";
+      }
+    } else if (data.used_web_search) {
+      const isOfficialWeb = topItem && (topItem.source_type === "hudco_web_search" || (topItem.domain && topItem.domain.includes("hudco.org")));
+      if (isOfficialWeb) {
+        if (stratIcon) stratIcon.textContent = "🌐";
+        if (stratTitle) stratTitle.textContent = "Retrieval Strategy: Official Website Search (hudco.org.in priority)";
+        if (stratReason) stratReason.textContent = (data.local_sufficiency && data.local_sufficiency.reason) || "Local reports yielded insufficient groundable evidence; official website searched.";
+        if (stratPill) {
+          stratPill.textContent = "HUDCO.ORG.IN";
+          stratPill.className = "diag-status-pill cyan";
+        }
+      } else {
+        if (stratIcon) stratIcon.textContent = "⚠️";
+        if (stratTitle) stratTitle.textContent = "Retrieval Strategy: General Web Search (Unverified Fallback)";
+        if (stratReason) stratReason.textContent = "Information not found in official portal or reports; general web search fallback with disclaimer.";
+        if (stratPill) {
+          stratPill.textContent = "GENERAL WEB";
+          stratPill.className = "diag-status-pill amber";
+        }
       }
     } else {
       if (stratIcon) stratIcon.textContent = "📚";
-      if (stratTitle) stratTitle.textContent = "Retrieval Strategy: Local Chunks Prioritized (Tavily Bypassed)";
+      if (stratTitle) stratTitle.textContent = "Retrieval Strategy: Annual Reports Chunks (Tavily Bypassed)";
       if (stratReason) stratReason.textContent = (data.local_sufficiency && data.local_sufficiency.reason) || "Verified groundable evidence found in annual reports.";
       if (stratPill) {
         stratPill.textContent = "CHUNKS FIRST";
@@ -1362,6 +1409,15 @@ function updateDevViewWithData(data) {
         const scoreDisplay = (scoreVal || 0).toFixed(3);
         const recencyLabel = item.recency_tier || (item.is_web ? "Web" : (item.fiscal_year ? `FY ${item.fiscal_year}` : "Report"));
 
+        let sourceTypeBadge = "";
+        if (item.source_type === "official_link") {
+          sourceTypeBadge = `<span class="evidence-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981; font-weight: 700;">🏛️ Official Live Link</span>`;
+        } else if (item.source_type === "hudco_web_search") {
+          sourceTypeBadge = `<span class="evidence-badge" style="background: rgba(6, 182, 212, 0.15); color: #06b6d4; font-weight: 600;">🌐 hudco.org.in</span>`;
+        } else if (item.source_type === "general_web_search") {
+          sourceTypeBadge = `<span class="evidence-badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; font-weight: 600;">⚠️ General Web</span>`;
+        }
+
         let breakdownHtml = "";
         if (item.scoring_breakdown) {
           const relVal = typeof item.relevance_score === "number" ? item.relevance_score.toFixed(2) : "--";
@@ -1384,6 +1440,7 @@ function updateDevViewWithData(data) {
               <span class="evidence-title-text">${escapeHtml(title)}</span>
             </div>
             <div class="evidence-header-right" style="display:flex; align-items:center; gap:6px;">
+              ${sourceTypeBadge}
               <span class="evidence-badge ${item.is_web ? 'web' : ''}" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8; font-weight:600;">Score: ${scoreDisplay}</span>
               <span class="evidence-badge ${item.is_web ? 'web' : ''}">${escapeHtml(docLabel)}</span>
             </div>
@@ -1391,7 +1448,7 @@ function updateDevViewWithData(data) {
           <div class="evidence-card-body">
             ${breakdownHtml}
             <div class="evidence-text-content">${escapeHtml(item.content || "")}</div>
-            ${item.url ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" class="web-link-btn" style="display:inline-block; margin-top:8px; color:var(--primary-indigo); font-size:0.78rem;">🔗 Visit Source: ${escapeHtml(item.url)}</a>` : ""}
+            ${item.url ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer" class="web-link-btn" style="display:inline-flex; align-items:center; gap:4px; margin-top:8px; color:#38bdf8; font-size:0.8rem; text-decoration:underline;">🔗 Open Official Link: ${escapeHtml(item.url)}</a>` : ""}
           </div>
         `;
         evidenceList.appendChild(card);
@@ -1438,7 +1495,16 @@ function openSourcesModal() {
         const url = item.url || "";
         const pageInfo = item.physical_page ? `Page ${item.physical_page}` : (item.domain || "Web");
 
-        const linkHtml = url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:8px; color:var(--accent-cyan); font-size:0.8rem;">🔗 Open Official Source: ${escapeHtml(url)}</a>` : "";
+        let sourceTypeBadge = "";
+        if (item.source_type === "official_link") {
+          sourceTypeBadge = `<span class="evidence-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981; font-weight: 700;">🏛️ Official Live Link</span>`;
+        } else if (item.source_type === "hudco_web_search") {
+          sourceTypeBadge = `<span class="evidence-badge" style="background: rgba(6, 182, 212, 0.15); color: #06b6d4; font-weight: 600;">🌐 hudco.org.in</span>`;
+        } else if (item.source_type === "general_web_search") {
+          sourceTypeBadge = `<span class="evidence-badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; font-weight: 600;">⚠️ General Web</span>`;
+        }
+
+        const linkHtml = url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:4px; margin-top:8px; color:var(--accent-cyan); font-size:0.8rem; text-decoration:underline;">🔗 Open Official Source: ${escapeHtml(url)}</a>` : "";
 
         const scoreVal = typeof item.composite_score === "number" ? item.composite_score : (typeof item.score === "number" ? item.score : null);
         const scoreTag = scoreVal !== null ? `<span class="evidence-badge" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8; font-weight:600;">Score: ${scoreVal.toFixed(3)}</span>` : "";
@@ -1451,6 +1517,7 @@ function openSourcesModal() {
               <span class="evidence-title-text">${escapeHtml(title)}</span>
             </div>
             <div class="evidence-header-right" style="display:flex; align-items:center; gap:6px;">
+              ${sourceTypeBadge}
               ${scoreTag}
               <span class="evidence-badge ${item.is_web ? 'web' : ''}">${escapeHtml(pageInfo)}</span>
             </div>

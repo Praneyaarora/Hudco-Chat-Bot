@@ -52,7 +52,7 @@
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="searchChatsInput" placeholder="Search conversation history..." oninput="handleSearchChats(this.value)">
+          <input type="search" id="searchChatsInput" name="hudco_conversation_filter_search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other" placeholder="Search conversation history..." oninput="handleSearchChats(this.value)">
         </div>
       </div>
 
@@ -241,10 +241,17 @@
 
         <!-- Floating Input Dock -->
         <div class="input-dock">
-          <form class="input-box-wrapper" id="chatInputForm" onsubmit="handleChatSubmit(event)">
+          <form class="input-box-wrapper" id="chatInputForm" autocomplete="off" onsubmit="handleChatSubmit(event)">
             <textarea
               id="chatInputText"
+              name="hudco_user_query_input"
               class="chat-input-textarea"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+              data-lpignore="true"
+              data-form-type="other"
               placeholder="Ask HUDCO Bot a question about HUDCO reports, head office, careers, or financing..."
               rows="1"
               oninput="autoResizeTextarea(this)"
@@ -331,19 +338,19 @@
                 <div class="settings-details-body">
                   <div class="key-input-row">
                     <label for="geminiKeyInput" class="key-label">Gemini API Key</label>
-                    <input type="password" id="geminiKeyInput" class="styled-input" placeholder="AIzaSy...">
+                    <input type="password" id="geminiKeyInput" class="styled-input" placeholder="AIzaSy..." autocomplete="new-password" data-lpignore="true">
                   </div>
                   <div class="key-input-row">
                     <label for="tavilyKeyInput" class="key-label">Tavily Search API Key</label>
-                    <input type="password" id="tavilyKeyInput" class="styled-input" placeholder="tvly-dev-..." value="">
+                    <input type="password" id="tavilyKeyInput" class="styled-input" placeholder="tvly-dev-..." value="" autocomplete="new-password" data-lpignore="true">
                   </div>
                   <div class="key-input-row">
                     <label for="claudeKeyInput" class="key-label">Anthropic Claude API Key</label>
-                    <input type="password" id="claudeKeyInput" class="styled-input" placeholder="sk-ant-...">
+                    <input type="password" id="claudeKeyInput" class="styled-input" placeholder="sk-ant-..." autocomplete="new-password" data-lpignore="true">
                   </div>
                   <div class="key-input-row">
                     <label for="openaiKeyInput" class="key-label">OpenAI API Key</label>
-                    <input type="password" id="openaiKeyInput" class="styled-input" placeholder="sk-proj-...">
+                    <input type="password" id="openaiKeyInput" class="styled-input" placeholder="sk-proj-..." autocomplete="new-password" data-lpignore="true">
                   </div>
                   <button type="button" class="secondary-btn save-keys-btn" onclick="saveApiKeys()">
                     <span>Save Configuration</span>
@@ -598,7 +605,7 @@
     </div>
   </div>
 
-  <script src="app.js?v=20261105_09"></script>
+  <script src="app.js?v=20261127_01"></script>
 
   <!-- ======================================================================
        EVIDENCE & SOURCES MODAL POPUP (CHAT MODE)

@@ -49,6 +49,7 @@ from pipeline.retrieval.scoring import (
     evaluate_local_sufficiency,
     compute_composite_score,
 )
+from pipeline.retrieval.curated_retriever import CuratedLinksRetriever
 from pipeline.inference.gpu_telemetry import get_gpu_telemetry
 from pipeline.inference.qwen_service import get_qwen_service
 from pipeline.inference.conversational_agent import check_conversational_intent, detect_language, detect_emotional_tone
@@ -95,6 +96,7 @@ class PipelineState:
         self.bm25_index: Optional[Layer4BM25Index] = None
         self.semantic_index: Optional[PersistentVectorIndex] = None
         self.hybrid_retriever: Optional[HybridRetriever] = None
+        self.curated_retriever: Optional[CuratedLinksRetriever] = None
         self.inventory: List[Dict[str, Any]] = []
         self.index_stats: Dict[str, Any] = {}
         self.init_error: Optional[str] = None
@@ -216,6 +218,13 @@ class PipelineState:
                         semantic_index=self.semantic_index,
                     )
                     logger.info("Initialized HybridRetriever (RRF) combining BM25 and Semantic search.")
+
+            # Initialize Curated Official HUDCO Links Retriever (Tier 1 live grounding)
+            try:
+                self.curated_retriever = CuratedLinksRetriever()
+                logger.info("Initialized CuratedLinksRetriever with verified official HUDCO website sources.")
+            except Exception as cl_err:
+                logger.warning(f"Could not initialize CuratedLinksRetriever: {cl_err}")
 
         except Exception as e:
             self.init_error = f"Pipeline initialization failed: {e}"
@@ -868,12 +877,25 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
 
             retrieval_latency_ms = round((time.perf_counter() - t0) * 1000.0, 2)
 
-            # Apply score-based recency prioritization across retrieved local chunks
-            reranked_local = rerank_chunks_with_recency(retrieval_response.results, query=search_query, top_k=top_k)
+            # 1. Retrieve from Curated Official HUDCO Links (Tier 1: Live verified website pages)
+            curated_items = []
+            if GLOBAL_STATE.curated_retriever:
+                try:
+                    curated_items = GLOBAL_STATE.curated_retriever.retrieve(query=search_query, top_k=top_k)
+                except Exception as c_err:
+                    logger.warning(f"CuratedLinksRetriever search failed: {c_err}")
+
+            # 2. Combine with Hybrid Annual Report candidate chunks (Tier 2)
+            combined_candidates = list(curated_items) + list(retrieval_response.results if retrieval_response else [])
+
+            # Apply score-based recency prioritization across all candidate chunks
+            reranked_local = rerank_chunks_with_recency(combined_candidates, query=search_query, top_k=top_k)
 
             evidence_items = []
             for item in reranked_local:
                 breakdown = getattr(item, "scoring_breakdown", None) or (item.get("scoring_breakdown") if isinstance(item, dict) else None)
+                item_url = getattr(item, "url", None) or (item.get("url") if isinstance(item, dict) else None)
+                src_type = getattr(item, "source_type", "annual_report") or (item.get("source_type") if isinstance(item, dict) else "annual_report")
                 evidence_items.append({
                     "rank": getattr(item, "rank", 1),
                     "evidence_index": getattr(item, "evidence_index", 1),
@@ -886,6 +908,8 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                     "printed_page": getattr(item, "printed_page", None),
                     "citation_label": getattr(item, "citation_label", ""),
                     "content": getattr(item, "content", ""),
+                    "url": item_url,
+                    "source_type": src_type,
                     "score": getattr(item, "composite_score", getattr(item, "score", 0.0)),
                     "composite_score": getattr(item, "composite_score", getattr(item, "score", 0.0)),
                     "relevance_score": getattr(item, "relevance_score", 0.0),
@@ -903,13 +927,13 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
             answer_payload = None
 
             # 5. Local-First Grounding Sufficiency & Restricted Web Fallback
-            local_evidence_valid = (not retrieval_response.is_abstention) and (len(evidence_items) > 0)
+            local_evidence_valid = (not (retrieval_response and retrieval_response.is_abstention and not curated_items)) and (len(evidence_items) > 0)
             local_sufficiency = evaluate_local_sufficiency(evidence_items, min_threshold=0.40)
 
             # PRIORITY 1: Always attempt answer generation from local report chunks first
             if local_evidence_valid and local_sufficiency["is_sufficient"] and generate_answer:
                 logger.info(
-                    "Local evidence sufficient (Top score: %s, %s). Prioritizing annual reports; web search bypassed.",
+                    "Local evidence sufficient (Top score: %s, %s). Prioritizing local verified sources; web search bypassed.",
                     local_sufficiency["top_composite_score"], local_sufficiency["top_recency_tier"]
                 )
                 answer_payload = LLMManager.generate(
@@ -958,6 +982,20 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                             language=lang,
                             emotional_context=emotional_context,
                         )
+
+                        # Check if results required general web search (Tier 4 fallback)
+                        is_general_web = any(
+                            (it.get("source_type") == "general_web_search") or ("hudco.org" not in (it.get("url") or "").lower())
+                            for it in web_results
+                        )
+                        if is_general_web and answer_payload and not answer_payload.get("is_refusal"):
+                            disclaimer = (
+                                "\n\n> ⚠️ **Note**: *Please note: This information was retrieved via general web search "
+                                "as it was not available in HUDCO's official website pages or annual reports, and may require independent verification.*"
+                            )
+                            if "general web search" not in answer_payload.get("clean_answer", "").lower():
+                                answer_payload["clean_answer"] = (answer_payload.get("clean_answer") or "").strip() + disclaimer
+                                answer_payload["answer"] = (answer_payload.get("answer") or "").strip() + disclaimer
 
             # Refusal fallback if both branches yielded no groundable results
             if generate_answer and not answer_payload:
@@ -1034,6 +1072,7 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                     "content": (it.get("content") or it.get("snippet") or "")[:1200],
                     "url": it.get("url"),
                     "domain": it.get("domain"),
+                    "source_type": it.get("source_type", "annual_report"),
                     "is_web": bool(it.get("is_web", False)),
                     "score": it.get("score"),
                     "composite_score": it.get("composite_score"),
