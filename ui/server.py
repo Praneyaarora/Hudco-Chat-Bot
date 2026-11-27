@@ -903,6 +903,7 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                     "document_id": getattr(item, "document_id", "DOC"),
                     "source_filename": getattr(item, "source_filename", ""),
                     "fiscal_year": getattr(item, "fiscal_year", None),
+                    "title": getattr(item, "section_title", "") or getattr(item, "title", "Official HUDCO Source"),
                     "section_title": getattr(item, "section_title", ""),
                     "physical_page": getattr(item, "physical_page", None),
                     "printed_page": getattr(item, "printed_page", None),
