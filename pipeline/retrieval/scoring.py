@@ -247,18 +247,31 @@ def filter_candidate_chunks_by_temporal_intent(
 
     temporal_info = detect_query_temporal_intent(query)
     historical_requested = temporal_info.get("historical_requested", False)
+    target_year = temporal_info.get("target_year")
+    range_years = temporal_info.get("range_years")
     active_years = temporal_info.get("active_years", {LATEST_CORPUS_YEAR})
+
+    # A query is historical for past years if historical_requested is True and target_year < 2025 (or range max < 2025)
+    is_past_historical = historical_requested and (
+        (target_year is not None and target_year < LATEST_CORPUS_YEAR - 1) or
+        (range_years and max(range_years) < LATEST_CORPUS_YEAR - 1)
+    )
 
     # If historical data is requested with wide or explicit scope, retain matching candidates
     active_candidates = []
     sleeping_count = 0
 
     for item in candidates:
-        # Curated live links and department live links are always awake (Tier 1)
         src_type = getattr(item, "source_type", None) or (item.get("source_type") if isinstance(item, dict) else None)
         chunk_id = getattr(item, "chunk_id", "") or (item.get("chunk_id") if isinstance(item, dict) else "")
+        is_live_link = (src_type in ("official_link", "official_department_live") or str(chunk_id).startswith("link_"))
 
-        if src_type in ("official_link", "official_department_live") or str(chunk_id).startswith("link_"):
+        # Curated live links and department live links represent current 2026/latest management & affairs.
+        # If the user specifically asks for past historical years (e.g. 2018), current live links sleep!
+        if is_live_link:
+            if is_past_historical:
+                sleeping_count += 1
+                continue
             active_candidates.append(item)
             continue
 
@@ -433,6 +446,16 @@ def compute_composite_score(
 
     relevance_score = calculate_relevance_score(item)
     recency_score, recency_tier = calculate_recency_score(item_year, effective_target_year)
+
+    # If query targets an older historical year (e.g. 2018), penalize any live 2026/undated links
+    is_live_link = (
+        getattr(item, "source_type", None) in ("official_link", "official_department_live") or
+        str(getattr(item, "chunk_id", "")).startswith("link_") or
+        (isinstance(item, dict) and (item.get("source_type") in ("official_link", "official_department_live") or str(item.get("chunk_id", "")).startswith("link_")))
+    )
+    if effective_target_year is not None and effective_target_year < LATEST_CORPUS_YEAR - 1 and is_live_link:
+        recency_score = 0.15
+        recency_tier = f"Live 2026 Link (Historical Target FY {effective_target_year})"
 
     # Base weighted combination: 60% relevance + 40% recency
     raw_composite = (0.60 * relevance_score) + (0.40 * recency_score)

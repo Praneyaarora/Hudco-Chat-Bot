@@ -23,7 +23,7 @@ import re
 import sys
 import threading
 import time
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 from urllib.parse import urlparse, parse_qs
 
 # UTF-8 stdout configuration for Windows terminals
@@ -48,6 +48,8 @@ from pipeline.retrieval.scoring import (
     rerank_chunks_with_recency,
     evaluate_local_sufficiency,
     compute_composite_score,
+    detect_query_temporal_intent,
+    LATEST_CORPUS_YEAR,
 )
 from pipeline.retrieval.curated_retriever import CuratedLinksRetriever
 from pipeline.retrieval.department_router import DepartmentRouter
@@ -241,6 +243,51 @@ class PipelineState:
 
 
 GLOBAL_STATE = PipelineState()
+
+_PAGE_CHUNKS_CACHE: Dict[Tuple[str, str], List[Dict[str, Any]]] = {}
+
+def expand_short_annual_report_chunk(chunk_id: str, doc_id: str, page_num: Optional[str], content: str) -> str:
+    """
+    If an annual report chunk has short content (< 120 chars) or is a tabular fragment
+    (e.g. 'ED (HR/Admn.)'), enriches its content with adjacent sibling chunks on the same
+    page from chunks_metadata.jsonl so names and designations remain unified.
+    """
+    if len(content.strip()) >= 120 or not chunk_id or not doc_id:
+        return content
+
+    key = (doc_id, str(page_num or ""))
+    page_chunks = _PAGE_CHUNKS_CACHE.get(key)
+    if page_chunks is None:
+        meta_file = PROJECT_ROOT / "data" / "vector_index" / "chunks_metadata.jsonl"
+        if not meta_file.exists():
+            return content
+        page_chunks = []
+        try:
+            with open(meta_file, "r", encoding="utf-8") as f:
+                for line in f:
+                    if doc_id in line:
+                        rec = json.loads(line)
+                        if rec.get("document_id") == doc_id:
+                            p_phys = str(rec.get("physical_page") or "")
+                            p_print = str(rec.get("printed_page") or "")
+                            if (page_num and (p_phys == str(page_num) or p_print == str(page_num))) or not page_num:
+                                page_chunks.append(rec)
+            _PAGE_CHUNKS_CACHE[key] = page_chunks
+        except Exception as e:
+            logger.warning(f"Error reading chunks for expansion: {e}")
+            return content
+
+    for i, c in enumerate(page_chunks):
+        if c.get("chunk_id") == chunk_id:
+            parts = []
+            if i > 0:
+                parts.append(page_chunks[i - 1].get("content", "").strip())
+            parts.append(content.strip())
+            if i < len(page_chunks) - 1:
+                parts.append(page_chunks[i + 1].get("content", "").strip())
+            return "\n".join(p for p in parts if p)
+
+    return content
 
 
 class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
@@ -889,21 +936,37 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
 
             retrieval_latency_ms = round((time.perf_counter() - t0) * 1000.0, 2)
 
+            # Check temporal intent: if query asks for a past historical year (e.g. 2018),
+            # live 2026 departmental / website links should be suppressed so historical Annual Reports take priority.
+            temporal_info = detect_query_temporal_intent(search_query)
+            target_year_intent = temporal_info.get("target_year")
+            range_years_intent = temporal_info.get("range_years")
+            is_past_historical_query = temporal_info.get("historical_requested", False) and (
+                (target_year_intent is not None and target_year_intent < LATEST_CORPUS_YEAR - 1) or
+                (range_years_intent and max(range_years_intent) < LATEST_CORPUS_YEAR - 1)
+            )
+
             # 1. Retrieve from Department Router & Curated Official HUDCO Links (Tier 1: Live verified website & departmental portals)
             curated_items = []
-            if GLOBAL_STATE.department_router:
-                try:
-                    _, dept_items = GLOBAL_STATE.department_router.route_and_retrieve(query=search_query, top_k=top_k)
-                    if dept_items:
-                        curated_items.extend(dept_items)
-                except Exception as d_err:
-                    logger.warning(f"DepartmentRouter routing failed: {d_err}")
+            if not is_past_historical_query:
+                if GLOBAL_STATE.department_router:
+                    try:
+                        _, dept_items = GLOBAL_STATE.department_router.route_and_retrieve(query=search_query, top_k=top_k)
+                        if dept_items:
+                            curated_items.extend(dept_items)
+                    except Exception as d_err:
+                        logger.warning(f"DepartmentRouter routing failed: {d_err}")
 
-            if not curated_items and GLOBAL_STATE.curated_retriever:
-                try:
-                    curated_items = GLOBAL_STATE.curated_retriever.retrieve(query=search_query, top_k=top_k)
-                except Exception as c_err:
-                    logger.warning(f"CuratedLinksRetriever search failed: {c_err}")
+                if not curated_items and GLOBAL_STATE.curated_retriever:
+                    try:
+                        curated_items = GLOBAL_STATE.curated_retriever.retrieve(query=search_query, top_k=top_k)
+                    except Exception as c_err:
+                        logger.warning(f"CuratedLinksRetriever search failed: {c_err}")
+            else:
+                logger.info(
+                    "Historical query detected (Target Year: %s). Live 2026 portal links suppressed in favor of Annual Reports.",
+                    target_year_intent or range_years_intent
+                )
 
             # 2. Combine with Hybrid Annual Report candidate chunks (Tier 2, subject to Annual Report Sleeping Filter)
             combined_candidates = list(curated_items) + list(retrieval_response.results if retrieval_response else [])
@@ -916,11 +979,18 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                 breakdown = getattr(item, "scoring_breakdown", None) or (item.get("scoring_breakdown") if isinstance(item, dict) else None)
                 item_url = getattr(item, "url", None) or (item.get("url") if isinstance(item, dict) else None)
                 src_type = getattr(item, "source_type", "annual_report") or (item.get("source_type") if isinstance(item, dict) else "annual_report")
+                content = getattr(item, "content", "")
+                chunk_id_str = getattr(item, "chunk_id", "")
+                doc_id_str = getattr(item, "document_id", "DOC")
+                page_val = getattr(item, "physical_page", None) or getattr(item, "printed_page", None)
+                if src_type not in ("official_link", "official_department_live") and len(content.strip()) < 120 and chunk_id_str:
+                    content = expand_short_annual_report_chunk(chunk_id_str, doc_id_str, str(page_val or ""), content)
+
                 evidence_items.append({
                     "rank": getattr(item, "rank", 1),
                     "evidence_index": getattr(item, "evidence_index", 1),
-                    "chunk_id": getattr(item, "chunk_id", ""),
-                    "document_id": getattr(item, "document_id", "DOC"),
+                    "chunk_id": chunk_id_str,
+                    "document_id": doc_id_str,
                     "source_filename": getattr(item, "source_filename", ""),
                     "fiscal_year": getattr(item, "fiscal_year", None),
                     "title": getattr(item, "section_title", "") or getattr(item, "title", "Official HUDCO Source"),
@@ -928,7 +998,7 @@ class HUDCOUIRequestHandler(SimpleHTTPRequestHandler):
                     "physical_page": getattr(item, "physical_page", None),
                     "printed_page": getattr(item, "printed_page", None),
                     "citation_label": getattr(item, "citation_label", ""),
-                    "content": getattr(item, "content", ""),
+                    "content": content,
                     "url": item_url,
                     "source_type": src_type,
                     "score": getattr(item, "composite_score", getattr(item, "score", 0.0)),

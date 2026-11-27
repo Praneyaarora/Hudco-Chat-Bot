@@ -208,6 +208,25 @@ class TestDepartmentAndTemporalRouting(unittest.TestCase):
         self.assertNotIn("job", rewritten_apply.lower())
         self.assertNotIn("recruitment", rewritten_apply.lower())
 
+    def test_historical_year_suppresses_live_links_and_prioritizes_past_report(self):
+        q = "who was ed of hr in 2018?"
+        info = detect_query_temporal_intent(q)
+        self.assertTrue(info["historical_requested"])
+        self.assertEqual(info["target_year"], 2018)
+
+        mock_candidates = [
+            {"chunk_id": "link_management_live", "source_type": "official_department_live", "content": "Smt. Vandana Motsara – ED HR 2026"},
+            {"chunk_id": "c_ar18_hr", "document_id": "doc_ar18", "content": "J. Prem Nawaz ED (HR/Admn.) 2018"},
+            {"chunk_id": "c_ar26_hr", "document_id": "doc_ar26", "content": "Current ED HR 2026"},
+        ]
+
+        active = filter_candidate_chunks_by_temporal_intent(mock_candidates, query=q)
+        active_ids = [c["chunk_id"] for c in active]
+        # Historical target year 2018 must awaken ar18 and put live 2026 link and ar26 to sleep
+        self.assertIn("c_ar18_hr", active_ids)
+        self.assertNotIn("link_management_live", active_ids)
+        self.assertNotIn("c_ar26_hr", active_ids)
+
 
 if __name__ == "__main__":
     unittest.main()
